@@ -10,10 +10,9 @@
     "javascript.env": {},
     // will be merged with "ruby.env"
     "javascript.jest.env": {},
-    "ruby.env": {},
     "ruby.bundle_exec": true,
+    "ruby.env": {},
     "ruby.use_binstubs": true,
     "ruby.use_spring_binstub": false,
-    // will be merged with "ruby.env"
-    "ruby.rspec.env": {},
+    "ruby.rspec.env": {}, // this will be merged with "ruby.env"
 }

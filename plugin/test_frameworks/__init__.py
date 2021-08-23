@@ -88,7 +88,7 @@ class TestFramework(metaclass=ABCMeta):
         pass
 
     def args(self):
-        return self.settings("args", fallback=False, type=list) or self.build_args()
+        return self.settings('args', fallback=False, type=list) or self.build_args()
 
     def build_args(self):
         return []

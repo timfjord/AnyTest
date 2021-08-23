@@ -1,0 +1,67 @@
+[
+    {
+        "id": "tools",
+        "children": [
+            {
+                "id": "AnyTest",
+                "caption": "AnyTest",
+                "children": [
+                    {
+                        "caption": "AnyTest: Test nearest",
+                        "command": "any_test_run",
+                        "args": { "scope": "nearest" }
+                    },
+                    {
+                        "caption": "AnyTest: Test file",
+                        "command": "any_test_run",
+                        "args": { "scope": "file" }
+                    },
+                    {
+                        "caption": "AnyTest: Test suite",
+                        "command": "any_test_run",
+                        "args": { "scope": "suite" }
+                    },
+                    {
+                        "caption": "AnyTest: Run last",
+                        "command": "any_test_run",
+                        "args": { "scope": "last" }
+                    },
+                ]
+            }
+        ]
+    },
+    {
+        "id": "preferences",
+        "children": [
+            {
+                "id": "package-settings",
+                "children": [
+                    {
+                        "caption": "AnyTest",
+                        "id": "sublime-any-test",
+                        "children": [
+                            {
+                                "caption": "Settings",
+                                "command": "edit_settings",
+                                "args": {
+                                    "base_file": "${packages}/AnyTest/AnyTest.sublime-settings",
+                                    "user_file": "${packages}/User/AnyTest.sublime-settings",
+                                    "default": "// Settings in here override those in \"AnyTest/AnyTest.sublime-settings\"\n{\n\t$0\n}\n"
+                                }
+                            },
+                            {
+                                "caption": "Key Bindings",
+                                "command": "edit_settings",
+                                "args": {
+                                    "base_file": "${packages}/AnyTest/Default.sublime-keymap",
+                                    "user_file": "${packages}/User/Default ($platform).sublime-keymap",
+                                    "default": "[\n\t$0\n]\n",
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

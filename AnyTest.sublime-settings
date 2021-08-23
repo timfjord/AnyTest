@@ -1,0 +1,17 @@
+{
+    // // auto save current file on spec run
+    // "save_current_file_on_run": true,
+    // // auto save all files on spec run
+    // "save_all_files_on_run": false,
+    // // it is recommended to use "terminus_exec", but it requires https://packagecontrol.io/packages/Terminus
+    // "output.panel.command": "exec",
+    // "output.panel.focus_on_run": false,
+    // // --- Test Frameworks ---
+    // "ruby.env": {},
+    // "ruby.use_bundler": false,
+    // // will be merged with "ruby.env"
+    // "ruby.rspec.env": {},
+    // "javascript.env": {},
+    // // will be merged with "ruby.env"
+    // "javascript.jest.env": {},
+}

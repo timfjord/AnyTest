@@ -1,0 +1,4 @@
+[tool.black]
+target-version = ['py33']
+max-line-length = 99
+skip-string-normalization = true

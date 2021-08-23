@@ -45,7 +45,7 @@ class Context:
     def root(self):
         return self.view.window().folders()[0]
 
-    def file_exists(self, *paths):
+    def file_exist(self, *paths):
         return os.path.isfile(os.path.join(self.root(), *paths))
 
     @lru_cache(maxsize=None)

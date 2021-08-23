@@ -32,8 +32,10 @@ class Context:
 
     @classmethod
     def find(cls, view):
+        if not bool(view.window().folders()):
+            raise errors.InvalidContext
         for view in Views(view):
-            if bool(view.window().folders()) and bool(view.file_name()):
+            if bool(view.file_name()):
                 return cls(view)
         else:
             raise errors.InvalidContext

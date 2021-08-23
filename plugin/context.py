@@ -34,6 +34,7 @@ class Context:
     def find(cls, view):
         if not bool(view.window().folders()):
             raise errors.InvalidContext
+
         for view in Views(view):
             if bool(view.file_name()):
                 return cls(view)
@@ -51,9 +52,14 @@ class Context:
     def file(self):
         return os.path.relpath(self.view.file_name(), self.root())
 
+    def get_line(self, region):
+        line, _ = self.view.rowcol(region.begin())
+
+        return int(line) + 1
+
     @lru_cache(maxsize=None)
     def lines(self):
-        return [region.begin() for region in self.view.sel()]
+        return [self.get_line(region) for region in self.view.sel()]
 
     @lru_cache(maxsize=None)
     def line(self):

@@ -3,7 +3,7 @@
 # See https://github.com/emmetio/sublime-text-plugin/issues/35
 import sys
 
-prefix = __package__ + "."  # don't clear the base package
+prefix = __package__ + '.'  # don't clear the base package
 for module_name in [
     module_name
     for module_name in sys.modules

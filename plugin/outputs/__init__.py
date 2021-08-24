@@ -5,7 +5,7 @@ from .. import settings, test_frameworks
 
 
 def load(output):
-    module = importlib.import_module(".{}".format(output), __name__)
+    module = importlib.import_module('.{}'.format(output), __name__)
     return getattr(module, 'Output')
 
 

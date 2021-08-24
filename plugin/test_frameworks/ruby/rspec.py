@@ -25,3 +25,6 @@ class TestFramework(ruby.TestFramework):
         return [
             '{}:{}'.format(self.context.file(), line) for line in self.context.lines()
         ]
+
+    def build_file_position_args(self):
+        return [self.context.file()]

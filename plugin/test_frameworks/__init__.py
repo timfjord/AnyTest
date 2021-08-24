@@ -97,8 +97,9 @@ class TestFramework(metaclass=ABCMeta):
     def build_nearest_position_args(self):
         pass
 
+    @abstractmethod
     def build_file_position_args(self):
-        return [self.context.file()]
+        pass
 
     def build_suite_position_args(self):
         return []

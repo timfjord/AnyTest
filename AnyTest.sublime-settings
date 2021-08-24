@@ -5,9 +5,8 @@
     "save_all_files_on_run": false,
     // --- Outputs ---
     "output": "panel",
-    // it is recommended to use "terminus_exec", but it requires https://packagecontrol.io/packages/Terminus
     "output.panel.command": "exec",
-    "output.panel.focus_on_run": false,
+    "output.terminus.focus_on_run": false,
     // --- Test Frameworks ---
     "javascript.env": {},
     // will be merged with "ruby.env"

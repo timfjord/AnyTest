@@ -1,3 +1,5 @@
+from functools import lru_cache
+
 import sublime
 
 from .. import errors
@@ -6,6 +8,18 @@ from ..outputs import Output as BaseOutput
 
 class Output(BaseOutput):
     name = 'panel'
+
+    def window(self):
+        return sublime.active_window()
+
+    @lru_cache(maxsize=None)
+    def sublime_command(self):
+        command = self.settings('command', type=str)
+
+        if not command:
+            raise errors.InvalidOutputCommand
+
+        return command
 
     def options(self):
         options = {
@@ -23,12 +37,4 @@ class Output(BaseOutput):
         return options
 
     def build(self):
-        sublime_command = self.settings('command', type=str)
-
-        if sublime_command:
-            sublime.active_window().run_command(sublime_command, self.options())
-
-            if self.settings('focus_on_run'):
-                pass  # TODO: Implement me
-        else:
-            raise errors.InvalidOutputCommand
+        self.window().run_command(self.sublime_command(), self.options())

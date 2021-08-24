@@ -5,7 +5,7 @@ from ..outputs import Output as BaseOutput
 
 
 class Output(BaseOutput):
-    settings_key = 'panel'
+    name = 'panel'
 
     def options(self):
         options = {

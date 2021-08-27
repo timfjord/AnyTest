@@ -21,7 +21,7 @@ from .plugin import Context, Error, Runner, logger  # noqa: E402
 class AnyTestRunCommand(sublime_plugin.TextCommand):
     def run(self, edit, scope='file'):
         try:
-            context = Context.find(self.view)
+            context = Context(self.view)
 
             Runner(context).run(scope)
         except Error as e:

@@ -23,8 +23,9 @@ class TestFramework(ruby.TestFramework):
 
     def build_nearest_position_args(self):
         return [
-            '{}:{}'.format(self.context.file(), line) for line in self.context.lines()
+            '{}:{}'.format(self.context.file_relpath(), line)
+            for line in self.context.lines()
         ]
 
     def build_file_position_args(self):
-        return [self.context.file()]
+        return [self.context.file_relpath()]

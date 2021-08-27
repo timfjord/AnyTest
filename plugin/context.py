@@ -1,56 +1,29 @@
-import os.path
 from functools import lru_cache
 
-from . import errors
-
-
-class Views:
-    def __init__(self, view):
-        self.view = view
-        self.fallback = False
-
-    @lru_cache(maxsize=None)
-    def fallback_views(self):
-        return iter(self.view.window().views())
-
-    def __iter__(self):
-        self.fallback = False
-
-        return self
-
-    def __next__(self):
-        if self.fallback:
-            return next(self.fallback_views())
-        else:
-            self.fallback = True
-            return self.view
+from .root import Root
 
 
 class Context:
     def __init__(self, view):
         self.view = view
+        self.root = Root.find(self.window().folders(), self.file())
 
-    @classmethod
-    def find(cls, view):
-        if not bool(view.window().folders()):
-            raise errors.InvalidContext
+    def window(self):
+        return self.view.window()
 
-        for view in Views(view):
-            if bool(view.file_name()):
-                return cls(view)
-        else:
-            raise errors.InvalidContext
-
-    @lru_cache(maxsize=None)
-    def root(self):
-        return self.view.window().folders()[0]
+    def directory(self):
+        return self.root.path
 
     def file_exist(self, *paths):
-        return os.path.isfile(os.path.join(self.root(), *paths))
+        return self.root.file_exist(*paths)
 
     @lru_cache(maxsize=None)
     def file(self):
-        return os.path.relpath(self.view.file_name(), self.root())
+        return self.view.file_name()
+
+    @lru_cache(maxsize=None)
+    def file_relpath(self):
+        return self.root.relpath(self.file())
 
     def get_line(self, region):
         line, _ = self.view.rowcol(region.begin())
@@ -66,10 +39,10 @@ class Context:
         return next(iter(self.lines()), 1)
 
     def save(self):
-        self.view.window().run_command('save')
+        self.window().run_command('save')
 
     def save_all(self):
-        self.view.window().run_command('save_all')
+        self.window().run_command('save_all')
 
     def find_nearest(self):
         pass

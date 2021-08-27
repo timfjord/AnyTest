@@ -2,7 +2,7 @@ class Error(Exception):
     DEFAULT_MESSAGE = ''
 
     def __init__(self, *args, **kwargs):
-        if not args and self.DEFAULT_MESSAGE:
+        if not args and bool(self.DEFAULT_MESSAGE):
             args = (self.DEFAULT_MESSAGE,)
 
         super().__init__(*args, **kwargs)

@@ -1,9 +1,10 @@
 from functools import lru_cache
 
 from .root import Root
+from .window import Window
 
 
-class Context:
+class Context(Window):
     def __init__(self, view):
         self.view = view
         self.root = Root.find(self.window().folders(), self.file())
@@ -37,12 +38,6 @@ class Context:
     @lru_cache(maxsize=None)
     def line(self):
         return next(iter(self.lines()), 1)
-
-    def save(self):
-        self.window().run_command('save')
-
-    def save_all(self):
-        self.window().run_command('save_all')
 
     def find_nearest(self):
         pass

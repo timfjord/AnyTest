@@ -1,19 +1,12 @@
-from functools import lru_cache
-
-import sublime
-
 from .. import errors
 from ..outputs import Output as BaseOutput
+from ..window import Window
 
 
-class Output(BaseOutput):
+class Output(BaseOutput, Window):
     name = 'panel'
 
-    def window(self):
-        return sublime.active_window()
-
-    @lru_cache(maxsize=None)
-    def sublime_command(self):
+    def panel_command(self):
         command = self.settings('command', type=str)
 
         if not command:
@@ -37,4 +30,4 @@ class Output(BaseOutput):
         return options
 
     def build(self):
-        self.window().run_command(self.sublime_command(), self.options())
+        self.run_command(self.panel_command(), self.options())

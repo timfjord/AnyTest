@@ -17,9 +17,9 @@ class Runner:
         )
 
         if settings.get('save_all_files_on_run'):
-            self.context.save_all()
+            self.context.run_command('save_all')
         elif settings.get('save_current_file_on_run'):
-            self.context.save()
+            self.context.run_command('save')
 
         command.run(test_framework)
 

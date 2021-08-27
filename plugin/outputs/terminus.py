@@ -4,7 +4,7 @@ from . import panel
 class Output(panel.Output):
     name = 'terminus'
 
-    def sublime_command(self):
+    def panel_command(self):
         return 'terminus_exec'
 
     def options(self):

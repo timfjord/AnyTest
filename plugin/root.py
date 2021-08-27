@@ -9,13 +9,12 @@ class Root:
 
     @classmethod
     def find(cls, folders, file):
-        if not bool(folders):
-            raise errors.InvalidContext("Couldn't find project")
-
         if not bool(file):
             raise errors.InvalidContext
 
         for folder in sorted(folders, key=len, reverse=True):
+            # Since Sublime returns expanded path so it should be fine to use `startswith`,
+            # but more future-proof solution would be using `pathlib.Path`
             if file.startswith(folder):
                 return cls(folder)
         else:

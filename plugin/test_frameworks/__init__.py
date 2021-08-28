@@ -77,6 +77,9 @@ class TestFramework(metaclass=ABCMeta):
 
         return default if value is None else value
 
+    def file(self, *path):
+        return self.context.root.file(*path)
+
     def executable(self):
         return (
             self.settings('executable', fallback=False, type=list)

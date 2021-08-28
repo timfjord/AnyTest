@@ -1,3 +1,5 @@
+from functools import lru_cache
+
 from .. import ruby
 
 
@@ -5,27 +7,33 @@ class TestFramework(ruby.TestFramework):
     framework = 'rspec'
     pattern = r'(_spec\.rb|spec/.*\.feature)$'
 
+    @lru_cache(maxsize=None)
+    def spring_bin(self):
+        return self.file('bin', 'spring')
+
+    @lru_cache(maxsize=None)
+    def bin(self):
+        return self.file('bin', 'rspec')
+
     def build_executable(self):
         executable = ['rspec']
 
-        if self.context.file_exist('.zeus.sock'):
+        if self.file('.zeus.sock').exists():
             executable = ['zeus', 'rspec']
-        elif self.context.file_exist('bin', 'spring') and self.settings(
-            'use_spring_binstub'
-        ):
-            executable = ['./bin/spring', 'rspec']
-        elif self.context.file_exist('bin', 'rspec') and self.settings('use_binstubs'):
-            executable = ['./bin/rspec']
-        elif self.context.file_exist('Gemfile') and self.settings('bundle_exec'):
+        elif self.spring_bin().exists() and self.settings('use_spring_binstub'):
+            executable = [self.spring_bin().relpath, 'rspec']
+        elif self.bin().exists() and self.settings('use_binstubs'):
+            executable = [self.bin().relpath]
+        elif self.file('Gemfile').exists() and self.settings('bundle_exec'):
             executable = ['bundle', 'exec', 'rspec']
 
         return executable
 
     def build_nearest_position_args(self):
         return [
-            '{}:{}'.format(self.context.file_relpath(), line)
+            '{}:{}'.format(self.context.file.relpath, line)
             for line in self.context.lines()
         ]
 
     def build_file_position_args(self):
-        return [self.context.file_relpath()]
+        return [self.context.file.relpath]

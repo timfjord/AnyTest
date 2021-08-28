@@ -14,8 +14,8 @@ class Command(
         return (
             cls(
                 ' '.join(framework.build_command(scope)),
-                framework.context.directory(),
-                framework.context.file(),
+                framework.context.root.path,
+                framework.context.file.path,
                 framework.context.line(),
                 framework.language,
                 framework.framework,

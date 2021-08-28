@@ -25,7 +25,7 @@ class Runner:
 
     def framework(self):
         for framework in test_frameworks.items():
-            if framework.is_suitable_for(self.context.file()):
+            if framework.is_suitable_for(self.context.file.path):
                 return framework(self.context)
         else:
             raise errors.FrameworkNotFound

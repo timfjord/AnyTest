@@ -16,7 +16,10 @@ class Root:
             # Since Sublime returns expanded path so it should be fine to use `startswith`,
             # but more future-proof solution would be using `pathlib.Path`
             if file.startswith(folder):
-                return cls(folder)
+                root = cls(folder)
+                relpath = root.relpath(file)
+
+                return (root, root.file(relpath))
         else:
             raise errors.InvalidContext(
                 "File '{}' is outside of the project".format(file)
@@ -25,8 +28,21 @@ class Root:
     def join(self, *paths):
         return os.path.join(self.path, *paths)
 
-    def file_exist(self, *paths):
-        return os.path.isfile(self.join(*paths))
-
     def relpath(self, file):
         return os.path.relpath(file, self.path)
+
+    def file(self, *paths):
+        return File(self, *paths)
+
+
+class File:
+    def __init__(self, root, *paths):
+        if not bool(paths):
+            raise ValueError('Path is required')
+
+        self.root = root
+        self.relpath = os.path.join(*paths)
+        self.path = self.root.join(self.relpath)
+
+    def exists(self):
+        return os.path.exists(self.path)

@@ -35,7 +35,7 @@ class Root:
         return File(self, *paths)
 
 
-class File:
+class RelativePath:
     def __init__(self, root, *paths):
         if not bool(paths):
             raise ValueError('Path is required')
@@ -46,3 +46,8 @@ class File:
 
     def exists(self):
         return os.path.exists(self.path)
+
+
+class File(RelativePath):
+    def exists(self):
+        return os.path.isfile(self.path)

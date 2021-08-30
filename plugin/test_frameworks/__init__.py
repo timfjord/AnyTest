@@ -37,33 +37,36 @@ def _safe_merge(dict1, dict2):
 
 
 class TestFramework(metaclass=ABCMeta):
-    language = None
-    framework = None
-    pattern = None
     output_file_regex = None
 
     def __init__(self, context):
         self.context = context
 
+    @property
+    @abstractmethod
+    def language(self):
+        pass
+
+    @property
+    @abstractmethod
+    def framework(self):
+        pass
+
+    @property
+    @abstractmethod
+    def pattern(self):
+        pass
+
     @classmethod
     def is_suitable_for(cls, file):
-        if cls.pattern is None:
-            raise NotImplementedError('pattern is not defined for the framework')
-
-        return re.search(cls.pattern, str(file))
+        return re.search(cls.pattern, file)
 
     @classmethod
     def settings(
         cls, key, type=None, default=None, fallback=True, merge=False, language=False
     ):
-        if cls.language is None:
-            raise NotImplementedError('language is not defined for the framework')
-
         if language:
             return settings.get((cls.language, key), type=type, default=default)
-
-        if cls.framework is None:
-            raise NotImplementedError('framework name is not defined for the framework')
 
         value = settings.get((cls.language, cls.framework, key), type=type)
 

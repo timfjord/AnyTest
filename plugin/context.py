@@ -18,12 +18,12 @@ class Context(Window):
         return int(line) + 1
 
     @lru_cache(maxsize=None)
-    def lines(self):
+    def sel_lines(self):
         return [self.get_line(region) for region in self.view.sel()]
 
     @lru_cache(maxsize=None)
-    def line(self):
-        return next(iter(self.lines()), 1)
+    def sel_line(self):
+        return next(iter(self.sel_lines()), 1)
 
     def find_nearest(self):
         pass

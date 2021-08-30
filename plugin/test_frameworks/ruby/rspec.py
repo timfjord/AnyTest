@@ -32,7 +32,7 @@ class TestFramework(ruby.TestFramework):
     def build_nearest_position_args(self):
         return [
             '{}:{}'.format(self.context.file.relpath, line)
-            for line in self.context.lines()
+            for line in self.context.sel_lines()
         ]
 
     def build_file_position_args(self):

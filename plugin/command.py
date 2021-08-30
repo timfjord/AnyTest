@@ -16,7 +16,7 @@ class Command(
                 ' '.join(framework.build_command(scope)),
                 framework.context.root.path,
                 framework.context.file.path,
-                framework.context.line(),
+                framework.context.sel_line(),
                 framework.language,
                 framework.framework,
             ),

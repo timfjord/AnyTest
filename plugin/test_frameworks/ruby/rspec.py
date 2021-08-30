@@ -19,13 +19,13 @@ class TestFramework(ruby.TestFramework):
         executable = ['rspec']
 
         if self.file('.zeus.sock').exists():
-            executable = ['zeus', 'rspec']
+            executable = ['zeus'] + executable
         elif self.spring_bin().exists() and self.settings('use_spring_binstub'):
-            executable = [self.spring_bin().relpath, 'rspec']
+            executable = [self.spring_bin().relpath] + executable
         elif self.bin().exists() and self.settings('use_binstubs'):
             executable = [self.bin().relpath]
         elif self.file('Gemfile').exists() and self.settings('bundle_exec'):
-            executable = ['bundle', 'exec', 'rspec']
+            executable = ['bundle', 'exec'] + executable
 
         return executable
 

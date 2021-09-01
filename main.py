@@ -19,7 +19,7 @@ from .plugin import Context, Error, Runner, logger  # noqa: E402
 
 
 class AnyTestRunCommand(sublime_plugin.TextCommand):
-    def run(self, edit, scope='file'):
+    def run(self, _, scope='file'):
         try:
             context = Context(self.view)
 

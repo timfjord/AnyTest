@@ -1,7 +1,7 @@
 import sublime
 
 
-class Window:
+class WindowMixin:
     def window(self):
         return sublime.active_window()
 

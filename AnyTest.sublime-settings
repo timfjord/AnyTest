@@ -11,6 +11,9 @@
     "javascript.env": {},
     // will be merged with "ruby.env"
     "javascript.jest.env": {},
+    "javascript.jest.args": [
+        "--no-coverage"
+    ],
     "ruby.bundle_exec": true,
     "ruby.env": {},
     "ruby.use_binstubs": true,

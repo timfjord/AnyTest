@@ -37,6 +37,8 @@ def _safe_merge(dict1, dict2):
 
 
 class TestFramework(metaclass=ABCMeta):
+    test_patterns = None
+    namespace_patterns = []
     output_file_regex = None
 
     def __init__(self, context):
@@ -59,7 +61,7 @@ class TestFramework(metaclass=ABCMeta):
 
     @classmethod
     def is_suitable_for(cls, file):
-        return re.search(cls.pattern, file)
+        return re.search(cls.pattern, file.path)
 
     @classmethod
     def settings(
@@ -82,6 +84,14 @@ class TestFramework(metaclass=ABCMeta):
 
     def file(self, *path):
         return self.context.root.file(*path)
+
+    def find_nearest(self, forward=False):
+        if self.test_patterns is None:
+            raise NotImplementedError('test_patterns is not defined for the framework')
+
+        return self.context.find_nearest(
+            self.test_patterns, self.namespace_patterns, forward=forward
+        )
 
     def executable(self):
         return (

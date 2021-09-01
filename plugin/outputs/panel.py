@@ -1,9 +1,9 @@
 from .. import errors
 from ..outputs import Output as BaseOutput
-from ..window import Window
+from ..mixins import WindowMixin
 
 
-class Output(BaseOutput, Window):
+class Output(BaseOutput, WindowMixin):
     name = 'panel'
 
     def panel_command(self):

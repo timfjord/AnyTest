@@ -1,0 +1,39 @@
+[
+    {
+        "caption": "-"
+    },
+    {
+        "id": "any-test",
+        "caption": "AnyTest",
+        "children": [
+            {
+                "caption": "Test nearest",
+                "command": "any_test_run",
+                "args": {
+                    "scope": "nearest"
+                }
+            },
+            {
+                "caption": "Test file",
+                "command": "any_test_run",
+                "args": {
+                    "scope": "file"
+                }
+            },
+            {
+                "caption": "Test suite",
+                "command": "any_test_run",
+                "args": {
+                    "scope": "suite"
+                }
+            },
+            {
+                "caption": "Run last",
+                "command": "any_test_run",
+                "args": {
+                    "scope": "last"
+                }
+            },
+        ]
+    }
+]

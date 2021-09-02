@@ -10,5 +10,6 @@ class Output(panel.Output):
     def options(self):
         return dict(
             super().options(),
+            cancellable=True,
             focus=self.settings('focus_on_run', type=bool, default=False),
         )

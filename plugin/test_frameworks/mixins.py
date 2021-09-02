@@ -5,7 +5,7 @@ class SuitableMixin:
             return False
 
         return cls.settings(
-            'framework', language=True
+            'framework', framework=False, fallback=False
         ) == cls.framework or cls.is_suitable(file)
 
     @classmethod

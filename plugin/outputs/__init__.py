@@ -13,8 +13,8 @@ def build(command, test_framework=None):
     if test_framework is None:
         test_framework = test_frameworks.load(command.language, command.framework)
 
-    output_name = test_framework.settings('output', type=str) or settings.get(
-        'output', type=str, default='console'
+    output_name = test_framework.settings(
+        'output', type=str, default='console', root=True
     )
     output = load(output_name)
 

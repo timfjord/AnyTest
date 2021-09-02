@@ -65,20 +65,31 @@ class TestFramework(metaclass=ABCMeta):
 
     @classmethod
     def settings(
-        cls, key, type=None, default=None, fallback=True, merge=False, language=False
+        cls,
+        key,
+        type=None,
+        default=None,
+        framework=True,
+        root=False,
+        fallback=True,
+        merge=False,
     ):
-        if language:
-            return settings.get((cls.language, key), type=type, default=default)
+        prefix = (cls.language,)
 
-        value = settings.get((cls.language, cls.framework, key), type=type)
+        if framework:
+            prefix += (cls.framework,)
+
+        value = settings.get(prefix + (key,), type=type)
 
         if fallback and value is None or merge:
-            lang_value = settings.get((cls.language, key), type=type)
+            for i in range(1, -1 if root else 0, -1):
+                prev_value = settings.get(prefix[:i] + (key,), type=type)
 
-            if merge and (isinstance(value, dict) or isinstance(lang_value, dict)):
-                value = _safe_merge(lang_value, value)
-            elif fallback:
-                value = lang_value
+                if merge and (isinstance(value, dict) or isinstance(prev_value, dict)):
+                    value = _safe_merge(prev_value, value)
+                elif fallback and prev_value is not None:
+                    value = prev_value
+                    break
 
         return default if value is None else value
 
@@ -95,7 +106,7 @@ class TestFramework(metaclass=ABCMeta):
 
     def executable(self):
         return (
-            self.settings('executable', fallback=False, type=list)
+            self.settings('executable', type=list, fallback=False)
             or self.build_executable()
         )
 
@@ -104,7 +115,7 @@ class TestFramework(metaclass=ABCMeta):
         pass
 
     def args(self):
-        return self.settings('args', fallback=False, type=list) or self.build_args()
+        return self.settings('args', type=list, fallback=False) or self.build_args()
 
     def build_args(self):
         return []

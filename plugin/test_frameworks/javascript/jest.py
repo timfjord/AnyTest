@@ -1,6 +1,5 @@
 from .. import javascript, escape
 from ..mixins import SuitableMixin
-from .utils import has_package
 
 
 class TestFramework(SuitableMixin, javascript.TestFramework):
@@ -9,7 +8,7 @@ class TestFramework(SuitableMixin, javascript.TestFramework):
 
     @classmethod
     def is_suitable(cls, file):
-        return has_package('jest', file.root)
+        return javascript.has_package('jest', file.root)
 
     def bin(self):
         return self.file('node_modules', '.bin', 'jest')

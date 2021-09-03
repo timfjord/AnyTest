@@ -1,13 +1,13 @@
 from .. import javascript, escape
-from ..mixins import SuitableMixin
+from ..mixins import IsAppropriateMixin
 
 
-class TestFramework(SuitableMixin, javascript.TestFramework):
+class TestFramework(IsAppropriateMixin, javascript.TestFramework):
     framework = 'jest'
     pattern = r'(__tests__/.*|(spec|test))\.(js|jsx|coffee|ts|tsx)$'
 
     @classmethod
-    def is_suitable(cls, file):
+    def is_appropriate_for(cls, file):
         return javascript.has_package('jest', file.root)
 
     def bin(self):

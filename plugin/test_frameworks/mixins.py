@@ -1,4 +1,4 @@
-class SuitableMixin:
+class IsAppropriateMixin:
     @classmethod
     def is_suitable_for(cls, file):
         if not super().is_suitable_for(file):
@@ -6,8 +6,8 @@ class SuitableMixin:
 
         return cls.settings(
             'framework', framework=False, fallback=False
-        ) == cls.framework or cls.is_suitable(file)
+        ) == cls.framework or cls.is_appropriate_for(file)
 
     @classmethod
-    def is_suitable(cls, _):
+    def is_appropriate_for(cls, _):
         return False

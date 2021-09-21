@@ -10,17 +10,14 @@ class Command(
     _last = None
 
     @classmethod
-    def from_framework(cls, framework, scope):
-        return (
-            cls(
-                ' '.join(framework.build_command(scope)),
-                framework.context.root.path,
-                framework.context.file.path,
-                framework.context.sel_line(),
-                framework.language,
-                framework.framework,
-            ),
-            framework.__class__,
+    def build(cls, framework, scope):
+        return cls(
+            ' '.join(framework.build_command(scope)),
+            framework.context.root.path,
+            framework.context.file.path,
+            framework.context.sel_line(),
+            framework.language,
+            framework.framework,
         )
 
     @classmethod
@@ -28,12 +25,7 @@ class Command(
         if cls._last is None:
             raise errors.NoLastCommand
 
-        return (cls(**cls._last), None)
+        return cls(**cls._last)
 
-    def run(self, test_framework=None):
-        outputs.build(self, test_framework=test_framework)
-
-        self.save_last_command()
-
-    def save_last_command(self):
+    def save(self):
         self.__class__._last = self._asdict()

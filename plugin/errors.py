@@ -1,3 +1,19 @@
+from functools import wraps
+
+from . import logger
+
+
+def handle_errors(func):
+    @wraps(func)
+    def handler(*args, **kwargs):
+        try:
+            return func(*args, **kwargs)
+        except Error as e:
+            logger.log(e)
+
+    return handler
+
+
 class Error(Exception):
     DEFAULT_MESSAGE = ''
 

@@ -1,8 +1,8 @@
+from abc import ABCMeta, abstractmethod
 import importlib
 import re
-from abc import ABCMeta, abstractmethod
 
-from .. import settings
+from .. import errors, settings
 
 
 # fmt: off
@@ -24,6 +24,14 @@ def items():
     for language, frameworks in ALL.items():
         for framework in frameworks:
             yield load(language, framework)
+
+
+def find(file):
+    for framework in items():
+        if framework.is_suitable_for(file):
+            return framework
+
+    raise errors.FrameworkNotFound
 
 
 def _safe_merge(dict1, dict2):

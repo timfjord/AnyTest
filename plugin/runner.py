@@ -1,31 +1,43 @@
-from . import errors, settings, test_frameworks
+from . import outputs, settings, test_frameworks
 from .command import Command
+from .context import Context
+from .errors import handle_errors
+from .mixins import WindowMixin
 
 
 SCOPE_LAST = 'last'
 
 
-class Runner:
-    def __init__(self, context):
-        self.context = context
+class Runner(WindowMixin):
+    def __init__(self, view):
+        self.view = view
 
-    def run(self, scope):
-        command, test_framework = (
-            Command.last()
-            if scope == SCOPE_LAST
-            else Command.from_framework(self.framework(), scope)
-        )
+    def window(self):
+        return self.view.window()
 
+    def save_file(self):
         if settings.get('save_all_files_on_run'):
-            self.context.run_command('save_all')
-        elif settings.get('save_current_file_on_run'):
-            self.context.run_command('save')
+            self.run_command('save_all')
+        elif settings.get('save_current_file_on_run') and bool(self.view.file_name()):
+            self.run_command('save')
 
-        command.run(test_framework)
+    def build_command(self, scope):
+        if scope == SCOPE_LAST:
+            command = Command.last()
+            test_framework = test_frameworks.load(command.language, command.framework)
+        else:
+            context = Context(self.view)
+            test_framework = test_frameworks.find(context.file)
+            command = Command.build(test_framework(context), scope)
 
-    def framework(self):
-        for framework in test_frameworks.items():
-            if framework.is_suitable_for(self.context.file):
-                return framework(self.context)
+        return command, test_framework
 
-        raise errors.FrameworkNotFound
+    @handle_errors
+    def run_test(self, scope):
+        command, test_framework = self.build_command(scope)
+        output = outputs.find(test_framework)
+
+        self.save_file()
+
+        output(command, test_framework).build()
+        command.save()

@@ -15,14 +15,9 @@ for module_name in [
 
 import sublime_plugin  # noqa: E402
 
-from .plugin import Context, Error, Runner, logger  # noqa: E402
+from .plugin import Runner  # noqa: E402
 
 
 class AnyTestRunCommand(sublime_plugin.TextCommand):
     def run(self, _, scope='file'):
-        try:
-            context = Context(self.view)
-
-            Runner(context).run(scope)
-        except Error as e:
-            logger.log(e)
+        Runner(self.view).run_test(scope)

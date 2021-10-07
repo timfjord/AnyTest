@@ -1,6 +1,22 @@
-// [
-//     { "keys": ["primary+j", "primary+n"], "command": "any_test_run", "args": { "scope": "nearest" } },
-//     { "keys": ["primary+j", "primary+f"], "command": "any_test_run", "args": { "scope": "file" } },
-//     { "keys": ["primary+j", "primary+s"], "command": "any_test_run", "args": { "scope": "suite" } },
-//     { "keys": ["primary+j", "primary+l"], "command": "any_test_run", "args": { "scope": "last" } },
-// ]
+[
+    {
+        "keys": [
+            "primary+r"
+        ],
+        "command": "any_test_run",
+        "args": {
+            "scope": "last"
+        },
+        "context": [
+            {
+                "key": "terminus_view.tag",
+                "operator": "equal",
+                "operand": "any-test"
+            }
+        ]
+    },
+    // { "keys": ["primary+j", "primary+n"], "command": "any_test_run", "args": { "scope": "nearest" } },
+    // { "keys": ["primary+j", "primary+f"], "command": "any_test_run", "args": { "scope": "file" } },
+    // { "keys": ["primary+j", "primary+s"], "command": "any_test_run", "args": { "scope": "suite" } },
+    // { "keys": ["primary+j", "primary+l"], "command": "any_test_run", "args": { "scope": "last" } },
+]

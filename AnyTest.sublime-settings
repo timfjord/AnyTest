@@ -7,6 +7,10 @@
     "output": "panel",
     "output.panel.command": "exec",
     "output.terminus.focus_on_run": false,
+    "output.terminus.run_in_view": false,
+    "output.terminus.pre_window_hooks": [],
+    "output.terminus.post_window_hooks": [],
+    "output.terminus.post_view_hooks": [],
     // --- Test Frameworks ---
     "javascript.env": {},
     // will be merged with "ruby.env"

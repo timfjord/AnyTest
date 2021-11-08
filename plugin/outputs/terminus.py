@@ -35,11 +35,3 @@ class Output(panel.Output):
             options['panel_name'] = self.PANEL_NAME
 
         return options
-
-    def build(self):
-        panel = self.window().find_output_panel(self.PANEL_NAME)
-        # check if the panel is hidden
-        if panel is not None and not bool(panel.window()):
-            panel.run_command('terminus_close')
-
-        super().build()

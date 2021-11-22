@@ -19,8 +19,6 @@ REGEXP_ESCAPE_TRANSLATION_TABLE = str.maketrans(
         ')': r'\)',
     }
 )
-
-
 SHELL_ESCAPE_TRANSLATION_TABLE = str.maketrans(
     {
         '$': r'\$',  # to avoid issues with the $ symbol in terminus

@@ -1,4 +1,5 @@
 import shlex
+from distutils import spawn
 
 
 REGEXP_ESCAPE_TRANSLATION_TABLE = str.maketrans(
@@ -26,9 +27,13 @@ SHELL_ESCAPE_TRANSLATION_TABLE = str.maketrans(
 )
 
 
-def regex(string):
+def escape_regex(string):
     return string.translate(REGEXP_ESCAPE_TRANSLATION_TABLE)
 
 
-def shell(string):
+def escape_shell(string):
     return shlex.quote(string).translate(SHELL_ESCAPE_TRANSLATION_TABLE)
+
+
+def is_executable(name):
+    return bool(spawn.find_executable(name))

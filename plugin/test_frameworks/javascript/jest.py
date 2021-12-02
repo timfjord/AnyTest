@@ -1,13 +1,13 @@
-from .. import javascript, escape
-from ..mixins import IsAppropriateMixin
+from .. import javascript, utils
+from ..mixins import IsConfigurableMixin
 
 
-class TestFramework(IsAppropriateMixin, javascript.TestFramework):
+class TestFramework(IsConfigurableMixin, javascript.TestFramework):
     framework = 'jest'
     pattern = r'(__tests__/.*|(spec|test))\.(js|jsx|coffee|ts|tsx)$'
 
     @classmethod
-    def is_appropriate_for(cls, file):
+    def is_configurable_fallback(cls, file):
         return javascript.has_package('jest', file.root)
 
     def bin(self):
@@ -26,13 +26,13 @@ class TestFramework(IsAppropriateMixin, javascript.TestFramework):
         name = ''.join(
             (
                 '^' if bool(nearest.namespaces) else '',
-                escape.regex(' '.join(nearest.namespaces + nearest.tests)),
+                utils.escape_regex(' '.join(nearest.namespaces + nearest.tests)),
                 '$' if bool(nearest.tests) else '',
             )
         )
 
         if bool(name):
-            args = ['-t', escape.shell(name)] + args
+            args = ['-t', utils.escape_shell(name)] + args
 
         return args
 

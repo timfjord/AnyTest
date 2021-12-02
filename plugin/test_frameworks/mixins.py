@@ -1,4 +1,4 @@
-class IsAppropriateMixin:
+class IsConfigurableMixin:
     @classmethod
     def is_suitable_for(cls, file):
         if not super().is_suitable_for(file):
@@ -6,8 +6,8 @@ class IsAppropriateMixin:
 
         return cls.settings(
             'framework', framework=False, fallback=False
-        ) == cls.framework or cls.is_appropriate_for(file)
+        ) == cls.framework or cls.is_configurable_fallback(file)
 
     @classmethod
-    def is_appropriate_for(cls, _):
+    def is_configurable_fallback(cls, _):
         return False

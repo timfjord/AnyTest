@@ -9,6 +9,10 @@ SCOPE_LAST = 'last'
 
 
 class Runner(WindowMixin):
+    @classmethod
+    def reload_project_settings(cls):
+        settings.reload_project_settings()
+
     def __init__(self, view):
         self.view = view
 

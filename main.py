@@ -21,3 +21,8 @@ from .plugin import Runner  # noqa: E402
 class AnyTestRunCommand(sublime_plugin.TextCommand):
     def run(self, _, scope='file'):
         Runner(self.view).run_test(scope)
+
+
+class AnyTestReloadProjectSettingsCommand(sublime_plugin.WindowCommand):
+    def run(self):
+        Runner.reload_project_settings()

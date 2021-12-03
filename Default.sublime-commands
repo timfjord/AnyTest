@@ -11,7 +11,7 @@
     {
         "caption": "Preferences: AnyTest Key Bindings",
         "command": "edit_settings",
-         "args": {
+        "args": {
             "base_file": "${packages}/AnyTest/Default.sublime-keymap",
             "user_file": "${packages}/User/Default ($platform).sublime-keymap",
             "default": "[\n\t$0\n]\n",
@@ -20,21 +20,33 @@
     {
         "caption": "AnyTest: Test nearest",
         "command": "any_test_run",
-        "args": { "scope": "nearest" }
+        "args": {
+            "scope": "nearest"
+        }
     },
     {
         "caption": "AnyTest: Test file",
         "command": "any_test_run",
-        "args": { "scope": "file" }
+        "args": {
+            "scope": "file"
+        }
     },
     {
         "caption": "AnyTest: Test suite",
         "command": "any_test_run",
-        "args": { "scope": "suite" }
+        "args": {
+            "scope": "suite"
+        }
     },
     {
         "caption": "AnyTest: Run last",
         "command": "any_test_run",
-        "args": { "scope": "last" }
+        "args": {
+            "scope": "last"
+        }
+    },
+    {
+        "caption": "AnyTest: Reload Project Settings",
+        "command": "any_test_reload_project_settings"
     },
 ]

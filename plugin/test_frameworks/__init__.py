@@ -7,8 +7,9 @@ from .. import errors, settings
 
 # fmt: off
 ALL = {
-    "JavaScript": ["Jest"],
-    "Ruby": ["RSpec"]
+    'JavaScript': ['Jest'],
+    'Python': ['pytest'],
+    'Ruby': ['RSpec'],
 }
 # fmt: on
 

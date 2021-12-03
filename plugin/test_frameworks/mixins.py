@@ -5,7 +5,7 @@ class IsConfigurableMixin:
             return False
 
         return cls.settings(
-            'framework', framework=False, fallback=False
+            'test_framework', framework=False, fallback=False
         ) == cls.framework or cls.is_configurable_fallback(file)
 
     @classmethod

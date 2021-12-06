@@ -1,6 +1,6 @@
 from collections import namedtuple
 
-from . import errors, outputs
+from . import errors
 
 
 class Command(

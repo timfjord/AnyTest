@@ -1,5 +1,5 @@
 from AnyTest.plugin.test_frameworks import TestFramework
-from AnyTest.tests import SublimeViewTestCase
+from AnyTest.tests import SublimeWindowTestCase
 
 
 class TF(TestFramework):
@@ -7,7 +7,7 @@ class TF(TestFramework):
     framework = 'rspec'
 
 
-class TestFrameworkTestCase(SublimeViewTestCase):
+class TestFrameworkTestCase(SublimeWindowTestCase):
     def test_settings_read_from_framework_settings(self):
         self.setSettings({'ruby.rspec.key': 'value'})
 

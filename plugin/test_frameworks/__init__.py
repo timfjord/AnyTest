@@ -2,14 +2,14 @@ from abc import ABCMeta, abstractmethod
 import importlib
 import re
 
-from .. import errors, settings
+from .. import errors, logger, settings
 
 
 # fmt: off
 ALL = {
-    'JavaScript': ['Jest'],
-    'Python': ['pytest'],
-    'Ruby': ['RSpec'],
+    'javascript': ['jest'],
+    'python': ['pytest'],
+    'ruby': ['rspec'],
 }
 # fmt: on
 
@@ -22,9 +22,23 @@ def load(language, framework):
 
 
 def items():
-    for language, frameworks in ALL.items():
+    test_frameworks = settings.get('test_frameworks', type=dict)
+    if not bool(test_frameworks):
+        test_frameworks = ALL
+
+    for language, frameworks in test_frameworks.items():
+        if not isinstance(frameworks, list):
+            frameworks = [str(frameworks)]
         for framework in frameworks:
-            yield load(language, framework)
+            try:
+                yield load(language, framework)
+            except ImportError:
+                logger.log(
+                    "Cannot load '{}' framework for '{}' language".format(
+                        framework, language
+                    )
+                )
+                continue
 
 
 def find(file):

@@ -85,3 +85,14 @@ class FileTestCase(TestCase):
             self.assertTrue(File(root, existing_file).exists())
             self.assertFalse(File(root, 'uNkn0wn.py').exists())
             self.assertFalse(File(subfolder, existing_dir).exists())
+
+    def test_contains(self):
+        with tempfile.NamedTemporaryFile('w') as tmpfile:
+            tmpfile.write('some content goes here')
+            tmpfile.seek(0)
+            file_name = os.path.basename(tmpfile.name)
+            root = Root(os.path.dirname(tmpfile.name))
+            file = File(root, file_name)
+
+            self.assertTrue(file.contains('content'))
+            self.assertFalse(file.contains('uNkn0wn'))

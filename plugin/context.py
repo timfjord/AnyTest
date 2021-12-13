@@ -97,4 +97,4 @@ class Context(WindowMixin):
                 last_indent = indent
                 last_namespace_line_nr = line_nr
 
-        return Nearest(tests, namespaces, test_line_nr, names)
+        return Nearest(tests, namespaces[::-1], test_line_nr, names)

@@ -19,6 +19,9 @@ class TestFramework(IsConfigurableMixin, javascript.TestFramework):
         else:
             return ['jest']
 
+    def build_file_position_args(self):
+        return ['--', self.context.file.relpath]
+
     def build_nearest_position_args(self):
         args = self.build_file_position_args()
         nearest = self.find_nearest()
@@ -35,6 +38,3 @@ class TestFramework(IsConfigurableMixin, javascript.TestFramework):
             args = ['-t', utils.escape_shell(name)] + args
 
         return args
-
-    def build_file_position_args(self):
-        return ['--', self.context.file.relpath]

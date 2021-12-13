@@ -35,5 +35,12 @@ def escape_shell(string):
     return shlex.quote(string).translate(SHELL_ESCAPE_TRANSLATION_TABLE)
 
 
+def escape(string, symbols):
+    for char in symbols:
+        string = string.replace(char, '\\{}'.format(char))
+
+    return string
+
+
 def is_executable(name):
     return bool(spawn.find_executable(name))

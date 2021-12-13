@@ -25,6 +25,9 @@ class TestFramework(IsConfigurableMixin, python.TestFramework):
 
         return executable
 
+    def build_file_position_args(self):
+        return [self.context.file.relpath]
+
     def build_nearest_position_args(self):
         file_args = self.build_file_position_args()
         nearest = self.find_nearest()
@@ -32,6 +35,3 @@ class TestFramework(IsConfigurableMixin, python.TestFramework):
         return [
             self.NEAREST_SEPARATOR.join(file_args + nearest.namespaces + nearest.tests)
         ]
-
-    def build_file_position_args(self):
-        return [self.context.file.relpath]

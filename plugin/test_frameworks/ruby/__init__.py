@@ -1,3 +1,5 @@
+from functools import lru_cache
+
 from .. import TestFramework as BaseTestFramework
 
 
@@ -13,3 +15,24 @@ class TestFramework(BaseTestFramework):
         r'^\s*describe\s*[\( ]\s*(?:"|\')(.*)(?:"|\')',
         r'^\s*describe\s*[\( ]\s*([^\s\)]+)',
     )
+
+    @lru_cache(maxsize=None)
+    def use_zeus(self):
+        return self.file('.zeus.sock').exists()
+
+    def zeus(self, executable):
+        return ['zeus'] + executable
+
+    def bin(self):
+        raise NotImplementedError()
+
+    @lru_cache(maxsize=None)
+    def use_binstubs(self):
+        return self.bin().exists() and self.settings('use_binstubs')
+
+    @lru_cache(maxsize=None)
+    def use_bundler(self):
+        return self.file('Gemfile').exists() and self.settings('bundle_exec')
+
+    def bundle(self, executable):
+        return ['bundle', 'exec'] + executable

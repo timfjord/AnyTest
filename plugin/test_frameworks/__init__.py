@@ -9,7 +9,7 @@ from .. import errors, logger, settings
 ALL = {
     'javascript': ['jest'],
     'python': ['pytest'],
-    'ruby': ['rspec'],
+    'ruby': ['minitest', 'rspec'],
 }
 # fmt: on
 
@@ -138,21 +138,18 @@ class TestFramework(metaclass=ABCMeta):
         pass
 
     def args(self):
-        return self.settings('args', type=list, fallback=False) or self.build_args()
+        return self.settings('args', type=list, fallback=False, default=[])
 
-    def build_args(self):
+    def build_suite_position_args(self):
         return []
-
-    @abstractmethod
-    def build_nearest_position_args(self):
-        pass
 
     @abstractmethod
     def build_file_position_args(self):
         pass
 
-    def build_suite_position_args(self):
-        return []
+    @abstractmethod
+    def build_nearest_position_args(self):
+        pass
 
     def build_command(self, scope):
         position_args = getattr(self, 'build_{}_position_args'.format(scope))

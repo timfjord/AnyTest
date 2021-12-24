@@ -148,10 +148,13 @@ class TestFramework(metaclass=ABCMeta):
         pass
 
     @abstractmethod
-    def build_nearest_position_args(self):
+    def build_line_position_args(self):
         pass
 
     def build_command(self, scope):
-        position_args = getattr(self, 'build_{}_position_args'.format(scope))
+        try:
+            position_args = getattr(self, 'build_{}_position_args'.format(scope))
 
-        return self.executable() + self.args() + position_args()
+            return self.executable() + self.args() + position_args()
+        except AttributeError:
+            raise errors.Error('Invalid scope')

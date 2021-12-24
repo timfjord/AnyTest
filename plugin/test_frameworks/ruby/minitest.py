@@ -79,7 +79,7 @@ class TestFramework(ruby.TestFramework):
         else:
             return [self.context.file.relpath]
 
-    def build_nearest_position_args(self):
+    def build_line_position_args(self):
         file_args = self.build_file_position_args()
         nearest_args = []
         nearest = self.build_nearest()

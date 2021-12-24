@@ -9,7 +9,7 @@
                     {
                         "caption": "AnyTest: Test nearest",
                         "command": "any_test_run",
-                        "args": { "scope": "nearest" }
+                        "args": { "scope": "line" }
                     },
                     {
                         "caption": "AnyTest: Test file",

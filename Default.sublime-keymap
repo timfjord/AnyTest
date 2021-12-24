@@ -15,7 +15,7 @@
             }
         ]
     },
-    // { "keys": ["primary+j", "primary+n"], "command": "any_test_run", "args": { "scope": "nearest" } },
+    // { "keys": ["primary+j", "primary+n"], "command": "any_test_run", "args": { "scope": "line" } },
     // { "keys": ["primary+j", "primary+f"], "command": "any_test_run", "args": { "scope": "file" } },
     // { "keys": ["primary+j", "primary+s"], "command": "any_test_run", "args": { "scope": "suite" } },
     // { "keys": ["primary+j", "primary+l"], "command": "any_test_run", "args": { "scope": "last" } },

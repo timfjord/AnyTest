@@ -1,4 +1,5 @@
 import re
+import os
 from functools import lru_cache
 
 from .. import ruby, utils
@@ -10,6 +11,18 @@ class TestFramework(ruby.TestFramework):
 
     framework = 'minitest'
     pattern = r'(((^|/)test_.+)|_test)(?<!spec).rb$'
+
+    @classmethod
+    def test_folder(cls):
+        return cls.settings('test_folder', type=str, default='test', fallback=False)
+
+    @classmethod
+    def build_ruby_test_pattern(cls, folder):
+        return os.path.join(
+            folder,
+            '**',
+            cls.settings('file_pattern', type=str, default='*_test.rb', fallback=False),
+        )
 
     @lru_cache(maxsize=None)
     def rakefile(self):
@@ -31,7 +44,7 @@ class TestFramework(ruby.TestFramework):
         if self.use_rake():
             return self.build_rake_executable()
 
-        executable = ['ruby', '-Itest']
+        executable = ['ruby', '-I{}'.format(self.test_folder())]
 
         if self.use_bundler():
             executable = self.bundle(executable)
@@ -49,6 +62,16 @@ class TestFramework(ruby.TestFramework):
             executable = self.bundle(executable)
 
         return executable
+
+    def build_suite_position_args(self):
+        if self.use_rake():
+            return []
+
+        test_pattern = utils.escape_shell(
+            self.build_ruby_test_pattern(self.test_folder()), quote=False
+        )
+
+        return [test_pattern]
 
     def build_file_position_args(self):
         if self.use_rake():

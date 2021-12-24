@@ -12,15 +12,12 @@
     "output.terminus.post_window_hooks": [],
     "output.terminus.post_view_hooks": [],
     // --- Test Frameworks ---
-    "javascript.env": {},
-    // will be merged with "ruby.env"
-    "javascript.jest.env": {},
     "javascript.jest.args": [
         "--no-coverage"
     ],
     "ruby.bundle_exec": true,
-    "ruby.env": {},
     "ruby.use_binstubs": true,
     "ruby.use_spring_binstub": false,
-    "ruby.rspec.env": {}, // this will be merged with "ruby.env"
+    "ruby.minitest.test_folder": "test",
+    "ruby.minitest.file_pattern": "*_test.rb",
 }

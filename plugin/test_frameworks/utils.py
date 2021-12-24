@@ -31,8 +31,11 @@ def escape_regex(string):
     return string.translate(REGEXP_ESCAPE_TRANSLATION_TABLE)
 
 
-def escape_shell(string):
-    return shlex.quote(string).translate(SHELL_ESCAPE_TRANSLATION_TABLE)
+def escape_shell(string, quote=True):
+    if quote:
+        string = shlex.quote(string)
+
+    return string.translate(SHELL_ESCAPE_TRANSLATION_TABLE)
 
 
 def escape(string, symbols):

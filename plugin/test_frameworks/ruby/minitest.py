@@ -8,20 +8,25 @@ from .. import ruby, utils
 class TestFramework(ruby.TestFramework):
     NAMESPEACE_SEPARATOR = '::'
     METHOD_SEPARATOR = '#'
+    DEFAULT_TEST_FOLDER = 'test'
+    DEFAULT_TEST_FILE_PATTERN = '*_test.rb'
 
     framework = 'minitest'
     pattern = r'(((^|/)test_.+)|_test)(?<!spec).rb$'
 
     @classmethod
     def test_folder(cls):
-        return cls.settings('test_folder', type=str, default='test', fallback=False)
+        return cls.settings(
+            'test_folder', type=str, default=cls.DEFAULT_TEST_FOLDER, fallback=False
+        )
 
     @classmethod
-    def build_ruby_test_pattern(cls, folder):
-        return os.path.join(
-            folder,
-            '**',
-            cls.settings('file_pattern', type=str, default='*_test.rb', fallback=False),
+    def test_file_pattern(cls):
+        return cls.settings(
+            'file_pattern',
+            type=str,
+            default=cls.DEFAULT_TEST_FILE_PATTERN,
+            fallback=False,
         )
 
     @lru_cache(maxsize=None)
@@ -62,16 +67,6 @@ class TestFramework(ruby.TestFramework):
             executable = self.bundle(executable)
 
         return executable
-
-    def build_suite_position_args(self):
-        if self.use_rake():
-            return []
-
-        test_pattern = utils.escape_shell(
-            self.build_ruby_test_pattern(self.test_folder()), quote=False
-        )
-
-        return [test_pattern]
 
     def build_file_position_args(self):
         if self.use_rake():
@@ -115,3 +110,23 @@ class TestFramework(ruby.TestFramework):
             test = [test_name]
 
         return self.METHOD_SEPARATOR.join(namespace + test)
+
+    def build_command(self, scope):
+        command = super().build_command(scope)
+
+        if scope != self.SCOPE_SUITE:
+            return command
+
+        # building a command like find `test -name "*_test.rb" -exec bundle exec ruby -Itest {} +`
+        # as a workaround for globstar in Bash, see https://github.com/randy3k/Terminus/issues/332
+        return (
+            [
+                'find',
+                utils.escape_shell(self.test_folder(), quote=False),
+                '-name',
+                utils.escape_shell(self.test_file_pattern(), quote=False),
+                '-exec',
+            ]
+            + command
+            + ['{}', '+']
+        )

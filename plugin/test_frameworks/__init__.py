@@ -60,6 +60,10 @@ def _safe_merge(dict1, dict2):
 
 
 class TestFramework(metaclass=ABCMeta):
+    SCOPE_SUITE = 'suite'
+    SCOPE_FILE = 'file'
+    SCOPE_LINE = 'line'
+
     test_patterns = None
     namespace_patterns = []
     output_file_regex = None

@@ -7,6 +7,7 @@ from .. import errors, logger, settings
 
 # fmt: off
 ALL = {
+    'elixir': ['exunit'],
     'javascript': ['jest'],
     'python': ['pytest'],
     'ruby': ['minitest', 'rspec'],

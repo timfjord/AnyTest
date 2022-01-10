@@ -93,7 +93,9 @@ class SublimeViewTestCase(SublimeWindowTestCase):
     def _testFile(self, folder, file, line=None, scope=None):
         test_scope = scope if scope is not None else TestFramework.SCOPE_FILE
 
-        path = FIXTURES_PATH.joinpath(folder)
+        if not isinstance(folder, list) and not isinstance(folder, tuple):
+            folder = (folder,)
+        path = FIXTURES_PATH.joinpath(*folder)
         self.window.set_project_data({'folders': [{'path': str(path)}]})
 
         file_path = path.joinpath(file)

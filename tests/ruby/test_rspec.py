@@ -3,11 +3,11 @@ from AnyTest.plugin.test_frameworks import TestFramework
 
 
 class RspecTestCase(SublimeViewTestCase):
-    def test_nearest1(self):
+    def test_line1(self):
         yield from self._testFile('rspec', 'normal_spec.rb', 1)
         self.assertLastCommand('rspec normal_spec.rb:1')
 
-    def test_nearest2(self):
+    def test_line2(self):
         yield from self._testFile('rspec', 'context_spec.rb', 1)
         self.assertLastCommand('rspec context_spec.rb:1')
 

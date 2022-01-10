@@ -3,7 +3,7 @@ from AnyTest.plugin.test_frameworks import TestFramework
 
 
 class WithoutMixTestCase(SublimeViewTestCase):
-    def test_nearest_specific_line(self):
+    def test_line(self):
         yield from self._testFile('exunit', 'normal_test.exs', 6)
         self.assertLastCommand('elixir normal_test.exs')
 
@@ -19,11 +19,11 @@ class WithoutMixTestCase(SublimeViewTestCase):
 
 
 class MixTestCase(SublimeViewTestCase):
-    def test_nearest_first_line(self):
+    def test_first_line(self):
         yield from self._testFile(('exunit', 'mix'), 'normal_test.exs', 1)
         self.assertLastCommand('mix test normal_test.exs')
 
-    def test_nearest_specific_line(self):
+    def test_specific_line(self):
         yield from self._testFile(('exunit', 'mix'), 'normal_test.exs', 6)
         self.assertLastCommand('mix test normal_test.exs:6')
 

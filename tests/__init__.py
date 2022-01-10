@@ -48,18 +48,23 @@ class SublimeWindowTestCase(DeferrableTestCase):
 
 
 class SublimeViewTestCase(SublimeWindowTestCase):
+    new_file = False
+
     def setUp(self):
         super().setUp()
 
-        self.view = self.buildView()
-
-    def buildView(self):
-        return self.window.new_file()
+        self.view = self.window.new_file() if self.new_file else None
 
     def focusView(self):
+        if not self.view:
+            return
+
         self.window.focus_view(self.view)
 
     def isViewLoaded(self):
+        if not self.view:
+            return True
+
         return not self.view.is_loading()
 
     def tearDown(self):
@@ -69,17 +74,40 @@ class SublimeViewTestCase(SublimeWindowTestCase):
         self.view.set_scratch(True)
         self.view.close()
 
-    def setText(self, string):
-        self.view.run_command('insert', {'characters': string})
-
-    def getRow(self, row):
-        return self.view.substr(self.view.line(self.view.text_point(row, 0)))
-
     def gotoLine(self, line):
+        if not self.view:
+            return
+
         self.focusView()
         self.view.run_command('goto_line', {'line': line})
 
         return line
+
+    def _testLine(self, line):
+        if not self.view:
+            return
+
+        self.gotoLine(line)
+        self.view.run_command('any_test_run', {'scope': TestFramework.SCOPE_LINE})
+
+    def _testFile(self, folder, file, line=None, scope=None):
+        test_scope = scope if scope is not None else TestFramework.SCOPE_FILE
+
+        path = FIXTURES_PATH.joinpath(folder)
+        self.window.set_project_data({'folders': [{'path': str(path)}]})
+
+        file_path = path.joinpath(file)
+        self.view = self.window.open_file(str(file_path))
+
+        yield self.isViewLoaded
+
+        if line is not None:
+            self.gotoLine(line)
+
+            if scope is None:
+                test_scope = TestFramework.SCOPE_LINE
+
+        self.view.run_command('any_test_run', {'scope': test_scope})
 
     def assertLastCommand(self, command):
         try:
@@ -88,30 +116,3 @@ class SublimeViewTestCase(SublimeWindowTestCase):
             last_command = ''
 
         self.assertEqual(last_command, command)
-
-
-class SublimeFileTestCase(SublimeViewTestCase):
-    def buildView(self):
-        pass
-
-    def Test(self, folder=None, file=None, line=None):
-        scope = TestFramework.SCOPE_SUITE
-
-        if folder is not None:
-            path = FIXTURES_PATH.joinpath(folder)
-            self.window.set_project_data({'folders': [{'path': str(path)}]})
-
-            if file is not None:
-                scope = TestFramework.SCOPE_FILE
-                file_path = path.joinpath(file)
-                self.view = self.window.open_file(str(file_path))
-
-                yield self.isViewLoaded
-
-        if line is not None:
-            scope = TestFramework.SCOPE_LINE
-            self.gotoLine(line)
-
-            yield
-
-        self.view.run_command('any_test_run', {'scope': scope})

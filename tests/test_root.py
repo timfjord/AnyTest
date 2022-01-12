@@ -80,6 +80,7 @@ class RelativePathTestCase(TestCase):
         )
 
     def test_exists_checks_if_path_exists(self):
+        pass
         # with tempfile.NamedTemporaryFile() as tmpfile:
         #     existing_file = os.path.basename(tmpfile.name)
         #     root = Root(os.path.dirname(tmpfile.name))

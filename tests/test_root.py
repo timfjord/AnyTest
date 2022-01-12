@@ -92,19 +92,19 @@ class RelativePathTestCase(TestCase):
 
 
 class FileTestCase(TestCase):
-    def test_exists_checks_if_file_exists(self):
-        with tempfile.NamedTemporaryFile() as tmpfile:
-            existing_file = os.path.basename(tmpfile.name)
-            root = Root(os.path.dirname(tmpfile.name))
-            existing_dir = os.path.basename(root.path)
-            subfolder = Root(os.path.dirname(root.path))
+    # def test_exists_checks_if_file_exists(self):
+    #     with tempfile.NamedTemporaryFile() as tmpfile:
+    #         existing_file = os.path.basename(tmpfile.name)
+    #         root = Root(os.path.dirname(tmpfile.name))
+    #         existing_dir = os.path.basename(root.path)
+    #         subfolder = Root(os.path.dirname(root.path))
 
-            self.assertTrue(File(root, existing_file).exists())
-            self.assertFalse(File(root, 'uNkn0wn.py').exists())
-            self.assertFalse(File(subfolder, existing_dir).exists())
+    #         self.assertTrue(File(root, existing_file).exists())
+    #         self.assertFalse(File(root, 'uNkn0wn.py').exists())
+    #         self.assertFalse(File(subfolder, existing_dir).exists())
 
     def test_contains(self):
-        with tempfile.NamedTemporaryFile('w') as tmpfile:
+        with tempfile.NamedTemporaryFile('w', dir='rand') as tmpfile:
             tmpfile.write('some content goes here')
             tmpfile.seek(0)
             file_name = os.path.basename(tmpfile.name)

@@ -104,7 +104,7 @@ class FileTestCase(TestCase):
     #         self.assertFalse(File(subfolder, existing_dir).exists())
 
     def test_contains(self):
-        with tempfile.NamedTemporaryFile('w', dir='rand') as tmpfile:
+        with tempfile.NamedTemporaryFile('w') as tmpfile:
             tmpfile.write('some content goes here')
             tmpfile.seek(0)
             file_name = os.path.basename(tmpfile.name)

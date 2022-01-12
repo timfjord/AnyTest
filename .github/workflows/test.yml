@@ -14,7 +14,7 @@ jobs:
         st-version: [3, 4]
         os: ["ubuntu-latest", "macOS-latest", "windows-latest"]
     runs-on: ${{ matrix.os }}
-    name: "Sublime Text ${{ matrix.st-version }} ({{ matrix.os }})"
+    name: "Sublime Text ${{ matrix.st-version }} (${{ matrix.os }})"
     steps:
       - uses: actions/checkout@v2
       - uses: SublimeText/UnitTesting/actions/setup@v1

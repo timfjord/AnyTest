@@ -9,7 +9,7 @@ on:
 jobs:
   run-tests:
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
         st-version: [3, 4]
         os: ["ubuntu-latest", "macOS-latest", "windows-latest"]

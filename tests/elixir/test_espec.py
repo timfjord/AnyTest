@@ -1,5 +1,4 @@
 from AnyTest.tests import SublimeViewTestCase
-from AnyTest.plugin.test_frameworks import TestFramework
 
 
 class EspecTestCase(SublimeViewTestCase):
@@ -12,7 +11,5 @@ class EspecTestCase(SublimeViewTestCase):
         self.assertLastCommand('mix espec normal_spec.exs')
 
     def test_suite(self):
-        yield from self._testFile(
-            'espec', 'normal_spec.exs', scope=TestFramework.SCOPE_SUITE
-        )
+        yield from self._testSuite('espec', 'normal_spec.exs')
         self.assertLastCommand('mix espec')

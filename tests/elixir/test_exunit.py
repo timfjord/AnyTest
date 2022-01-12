@@ -1,5 +1,4 @@
 from AnyTest.tests import SublimeViewTestCase
-from AnyTest.plugin.test_frameworks import TestFramework
 
 
 class WithoutMixTestCase(SublimeViewTestCase):
@@ -12,9 +11,7 @@ class WithoutMixTestCase(SublimeViewTestCase):
         self.assertLastCommand('elixir normal_test.exs')
 
     def test_suite(self):
-        yield from self._testFile(
-            'exunit', 'normal_test.exs', scope=TestFramework.SCOPE_SUITE
-        )
+        yield from self._testSuite('exunit', 'normal_test.exs')
         self.assertLastCommand('elixir *.exs')
 
 
@@ -32,7 +29,5 @@ class MixTestCase(SublimeViewTestCase):
         self.assertLastCommand('mix test normal_test.exs')
 
     def test_suite(self):
-        yield from self._testFile(
-            ('exunit', 'mix'), 'normal_test.exs', scope=TestFramework.SCOPE_SUITE
-        )
+        yield from self._testSuite(('exunit', 'mix'), 'normal_test.exs')
         self.assertLastCommand('mix test')

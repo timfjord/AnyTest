@@ -111,6 +111,9 @@ class SublimeViewTestCase(SublimeWindowTestCase):
 
         self.view.run_command('any_test_run', {'scope': test_scope})
 
+    def _testSuite(self, folder, file):
+        yield from self._testFile(folder, file, scope=TestFramework.SCOPE_SUITE)
+
     def assertLastCommand(self, command):
         try:
             last_command = Command.last().command

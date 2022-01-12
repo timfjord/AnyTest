@@ -1,6 +1,6 @@
 import os
 import tempfile
-from unittest import TestCase
+import unittest
 
 import sublime
 
@@ -8,14 +8,17 @@ from AnyTest.plugin import errors
 from AnyTest.plugin.root import File, RelativePath, Root
 
 
-DIR = 'C:\\st' if sublime.platform() == 'windows' else '~'
+IS_WINDOWS = sublime.platform() == 'windows'
+
+
+DIR = 'C:\\st' if IS_WINDOWS else '~'
 
 
 def path(*parts):
     return os.path.join(DIR, *parts)
 
 
-class RootTestCase(TestCase):
+class RootTestCase(unittest.TestCase):
     def test_find_handles_invalid_files(self):
         with self.assertRaises(errors.InvalidContext):
             Root.find([], None)
@@ -69,7 +72,7 @@ class RootTestCase(TestCase):
         self.assertEqual(file.path, path('code', 'project', 'folder', 'file.py'))
 
 
-class RelativePathTestCase(TestCase):
+class RelativePathTestCase(unittest.TestCase):
     def test_realative_path_calculation_on_init(self):
         root = Root(path('code', 'project'))
         relative_path = RelativePath(root, 'folder', 'file.py')
@@ -80,30 +83,30 @@ class RelativePathTestCase(TestCase):
         )
 
     def test_exists_checks_if_path_exists(self):
-        pass
-        # with tempfile.NamedTemporaryFile() as tmpfile:
-        #     existing_file = os.path.basename(tmpfile.name)
-        #     root = Root(os.path.dirname(tmpfile.name))
-        #     existing_dir = os.path.basename(root.path)
-        #     subfolder = Root(os.path.dirname(root.path))
+        with tempfile.NamedTemporaryFile() as tmpfile:
+            existing_file = os.path.basename(tmpfile.name)
+            root = Root(os.path.dirname(tmpfile.name))
+            existing_dir = os.path.basename(root.path)
+            subfolder = Root(os.path.dirname(root.path))
 
-        #     self.assertTrue(RelativePath(root, existing_file).exists())
-        #     self.assertFalse(RelativePath(root, 'uNkn0wn.py').exists())
-        #     self.assertTrue(RelativePath(subfolder, existing_dir).exists())
+            self.assertTrue(RelativePath(root, existing_file).exists())
+            self.assertFalse(RelativePath(root, 'uNkn0wn.py').exists())
+            self.assertTrue(RelativePath(subfolder, existing_dir).exists())
 
 
-class FileTestCase(TestCase):
-    # def test_exists_checks_if_file_exists(self):
-    #     with tempfile.NamedTemporaryFile() as tmpfile:
-    #         existing_file = os.path.basename(tmpfile.name)
-    #         root = Root(os.path.dirname(tmpfile.name))
-    #         existing_dir = os.path.basename(root.path)
-    #         subfolder = Root(os.path.dirname(root.path))
+class FileTestCase(unittest.TestCase):
+    def test_exists_checks_if_file_exists(self):
+        with tempfile.NamedTemporaryFile() as tmpfile:
+            existing_file = os.path.basename(tmpfile.name)
+            root = Root(os.path.dirname(tmpfile.name))
+            existing_dir = os.path.basename(root.path)
+            subfolder = Root(os.path.dirname(root.path))
 
-    #         self.assertTrue(File(root, existing_file).exists())
-    #         self.assertFalse(File(root, 'uNkn0wn.py').exists())
-    #         self.assertFalse(File(subfolder, existing_dir).exists())
+            self.assertTrue(File(root, existing_file).exists())
+            self.assertFalse(File(root, 'uNkn0wn.py').exists())
+            self.assertFalse(File(subfolder, existing_dir).exists())
 
+    @unittest.skipIf(IS_WINDOWS, '[Errno 13] Permission denied')
     def test_contains(self):
         with tempfile.NamedTemporaryFile('w') as tmpfile:
             tmpfile.write('some content goes here')

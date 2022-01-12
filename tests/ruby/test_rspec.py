@@ -20,11 +20,11 @@ class RspecTestCase(SublimeViewTestCase):
         yield from self._testFile('rspec', 'normal_spec.rb')
         self.assertLastCommand('rspec normal_spec.rb')
 
+    def test_suite(self):
+        yield from self._testSuite('rspec', 'normal_spec.rb')
+        self.assertLastCommand('rspec')
+
     def test_turnip(self):
         yield from self._testFile('rspec', 'math.feature')
 
         self.assertLastCommand('rspec math.feature')
-
-    def test_suite(self):
-        yield from self._testSuite('rspec', 'normal_spec.rb')
-        self.assertLastCommand('rspec')

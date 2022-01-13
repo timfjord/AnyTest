@@ -1,5 +1,4 @@
 import re
-import os
 from functools import lru_cache
 
 from .. import ruby, utils

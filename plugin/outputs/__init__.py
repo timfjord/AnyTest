@@ -1,7 +1,7 @@
 from abc import ABCMeta, abstractmethod
 import importlib
 
-from .. import settings, test_frameworks
+from .. import settings
 
 
 def load(output):

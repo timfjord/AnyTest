@@ -1,4 +1,4 @@
-from pathlib import Path
+import os
 
 import sublime
 
@@ -10,7 +10,7 @@ from AnyTest.plugin.errors import NoLastCommand
 from AnyTest.plugin.test_frameworks import TestFramework
 
 
-FIXTURES_PATH = Path(__file__).parent.joinpath('fixtures')
+FIXTURES_PATH = os.path.join(os.path.dirname(__file__), 'fixtures')
 
 
 class SublimeWindowTestCase(DeferrableTestCase):
@@ -95,11 +95,11 @@ class SublimeViewTestCase(SublimeWindowTestCase):
 
         if not isinstance(folder, list) and not isinstance(folder, tuple):
             folder = (folder,)
-        path = FIXTURES_PATH.joinpath(*folder)
-        self.window.set_project_data({'folders': [{'path': str(path)}]})
+        path = os.path.join(FIXTURES_PATH, *folder)
+        self.window.set_project_data({'folders': [{'path': path}]})
 
-        file_path = path.joinpath(file)
-        self.view = self.window.open_file(str(file_path))
+        file_path = os.path.join(path, file)
+        self.view = self.window.open_file(file_path)
 
         yield self.isViewLoaded
 
@@ -110,6 +110,9 @@ class SublimeViewTestCase(SublimeWindowTestCase):
                 test_scope = TestFramework.SCOPE_LINE
 
         self.view.run_command('any_test_run', {'scope': test_scope})
+
+    def _testSuite(self, folder, file):
+        yield from self._testFile(folder, file, scope=TestFramework.SCOPE_SUITE)
 
     def assertLastCommand(self, command):
         try:

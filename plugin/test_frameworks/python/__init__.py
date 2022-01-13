@@ -1,5 +1,3 @@
-import json
-
 from .. import TestFramework as BaseTestFramework
 
 

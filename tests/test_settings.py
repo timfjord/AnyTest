@@ -1,7 +1,10 @@
+import unittest
+
 from AnyTest.plugin import settings
 from AnyTest.tests import SublimeWindowTestCase
 
 
+@unittest.skip
 class SettingsTestCase(SublimeWindowTestCase):
     def test_unknown(self):
         self.assertIsNone(settings.get('unknown'))
@@ -26,6 +29,7 @@ class SettingsTestCase(SublimeWindowTestCase):
         self.assertIsNone(settings.get('key', type=bool))
 
 
+@unittest.skip
 class ProjectSettingsTestCase(SublimeWindowTestCase):
     @classmethod
     def setUpClass(cls):
@@ -41,6 +45,7 @@ class ProjectSettingsTestCase(SublimeWindowTestCase):
         self.assertEqual(settings.get('key'), 'value2')
 
 
+@unittest.skip
 class InvalidProjectDataTestCase(SublimeWindowTestCase):
     @classmethod
     def setUpClass(cls):
@@ -54,6 +59,7 @@ class InvalidProjectDataTestCase(SublimeWindowTestCase):
         self.assertEqual(settings.get('key'), 'value')
 
 
+@unittest.skip
 class InvalidProjectSettingsTestCase(SublimeWindowTestCase):
     @classmethod
     def setUpClass(cls):
@@ -67,6 +73,7 @@ class InvalidProjectSettingsTestCase(SublimeWindowTestCase):
         self.assertEqual(settings.get('key'), 'value')
 
 
+@unittest.skip
 class InvalidProjectPluginSettingsTestCase(SublimeWindowTestCase):
     @classmethod
     def setUpClass(cls):

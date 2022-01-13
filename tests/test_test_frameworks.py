@@ -1,3 +1,5 @@
+import unittest
+
 from AnyTest.plugin.test_frameworks import TestFramework
 from AnyTest.tests import SublimeWindowTestCase
 
@@ -7,6 +9,7 @@ class TF(TestFramework):
     framework = 'rspec'
 
 
+@unittest.skip
 class TestFrameworkTestCase(SublimeWindowTestCase):
     def test_settings_read_from_framework_settings(self):
         self.setSettings({'ruby.rspec.key': 'value'})

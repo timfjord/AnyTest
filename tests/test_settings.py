@@ -4,7 +4,6 @@ from AnyTest.plugin import settings
 from AnyTest.tests import SublimeWindowTestCase
 
 
-@unittest.skip
 class SettingsTestCase(SublimeWindowTestCase):
     def test_unknown(self):
         self.assertIsNone(settings.get('unknown'))

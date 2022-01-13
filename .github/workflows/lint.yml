@@ -23,3 +23,6 @@ jobs:
           VALIDATE_PYTHON_ISORT: false
           VALIDATE_PYTHON_MYPY: false
           VALIDATE_PYTHON_PYLINT: false
+          VALIDATE_RUBY: false
+          VALIDATE_GHERKIN: false
+          VALIDATE_JSCPD: false

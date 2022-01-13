@@ -44,22 +44,23 @@ class TestFrameworkTestCase(SublimeWindowTestCase):
         self.assertEqual(TF.settings('key', fallback=True, root=True), 'value')
 
     def test_settings_merge_framework_with_language(self):
-        self.setSettings({'_lng._frm.ENV': {'B': 1}, '_lng.ENV': {'A': 1}})
+        self.setSettings({'_lng._frm._ENV': {'B': 1}, '_lng._ENV': {'A': 1}})
 
-        self.assertEqual(TF.settings('ENV', merge=True), {'A': 1, 'B': 1})
+        self.assertEqual(TF.settings('_ENV', merge=True), {'A': 1, 'B': 1})
 
     def test_settings_merge_language_with_root(self):
-        self.setSettings({'_lng.ENV': {'C': 1}, 'ENV': {'D': 1}})
+        self.setSettings({'_lng._ENV': {'C': 1}, '_ENV': {'D': 1}})
 
         self.assertEqual(
-            TF.settings('ENV', framework=False, root=True, merge=True), {'C': 1, 'D': 1}
+            TF.settings('_ENV', framework=False, root=True, merge=True),
+            {'C': 1, 'D': 1},
         )
 
     def test_settings_merge_framework_with_language_with_root(self):
         self.setSettings(
-            {'_lng._frm.ENV': {'E': 1}, '_lng.ENV': {'F': 1}, 'ENV': {'G': 1}}
+            {'_lng._frm._ENV': {'E': 1}, '_lng._ENV': {'F': 1}, '_ENV': {'G': 1}}
         )
 
         self.assertEqual(
-            TF.settings('ENV', root=True, merge=True), {'E': 1, 'F': 1, 'G': 1}
+            TF.settings('_ENV', root=True, merge=True), {'E': 1, 'F': 1, 'G': 1}
         )

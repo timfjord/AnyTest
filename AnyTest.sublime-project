@@ -5,6 +5,9 @@
         },
     ],
     "settings": {
+        "rulers": [
+            100
+        ],
         "lsp_format_on_save": true,
         "LSP": {
             "LSP-pyright": {

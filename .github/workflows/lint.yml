@@ -17,8 +17,9 @@ jobs:
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+          LINTER_RULES_PATH: /
           PYTHON_FLAKE8_CONFIG_FILE: tox.ini
-          VALIDATE_PYTHON_BLACK: false
+          PYTHON_BLACK_CONFIG_FILE: pyproject.toml
           VALIDATE_PYTHON_ISORT: false
           VALIDATE_PYTHON_MYPY: false
           VALIDATE_PYTHON_PYLINT: false

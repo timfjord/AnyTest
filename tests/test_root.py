@@ -72,6 +72,15 @@ class RootTestCase(unittest.TestCase):
         self.assertEqual(file.path, path('code', 'project', 'folder', 'file.py'))
 
 
+def build_temp_files(tmpfile):
+    existing_file = os.path.basename(tmpfile.name)
+    root = Root(os.path.dirname(tmpfile.name))
+    existing_dir = os.path.basename(root.path)
+    subfolder = Root(os.path.dirname(root.path))
+
+    return existing_file, root, existing_dir, subfolder
+
+
 class RelativePathTestCase(unittest.TestCase):
     def test_realative_path_calculation_on_init(self):
         root = Root(path('code', 'project'))
@@ -84,10 +93,7 @@ class RelativePathTestCase(unittest.TestCase):
 
     def test_exists_checks_if_path_exists(self):
         with tempfile.NamedTemporaryFile() as tmpfile:
-            existing_file = os.path.basename(tmpfile.name)
-            root = Root(os.path.dirname(tmpfile.name))
-            existing_dir = os.path.basename(root.path)
-            subfolder = Root(os.path.dirname(root.path))
+            existing_file, root, existing_dir, subfolder = build_temp_files(tmpfile)
 
             self.assertTrue(RelativePath(root, existing_file).exists())
             self.assertFalse(RelativePath(root, 'uNkn0wn.py').exists())
@@ -97,10 +103,7 @@ class RelativePathTestCase(unittest.TestCase):
 class FileTestCase(unittest.TestCase):
     def test_exists_checks_if_file_exists(self):
         with tempfile.NamedTemporaryFile() as tmpfile:
-            existing_file = os.path.basename(tmpfile.name)
-            root = Root(os.path.dirname(tmpfile.name))
-            existing_dir = os.path.basename(root.path)
-            subfolder = Root(os.path.dirname(root.path))
+            existing_file, root, existing_dir, subfolder = build_temp_files(tmpfile)
 
             self.assertTrue(File(root, existing_file).exists())
             self.assertFalse(File(root, 'uNkn0wn.py').exists())

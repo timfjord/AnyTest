@@ -25,4 +25,3 @@ jobs:
           VALIDATE_PYTHON_PYLINT: false
           VALIDATE_RUBY: false
           VALIDATE_GHERKIN: false
-          VALIDATE_JSCPD: false

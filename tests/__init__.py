@@ -13,6 +13,10 @@ from AnyTest.plugin.test_frameworks import TestFramework
 FIXTURES_PATH = os.path.join(os.path.dirname(__file__), 'fixtures')
 
 
+def to_iter(val):
+    return val if isinstance(val, list) or isinstance(val, tuple) else (val,)
+
+
 class SublimeWindowTestCase(DeferrableTestCase):
     @classmethod
     def setUpClass(cls):
@@ -54,6 +58,7 @@ class SublimeViewTestCase(SublimeWindowTestCase):
         super().setUp()
 
         self.view = self.window.new_file() if self.new_file else None
+        self._currentFolder = None
 
     def focusView(self):
         if not self.view:
@@ -83,6 +88,10 @@ class SublimeViewTestCase(SublimeWindowTestCase):
 
         return line
 
+    def openFolder(self, *paths):
+        self._currentFolder = os.path.join(FIXTURES_PATH, *paths)
+        self.window.set_project_data({'folders': [{'path': self._currentFolder}]})
+
     def _testLine(self, line):
         if not self.view:
             return
@@ -90,15 +99,13 @@ class SublimeViewTestCase(SublimeWindowTestCase):
         self.gotoLine(line)
         self.view.run_command('any_test_run', {'scope': TestFramework.SCOPE_LINE})
 
-    def _testFile(self, folder, file, line=None, scope=None):
+    def _testFile(self, file, line=None, scope=None, folder=None):
         test_scope = scope if scope is not None else TestFramework.SCOPE_FILE
 
-        if not isinstance(folder, list) and not isinstance(folder, tuple):
-            folder = (folder,)
-        path = os.path.join(FIXTURES_PATH, *folder)
-        self.window.set_project_data({'folders': [{'path': path}]})
+        if folder is not None:
+            self.openFolder(*to_iter(folder))
 
-        file_path = os.path.join(path, file)
+        file_path = os.path.join(self._currentFolder or FIXTURES_PATH, *to_iter(file))
         self.view = self.window.open_file(file_path)
 
         yield self.isViewLoaded
@@ -111,8 +118,8 @@ class SublimeViewTestCase(SublimeWindowTestCase):
 
         self.view.run_command('any_test_run', {'scope': test_scope})
 
-    def _testSuite(self, folder, file):
-        yield from self._testFile(folder, file, scope=TestFramework.SCOPE_SUITE)
+    def _testSuite(self, file, folder=None):
+        yield from self._testFile(file, scope=TestFramework.SCOPE_SUITE, folder=folder)
 
     def assertLastCommand(self, command):
         try:

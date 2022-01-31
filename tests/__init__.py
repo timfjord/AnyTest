@@ -107,8 +107,6 @@ class SublimeViewTestCase(SublimeWindowTestCase):
         file_path = os.path.join(self._currentFolder or FIXTURES_PATH, *to_iter(file))
         self.view = self.window.open_file(file_path)
 
-        print('_testFile', self.view.id())
-
         yield self.isViewLoaded
 
         if line is not None:

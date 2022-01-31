@@ -11,7 +11,7 @@ class TestFramework(ruby.TestFramework):
     DEFAULT_TEST_FILE_PATTERN = '*_test.rb'
 
     framework = 'minitest'
-    pattern = r'(((^|/)test_.+)|_test)(?<!spec).rb$'
+    pattern = r'(((^|/|\\)test_.+)|_test)(?<!spec).rb$'
 
     @classmethod
     def test_folder(cls):

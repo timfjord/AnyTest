@@ -26,6 +26,10 @@ class RspecTestCase(SublimeViewTestCase):
         yield from self._testFile('normal_spec.rb')
         self.assertLastCommand('rspec normal_spec.rb')
 
+    def test_file_starts_with_test(self):
+        yield from self._testFile('test_spec.rb')
+        self.assertLastCommand('rspec test_spec.rb')
+
     def test_suite(self):
         yield from self._testSuite('normal_spec.rb')
         self.assertLastCommand('rspec')

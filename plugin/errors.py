@@ -25,7 +25,7 @@ class Error(Exception):
 
 
 class EmptyHistory(Error):
-    DEFAULT_MESSAGE = 'No tests were run so far'
+    DEFAULT_MESSAGE = 'No tests were run so far in this window'
 
 
 class FrameworkNotFound(Error):

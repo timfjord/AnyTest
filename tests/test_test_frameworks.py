@@ -1,7 +1,3 @@
-import unittest
-
-import sublime
-
 from AnyTest.plugin.test_frameworks import TestFramework
 from AnyTest.tests import SublimeWindowTestCase
 
@@ -11,10 +7,6 @@ class TF(TestFramework):
     framework = '_frm'
 
 
-@unittest.skipIf(
-    sublime.platform() != 'windows' and int(sublime.version()) < 4000,
-    "ST 3 doesn't like this test case for some reasons",
-)
 class TestFrameworkTestCase(SublimeWindowTestCase):
     def test_settings_read_from_framework_settings(self):
         self.setSettings({'_lng._frm.key': 'value'})

@@ -5,15 +5,20 @@ import sublime
 from unittesting import DeferrableTestCase
 
 from AnyTest.plugin import settings
-from AnyTest.plugin.command import Command
-from AnyTest.plugin.errors import NoLastCommand
 from AnyTest.plugin.test_frameworks import TestFramework
+from AnyTest.plugin.runners.tests import last_command
 
 
 FIXTURES_PATH = os.path.join(os.path.dirname(__file__), 'fixtures')
 
 
+def to_iter(val):
+    return val if isinstance(val, list) or isinstance(val, tuple) else (val,)
+
+
 class SublimeWindowTestCase(DeferrableTestCase):
+    _currentFolder = None
+
     @classmethod
     def setUpClass(cls):
         sublime.run_command('new_window')
@@ -30,11 +35,16 @@ class SublimeWindowTestCase(DeferrableTestCase):
     def tearDownClass(cls):
         cls.window.run_command('close_window')
 
+    @classmethod
+    def openFolder(cls, *paths):
+        cls._currentFolder = os.path.join(FIXTURES_PATH, *paths)
+        cls.window.set_project_data({'folders': [{'path': cls._currentFolder}]})
+
     def setUp(self):
         self.settings = sublime.load_settings(settings.BASE_NAME)
         self._setting_keys = set()
 
-        self.setSettings({'output': 'console'})
+        self.setSettings({'runner': 'tests'})
 
     def tearDown(self):
         for key in self._setting_keys:
@@ -90,15 +100,13 @@ class SublimeViewTestCase(SublimeWindowTestCase):
         self.gotoLine(line)
         self.view.run_command('any_test_run', {'scope': TestFramework.SCOPE_LINE})
 
-    def _testFile(self, folder, file, line=None, scope=None):
+    def _testFile(self, file, line=None, scope=None, folder=None):
         test_scope = scope if scope is not None else TestFramework.SCOPE_FILE
 
-        if not isinstance(folder, list) and not isinstance(folder, tuple):
-            folder = (folder,)
-        path = os.path.join(FIXTURES_PATH, *folder)
-        self.window.set_project_data({'folders': [{'path': path}]})
+        if folder is not None:
+            self.openFolder(*to_iter(folder))
 
-        file_path = os.path.join(path, file)
+        file_path = os.path.join(self._currentFolder or FIXTURES_PATH, *to_iter(file))
         self.view = self.window.open_file(file_path)
 
         yield self.isViewLoaded
@@ -111,13 +119,8 @@ class SublimeViewTestCase(SublimeWindowTestCase):
 
         self.view.run_command('any_test_run', {'scope': test_scope})
 
-    def _testSuite(self, folder, file):
-        yield from self._testFile(folder, file, scope=TestFramework.SCOPE_SUITE)
+    def _testSuite(self, file, folder=None):
+        yield from self._testFile(file, scope=TestFramework.SCOPE_SUITE, folder=folder)
 
     def assertLastCommand(self, command):
-        try:
-            last_command = Command.last().command
-        except NoLastCommand:
-            last_command = ''
-
-        self.assertEqual(last_command, command)
+        self.assertEqual(last_command(self.view), command)

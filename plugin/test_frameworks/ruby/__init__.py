@@ -24,7 +24,7 @@ class TestFramework(BaseTestFramework):
         return ['zeus'] + executable
 
     def bin(self):
-        raise NotImplementedError()
+        raise NotImplementedError
 
     @lru_cache(maxsize=None)
     def use_binstubs(self):

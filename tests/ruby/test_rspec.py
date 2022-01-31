@@ -2,12 +2,18 @@ from AnyTest.tests import SublimeViewTestCase
 
 
 class RspecTestCase(SublimeViewTestCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+
+        cls.openFolder('rspec')
+
     def test_line1(self):
-        yield from self._testFile('rspec', 'normal_spec.rb', 1)
+        yield from self._testFile('normal_spec.rb', 1)
         self.assertLastCommand('rspec normal_spec.rb:1')
 
     def test_line2(self):
-        yield from self._testFile('rspec', 'context_spec.rb', 1)
+        yield from self._testFile('context_spec.rb', 1)
         self.assertLastCommand('rspec context_spec.rb:1')
 
         self._testLine(2)
@@ -17,14 +23,14 @@ class RspecTestCase(SublimeViewTestCase):
         self.assertLastCommand('rspec context_spec.rb:3')
 
     def test_file(self):
-        yield from self._testFile('rspec', 'normal_spec.rb')
+        yield from self._testFile('normal_spec.rb')
         self.assertLastCommand('rspec normal_spec.rb')
 
     def test_suite(self):
-        yield from self._testSuite('rspec', 'normal_spec.rb')
+        yield from self._testSuite('normal_spec.rb')
         self.assertLastCommand('rspec')
 
     def test_turnip(self):
-        yield from self._testFile('rspec', 'math.feature')
+        yield from self._testFile('math.feature')
 
         self.assertLastCommand('rspec math.feature')

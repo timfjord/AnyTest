@@ -47,8 +47,8 @@ class RelativePath:
     def exists(self):
         return os.path.exists(self.path)
 
-    def contains(self, _content):
-        raise NotImplementedError()
+    def contains(self, _):
+        raise NotImplementedError
 
 
 class File(RelativePath):

@@ -1,17 +1,20 @@
-from . import panel
+from functools import lru_cache
+
+from . import command
 
 
-class Output(panel.Output):
+class Runner(command.Runner):
     PANEL_NAME = 'AnyTest'
     TAG = 'any-test'
 
     name = 'terminus'
 
-    def panel_command(self):
+    def command_name(self):
         return 'terminus_open'
 
-    def options(self):
-        options = super().options()
+    @lru_cache(maxsize=None)
+    def command_options(self):
+        options = super().command_options()
         options.pop('encoding', None)
 
         options['auto_close'] = False

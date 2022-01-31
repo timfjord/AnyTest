@@ -5,9 +5,8 @@ import sublime
 from unittesting import DeferrableTestCase
 
 from AnyTest.plugin import settings
-from AnyTest.plugin.command import Command
-from AnyTest.plugin.errors import NoLastCommand
 from AnyTest.plugin.test_frameworks import TestFramework
+from AnyTest.plugin.runners import tests
 
 
 FIXTURES_PATH = os.path.join(os.path.dirname(__file__), 'fixtures')
@@ -38,7 +37,7 @@ class SublimeWindowTestCase(DeferrableTestCase):
         self.settings = sublime.load_settings(settings.BASE_NAME)
         self._setting_keys = set()
 
-        self.setSettings({'output': 'console'})
+        self.setSettings({'runner': 'tests'})
 
     def tearDown(self):
         for key in self._setting_keys:
@@ -108,6 +107,8 @@ class SublimeViewTestCase(SublimeWindowTestCase):
         file_path = os.path.join(self._currentFolder or FIXTURES_PATH, *to_iter(file))
         self.view = self.window.open_file(file_path)
 
+        print('_testFile', self.view.id())
+
         yield self.isViewLoaded
 
         if line is not None:
@@ -122,9 +123,8 @@ class SublimeViewTestCase(SublimeWindowTestCase):
         yield from self._testFile(file, scope=TestFramework.SCOPE_SUITE, folder=folder)
 
     def assertLastCommand(self, command):
-        try:
-            last_command = Command.last().command
-        except NoLastCommand:
-            last_command = ''
+        last_command_for_view = (
+            self.view.settings().get(tests.SETTINS_KEY) if self.view is not None else ''
+        )
 
-        self.assertEqual(last_command, command)
+        self.assertEqual(last_command_for_view, command)

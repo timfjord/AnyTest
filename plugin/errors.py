@@ -24,7 +24,7 @@ class Error(Exception):
         super().__init__(*args, **kwargs)
 
 
-class NoLastCommand(Error):
+class EmptyHistory(Error):
     DEFAULT_MESSAGE = 'No tests were run so far'
 
 
@@ -32,13 +32,5 @@ class FrameworkNotFound(Error):
     DEFAULT_MESSAGE = "Couldn't find the right test framework"
 
 
-class InvalidOutputCommand(Error):
-    DEFAULT_MESSAGE = 'Output command is not set'
-
-
 class InvalidContext(Error):
     DEFAULT_MESSAGE = 'Test context is invalid'
-
-
-class OutputNotFound(Error):
-    DEFAULT_MESSAGE = "Couldn't find the right output"

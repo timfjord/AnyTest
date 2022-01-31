@@ -1,11 +1,13 @@
-from . import outputs, settings, test_frameworks
-from .command import Command
+from . import runners, settings, test_frameworks
 from .context import Context
+from .history import History
 from .errors import handle_errors
 from .mixins import WindowMixin
 
 
 SCOPE_LAST = 'last'
+
+history = History()
 
 
 class Plugin(WindowMixin):
@@ -21,25 +23,23 @@ class Plugin(WindowMixin):
         elif settings.get('save_current_file_on_run') and bool(self.view.file_name()):
             self.run_command('save')
 
-    def build_command(self, scope):
+    def build_runner(self, scope):
         if scope == SCOPE_LAST:
-            command = Command.last()
-            test_framework = test_frameworks.load(command.language, command.framework)
-        else:
-            context = Context(self.view)
-            test_framework = test_frameworks.find(context.file)
-            command = Command.build(test_framework(context), scope)
+            return history.last()
 
-        return command, test_framework
+        context = Context(self.view)
+        test_framework = test_frameworks.find(context.file)
+        runner = runners.find(test_framework)
+
+        return runner(test_framework(context), scope)
 
     @handle_errors
     def run_test(self, scope):
         settings.reload_project_settings()
 
-        command, test_framework = self.build_command(scope)
-        output = outputs.find(test_framework)
+        runner = self.build_runner(scope)
 
         self.save_file()
 
-        output(command, test_framework).build()
-        command.save()
+        runner.run()
+        history.add(runner)

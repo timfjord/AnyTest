@@ -17,6 +17,8 @@ def to_iter(val):
 
 
 class SublimeWindowTestCase(DeferrableTestCase):
+    _currentFolder = None
+
     @classmethod
     def setUpClass(cls):
         sublime.run_command('new_window')
@@ -32,6 +34,11 @@ class SublimeWindowTestCase(DeferrableTestCase):
     @classmethod
     def tearDownClass(cls):
         cls.window.run_command('close_window')
+
+    @classmethod
+    def openFolder(cls, *paths):
+        cls._currentFolder = os.path.join(FIXTURES_PATH, *paths)
+        cls.window.set_project_data({'folders': [{'path': cls._currentFolder}]})
 
     def setUp(self):
         self.settings = sublime.load_settings(settings.BASE_NAME)
@@ -57,7 +64,6 @@ class SublimeViewTestCase(SublimeWindowTestCase):
         super().setUp()
 
         self.view = self.window.new_file() if self.new_file else None
-        self._currentFolder = None
 
     def focusView(self):
         if not self.view:
@@ -86,10 +92,6 @@ class SublimeViewTestCase(SublimeWindowTestCase):
         self.view.run_command('goto_line', {'line': line})
 
         return line
-
-    def openFolder(self, *paths):
-        self._currentFolder = os.path.join(FIXTURES_PATH, *paths)
-        self.window.set_project_data({'folders': [{'path': self._currentFolder}]})
 
     def _testLine(self, line):
         if not self.view:

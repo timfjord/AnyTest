@@ -2,10 +2,11 @@ from AnyTest.tests import SublimeViewTestCase
 
 
 class WithoutMixTestCase(SublimeViewTestCase):
-    def setUp(self):
-        super().setUp()
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
 
-        self.openFolder('exunit')
+        cls.openFolder('exunit')
 
     def test_line(self):
         yield from self._testFile('normal_test.exs', 6)
@@ -21,10 +22,11 @@ class WithoutMixTestCase(SublimeViewTestCase):
 
 
 class MixTestCase(SublimeViewTestCase):
-    def setUp(self):
-        super().setUp()
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
 
-        self.openFolder('exunit', 'mix')
+        cls.openFolder('exunit', 'mix')
 
     def test_first_line(self):
         yield from self._testFile('normal_test.exs', 1)

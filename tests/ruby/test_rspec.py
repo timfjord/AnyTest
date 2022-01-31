@@ -2,10 +2,11 @@ from AnyTest.tests import SublimeViewTestCase
 
 
 class RspecTestCase(SublimeViewTestCase):
-    def setUp(self):
-        super().setUp()
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
 
-        self.openFolder('rspec')
+        cls.openFolder('rspec')
 
     def test_line1(self):
         yield from self._testFile('normal_spec.rb', 1)

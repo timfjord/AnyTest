@@ -2,10 +2,11 @@ from AnyTest.tests import SublimeViewTestCase
 
 
 class EspecTestCase(SublimeViewTestCase):
-    def setUp(self):
-        super().setUp()
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
 
-        self.openFolder('espec')
+        cls.openFolder('espec')
 
     def test_line(self):
         yield from self._testFile('normal_spec.exs', 3)

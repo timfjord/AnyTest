@@ -19,9 +19,7 @@ class History:
         self._history[self.window_id] = runner
 
     def last(self):
-        last = self._history.get(self.window_id, None)
-
-        if last is None:
+        try:
+            return self._history[self.window_id]
+        except KeyError:
             raise errors.EmptyHistory
-
-        return last

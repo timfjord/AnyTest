@@ -1,7 +1,7 @@
 from AnyTest.tests import SublimeViewTestCase
 
 
-class MinitestTestCase(SublimeViewTestCase):
+class MinitestRakeTestCase(SublimeViewTestCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -174,3 +174,26 @@ class MinitestTestCase(SublimeViewTestCase):
         self.assertLastCommand(
             'rake test TEST="explicit_spec_test.rb" TESTOPTS="--name=/MathSpec#test_\\d+_is\\$/"'
         )
+
+    def test_line_no_nearest(self):
+        yield from self._testFile('classic_unit_test.rb', 1)
+        self.assertLastCommand('rake test TEST="classic_unit_test.rb"')
+
+    def test_file(self):
+        yield from self._testFile('classic_unit_test.rb')
+        self.assertLastCommand('rake test TEST="classic_unit_test.rb"')
+
+    def test_suite(self):
+        yield from self._testSuite('classic_unit_test.rb')
+        self.assertLastCommand('find test -name *_test.rb -exec rake test {} +')
+
+    def test_suite_with_custom_folder_and_pattern(self):
+        self.setSettings(
+            {
+                'ruby.minitest.test_folder': 'my_test',
+                'ruby.minitest.file_pattern': '*_my_test.rb',
+            }
+        )
+
+        yield from self._testSuite('classic_unit_test.rb')
+        self.assertLastCommand('find my_test -name *_my_test.rb -exec rake test {} +')

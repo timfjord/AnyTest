@@ -78,6 +78,8 @@ class SublimeViewTestCase(SublimeWindowTestCase):
         return not self.view.is_loading()
 
     def tearDown(self):
+        super().tearDown()
+
         if not self.view:
             return
 

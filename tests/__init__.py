@@ -6,7 +6,7 @@ from unittesting import DeferrableTestCase
 
 from AnyTest.plugin import settings
 from AnyTest.plugin.test_frameworks import TestFramework
-from AnyTest.plugin.runners import tests
+from AnyTest.plugin.runners.tests import last_command
 
 
 FIXTURES_PATH = os.path.join(os.path.dirname(__file__), 'fixtures')
@@ -123,8 +123,4 @@ class SublimeViewTestCase(SublimeWindowTestCase):
         yield from self._testFile(file, scope=TestFramework.SCOPE_SUITE, folder=folder)
 
     def assertLastCommand(self, command):
-        last_command_for_view = (
-            self.view.settings().get(tests.SETTINS_KEY) if self.view is not None else ''
-        )
-
-        self.assertEqual(last_command_for_view, command)
+        self.assertEqual(last_command(self.view), command)

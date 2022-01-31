@@ -1,7 +1,19 @@
 from ..runners import Runner as BaseRunner
 
 
-SETTINS_KEY = 'last_command'
+SETTINGS_KEY = 'any_test_last_command'
+
+
+def last_command(view, value=None):
+    if view is None:
+        return ''
+
+    settings = view.settings()
+
+    if value is not None:
+        settings.set(SETTINGS_KEY, value)
+
+    return settings.get(SETTINGS_KEY)
 
 
 class Runner(BaseRunner):
@@ -12,4 +24,4 @@ class Runner(BaseRunner):
         print(self.command)
         print('-----------------------')
 
-        self.test_framework.context.view.settings().set(SETTINS_KEY, self.command.cmd)
+        last_command(self.test_framework.context.view, self.command.cmd)

@@ -12,13 +12,11 @@ from AnyTest.plugin.runners.tests import last_command
 FIXTURES_PATH = os.path.join(os.path.dirname(__file__), 'fixtures')
 
 
-def to_iter(val):
+def to_unpackable(val):
     return val if isinstance(val, list) or isinstance(val, tuple) else (val,)
 
 
 class SublimeWindowTestCase(DeferrableTestCase):
-    _currentFolder = None
-
     @classmethod
     def setUpClass(cls):
         sublime.run_command('new_window')
@@ -34,11 +32,6 @@ class SublimeWindowTestCase(DeferrableTestCase):
     @classmethod
     def tearDownClass(cls):
         cls.window.run_command('close_window')
-
-    @classmethod
-    def openFolder(cls, *paths):
-        cls._currentFolder = os.path.join(FIXTURES_PATH, *paths)
-        cls.window.set_project_data({'folders': [{'path': cls._currentFolder}]})
 
     def setUp(self):
         self.settings = sublime.load_settings(settings.BASE_NAME)
@@ -58,7 +51,7 @@ class SublimeWindowTestCase(DeferrableTestCase):
 
 
 class SublimeViewTestCase(SublimeWindowTestCase):
-    new_file = False
+    new_file = True
 
     def setUp(self):
         super().setUp()
@@ -95,6 +88,22 @@ class SublimeViewTestCase(SublimeWindowTestCase):
 
         return line
 
+
+class SublimeProjectTestCase(SublimeViewTestCase):
+    new_file = False
+    folder = None
+    _currentFolder = None
+
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+
+        if cls.folder is None:
+            raise ValueError('folder is missing')
+
+        cls._currentFolder = os.path.join(FIXTURES_PATH, *to_unpackable(cls.folder))
+        cls.window.set_project_data({'folders': [{'path': cls._currentFolder}]})
+
     def _testLine(self, line):
         if not self.view:
             return
@@ -106,9 +115,9 @@ class SublimeViewTestCase(SublimeWindowTestCase):
         test_scope = scope if scope is not None else TestFramework.SCOPE_FILE
 
         if self._currentFolder is None:
-            raise ValueError('Call cls.openFolder in the setUpClass callback')
+            raise ValueError('folder is required')
 
-        file_path = os.path.join(self._currentFolder, *to_iter(file))
+        file_path = os.path.join(self._currentFolder, *to_unpackable(file))
         self.view = self.window.open_file(file_path)
 
         yield self.isViewLoaded

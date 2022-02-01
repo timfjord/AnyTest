@@ -1,12 +1,8 @@
-from AnyTest.tests import SublimeViewTestCase
+from AnyTest.tests import SublimeProjectTestCase
 
 
-class WithoutMixTestCase(SublimeViewTestCase):
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-
-        cls.openFolder('exunit')
+class WithoutMixTestCase(SublimeProjectTestCase):
+    folder = 'exunit'
 
     def test_line(self):
         yield from self._testFile('normal_test.exs', 6)
@@ -21,12 +17,8 @@ class WithoutMixTestCase(SublimeViewTestCase):
         self.assertLastCommand('elixir *.exs')
 
 
-class MixTestCase(SublimeViewTestCase):
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-
-        cls.openFolder('exunit', 'mix')
+class MixTestCase(SublimeProjectTestCase):
+    folder = ('exunit', 'mix')
 
     def test_first_line(self):
         yield from self._testFile('normal_test.exs', 1)

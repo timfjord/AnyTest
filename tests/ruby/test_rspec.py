@@ -1,12 +1,8 @@
-from AnyTest.tests import SublimeViewTestCase
+from AnyTest.tests import SublimeProjectTestCase
 
 
-class RspecTestCase(SublimeViewTestCase):
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-
-        cls.openFolder('rspec')
+class RspecTestCase(SublimeProjectTestCase):
+    folder = 'rspec'
 
     def test_line1(self):
         yield from self._testFile('normal_spec.rb', 1)

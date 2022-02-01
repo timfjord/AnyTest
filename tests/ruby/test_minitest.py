@@ -1,12 +1,8 @@
-from AnyTest.tests import SublimeViewTestCase
+from AnyTest.tests import SublimeProjectTestCase
 
 
-class MinitestRakeTestCase(SublimeViewTestCase):
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-
-        cls.openFolder('minitest', 'rake')
+class MinitestRakeTestCase(SublimeProjectTestCase):
+    folder = ('minitest', 'rake')
 
     def test_line_unit_syntax(self):
         yield from self._testFile('classic_unit_test.rb', 3)

@@ -1,12 +1,8 @@
-from AnyTest.tests import SublimeViewTestCase
+from AnyTest.tests import SublimeProjectTestCase
 
 
-class EspecTestCase(SublimeViewTestCase):
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-
-        cls.openFolder('espec')
+class EspecTestCase(SublimeProjectTestCase):
+    folder = 'espec'
 
     def test_line(self):
         yield from self._testFile('normal_spec.exs', 3)

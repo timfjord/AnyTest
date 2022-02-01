@@ -1,12 +1,8 @@
-from AnyTest.tests import SublimeViewTestCase
+from AnyTest.tests import SublimeProjectTestCase
 
 
-class PyunitTestCase(SublimeViewTestCase):
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-
-        cls.openFolder('pyunit')
+class PyunitTestCase(SublimeProjectTestCase):
+    folder = 'pyunit'
 
     def setUp(self):
         super().setUp()

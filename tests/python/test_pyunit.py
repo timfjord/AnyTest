@@ -3,11 +3,7 @@ from AnyTest.tests import SublimeProjectTestCase
 
 class PyunitTestCase(SublimeProjectTestCase):
     folder = 'pyunit'
-
-    def setUp(self):
-        super().setUp()
-
-        self.setSettings({'python.test_framework': 'pyunit'})
+    settings = {'python.test_framework': 'pyunit'}
 
     def test_line(self):
         yield from self._testFile(('module', 'test_class.py'), 2)
@@ -40,3 +36,37 @@ class PyunitTestCase(SublimeProjectTestCase):
     def test_suite(self):
         yield from self._testSuite(('module', 'test_class.py'))
         self.assertLastCommand('python -m unittest')
+
+
+class PipenvPyunitTestCase(SublimeProjectTestCase):
+    folder = 'pipenv'
+    settings = {'python.test_framework': 'pyunit'}
+
+    def test_line(self):
+        yield from self._testFile('test_class.py', 1)
+        self.assertLastCommand('pipenv run python -m unittest test_class.TestNumbers')
+
+    def test_file(self):
+        yield from self._testFile('test_class.py')
+        self.assertLastCommand('pipenv run python -m unittest test_class')
+
+    def test_suite(self):
+        yield from self._testSuite('test_class.py')
+        self.assertLastCommand('pipenv run python -m unittest')
+
+
+class PoetryPyunitTestCase(SublimeProjectTestCase):
+    folder = 'poetry'
+    settings = {'python.test_framework': 'pyunit'}
+
+    def test_line(self):
+        yield from self._testFile('test_class.py', 1)
+        self.assertLastCommand('poetry run python -m unittest test_class.TestNumbers')
+
+    def test_file(self):
+        yield from self._testFile('test_class.py')
+        self.assertLastCommand('poetry run python -m unittest test_class')
+
+    def test_suite(self):
+        yield from self._testSuite('test_class.py')
+        self.assertLastCommand('poetry run python -m unittest')

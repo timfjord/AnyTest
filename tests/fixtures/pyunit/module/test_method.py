@@ -1,4 +1,4 @@
-import pytest
+from unittest import Mock
 
 
 def test_numbers():

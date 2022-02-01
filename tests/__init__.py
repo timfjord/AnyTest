@@ -6,14 +6,11 @@ from unittesting import DeferrableTestCase
 
 from AnyTest.plugin import settings
 from AnyTest.plugin.test_frameworks import TestFramework
+from AnyTest.plugin.test_frameworks.utils import to_unpackable
 from AnyTest.plugin.runners.tests import last_command
 
 
 FIXTURES_PATH = os.path.join(os.path.dirname(__file__), 'fixtures')
-
-
-def to_unpackable(val):
-    return val if isinstance(val, list) or isinstance(val, tuple) else (val,)
 
 
 class SublimeWindowTestCase(DeferrableTestCase):

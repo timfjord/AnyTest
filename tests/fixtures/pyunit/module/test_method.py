@@ -1,4 +1,4 @@
-import pytest  # noqa
+import pytest
 
 
 def test_numbers():

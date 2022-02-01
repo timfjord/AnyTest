@@ -3,6 +3,7 @@ import importlib
 import re
 
 from .. import errors, logger, settings
+from . import utils
 
 
 # fmt: off
@@ -28,9 +29,7 @@ def items():
         test_frameworks = ALL
 
     for language, frameworks in test_frameworks.items():
-        if not isinstance(frameworks, list):
-            frameworks = [str(frameworks)]
-        for framework in frameworks:
+        for framework in utils.to_unpackable(frameworks):
             try:
                 yield load(language, framework)
             except ImportError:

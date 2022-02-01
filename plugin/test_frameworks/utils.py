@@ -47,3 +47,7 @@ def escape(string, symbols):
 
 def is_executable(name):
     return bool(spawn.find_executable(name))
+
+
+def to_unpackable(val):
+    return val if isinstance(val, list) or isinstance(val, tuple) else (val,)

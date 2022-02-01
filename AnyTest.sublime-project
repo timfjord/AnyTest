@@ -16,5 +16,11 @@
                 },
             },
         },
+        "AnyTest": {
+            "test_frameworks": {
+                "python": "pyunit"
+            },
+            "python.pyunit.runner": "unittesting"
+        }
     },
 }

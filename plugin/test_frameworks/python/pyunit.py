@@ -1,27 +1,26 @@
+import os.path
+
 from .. import python, utils
 from ..mixins import IsConfigurableMixin
 
 
 class TestFramework(IsConfigurableMixin, python.TestFramework):
-    NEAREST_SEPARATOR = '::'
+    NEAREST_SEPARATOR = '.'
 
-    framework = 'pytest'
-    pattern = r'(test_[^/]+|[^/]+_test)\.py$'
+    framework = 'pyunit'
+    pattern = r'test.*\.py$'
 
     @classmethod
     def is_configurable_fallback(cls, _):
-        return utils.is_executable('pytest') or utils.is_executable('py.test')
+        return utils.is_executable('python')
 
     def build_executable(self):
-        if utils.is_executable('py.test') and not utils.is_executable('pytest'):
-            executable = ['py.test']
-        else:
-            executable = ['pytest']
-
-        return self.prefix_executable(executable)
+        return self.prefix_executable(['python', '-m', 'unittest'])
 
     def build_file_position_args(self):
-        return [self.context.file.relpath]
+        file_path = os.path.splitext(self.context.file.relpath)[0]
+
+        return [file_path.replace(os.path.sep, self.NEAREST_SEPARATOR)]
 
     def build_line_position_args(self):
         file_args = self.build_file_position_args()

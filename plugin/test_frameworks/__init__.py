@@ -9,7 +9,7 @@ from .. import errors, logger, settings
 ALL = {
     'elixir': ['espec', 'exunit'],
     'javascript': ['jest'],
-    'python': ['pytest'],
+    'python': ['pytest', 'pyunit'],
     'ruby': ['minitest', 'rspec'],
 }
 # fmt: on

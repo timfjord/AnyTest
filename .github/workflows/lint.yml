@@ -18,7 +18,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
           LINTER_RULES_PATH: /
-          PYTHON_FLAKE8_CONFIG_FILE: tox.ini
+          PYTHON_FLAKE8_CONFIG_FILE: .flake8
           PYTHON_BLACK_CONFIG_FILE: pyproject.toml
           VALIDATE_PYTHON_ISORT: false
           VALIDATE_PYTHON_MYPY: false

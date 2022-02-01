@@ -1,12 +1,8 @@
-from AnyTest.tests import SublimeViewTestCase
+from AnyTest.tests import SublimeProjectTestCase
 
 
-class MinitestRakeTestCase(SublimeViewTestCase):
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-
-        cls.openFolder('minitest', 'rake')
+class MinitestRakeTestCase(SublimeProjectTestCase):
+    folder = ('minitest', 'rake')
 
     def test_line_unit_syntax(self):
         yield from self._testFile('classic_unit_test.rb', 3)
@@ -14,12 +10,12 @@ class MinitestRakeTestCase(SublimeViewTestCase):
             'rake test TEST="classic_unit_test.rb" TESTOPTS="--name=/Math/"'
         )
 
-        yield from self._testFile('classic_unit_test.rb', 4)
+        self._testLine(4)
         self.assertLastCommand(
             'rake test TEST="classic_unit_test.rb" TESTOPTS="--name=/Math::TestNumbers/"'
         )
 
-        yield from self._testFile('classic_unit_test.rb', 6)
+        self._testLine(6)
         self.assertLastCommand(
             (
                 'rake test TEST="classic_unit_test.rb" '
@@ -32,12 +28,12 @@ class MinitestRakeTestCase(SublimeViewTestCase):
             'rake test TEST="test_classic.rb" TESTOPTS="--name=/Math/"'
         )
 
-        yield from self._testFile('test_classic.rb', 4)
+        self._testLine(4)
         self.assertLastCommand(
             'rake test TEST="test_classic.rb" TESTOPTS="--name=/Math::TestOperators/"'
         )
 
-        yield from self._testFile('test_classic.rb', 6)
+        self._testLine(6)
         self.assertLastCommand(
             (
                 'rake test TEST="test_classic.rb" '
@@ -53,7 +49,7 @@ class MinitestRakeTestCase(SublimeViewTestCase):
             )
         )
 
-        yield from self._testFile('rails_unit_test.rb', 15)
+        self._testLine(15)
         self.assertLastCommand(
             (
                 'rake test TEST="rails_unit_test.rb" '
@@ -61,7 +57,7 @@ class MinitestRakeTestCase(SublimeViewTestCase):
             )
         )
 
-        yield from self._testFile('rails_unit_test.rb', 19)
+        self._testLine(19)
         self.assertLastCommand(
             (
                 'rake test TEST="rails_unit_test.rb" '
@@ -69,7 +65,7 @@ class MinitestRakeTestCase(SublimeViewTestCase):
             )
         )
 
-        yield from self._testFile('rails_unit_test.rb', 23)
+        self._testLine(23)
         self.assertLastCommand(
             (
                 'rake test TEST="rails_unit_test.rb" '
@@ -77,7 +73,7 @@ class MinitestRakeTestCase(SublimeViewTestCase):
             )
         )
 
-        yield from self._testFile('rails_unit_test.rb', 27)
+        self._testLine(27)
         self.assertLastCommand(
             (
                 'rake test TEST="rails_unit_test.rb" '
@@ -85,7 +81,7 @@ class MinitestRakeTestCase(SublimeViewTestCase):
             )
         )
 
-        yield from self._testFile('rails_unit_test.rb', 29)
+        self._testLine(29)
         self.assertLastCommand(
             'rake test TEST="rails_unit_test.rb" TESTOPTS="--name=/MathTest#test_parentheses\\$/"'
         )
@@ -96,12 +92,12 @@ class MinitestRakeTestCase(SublimeViewTestCase):
             'rake test TEST="classic_spec_test.rb" TESTOPTS="--name=/Math/"'
         )
 
-        yield from self._testFile('classic_spec_test.rb', 7)
+        self._testLine(7)
         self.assertLastCommand(
             'rake test TEST="classic_spec_test.rb" TESTOPTS="--name=/Math::TestNumbers/"'
         )
 
-        yield from self._testFile('classic_spec_test.rb', 8)
+        self._testLine(8)
         self.assertLastCommand(
             (
                 'rake test TEST="classic_spec_test.rb" '
@@ -109,7 +105,7 @@ class MinitestRakeTestCase(SublimeViewTestCase):
             )
         )
 
-        yield from self._testFile('classic_spec_test.rb', 12)
+        self._testLine(12)
         self.assertLastCommand(
             (
                 'rake test TEST="classic_spec_test.rb" '
@@ -117,7 +113,7 @@ class MinitestRakeTestCase(SublimeViewTestCase):
             )
         )
 
-        yield from self._testFile('classic_spec_test.rb', 16)
+        self._testLine(16)
         self.assertLastCommand(
             (
                 'rake test TEST="classic_spec_test.rb" '
@@ -125,7 +121,7 @@ class MinitestRakeTestCase(SublimeViewTestCase):
             )
         )
 
-        yield from self._testFile('classic_spec_test.rb', 20)
+        self._testLine(20)
         self.assertLastCommand(
             (
                 'rake test TEST="classic_spec_test.rb" '
@@ -133,7 +129,7 @@ class MinitestRakeTestCase(SublimeViewTestCase):
             )
         )
 
-        yield from self._testFile('classic_spec_test.rb', 24)
+        self._testLine(24)
         self.assertLastCommand(
             (
                 'rake test TEST="classic_spec_test.rb" '
@@ -141,7 +137,7 @@ class MinitestRakeTestCase(SublimeViewTestCase):
             )
         )
 
-        yield from self._testFile('classic_spec_test.rb', 28)
+        self._testLine(28)
         self.assertLastCommand(
             (
                 'rake test TEST="classic_spec_test.rb" '
@@ -149,7 +145,7 @@ class MinitestRakeTestCase(SublimeViewTestCase):
             )
         )
 
-        yield from self._testFile('classic_spec_test.rb', 30)
+        self._testLine(30)
         self.assertLastCommand(
             (
                 'rake test TEST="classic_spec_test.rb" '
@@ -157,7 +153,7 @@ class MinitestRakeTestCase(SublimeViewTestCase):
             )
         )
 
-        yield from self._testFile('classic_spec_test.rb', 32)
+        self._testLine(32)
         self.assertLastCommand(
             (
                 'rake test TEST="classic_spec_test.rb" '
@@ -170,7 +166,7 @@ class MinitestRakeTestCase(SublimeViewTestCase):
             'rake test TEST="explicit_spec_test.rb" TESTOPTS="--name=/MathSpec/"'
         )
 
-        yield from self._testFile('explicit_spec_test.rb', 5)
+        self._testLine(5)
         self.assertLastCommand(
             'rake test TEST="explicit_spec_test.rb" TESTOPTS="--name=/MathSpec#test_\\d+_is\\$/"'
         )

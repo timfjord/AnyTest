@@ -19,13 +19,13 @@ class PyunitTestCase(SublimeViewTestCase):
             'python -m unittest module.test_class.TestNumbers.test_numbers'
         )
 
-        yield from self._testFile(('module', 'test_class.py'), 5)
+        yield from self._testFile(('module', 'test_class.py'), 6)
         self.assertLastCommand('python -m unittest module.test_class.TestSubclass')
 
-        yield from self._testFile(('module', 'test_class.py'), 1)
+        self._testLine(1)
         self.assertLastCommand('python -m unittest module.test_class.TestNumbers')
 
-        yield from self._testFile(('module', 'test_class.py'), 15)
+        self._testLine(18)
         self.assertLastCommand(
             'python -m unittest module.test_class.TestNestedClass.test_nested'
         )

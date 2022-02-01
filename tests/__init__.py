@@ -102,13 +102,13 @@ class SublimeViewTestCase(SublimeWindowTestCase):
         self.gotoLine(line)
         self.view.run_command('any_test_run', {'scope': TestFramework.SCOPE_LINE})
 
-    def _testFile(self, file, line=None, scope=None, folder=None):
+    def _testFile(self, file, line=None, scope=None):
         test_scope = scope if scope is not None else TestFramework.SCOPE_FILE
 
-        if folder is not None:
-            self.openFolder(*to_iter(folder))
+        if self._currentFolder is None:
+            raise ValueError('Call cls.openFolder in the setUpClass callback')
 
-        file_path = os.path.join(self._currentFolder or FIXTURES_PATH, *to_iter(file))
+        file_path = os.path.join(self._currentFolder, *to_iter(file))
         self.view = self.window.open_file(file_path)
 
         yield self.isViewLoaded
@@ -121,8 +121,8 @@ class SublimeViewTestCase(SublimeWindowTestCase):
 
         self.view.run_command('any_test_run', {'scope': test_scope})
 
-    def _testSuite(self, file, folder=None):
-        yield from self._testFile(file, scope=TestFramework.SCOPE_SUITE, folder=folder)
+    def _testSuite(self, file):
+        yield from self._testFile(file, scope=TestFramework.SCOPE_SUITE)
 
     def assertLastCommand(self, command):
         self.assertEqual(last_command(self.view), command)

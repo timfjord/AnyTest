@@ -11,7 +11,7 @@ class Runner(BaseRunner, WindowMixin):
         self.command = Command(
             scope,
             # we care only about the last part when it comes to unittesting
-            # as this is where the module part of the pyunit test framework output
+            # as this is where the module part of the pyunit test framework command
             # can be found
             test_framework.build_command(scope)[-1],
             test_framework.context.root.path,

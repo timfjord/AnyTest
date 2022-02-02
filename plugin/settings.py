@@ -1,6 +1,5 @@
 import sublime
 
-
 BASE_NAME = 'AnyTest.sublime-settings'
 PROJECT_SETTINGS_KEY = 'AnyTest'
 

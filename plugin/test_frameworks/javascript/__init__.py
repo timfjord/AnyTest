@@ -2,7 +2,6 @@ import json
 
 from .. import TestFramework as BaseTestFramework
 
-
 PACKAGE_JSON = 'package.json'
 
 

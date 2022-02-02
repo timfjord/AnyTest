@@ -1,10 +1,9 @@
-from abc import ABCMeta, abstractmethod
 import importlib
 import re
+from abc import ABCMeta, abstractmethod
 
 from .. import errors, logger, settings
 from . import utils
-
 
 # fmt: off
 ALL = {

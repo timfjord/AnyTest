@@ -1,6 +1,6 @@
-from AnyTest.tests import SublimeWindowTestCase
 from AnyTest.plugin.test_frameworks import TestFramework
 from AnyTest.plugin.test_frameworks.mixins import IsConfigurableMixin
+from AnyTest.tests import SublimeWindowTestCase
 
 
 class TFBase(TestFramework):

@@ -7,7 +7,6 @@ import sublime
 from AnyTest.plugin import errors
 from AnyTest.plugin.root import File, RelativePath, Root
 
-
 IS_WINDOWS = sublime.platform() == 'windows'
 
 

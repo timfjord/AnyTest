@@ -37,4 +37,8 @@
         "command": "any_test_run",
         "args": { "scope": "last" }
     },
+    {
+        "caption": "AnyTest: Toggle last output focus",
+        "command": "any_test_toggle_last_output_focus"
+    },
 ]

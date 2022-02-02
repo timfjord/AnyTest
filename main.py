@@ -21,3 +21,8 @@ from .plugin import Plugin  # noqa: E402
 class AnyTestRunCommand(sublime_plugin.TextCommand):
     def run(self, _, scope='file'):
         Plugin(self.view).run_test(scope)
+
+
+class AnyTestToggleLastOutputFocusCommand(sublime_plugin.ApplicationCommand):
+    def run(self):
+        Plugin.toggle_last_output_focus()

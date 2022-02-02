@@ -8,6 +8,7 @@ class Runner(command.Runner):
     TAG = 'any-test'
 
     name = 'terminus'
+    panel_name = 'output.{}'.format(PANEL_NAME)
 
     def command_name(self):
         return 'terminus_open'

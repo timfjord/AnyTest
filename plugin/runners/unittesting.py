@@ -1,10 +1,11 @@
+from ..runners import Command
+from ..runners import Runner as BaseRunner
 from ..test_frameworks import TestFramework
-from ..runners import Command, Runner as BaseRunner
-from ..mixins import WindowMixin
 
 
-class Runner(BaseRunner, WindowMixin):
+class Runner(BaseRunner):
     name = 'unittesting'
+    panel_name = 'output.UnitTesting'
 
     def __init__(self, test_framework, scope):
         self.test_framework = test_framework

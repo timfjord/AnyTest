@@ -7,24 +7,28 @@
                 "caption": "AnyTest",
                 "children": [
                     {
-                        "caption": "AnyTest: Test nearest",
+                        "caption": "Test nearest",
                         "command": "any_test_run",
                         "args": { "scope": "line" }
                     },
                     {
-                        "caption": "AnyTest: Test file",
+                        "caption": "Test file",
                         "command": "any_test_run",
                         "args": { "scope": "file" }
                     },
                     {
-                        "caption": "AnyTest: Test suite",
+                        "caption": "Test suite",
                         "command": "any_test_run",
                         "args": { "scope": "suite" }
                     },
                     {
-                        "caption": "AnyTest: Run last",
+                        "caption": "Run last",
                         "command": "any_test_run",
                         "args": { "scope": "last" }
+                    },
+                    {
+                        "caption": "Toggle last output focus",
+                        "command": "any_test_toggle_last_output_focus"
                     },
                 ]
             }

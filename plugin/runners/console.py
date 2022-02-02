@@ -22,6 +22,7 @@ class Runner(BaseRunner):
     """
 
     name = 'console'
+    panel_name = 'console'
 
     def run(self):
         print('--- AnyTest command ---')

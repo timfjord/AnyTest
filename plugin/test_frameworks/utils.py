@@ -1,7 +1,6 @@
 import shlex
 from distutils import spawn
 
-
 REGEXP_ESCAPE_TRANSLATION_TABLE = str.maketrans(
     {
         '?': r'\?',

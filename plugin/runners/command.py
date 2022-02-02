@@ -1,11 +1,18 @@
 from functools import lru_cache
 
 from ..runners import Runner as BaseRunner
-from ..mixins import WindowMixin
 
 
-class Runner(BaseRunner, WindowMixin):
+class Runner(BaseRunner):
     name = 'command'
+    panel_name = 'output.exec'
+
+    def __init__(self, test_framework, scope):
+        super().__init__(test_framework, scope)
+
+        panel_name = self.settings('panel_name', type=str)
+        if panel_name:
+            self.panel_name = panel_name
 
     @lru_cache(maxsize=None)
     def command_name(self):

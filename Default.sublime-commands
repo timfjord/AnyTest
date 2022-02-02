@@ -37,4 +37,9 @@
         "command": "any_test_run",
         "args": { "scope": "last" }
     },
+    {
+        "caption": "AnyTest: Show last output",
+        "command": "any_test_show_last_output",
+        "args": { "focus": true }
+    },
 ]

@@ -19,4 +19,5 @@
     // { "keys": ["primary+j", "primary+f"], "command": "any_test_run", "args": { "scope": "file" } },
     // { "keys": ["primary+j", "primary+s"], "command": "any_test_run", "args": { "scope": "suite" } },
     // { "keys": ["primary+j", "primary+l"], "command": "any_test_run", "args": { "scope": "last" } },
+    // { "keys": ["primary+j", "primary+k"], "command": "any_test_show_last_output", "args": { "focus": true } },
 ]

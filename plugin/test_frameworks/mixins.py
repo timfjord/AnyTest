@@ -1,5 +1,5 @@
-from .utils import to_unpackable
 from .. import settings
+from .utils import to_unpackable
 
 
 class IsConfigurableMixin:

@@ -1,9 +1,8 @@
 from . import runners, settings, test_frameworks
 from .context import Context
-from .history import History
 from .errors import handle_errors
+from .history import History
 from .mixins import WindowMixin
-
 
 SCOPE_LAST = 'last'
 
@@ -11,9 +10,15 @@ history = History()
 
 
 class Plugin(WindowMixin):
+    @classmethod
+    @handle_errors
+    def show_last_output(cls, focus=True):
+        history.last().show_output(focus=focus)
+
     def __init__(self, view):
         self.view = view
 
+    @property
     def window(self):
         return self.view.window()
 

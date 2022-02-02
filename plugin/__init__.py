@@ -12,8 +12,8 @@ history = History()
 class Plugin(WindowMixin):
     @classmethod
     @handle_errors
-    def toggle_last_output_focus(cls):
-        history.last().toogle_output_focus()
+    def show_last_output(cls, focus=True):
+        history.last().show_output(focus=focus)
 
     def __init__(self, view):
         self.view = view

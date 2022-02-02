@@ -23,6 +23,6 @@ class AnyTestRunCommand(sublime_plugin.TextCommand):
         Plugin(self.view).run_test(scope)
 
 
-class AnyTestToggleLastOutputFocusCommand(sublime_plugin.ApplicationCommand):
-    def run(self):
-        Plugin.toggle_last_output_focus()
+class AnyTestShowLastOutputCommand(sublime_plugin.ApplicationCommand):
+    def run(self, focus=True):
+        Plugin.show_last_output(focus=focus)

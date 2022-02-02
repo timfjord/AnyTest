@@ -46,22 +46,19 @@ class Runner(WindowMixin, metaclass=ABCMeta):
 
         return settings.get(('runner', self.name, key), type=type, default=default)
 
-    def toogle_output_focus(self):
+    def show_output(self, focus=True):
         if self.panel_name is None:
             raise ValueError('panel_name is not set')
 
-        view_to_focus = None
+        self.window.run_command('show_panel', args={'panel': self.panel_name})
 
-        if self.window.active_panel() == self.panel_name:
-            view_to_focus = self.window.active_view()
-        else:
-            self.window.run_command('show_panel', args={'panel': self.panel_name})
-            view_to_focus = self.window.find_output_panel(
-                re.sub(r'^output\.', '', self.panel_name)
-            )
+        if not focus:
+            return
 
-        if view_to_focus:
-            self.window.focus_view(view_to_focus)
+        panel = self.window.find_output_panel(re.sub(r'^output\.', '', self.panel_name))
+
+        if panel:
+            self.window.focus_view(panel)
 
     @abstractmethod
     def run(self):

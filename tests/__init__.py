@@ -1,14 +1,12 @@
 import os
 
 import sublime
-
 from unittesting import DeferrableTestCase
 
 from AnyTest.plugin import settings
+from AnyTest.plugin.runners.console import last_command
 from AnyTest.plugin.test_frameworks import TestFramework
 from AnyTest.plugin.test_frameworks.utils import to_unpackable
-from AnyTest.plugin.runners.tests import last_command
-
 
 FIXTURES_PATH = os.path.join(os.path.dirname(__file__), 'fixtures')
 
@@ -36,7 +34,7 @@ class SublimeWindowTestCase(DeferrableTestCase):
         self._settings = sublime.load_settings(settings.BASE_NAME)
         self._setting_keys = set()
 
-        self.setSettings({'runner': 'tests'})
+        self.setSettings({'runner': 'console'})
         self.setSettings(self.settings)
 
     def tearDown(self):

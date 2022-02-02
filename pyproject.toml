@@ -2,3 +2,8 @@
 target-version = ['py33']
 max-line-length = 99
 skip-string-normalization = true
+
+[tool.isort]
+profile = "black"
+filter_files = true
+line_length = 99

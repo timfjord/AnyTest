@@ -7,7 +7,7 @@ class TF(TestFramework):
     framework = '_frm'
 
 
-class TestFrameworkTestCase(SublimeWindowTestCase):
+class BaseTestFrameworkTestCase(SublimeWindowTestCase):
     def test_settings_read_from_framework_settings(self):
         self.setSettings({'_lng._frm.key': 'value'})
 

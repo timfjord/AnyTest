@@ -1,6 +1,8 @@
+import sublime
+
 from ..runners import Runner as BaseRunner
 
-SETTINGS_KEY = 'any_test_last_command'
+SETTINGS_KEY = 'AnyTest.last_command'
 
 
 def last_command(view, value=None):
@@ -26,7 +28,7 @@ class Runner(BaseRunner):
 
     def run(self):
         print('--- AnyTest command ---')
-        print(self.command)
+        print(self)
         print('-----------------------')
 
-        last_command(self.test_framework.context.view, self.command.cmd)
+        last_command(sublime.active_window().active_view(), self.cmd)

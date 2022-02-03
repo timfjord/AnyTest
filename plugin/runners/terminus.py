@@ -1,41 +1,51 @@
-from functools import lru_cache
-
-from . import command
+from .command import Runner as CommandRunner
 
 
-class Runner(command.Runner):
+class Runner(CommandRunner):
     PANEL_NAME = 'AnyTest'
     TAG = 'any-test'
+    COMMAND_NAME = 'terminus_open'
 
     name = 'terminus'
     panel_name = 'output.{}'.format(PANEL_NAME)
 
-    def command_name(self):
-        return 'terminus_open'
+    def get_panel_name(self):
+        super().get_panel_name()  # to clean up options
+        return self.__class__.panel_name
 
-    @lru_cache(maxsize=None)
-    def command_options(self):
-        options = super().command_options()
-        options.pop('encoding', None)
+    def get_command_name(self):
+        super().get_command_name()  # to clean up options
+        return self.COMMAND_NAME
 
-        options['auto_close'] = False
-        options['cancellable'] = True
-        options['tag'] = self.TAG
-        if self.settings('run_in_view', type=bool, default=False):
-            options['title'] = 'Running {} {} tests'.format(
-                self.test_framework.language, self.test_framework.framework
-            )
-            options['pre_window_hooks'] = self.settings(
-                'pre_window_hooks', type=list, default=[]
-            )
-            options['post_window_hooks'] = self.settings(
-                'post_window_hooks', type=list, default=[]
-            )
-            options['post_view_hooks'] = self.settings(
-                'post_view_hooks', type=list, default=[]
-            )
-        else:
-            options['focus'] = self.settings('focus_on_run', type=bool, default=False)
-            options['panel_name'] = self.PANEL_NAME
+    def get_command_options(self):
+        return dict(super().get_command_options(), **{'tag': self.TAG})
 
-        return options
+    class Builder(CommandRunner.Builder):
+        def build_options(self):
+            options = super().build_options()
+            options.pop('encoding', None)
+            options.pop('file_regex', None)
+
+            options['auto_close'] = False
+            options['cancellable'] = True
+
+            if Runner.settings('run_in_view', type=bool, default=False):
+                options['title'] = 'Running {} {} tests'.format(
+                    self.test_framework.language, self.test_framework.framework
+                )
+                options['pre_window_hooks'] = Runner.settings(
+                    'pre_window_hooks', type=list, default=[]
+                )
+                options['post_window_hooks'] = Runner.settings(
+                    'post_window_hooks', type=list, default=[]
+                )
+                options['post_view_hooks'] = Runner.settings(
+                    'post_view_hooks', type=list, default=[]
+                )
+            else:
+                options['focus'] = Runner.settings(
+                    'focus_on_run', type=bool, default=False
+                )
+                options['panel_name'] = Runner.PANEL_NAME
+
+            return options

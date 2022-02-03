@@ -36,7 +36,7 @@ class Plugin(WindowMixin):
         test_framework = test_frameworks.find(context.file)
         runner = runners.find(test_framework)
 
-        return runner(test_framework(context), scope)
+        return runner.build(test_framework(context), scope)
 
     @handle_errors
     def run_test(self, scope):

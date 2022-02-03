@@ -47,7 +47,6 @@ def plugin_loaded():
 
     settings.all().add_on_change(__name__, on_settings_reload)
     on_settings_reload()  # trigger on initial settings load, too
-    package_logger.error('NO DUP')
 
 
 def plugin_unloaded():

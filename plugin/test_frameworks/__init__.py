@@ -1,8 +1,9 @@
 import importlib
+import logging
 import re
 from abc import ABCMeta, abstractmethod
 
-from .. import errors, logger, settings
+from .. import errors, settings
 from . import utils
 
 # fmt: off
@@ -13,6 +14,8 @@ ALL = {
     'ruby': ['minitest', 'rspec'],
 }
 # fmt: on
+
+logger = logging.getLogger(__name__)
 
 
 def load(language, framework):
@@ -32,10 +35,8 @@ def items():
             try:
                 yield load(language, framework)
             except ImportError:
-                logger.log(
-                    "Cannot load '{}' framework for '{}' language".format(
-                        framework, language
-                    )
+                logger.error(
+                    "Cannot load '%s' framework for '%s' language", framework, language
                 )
                 continue
 

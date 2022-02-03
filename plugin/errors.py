@@ -1,6 +1,7 @@
+import logging
 from functools import wraps
 
-from . import logger
+logger = logging.getLogger(__name__)
 
 
 def handle_errors(func):
@@ -9,7 +10,7 @@ def handle_errors(func):
         try:
             return func(*args, **kwargs)
         except Error as e:
-            logger.log(e)
+            logger.error(e)
 
     return handler
 

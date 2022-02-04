@@ -35,7 +35,7 @@ def items():
             try:
                 yield load(language, framework)
             except ImportError:
-                logger.error(
+                logger.warning(
                     "Cannot load '%s' framework for '%s' language", framework, language
                 )
                 continue

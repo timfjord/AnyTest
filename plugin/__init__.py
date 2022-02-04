@@ -1,3 +1,5 @@
+import sublime
+
 from . import runners, settings, test_frameworks
 from .context import Context
 from .errors import handle_errors
@@ -14,6 +16,14 @@ class Plugin(WindowMixin):
     @handle_errors
     def show_last_output(cls, focus=True):
         history.last().show_output(focus=focus)
+
+    @classmethod
+    @handle_errors
+    def edit_last(cls):
+        runner = history.last()
+        sublime.active_window().open_file(
+            '{}:{}'.format(runner.file, runner.line), sublime.ENCODED_POSITION
+        )
 
     def __init__(self, view):
         self.view = view

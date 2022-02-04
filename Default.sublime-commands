@@ -42,4 +42,8 @@
         "command": "any_test_show_last_output",
         "args": { "focus": true }
     },
+    {
+        "caption": "AnyTest: Edit last test",
+        "command": "any_test_edit_last"
+    },
 ]

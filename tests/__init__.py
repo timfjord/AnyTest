@@ -119,15 +119,18 @@ class SublimeProjectTestCase(SublimeViewTestCase):
             raise ValueError('folder is required')
 
         file_path = os.path.join(self._currentFolder, *to_unpackable(file))
-        self.view = self.window.open_file(file_path)
-
-        yield self.isViewLoaded
+        open_flags = 0
 
         if line is not None:
-            self.gotoLine(line)
+            file_path += ':{}'.format(line)
+            open_flags |= sublime.ENCODED_POSITION
 
             if scope is None:
                 test_scope = TestFramework.SCOPE_LINE
+
+        self.view = self.window.open_file(file_path, open_flags)
+
+        yield self.isViewLoaded
 
         self.view.run_command('any_test_run', {'scope': test_scope})
 

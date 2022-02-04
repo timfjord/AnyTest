@@ -26,3 +26,8 @@ class AnyTestRunCommand(sublime_plugin.TextCommand):
 class AnyTestShowLastOutputCommand(sublime_plugin.ApplicationCommand):
     def run(self, focus=True):
         Plugin.show_last_output(focus=focus)
+
+
+class AnyTestEditLastCommand(sublime_plugin.ApplicationCommand):
+    def run(self):
+        Plugin.edit_last()

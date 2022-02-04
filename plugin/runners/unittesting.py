@@ -1,3 +1,5 @@
+import os.path
+
 from ..runners import Runner as BaseRunner
 from ..test_frameworks import TestFramework
 
@@ -7,10 +9,13 @@ class Runner(BaseRunner):
     panel_name = 'output.UnitTesting'
 
     def run(self):
-        if self.scope == TestFramework.SCOPE_SUITE:
-            self.run_command('unit_testing_current_package')
-        else:
-            self.run_command('unit_testing_current_file')
+        args = {'package': os.path.basename(self.dir)}
+
+        if self.scope != TestFramework.SCOPE_SUITE:
+            args['pattern'] = os.path.basename(self.file)
+            args['package'] += ':{}'.format(args['pattern'])
+
+        self.run_command('unit_testing', args=args)
 
     class Builder(BaseRunner.Builder):
         def build_cmd(self):

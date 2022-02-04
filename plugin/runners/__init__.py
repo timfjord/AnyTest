@@ -75,21 +75,6 @@ class Runner(
         def build_cmd(self):
             return ' '.join(self.test_framework.build_command(self.scope))
 
-        def build_dir(self):
-            return self.test_framework.context.root.path
-
-        def build_file(self):
-            return self.test_framework.context.file.path
-
-        def build_line(self):
-            return self.test_framework.context.sel_line()
-
-        def build_language(self):
-            return self.test_framework.language
-
-        def build_framework(self):
-            return self.test_framework.framework
-
         def build_options(self):
             return {}
 
@@ -97,10 +82,10 @@ class Runner(
             return (
                 self.scope,
                 self.build_cmd(),
-                self.build_dir(),
-                self.build_file(),
-                self.build_line(),
-                self.build_language(),
-                self.build_framework(),
+                self.test_framework.context.root.path,
+                self.test_framework.context.file.path,
+                self.test_framework.context.sel_line(),
+                self.test_framework.language,
+                self.test_framework.framework,
                 self.build_options(),
             )

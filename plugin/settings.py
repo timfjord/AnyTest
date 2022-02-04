@@ -53,7 +53,7 @@ def get(key, type=None, default=None):
     )
 
     if type is not None and not isinstance(value, type):
-        logger.warn(
+        logger.info(
             "type doesn't match: key: '%s', value: '%s', expected type: '%s'",
             key,
             value,

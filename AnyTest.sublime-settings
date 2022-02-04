@@ -1,5 +1,6 @@
 {
     "log_level": "WARNING",
+    "show_status_messages": true,
     // auto save current file on spec run
     "save_current_file_on_run": true,
     // auto save all files on spec run

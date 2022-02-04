@@ -1,6 +1,8 @@
 import logging
 from functools import wraps
 
+from . import status
+
 logger = logging.getLogger(__name__)
 
 
@@ -10,6 +12,7 @@ def handle_errors(func):
         try:
             return func(*args, **kwargs)
         except Error as e:
+            status.update(str(e))
             logger.error(e)
 
     return handler

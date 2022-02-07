@@ -43,21 +43,21 @@ class PytestXunitTestCase(SublimeProjectTestCase):
         self._testLine(2)
         self.assertLastCommand('pytest test_class.py::TestNumbers::test_numbers')
 
-        self._testLine(7)
+        self._testLine(8)
         self.assertLastCommand('pytest test_class.py::TestSubclass::test_subclass')
 
-        self._testLine(9)
+        self._testLine(11)
         self.assertLastCommand('pytest test_class.py::Test_underscores_and_123')
 
-        self._testLine(11)
+        self._testLine(13)
         self.assertLastCommand(
             'pytest test_class.py::Test_underscores_and_123::test_underscores'
         )
 
-        self._testLine(13)
+        self._testLine(16)
         self.assertLastCommand('pytest test_class.py::UnittestClass')
 
-        self._testLine(19)
+        self._testLine(22)
         self.assertLastCommand('pytest test_class.py::SomeTest::test_foo')
 
         yield from self._testFile('test_method.py', 4)

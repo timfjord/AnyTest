@@ -1,4 +1,4 @@
-from unittest import Mock  # noqa
+# noqa
 
 
 def test_numbers():

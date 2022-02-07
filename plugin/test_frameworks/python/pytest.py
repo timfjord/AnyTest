@@ -13,10 +13,12 @@ class TestFramework(IsConfigurableMixin, python.TestFramework):
         return utils.is_executable('pytest') or utils.is_executable('py.test')
 
     def build_executable(self):
-        if utils.is_executable('py.test') and not utils.is_executable('pytest'):
-            executable = ['py.test']
-        else:
+        executable = ['python', '-m', 'pytest']
+
+        if utils.is_executable('pytest'):
             executable = ['pytest']
+        elif utils.is_executable('py.test'):
+            executable = ['py.test']
 
         return self.prefix_executable(executable)
 

@@ -1,4 +1,4 @@
-# something
+# fmt: off
 
 
 def test_numbers():
@@ -9,6 +9,6 @@ def test_foo():
     class CustomException(Exception):
         pass
 
-    mocker.patch('some.module', side_effect=CustomException())
+    mocker.patch('some.module', side_effect=CustomException())  # noqa
 
-    assert something
+    assert something # noqa

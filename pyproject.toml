@@ -1,7 +1,10 @@
 [tool.black]
-target-version = ['py33']
 max-line-length = 99
 skip-string-normalization = true
+target-version = ['py33']
+extend-exclude = '''
+^/tests/fixtures
+'''
 
 [tool.isort]
 profile = "black"

@@ -29,12 +29,12 @@ class JestTestCase(SublimeProjectTestCase):
             'jest --no-coverage -t \'^Math\' -- __tests__/context-test.js'
         )
 
-        yield from self._testFile(('__tests__', 'context-test.js'), 2)
+        self._testLine(2)
         self.assertLastCommand(
             'jest --no-coverage -t \'^Math Addition\' -- __tests__/context-test.js'
         )
 
-        yield from self._testFile(('__tests__', 'context-test.js'), 3)
+        self._testLine(3)
         self.assertLastCommand(
             (
                 'jest --no-coverage -t \'^Math Addition adds two numbers\\$\' '
@@ -48,12 +48,12 @@ class JestTestCase(SublimeProjectTestCase):
             'jest --no-coverage -t \'^Math\' -- __tests__/normal-test.coffee'
         )
 
-        yield from self._testFile(('__tests__', 'normal-test.coffee'), 2)
+        self._testLine(2)
         self.assertLastCommand(
             'jest --no-coverage -t \'^Math Addition\' -- __tests__/normal-test.coffee'
         )
 
-        yield from self._testFile(('__tests__', 'normal-test.coffee'), 3)
+        self._testLine(3)
         self.assertLastCommand(
             (
                 'jest --no-coverage -t \'^Math Addition adds two numbers\\$\' '
@@ -67,12 +67,12 @@ class JestTestCase(SublimeProjectTestCase):
             'jest --no-coverage -t \'^Math\' -- __tests__/normal-test.jsx'
         )
 
-        yield from self._testFile(('__tests__', 'normal-test.jsx'), 2)
+        self._testLine(2)
         self.assertLastCommand(
             'jest --no-coverage -t \'^Math Addition\' -- __tests__/normal-test.jsx'
         )
 
-        yield from self._testFile(('__tests__', 'normal-test.jsx'), 3)
+        self._testLine(3)
         self.assertLastCommand(
             (
                 'jest --no-coverage -t \'^Math Addition adds two numbers\\$\' '

@@ -1,3 +1,5 @@
+import os.path
+
 from AnyTest.tests import SublimeProjectTestCase
 
 
@@ -7,86 +9,106 @@ class JestTestCase(SublimeProjectTestCase):
     def test_line(self):
         yield from self._testFile(('__tests__', 'normal-test.js'), 2)
         self.assertLastCommand(
-            'jest --no-coverage -t \'^Math\' -- __tests__/normal-test.js'
+            'jest --no-coverage -t \'^Math\' -- __tests__{}normal-test.js'.format(
+                os.path.sep
+            )
         )
 
         self._testLine(3)
         self.assertLastCommand(
-            'jest --no-coverage -t \'^Math Addition\' -- __tests__/normal-test.js'
+            'jest --no-coverage -t \'^Math Addition\' -- __tests__{}normal-test.js'.format(
+                os.path.sep
+            )
         )
 
         self._testLine(4)
         self.assertLastCommand(
             (
                 'jest --no-coverage -t \'^Math Addition adds two numbers\\$\' '
-                '-- __tests__/normal-test.js'
-            )
+                '-- __tests__{}normal-test.js'
+            ).format(os.path.sep)
         )
 
     def test_line_context(self):
         yield from self._testFile(('__tests__', 'context-test.js'), 1)
         self.assertLastCommand(
-            'jest --no-coverage -t \'^Math\' -- __tests__/context-test.js'
+            'jest --no-coverage -t \'^Math\' -- __tests__{}context-test.js'.format(
+                os.path.sep
+            )
         )
 
         self._testLine(2)
         self.assertLastCommand(
-            'jest --no-coverage -t \'^Math Addition\' -- __tests__/context-test.js'
+            'jest --no-coverage -t \'^Math Addition\' -- __tests__{}context-test.js'.format(
+                os.path.sep
+            )
         )
 
         self._testLine(3)
         self.assertLastCommand(
             (
                 'jest --no-coverage -t \'^Math Addition adds two numbers\\$\' '
-                '-- __tests__/context-test.js'
-            )
+                '-- __tests__{}context-test.js'
+            ).format(os.path.sep)
         )
 
     def test_line_coffee(self):
         yield from self._testFile(('__tests__', 'normal-test.coffee'), 1)
         self.assertLastCommand(
-            'jest --no-coverage -t \'^Math\' -- __tests__/normal-test.coffee'
+            'jest --no-coverage -t \'^Math\' -- __tests__{}normal-test.coffee'.format(
+                os.path.sep
+            )
         )
 
         self._testLine(2)
         self.assertLastCommand(
-            'jest --no-coverage -t \'^Math Addition\' -- __tests__/normal-test.coffee'
+            'jest --no-coverage -t \'^Math Addition\' -- __tests__{}normal-test.coffee'.format(
+                os.path.sep
+            )
         )
 
         self._testLine(3)
         self.assertLastCommand(
             (
                 'jest --no-coverage -t \'^Math Addition adds two numbers\\$\' '
-                '-- __tests__/normal-test.coffee'
-            )
+                '-- __tests__{}normal-test.coffee'
+            ).format(os.path.sep)
         )
 
     def test_line_react(self):
         yield from self._testFile(('__tests__', 'normal-test.jsx'), 1)
         self.assertLastCommand(
-            'jest --no-coverage -t \'^Math\' -- __tests__/normal-test.jsx'
+            'jest --no-coverage -t \'^Math\' -- __tests__{}normal-test.jsx'.format(
+                os.path.sep
+            )
         )
 
         self._testLine(2)
         self.assertLastCommand(
-            'jest --no-coverage -t \'^Math Addition\' -- __tests__/normal-test.jsx'
+            'jest --no-coverage -t \'^Math Addition\' -- __tests__{}normal-test.jsx'.format(
+                os.path.sep
+            )
         )
 
         self._testLine(3)
         self.assertLastCommand(
             (
                 'jest --no-coverage -t \'^Math Addition adds two numbers\\$\' '
-                '-- __tests__/normal-test.jsx'
-            )
+                '-- __tests__{}normal-test.jsx'
+            ).format(os.path.sep)
         )
 
     def test_line_no_nearest(self):
         yield from self._testFile(('__tests__', 'normal-test.js'), 1)
-        self.assertLastCommand('jest --no-coverage -- __tests__/normal-test.js')
+        self.assertLastCommand(
+            'jest --no-coverage -- __tests__{}normal-test.js'.format(os.path.sep)
+        )
 
     def test_file(self):
         yield from self._testFile(('__tests__', 'normal-test.js'))
-        self.assertLastCommand('jest --no-coverage -- __tests__/normal-test.js')
+        self.assertLastCommand(
+            'jest --no-coverage -- __tests__{}normal-test.js'.format(os.path.sep)
+        )
 
     def test_file_outside_tests_folder(self):
         yield from self._testFile('outside-test.js')
@@ -103,7 +125,11 @@ class NpmRunJestTestCase(SublimeProjectTestCase):
 
     def test_file(self):
         yield from self._testFile(('__tests__', 'normal-test.js'))
-        self.assertLastCommand('npm run jest --no-coverage -- __tests__/normal-test.js')
+        self.assertLastCommand(
+            'npm run jest --no-coverage -- __tests__{}normal-test.js'.format(
+                os.path.sep
+            )
+        )
 
 
 class YarnJestTestCase(SublimeProjectTestCase):
@@ -112,7 +138,9 @@ class YarnJestTestCase(SublimeProjectTestCase):
 
     def test_no_end_of_options(self):
         yield from self._testFile(('__tests__', 'normal-test.js'))
-        self.assertLastCommand('yarn jest --no-coverage __tests__/normal-test.js')
+        self.assertLastCommand(
+            'yarn jest --no-coverage __tests__{}normal-test.js'.format(os.path.sep)
+        )
 
 
 class LocalYarnJestTestCase(SublimeProjectTestCase):
@@ -122,5 +150,7 @@ class LocalYarnJestTestCase(SublimeProjectTestCase):
     def test_no_end_of_options(self):
         yield from self._testFile(('__tests__', 'normal-test.js'))
         self.assertLastCommand(
-            '~/.local/bin/yarn jest --no-coverage __tests__/normal-test.js'
+            '~/.local/bin/yarn jest --no-coverage __tests__{}normal-test.js'.format(
+                os.path.sep
+            )
         )

@@ -3,6 +3,8 @@ from ..mixins import IsConfigurableMixin
 
 
 class TestFramework(IsConfigurableMixin, javascript.TestFramework):
+    EOO = '--'  # end of the options
+
     framework = 'jest'
     pattern = r'(__tests__/.*|(spec|test))\.(js|jsx|coffee|ts|tsx)$'
 
@@ -20,7 +22,7 @@ class TestFramework(IsConfigurableMixin, javascript.TestFramework):
             return ['jest']
 
     def build_file_position_args(self):
-        return ['--', self.context.file.relpath]
+        return [self.EOO, self.context.file.relpath]
 
     def build_line_position_args(self):
         args = self.build_file_position_args()
@@ -38,3 +40,11 @@ class TestFramework(IsConfigurableMixin, javascript.TestFramework):
             args = ['-t', utils.escape_shell(name)] + args
 
         return args
+
+    def build_command(self, scope):
+        command = super().build_command(scope)
+
+        if any(part and part.endswith('yarn') for part in command):
+            command.remove(self.EOO)
+
+        return command

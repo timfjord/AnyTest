@@ -6,7 +6,7 @@ class TestFramework(IsConfigurableMixin, javascript.TestFramework):
     EOO = '--'  # end of the options
 
     framework = 'jest'
-    pattern = r'(__tests__/.*|(spec|test))\.(js|jsx|coffee|ts|tsx)$'
+    pattern = r'(__tests__[/\\].*|(spec|test))\.(js|jsx|coffee|ts|tsx)$'
 
     @classmethod
     def is_configurable_fallback(cls, file):

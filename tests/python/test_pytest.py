@@ -43,24 +43,24 @@ class PytestXunitTestCase(SublimeProjectTestCase):
         self._testLine(2)
         self.assertLastCommand('pytest test_class.py::TestNumbers::test_numbers')
 
-        self._testLine(8)
+        self._testLine(6)
         self.assertLastCommand('pytest test_class.py::TestSubclass::test_subclass')
 
-        self._testLine(11)
+        self._testLine(9)
         self.assertLastCommand('pytest test_class.py::Test_underscores_and_123')
 
-        self._testLine(13)
+        self._testLine(10)
         self.assertLastCommand(
             'pytest test_class.py::Test_underscores_and_123::test_underscores'
         )
 
-        self._testLine(16)
+        self._testLine(13)
         self.assertLastCommand('pytest test_class.py::UnittestClass')
 
-        self._testLine(22)
+        self._testLine(18)
         self.assertLastCommand('pytest test_class.py::SomeTest::test_foo')
 
-        yield from self._testFile('test_method.py', 4)
+        yield from self._testFile('test_method.py', 3)
         self.assertLastCommand('pytest test_method.py::test_numbers')
 
     def test_line_no_nearest(self):

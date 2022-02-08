@@ -11,13 +11,13 @@ class PyunitTestCase(SublimeProjectTestCase):
             'python -m unittest module.test_class.TestNumbers.test_numbers'
         )
 
-        yield from self._testFile(('module', 'test_class.py'), 6)
+        self._testLine(5)
         self.assertLastCommand('python -m unittest module.test_class.TestSubclass')
 
         self._testLine(1)
         self.assertLastCommand('python -m unittest module.test_class.TestNumbers')
 
-        self._testLine(18)
+        self._testLine(14)
         self.assertLastCommand(
             'python -m unittest module.test_class.TestNestedClass.test_nested'
         )

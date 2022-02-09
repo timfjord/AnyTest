@@ -38,6 +38,10 @@ class Plugin(WindowMixin):
         elif settings.get('save_current_file_on_run') and bool(self.view.file_name()):
             self.run_command('save')
 
+    def show_at_center(self):
+        if settings.get('show_at_center_on_run') and bool(self.view.file_name()):
+            self.view.run_command('show_at_center')
+
     def build_runner(self, scope):
         if scope == SCOPE_LAST:
             return history.last()
@@ -55,6 +59,7 @@ class Plugin(WindowMixin):
         runner = self.build_runner(scope)
 
         self.save_file()
+        sublime.set_timeout(self.show_at_center, 500)
 
         runner.run()
         history.add(runner)

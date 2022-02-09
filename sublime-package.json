@@ -1,0 +1,113 @@
+{
+    "contributions": {
+        "settings": [
+            {
+                "file_patterns": [
+                    "/AnyTest.sublime-settings"
+                ],
+                "schema": {
+                    "$id": "sublime://settings/AnyTest",
+                    "definitions": {
+                        "Runner": {
+                            "type": "string",
+                            "default": "",
+                            "enum": [
+                                "console",
+                                "command",
+                                "terminus"
+                            ],
+                            "description": "A runner to run tests with"
+                        },
+                        "PackageConfig": {
+                            "properties": {
+                                "log_level": {
+                                    "type": "string",
+                                    "default": "WARNING",
+                                    "enum": [
+                                        "DEBUG",
+                                        "INFO",
+                                        "WARNING",
+                                        "ERROR",
+                                        "CRITICAL"
+                                    ],
+                                    "description": "Package log level"
+                                },
+                                "show_status_messages": {
+                                    "type": "boolean",
+                                    "default": true,
+                                    "description": "Show important messages in the sublime status bar"
+                                },
+                                "save_current_file_on_run": {
+                                    "type": "boolean",
+                                    "default": true,
+                                    "description": "Save current file when running tests"
+                                },
+                                "save_all_files_on_run": {
+                                    "type": "boolean",
+                                    "default": false,
+                                    "description": "Save all files when running tests"
+                                },
+                                "scroll_to_view_on_run": {
+                                    "type": "boolean",
+                                    "default": false,
+                                    "description": "Scroll the view when running tests and the panel is overlaying the cursor"
+                                },
+                                "runner": {
+                                    "$ref": "sublime://settings/AnyTest#/definitions/Runner",
+                                    "default": "panel"
+                                },
+                                "runner.command.name": {
+                                    "type": "string",
+                                    "default": "exec",
+                                    "description": "Sublime command to run tests with"
+                                },
+                                "runner.terminus.focus_on_run": {
+                                    "type": "boolean",
+                                    "default": false,
+                                    "description": "Focus on the terminus panel when running tests"
+                                },
+                                "runner.terminus.run_in_view": {
+                                    "type": "boolean",
+                                    "default": false,
+                                    "description": "Run tests in a view or in a panel"
+                                },
+                                "runner.terminus.pre_window_hooks": {
+                                    "type": "array",
+                                    "default": [],
+                                    "description": "A list of window hooks before running tests"
+                                },
+                                "runner.terminus.post_window_hooks": {
+                                    "type": "array",
+                                    "default": [],
+                                    "description": "A list of window hooks after running tests(e.g. carry_file_to_pane to move the view to a pane)"
+                                },
+                                "runner.terminus.post_view_hooks": {
+                                    "type": "array",
+                                    "default": [],
+                                    "description": "A list of view hooks before running tests"
+                                }
+                            },
+                        },
+                    },
+                    "$ref": "sublime://settings/AnyTest#/definitions/PackageConfig"
+                }
+            },
+            {
+                "file_patterns": [
+                    "/*.sublime-project"
+                ],
+                "schema": {
+                    "properties": {
+                        "settings": {
+                            "properties": {
+                                "AnyTest": {
+                                    "$ref": "sublime://settings/AnyTest#/definitions/PackageConfig"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+        ]
+    }
+}

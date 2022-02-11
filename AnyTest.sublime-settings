@@ -5,8 +5,8 @@
     "save_current_file_on_run": true,
     // auto save all files on test run
     "save_all_files_on_run": false,
-    // run the show_at_center command on test run
-    "show_at_center_on_run": false,
+    // try to keep the cursor in view by scrolling the current view
+    "scroll_to_view_on_run": false,
     // --- Runners ---
     "runner": "command",
     "runner.command.name": "exec",

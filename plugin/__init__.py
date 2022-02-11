@@ -4,14 +4,14 @@ from . import runners, settings, test_frameworks
 from .context import Context
 from .errors import handle_errors
 from .history import History
-from .mixins import WindowMixin
+from .view_callbacks import ViewCallbacks
 
 SCOPE_LAST = 'last'
 
 history = History()
 
 
-class Plugin(WindowMixin):
+class Plugin:
     @classmethod
     @handle_errors
     def show_last_output(cls, focus=True):
@@ -27,20 +27,6 @@ class Plugin(WindowMixin):
 
     def __init__(self, view):
         self.view = view
-
-    @property
-    def window(self):
-        return self.view.window()
-
-    def save_file(self):
-        if settings.get('save_all_files_on_run'):
-            self.run_command('save_all')
-        elif settings.get('save_current_file_on_run') and bool(self.view.file_name()):
-            self.run_command('save')
-
-    def show_at_center(self):
-        if settings.get('show_at_center_on_run') and bool(self.view.file_name()):
-            self.view.run_command('show_at_center')
 
     def build_runner(self, scope):
         if scope == SCOPE_LAST:
@@ -58,8 +44,7 @@ class Plugin(WindowMixin):
 
         runner = self.build_runner(scope)
 
-        self.save_file()
-        sublime.set_timeout(self.show_at_center, 500)
+        ViewCallbacks(self.view).run()
 
         runner.run()
         history.add(runner)

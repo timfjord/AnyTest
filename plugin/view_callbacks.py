@@ -10,14 +10,11 @@ class ViewCallbacks(WindowMixin):
     def __init__(self, view):
         self.view = view
         self.is_editable = bool(self.view.file_name())
-        self._num_of_visible_lines = None
+        self._prev_visible_region = None
 
     @property
     def window(self):
         return self.view.window()
-
-    def num_of_visible_lines(self):
-        return len(self.view.lines(self.view.visible_region()))
 
     def save(self):
         if settings.get('save_all_files_on_run'):
@@ -27,15 +24,24 @@ class ViewCallbacks(WindowMixin):
 
     def scroll_to_view(self):
         if (
-            settings.get('scroll_to_view_on_run')
-            and self.is_editable
-            and self._num_of_visible_lines is not None
+            not settings.get('scroll_to_view_on_run')
+            or not self.is_editable
+            or self._prev_visible_region is None
         ):
-            diff = self.num_of_visible_lines() - self._num_of_visible_lines
-            self.view.run_command('scroll_lines', args={'amount': float(diff)})
+            return
+
+        overlaid_region = sublime.Region(
+            self.view.visible_region().end() + 1, self._prev_visible_region.end()
+        )
+
+        if not overlaid_region.contains(self.view.sel()[-1].end()):
+            return
+
+        diff = -len(self.view.lines(overlaid_region))
+        self.view.run_command('scroll_lines', args={'amount': float(diff)})
 
     def run(self):
         self.save()
 
-        self._num_of_visible_lines = self.num_of_visible_lines()
+        self._prev_visible_region = self.view.visible_region()
         sublime.set_timeout(self.scroll_to_view, self.SCROLL_TO_VIEW_TIMEOUT)

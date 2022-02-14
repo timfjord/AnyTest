@@ -5,7 +5,7 @@
     "save_current_file_on_run": true,
     // auto save all files on test run
     "save_all_files_on_run": false,
-    // try to keep the cursor in view by scrolling the current view
+    // scroll the cursor in view when the panel is overlaid
     "scroll_to_view_on_run": false,
     // --- Runners ---
     "runner": "command",

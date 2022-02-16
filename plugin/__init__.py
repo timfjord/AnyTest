@@ -1,3 +1,5 @@
+import logging
+
 import sublime
 
 from . import runners, settings, test_frameworks
@@ -9,6 +11,8 @@ from .view_callbacks import ViewCallbacks
 SCOPE_LAST = 'last'
 
 history = History()
+
+logger = logging.getLogger(__name__)
 
 
 class Plugin:
@@ -46,5 +50,6 @@ class Plugin:
 
         ViewCallbacks(self.view).run()
 
+        logger.debug("Running '%s' from '%s'", runner.cmd, runner.dir)
         runner.run()
         history.add(runner)

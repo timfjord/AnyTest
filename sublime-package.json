@@ -138,7 +138,7 @@
                                     "description": "Scroll the view when running tests and the panel is overlaying the cursor"
                                 },
                                 "runner": {
-                                    "$ref": "sublime://settings/AnyTest#/definitions/Runner",
+                                    "$ref": "sublime://settings/AnyTest#/definitions/Runner"
                                 },
                                 "runner.command.name": {
                                     "type": "string",
@@ -405,9 +405,9 @@
                                     "type": "object",
                                     "default": {},
                                     "description": "RSpec specific ENV variables (will be merged with the ENV variables defined on the language level)"
-                                },
-                            },
-                        },
+                                }
+                            }
+                        }
                     },
                     "$ref": "sublime://settings/AnyTest#/definitions/PackageConfig"
                 }
@@ -427,7 +427,7 @@
                         }
                     }
                 }
-            },
+            }
         ]
     }
 }

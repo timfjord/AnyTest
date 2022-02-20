@@ -1,27 +1,104 @@
 {
+    // To specify test frameworks to choose from use (other test frameworks will be ignored):
+    // "test_frameworks": {
+    //     "javascript": "jest" // or ["jest"]
+    // },
+    // Available log levels: DEBUG, INFO, WARNING, ERROR, CRITICAL
     "log_level": "WARNING",
     "show_status_messages": true,
     // auto save current file on test run
     "save_current_file_on_run": true,
     // auto save all files on test run
     "save_all_files_on_run": false,
-    // scroll the cursor in view when the panel is overlaid
+    // scroll the view when the panel is overlaying the cursor
     "scroll_to_view_on_run": false,
-    // --- Runners ---
+    //
+    // ###########
+    // # Runners #
+    // ###########
+    // Available runners: command, terminus, console (console is mostly for debugging)
     "runner": "command",
+    // --- Command runner ---
     "runner.command.name": "exec",
+    // "runner.command.panel_name": "output.exec",
+    //
+    // --- Terminus runner ---
     "runner.terminus.focus_on_run": false,
-    "runner.terminus.run_in_view": false,
-    "runner.terminus.pre_window_hooks": [],
-    "runner.terminus.post_window_hooks": [],
-    "runner.terminus.post_view_hooks": [],
-    // --- Test Frameworks ---
+    // "runner.terminus.run_in_view": false,
+    // "runner.terminus.pre_window_hooks": [],
+    // "runner.terminus.post_window_hooks": [],
+    // "runner.terminus.post_view_hooks": [],
+    //
+    // ###################
+    // # Test Frameworks #
+    // ###################
+    // --- Elixir ---
+    // "elixir.runner": "command", // a runner for all elixir test frameworks
+    // "elixir.env": { "ENV1": "value" }, // will be merged with the ENV variable defined on the test framework level
+    //
+    // "elixir.espec.runner": "command", // a runner for the ESpec test framework
+    // "elixir.espec.executable": ["mix", "do", "smth"],
+    // "elixir.espec.args": ["--do-smth"],
+    // "elixir.espec.env": { "ENV2": "value" }, // will be merged with the ENV variable defined on the language level
+    //
+    // "elixir.exunit.runner": "command", // a runner for the ExUnit test framework
+    // "elixir.exunit.executable": ["mix", "do", "smth"],
+    // "elixir.exunit.args": ["--do-smth"],
+    // "elixir.exunit.env": { "ENV2": "value" }, // will be merged with the ENV variable defined on the language level
+    //
+    // --- JavaScript ---
+    // to force a JavaScript test framework use:
+    // "javascript.test_framework": "jest",
+    //
+    // "javascript.runner": "command", // a runner for all JavaScript test frameworks
+    // "javascript.env": { "ENV1": "value" }, // will be merged with the ENV variable defined on the test framework level
+    //
+    // "javascript.jest.runner": "command", // a runner for the Jest test framework
+    // "javascript.jest.executable": ["npm", "run", "test"],
+    // "javascript.jest.env": { "ENV2": "value" }, // will be merged with the ENV variable defined on the language level
     "javascript.jest.args": [
         "--no-coverage"
     ],
-    "ruby.bundle_exec": true,
+    //
+    // --- Python ---
+    // to force a Python test framework use:
+    // "python.test_framework": "pytest",
+    //
+    // "python.runner": "command", // a runner for all Python test frameworks
+    // "python.env": { "ENV1": "value" }, // will be merged with the ENV variable defined on the test framework level
+    //
+    // "python.pytest.runner": "command", // a runner for the pytest test framework
+    // "python.pytest.executable": ["my_pytest"],
+    // "python.pytest.args": ["--do-smth"],
+    // "python.pytest.env": { "ENV2": "value" }, // will be merged with the ENV variable defined on the language level
+    //
+    // "python.pyunit.runner": "unittesting", // a runner for the pyunit test framework (use unittesting for testing sublime packages)
+    // "python.pyunit.executable": ["my_pyunit"],
+    // "python.pyunit.args": ["--do-smth"],
+    // "python.pyunit.env": { "ENV2": "value" }, // will be merged with the ENV variable defined on the language level
+    //
+    // --- Ruby ---
+    "ruby.use_bundle": true,
     "ruby.use_binstubs": true,
     "ruby.use_spring_binstub": false,
+    // "ruby.runner": "command", // a runner for all Python test frameworks
+    // "ruby.env": { "ENV1": "value" }, // will be merged with the ENV variable defined on the test framework level
+    //
     "ruby.minitest.test_folder": "test",
     "ruby.minitest.file_pattern": "*_test.rb",
+    // "ruby.minitest.use_bundle": true,
+    // "ruby.minitest.use_binstubs": true,
+    // "ruby.minitest.use_spring_binstub": false,
+    // "ruby.minitest.runner": "command", // a runner for the pytest test framework
+    // "ruby.minitest.executable": ["bin/tests"],
+    // "ruby.minitest.args": ["--do-smth"],
+    // "ruby.minitest.env": { "ENV2": "value" }, // will be merged with the ENV variable defined on the language level
+    //
+    // "ruby.rspec.use_bundle": true,
+    // "ruby.rspec.use_binstubs": true,
+    // "ruby.rspec.use_spring_binstub": false,
+    // "ruby.rspec.runner": "command", // a runner for the pyunit test framework
+    // "ruby.rspec.executable": ["bin/my_rpsec"],
+    // "ruby.rspec.args": ["--do-smth"],
+    // "ruby.rspec.env": { "ENV2": "value" }, // will be merged with the ENV variable defined on the language level
 }

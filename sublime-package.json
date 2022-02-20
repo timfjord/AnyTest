@@ -103,7 +103,7 @@
                                                 }
                                             ]
                                         }
-                                    },
+                                    }
                                 },
                                 "log_level": {
                                     "type": "string",

@@ -32,7 +32,7 @@ class TestFramework(BaseTestFramework):
 
     @lru_cache(maxsize=None)
     def use_bundler(self):
-        return self.file('Gemfile').exists() and self.settings('bundle_exec')
+        return self.file('Gemfile').exists() and self.settings('use_bundle')
 
     def bundle(self, executable):
         return ['bundle', 'exec'] + executable

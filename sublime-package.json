@@ -10,7 +10,7 @@
                     "definitions": {
                         "Runner": {
                             "type": "string",
-                            "default": "",
+                            "default": "command",
                             "enum": [
                                 "console",
                                 "command",
@@ -18,8 +18,93 @@
                             ],
                             "description": "A runner to run tests with"
                         },
+                        "ElixirFrameworks": {
+                            "type": "string",
+                            "enum": [
+                                "espec",
+                                "exunit"
+                            ]
+                        },
+                        "JavascriptFrameworks": {
+                            "type": "string",
+                            "enum": [
+                                "jest"
+                            ]
+                        },
+                        "PythonFrameworks": {
+                            "type": "string",
+                            "enum": [
+                                "pytest",
+                                "pyunit"
+                            ]
+                        },
+                        "RubyFrameworks": {
+                            "type": "string",
+                            "enum": [
+                                "minitest",
+                                "rspec"
+                            ]
+                        },
                         "PackageConfig": {
                             "properties": {
+                                "test_frameworks": {
+                                    "type": "object",
+                                    "description": "Test frameworks to choose from",
+                                    "properties": {
+                                        "elixir": {
+                                            "anyOf": [
+                                                {
+                                                    "$ref": "sublime://settings/AnyTest#/definitions/ElixirFrameworks"
+                                                },
+                                                {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "sublime://settings/AnyTest#/definitions/ElixirFrameworks"
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        "javascript": {
+                                            "anyOf": [
+                                                {
+                                                    "$ref": "sublime://settings/AnyTest#/definitions/JavascriptFrameworks"
+                                                },
+                                                {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "sublime://settings/AnyTest#/definitions/JavascriptFrameworks"
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        "python": {
+                                            "anyOf": [
+                                                {
+                                                    "$ref": "sublime://settings/AnyTest#/definitions/PythonFrameworks"
+                                                },
+                                                {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "sublime://settings/AnyTest#/definitions/PythonFrameworks"
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        "ruby": {
+                                            "anyOf": [
+                                                {
+                                                    "$ref": "sublime://settings/AnyTest#/definitions/RubyFrameworks"
+                                                },
+                                                {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "sublime://settings/AnyTest#/definitions/RubyFrameworks"
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                },
                                 "log_level": {
                                     "type": "string",
                                     "default": "WARNING",
@@ -54,12 +139,16 @@
                                 },
                                 "runner": {
                                     "$ref": "sublime://settings/AnyTest#/definitions/Runner",
-                                    "default": "panel"
                                 },
                                 "runner.command.name": {
                                     "type": "string",
                                     "default": "exec",
                                     "description": "Sublime command to run tests with"
+                                },
+                                "runner.command.panel_name": {
+                                    "type": "string",
+                                    "default": "output.exec",
+                                    "description": "Output panel name"
                                 },
                                 "runner.terminus.focus_on_run": {
                                     "type": "boolean",
@@ -85,7 +174,238 @@
                                     "type": "array",
                                     "default": [],
                                     "description": "A list of view hooks before running tests"
-                                }
+                                },
+                                "elixir.runner": {
+                                    "$ref": "sublime://settings/AnyTest#/definitions/Runner",
+                                    "description": "A runner to run elixir tests with"
+                                },
+                                "elixir.env": {
+                                    "type": "object",
+                                    "default": {},
+                                    "description": "Elixir specific ENV variables (will be merged with the ENV variables defined on the test framework level)"
+                                },
+                                "elixir.espec.runner": {
+                                    "$ref": "sublime://settings/AnyTest#/definitions/Runner",
+                                    "description": "A runner to run ESpec tests with"
+                                },
+                                "elixir.espec.executable": {
+                                    "type": "array",
+                                    "description": "ESpec test framework executable (e.g. [\"mix\", \"do\", \"smth\"])"
+                                },
+                                "elixir.espec.args": {
+                                    "type": "array",
+                                    "default": [],
+                                    "description": "ESpec cli args (e.g. [\"--do-smth\"])"
+                                },
+                                "elixir.espec.env": {
+                                    "type": "object",
+                                    "default": {},
+                                    "description": "ESpec specific ENV variables (will be merged with the ENV variables defined on the language level)"
+                                },
+                                "elixir.exunit.runner": {
+                                    "$ref": "sublime://settings/AnyTest#/definitions/Runner",
+                                    "description": "A runner to run ExUnit tests with"
+                                },
+                                "elixir.exunit.executable": {
+                                    "type": "array",
+                                    "description": "ExUnit test framework executable (e.g. [\"mix\", \"do\", \"smth\"])"
+                                },
+                                "elixir.exunit.args": {
+                                    "type": "array",
+                                    "default": [],
+                                    "description": "ExUnit cli args (e.g. [\"--do-smth\"])"
+                                },
+                                "elixir.exunit.env": {
+                                    "type": "object",
+                                    "default": {},
+                                    "description": "ExUnit specific ENV variables (will be merged with the ENV variables defined on the language level)"
+                                },
+                                "javascript.test_framework": {
+                                    "$ref": "sublime://settings/AnyTest#/definitions/JavascriptFrameworks"
+                                },
+                                "javascript.runner": {
+                                    "$ref": "sublime://settings/AnyTest#/definitions/Runner",
+                                    "description": "A runner to run JavaScript tests with"
+                                },
+                                "javascript.env": {
+                                    "type": "object",
+                                    "default": {},
+                                    "description": "JavaScript specific ENV variables (will be merged with the ENV variables defined on the test framework level)"
+                                },
+                                "javascript.jest.runner": {
+                                    "$ref": "sublime://settings/AnyTest#/definitions/Runner",
+                                    "description": "A runner to run Jest tests with"
+                                },
+                                "javascript.jest.executable": {
+                                    "type": "array",
+                                    "description": "Jest test framework executable (e.g. [\"npm\", \"run\", \"test\"])"
+                                },
+                                "javascript.jest.args": {
+                                    "type": "array",
+                                    "default": [
+                                        "--no-coverage"
+                                    ],
+                                    "description": "Jest cli args (e.g. [\"--do-smth\"])"
+                                },
+                                "javascript.jest.env": {
+                                    "type": "object",
+                                    "default": {},
+                                    "description": "Jest specific ENV variables (will be merged with the ENV variables defined on the language level)"
+                                },
+                                "python.test_framework": {
+                                    "$ref": "sublime://settings/AnyTest#/definitions/PythonFrameworks"
+                                },
+                                "python.runner": {
+                                    "$ref": "sublime://settings/AnyTest#/definitions/Runner",
+                                    "description": "A runner to run Python tests with"
+                                },
+                                "python.env": {
+                                    "type": "object",
+                                    "default": {},
+                                    "description": "Python specific ENV variables (will be merged with the ENV variables defined on the test framework level)"
+                                },
+                                "python.pytest.runner": {
+                                    "$ref": "sublime://settings/AnyTest#/definitions/Runner",
+                                    "description": "A runner to run pytest tests with"
+                                },
+                                "python.pytest.executable": {
+                                    "type": "array",
+                                    "description": "pytest test framework executable (e.g. [\"my_pytest\"])"
+                                },
+                                "python.pytest.args": {
+                                    "type": "array",
+                                    "default": [],
+                                    "description": "pytest cli args (e.g. [\"--do-smth\"])"
+                                },
+                                "python.pytest.env": {
+                                    "type": "object",
+                                    "default": {},
+                                    "description": "pytest specific ENV variables (will be merged with the ENV variables defined on the language level)"
+                                },
+                                "python.pyunit.runner": {
+                                    "$ref": "sublime://settings/AnyTest#/definitions/Runner",
+                                    "enum": [
+                                        "console",
+                                        "command",
+                                        "terminus",
+                                        "unittesting"
+                                    ],
+                                    "description": "A runner to run pyunit tests with"
+                                },
+                                "python.pyunit.executable": {
+                                    "type": "array",
+                                    "description": "pyunit test framework executable (e.g. [\"my_pyunit\"])"
+                                },
+                                "python.pyunit.args": {
+                                    "type": "array",
+                                    "default": [],
+                                    "description": "pyunit cli args (e.g. [\"--do-smth\"])"
+                                },
+                                "python.pyunit.env": {
+                                    "type": "object",
+                                    "default": {},
+                                    "description": "pyunit specific ENV variables (will be merged with the ENV variables defined on the language level)"
+                                },
+                                "ruby.runner": {
+                                    "$ref": "sublime://settings/AnyTest#/definitions/Runner",
+                                    "description": "A runner to run Python tests with"
+                                },
+                                "ruby.use_bundle": {
+                                    "type": "boolean",
+                                    "default": true,
+                                    "description": "If the Gemfile exists prefix the executable with bundle exec"
+                                },
+                                "ruby.use_binstubs": {
+                                    "type": "boolean",
+                                    "default": true,
+                                    "description": "If the binstub exists use it as an executable"
+                                },
+                                "ruby.use_spring_binstub": {
+                                    "type": "boolean",
+                                    "default": false,
+                                    "description": "If the Spring binstub exists prefix the executable with it"
+                                },
+                                "ruby.env": {
+                                    "type": "object",
+                                    "default": {},
+                                    "description": "Ruby specific ENV variables (will be merged with the ENV variables defined on the test framework level)"
+                                },
+                                "ruby.minitest.runner": {
+                                    "$ref": "sublime://settings/AnyTest#/definitions/Runner",
+                                    "description": "A runner to run minitest tests with"
+                                },
+                                "ruby.minitest.executable": {
+                                    "type": "array",
+                                    "description": "minitest test framework executable (e.g. [\"bin/tests\"])"
+                                },
+                                "ruby.minitest.use_bundle": {
+                                    "type": "boolean",
+                                    "default": true,
+                                    "description": "If the Gemfile exists prefix the minitest executable with bundle exec"
+                                },
+                                "ruby.minitest.use_binstubs": {
+                                    "type": "boolean",
+                                    "default": true,
+                                    "description": "If the minitest binstub exists use it as an executable"
+                                },
+                                "ruby.minitest.use_spring_binstub": {
+                                    "type": "boolean",
+                                    "default": false,
+                                    "description": "If the Spring binstub exists prefix the minitest executable with it"
+                                },
+                                "ruby.minitest.test_folder": {
+                                    "type": "string",
+                                    "default": "test",
+                                    "description": "The folder when the tests are located"
+                                },
+                                "ruby.minitest.file_pattern": {
+                                    "type": "string",
+                                    "default": "*_test.rb",
+                                    "description": "The test files pattern"
+                                },
+                                "ruby.minitest.args": {
+                                    "type": "array",
+                                    "default": [],
+                                    "description": "minitest cli args (e.g. [\"--do-smth\"])"
+                                },
+                                "ruby.minitest.env": {
+                                    "type": "object",
+                                    "default": {},
+                                    "description": "minitest specific ENV variables (will be merged with the ENV variables defined on the language level)"
+                                },
+                                "ruby.rspec.runner": {
+                                    "$ref": "sublime://settings/AnyTest#/definitions/Runner",
+                                    "description": "A runner to run RSpec tests with"
+                                },
+                                "ruby.rspec.executable": {
+                                    "type": "array",
+                                    "description": "RSpec test framework executable (e.g. [\"bin/my_rspec\"])"
+                                },
+                                "ruby.rspec.use_bundle": {
+                                    "type": "boolean",
+                                    "default": true,
+                                    "description": "If the Gemfile exists prefix the RSpec executable with bundle exec"
+                                },
+                                "ruby.rspec.use_binstubs": {
+                                    "type": "boolean",
+                                    "default": true,
+                                    "description": "If the RSpec binstub exists use it as an executable"
+                                },
+                                "ruby.rspec.use_spring_binstub": {
+                                    "type": "boolean",
+                                    "default": false,
+                                    "description": "If the Spring binstub exists prefix the RSpec executable with it"
+                                },
+                                "ruby.rspec.args": {
+                                    "type": "array",
+                                    "default": [],
+                                    "description": "RSpec cli args (e.g. [\"--do-smth\"])"
+                                },
+                                "ruby.rspec.env": {
+                                    "type": "object",
+                                    "default": {},
+                                    "description": "RSpec specific ENV variables (will be merged with the ENV variables defined on the language level)"
+                                },
                             },
                         },
                     },

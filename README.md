@@ -46,7 +46,7 @@ The package provides schemas for its settings so it is recommended to install [L
 
 To see all available settings please check [AnyTest.sublime-settings](https://github.com/timfjord/AnyTest/blob/main/AnyTest.sublime-settings)
 
-By default the package iterates thought all available test frameworks to detect the one to use. 
+By default the package iterates thought all available test frameworks to detect the one to use.
 This can be changed with the `test_frameworks` setting:
 
 ```json
@@ -55,7 +55,7 @@ This can be changed with the `test_frameworks` setting:
 }
 ```
 
-or 
+or
 
 ```json
 "test_frameworks": {
@@ -94,7 +94,7 @@ Runners can be activated globally, per language or per framework:
 "python.pyunit.runner": "unittesting"
 ```
 
-Please consult with [AnyTest.sublime-settings](https://github.com/timfjord/AnyTest/blob/main/AnyTest.sublime-settings) to check all available settings. 
+Please consult with [AnyTest.sublime-settings](https://github.com/timfjord/AnyTest/blob/main/AnyTest.sublime-settings) to check all available settings.
 
 There is also the `unittesting` runner and it should be used to test sublime packages with [UnitTesting](https://github.com/SublimeText/UnitTesting).  
 Unfortunately, due to `UnitTesting` limitations there is no way to run tests for the current line.  
@@ -114,8 +114,8 @@ Using `unittesting` only makes sense with PyUnit test framework, so it is usuall
 
 ## Contribution
 
-The easiest way to add a new test framework is to find it in [the `vim-test` repo](https://github.com/vim-test/vim-test/tree/master/autoload/test) and try to adapt it.  
-It is also required to cover the test frameworks with tests. Tests and fixtures can be also found in [the `vim-test` repo](https://github.com/vim-test/vim-test/tree/master/spec)
+The easiest way to add a new test framework is to find it in [the `vim-test` repository](https://github.com/vim-test/vim-test/tree/master/autoload/test) and try to adapt it.  
+It is also required to cover the test frameworks with tests. Tests and fixtures can be also found in [the `vim-test` repository](https://github.com/vim-test/vim-test/tree/master/spec)
 
 The package uses `black`, `flake8` and `isort` for linting.
 

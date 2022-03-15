@@ -30,7 +30,7 @@ class IsConfigurableMixinTestCase(SublimeWindowTestCase):
         self.assertFalse(TF.is_suitable_for('_file'))
 
     def test_is_suitable_for_the_only_available(self):
-        self.setSettings({'test_frameworks': {'_lng': '_frm'}})
+        self.setSettings({'test_frameworks': {'_lng': '_frm', '_lng1': '_frm1'}})
 
         self.assertTrue(TF.is_suitable_for('_file'))
 

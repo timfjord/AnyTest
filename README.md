@@ -42,6 +42,26 @@ By default the package doesn't define any key bindings, run `Preferences: AnyTes
 The package can be configured either globally or at the project level.
 Settings defined at the project level override settings defined globally.
 
+To configure the package at the project level all settings must be added under the `AnyTest` namespace:
+
+```json
+{
+    "folders": [
+        {
+            "path": ".",
+        }
+    ],
+    "settings": {
+        "AnyTest": {
+            "test_frameworks": {
+                "python": "pyunit"
+            },
+            "python.pyunit.runner": "unittesting"
+        }
+    }
+}
+```
+
 The package provides schemas for its settings so it is recommended to install [LSP-json](https://github.com/sublimelsp/LSP-json) to have settings autocomplete.
 
 To see all available settings please check [AnyTest.sublime-settings](https://github.com/timfjord/AnyTest/blob/main/AnyTest.sublime-settings)

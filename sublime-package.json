@@ -45,6 +45,12 @@
                                 "rspec"
                             ]
                         },
+                        "RustFrameworks": {
+                            "type": "string",
+                            "enum": [
+                                "cargotest"
+                            ]
+                        },
                         "PackageConfig": {
                             "properties": {
                                 "test_frameworks": {
@@ -99,6 +105,19 @@
                                                     "type": "array",
                                                     "items": {
                                                         "$ref": "sublime://settings/AnyTest#/definitions/RubyFrameworks"
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        "rust": {
+                                            "anyOf": [
+                                                {
+                                                    "$ref": "sublime://settings/AnyTest#/definitions/RustFrameworks"
+                                                },
+                                                {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "sublime://settings/AnyTest#/definitions/RustFrameworks"
                                                     }
                                                 }
                                             ]
@@ -190,6 +209,10 @@
                                 },
                                 "elixir.espec.executable": {
                                     "type": "array",
+                                    "default": [
+                                        "mix",
+                                        "espec"
+                                    ],
                                     "description": "ESpec test framework executable (e.g. [\"mix\", \"do\", \"smth\"])"
                                 },
                                 "elixir.espec.args": {
@@ -405,6 +428,37 @@
                                     "type": "object",
                                     "default": {},
                                     "description": "RSpec specific ENV variables (will be merged with the ENV variables defined on the language level)"
+                                },
+                                "rust.runner": {
+                                    "$ref": "sublime://settings/AnyTest#/definitions/Runner",
+                                    "description": "A runner to run Rust tests with"
+                                },
+                                "rust.env": {
+                                    "type": "object",
+                                    "default": {},
+                                    "description": "Rust specific ENV variables (will be merged with the ENV variables defined on the test framework level)"
+                                },
+                                "rust.cargotest.runner": {
+                                    "$ref": "sublime://settings/AnyTest#/definitions/Runner",
+                                    "description": "A runner to run cargo tests with"
+                                },
+                                "rust.cargotest.executable": {
+                                    "type": "array",
+                                    "default": [
+                                        "cargo",
+                                        "test"
+                                    ],
+                                    "description": "Cargo test framework executable (e.g. [\"bin/tests\"])"
+                                },
+                                "rust.cargotest.args": {
+                                    "type": "array",
+                                    "default": [],
+                                    "description": "Cargo test cli args (e.g. [\"--do-smth\"])"
+                                },
+                                "rust.cargotest.env": {
+                                    "type": "object",
+                                    "default": {},
+                                    "description": "Cargo tests specific ENV variables (will be merged with the ENV variables defined on the language level)"
                                 }
                             }
                         }

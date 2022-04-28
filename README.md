@@ -94,6 +94,11 @@ Also, some languages support specifying test framework, for example
 
 This won't change the detection process, but if there are multiple candidates the specified one will be used.
 
+### Project folders
+
+The package supports multiple project folders. It can be very useful when there is a nested folder
+that contains a separate project. The package is able to detect this situation and calculates the root path correctly
+
 ## Runners
 
 The package comes with 3 runners:

@@ -48,7 +48,7 @@
                         "RustFrameworks": {
                             "type": "string",
                             "enum": [
-                                "cargotest",
+                                "cargotest"
                             ]
                         },
                         "PackageConfig": {
@@ -451,7 +451,7 @@
                                     "type": "object",
                                     "default": {},
                                     "description": "Cargo tests specific ENV variables (will be merged with the ENV variables defined on the language level)"
-                                },
+                                }
                             }
                         }
                     },

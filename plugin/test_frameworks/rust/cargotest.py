@@ -16,9 +16,6 @@ class TestFramework(rust.TestFramework):
 
     forward_test_patterns = (r'\s*(?:async )?fn\s+(\w+)',)
 
-    def build_executable(self):
-        return ['cargo', 'test']
-
     def build_file_position_args(self):
         path, _ = os.path.splitext(self.context.file.relpath)
         modules = path.split(os.sep)

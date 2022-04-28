@@ -1,8 +1,24 @@
 {
-    // To specify test frameworks to choose from use (other test frameworks will be ignored):
-    // "test_frameworks": {
-    //     "javascript": "jest" // or ["jest"]
-    // },
+    "test_frameworks": {
+        "elixir": [
+            "espec",
+            "exunit"
+        ],
+        "javascript": [
+            "jest"
+        ],
+        "python": [
+            "pytest",
+            "pyunit"
+        ],
+        "ruby": [
+            "minitest",
+            "rspec"
+        ],
+        "rust": [
+            "cargotest"
+        ]
+    },
     // Available log levels: DEBUG, INFO, WARNING, ERROR, CRITICAL
     "log_level": "WARNING",
     "show_status_messages": true,
@@ -37,7 +53,10 @@
     // "elixir.env": { "ENV1": "value" }, // will be merged with the ENV variable defined on the test framework level
     //
     // "elixir.espec.runner": "command", // a runner for the ESpec test framework
-    // "elixir.espec.executable": ["mix", "do", "smth"],
+    "elixir.espec.executable": [
+        "mix",
+        "espec"
+    ],
     // "elixir.espec.args": ["--do-smth"],
     // "elixir.espec.env": { "ENV2": "value" }, // will be merged with the ENV variable defined on the language level
     //
@@ -107,7 +126,10 @@
     // "rust.env": { "ENV1": "value" }, // will be merged with the ENV variable defined on the test framework level
     //
     // "rust.cargotest.runner": "command", // a runner for the cargo test framework
-    // "rust.cargotest.executable": ["bin/tests"],
+    "rust.cargotest.executable": [
+        "cargo",
+        "test"
+    ],
     // "rust.cargotest.args": ["--do-smth"],
     // "rust.cargotest.env": { "ENV2": "value" }, // will be merged with the ENV variable defined on the language level
 }

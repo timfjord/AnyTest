@@ -7,24 +7,19 @@ from .. import ruby, utils
 class TestFramework(ruby.TestFramework):
     NAMESPEACE_SEPARATOR = '::'
     METHOD_SEPARATOR = '#'
-    DEFAULT_TEST_FOLDER = 'test'
-    DEFAULT_TEST_FILE_PATTERN = '*_test.rb'
 
     framework = 'minitest'
     pattern = r'(((^|/|\\)test_.+)|_test)(?<!spec).rb$'
 
     @classmethod
     def test_folder(cls):
-        return cls.settings(
-            'test_folder', type=str, default=cls.DEFAULT_TEST_FOLDER, fallback=False
-        )
+        return cls.settings('test_folder', type=str, fallback=False)
 
     @classmethod
     def test_file_pattern(cls):
         return cls.settings(
             'file_pattern',
             type=str,
-            default=cls.DEFAULT_TEST_FILE_PATTERN,
             fallback=False,
         )
 

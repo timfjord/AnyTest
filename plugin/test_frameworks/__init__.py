@@ -6,16 +6,6 @@ from abc import ABCMeta, abstractmethod
 from .. import errors, settings
 from . import utils
 
-# fmt: off
-ALL = {
-    'elixir': ['espec', 'exunit'],
-    'javascript': ['jest'],
-    'python': ['pytest', 'pyunit'],
-    'ruby': ['minitest', 'rspec'],
-    'rust': ['cargotest'],
-}
-# fmt: on
-
 logger = logging.getLogger(__name__)
 
 
@@ -27,9 +17,7 @@ def load(language, framework):
 
 
 def items():
-    test_frameworks = settings.get('test_frameworks', type=dict)
-    if not bool(test_frameworks):
-        test_frameworks = ALL
+    test_frameworks = settings.get('test_frameworks', type=dict, default={})
 
     for language, frameworks in test_frameworks.items():
         for framework in utils.to_unpackable(frameworks):
@@ -138,9 +126,8 @@ class TestFramework(metaclass=ABCMeta):
             or self.build_executable()
         )
 
-    @abstractmethod
     def build_executable(self):
-        pass
+        return []
 
     def args(self):
         return self.settings('args', type=list, fallback=False, default=[])

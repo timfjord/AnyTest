@@ -5,9 +5,6 @@ class TestFramework(elixir.TestFramework):
     framework = 'espec'
     pattern = r'_spec\.exs$'
 
-    def build_executable(self):
-        return ['mix', 'espec']
-
     def build_file_position_args(self):
         return [self.context.file.relpath]
 

@@ -209,6 +209,10 @@
                                 },
                                 "elixir.espec.executable": {
                                     "type": "array",
+                                    "default": [
+                                        "mix",
+                                        "espec"
+                                    ],
                                     "description": "ESpec test framework executable (e.g. [\"mix\", \"do\", \"smth\"])"
                                 },
                                 "elixir.espec.args": {
@@ -440,6 +444,10 @@
                                 },
                                 "rust.cargotest.executable": {
                                     "type": "array",
+                                    "default": [
+                                        "cargo",
+                                        "test"
+                                    ],
                                     "description": "Cargo test framework executable (e.g. [\"bin/tests\"])"
                                 },
                                 "rust.cargotest.args": {

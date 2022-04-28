@@ -12,6 +12,7 @@ ALL = {
     'javascript': ['jest'],
     'python': ['pytest', 'pyunit'],
     'ruby': ['minitest', 'rspec'],
+    'rust': ['cargotest'],
 }
 # fmt: on
 
@@ -123,12 +124,12 @@ class TestFramework(metaclass=ABCMeta):
     def file(self, *path):
         return self.context.root.file(*path)
 
-    def find_nearest(self, forward=False):
+    def find_nearest(self):
         if self.test_patterns is None:
             raise NotImplementedError('test_patterns is not defined for the framework')
 
         return self.context.find_nearest(
-            self.test_patterns, self.namespace_patterns, forward=forward
+            self.test_patterns, self.namespace_patterns, to_line=1
         )
 
     def executable(self):

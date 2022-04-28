@@ -1,7 +1,7 @@
 # AnyTest [![Lint](https://github.com/timfjord/AnyTest/actions/workflows/lint.yml/badge.svg)](https://github.com/timfjord/AnyTest/actions/workflows/lint.yml) [![Test](https://github.com/timfjord/AnyTest/actions/workflows/test.yml/badge.svg)](https://github.com/timfjord/AnyTest/actions/workflows/test.yml)
 Run any test from Sublime Text
 
-A Sublime Text 3/4 package which main idea is to automatically detect a test framework for the given file and run it.  
+A Sublime Text 3/4 package whose main idea is to automatically detect a test framework for the given file and run it.  
 Basically it is a Sublime Text interpretation of the awesome [vim-test](https://github.com/vim-test/vim-test) plugin.
 
 Currently the following test frameworks are supported (more test frameworks are coming soon):
@@ -12,6 +12,7 @@ Currently the following test frameworks are supported (more test frameworks are 
 | **JavaScript** | Jest            | `jest`              |
 |     **Python** | PyTest, PyUnit  | `pytest`, `pyunit`  |
 |       **Ruby** | Minitest, RSpec | `minitest`, `rspec` |
+|       **Rust** | Cargo           | `cargotest`         |
 
 Feel free to [open an issue](https://github.com/timfjord/AnyTest/issues/new) with a test framework request as those test frameworks will be added first.
 

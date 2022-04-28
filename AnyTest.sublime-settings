@@ -101,4 +101,13 @@
     // "ruby.rspec.executable": ["bin/my_rpsec"],
     // "ruby.rspec.args": ["--do-smth"],
     // "ruby.rspec.env": { "ENV2": "value" }, // will be merged with the ENV variable defined on the language level
+    //
+    // --- Rust ---
+    // "rust.runner": "command", // a runner for all Rust test frameworks
+    // "rust.env": { "ENV1": "value" }, // will be merged with the ENV variable defined on the test framework level
+    //
+    // "rust.cargotest.runner": "command", // a runner for the cargo test framework
+    // "rust.cargotest.executable": ["bin/tests"],
+    // "rust.cargotest.args": ["--do-smth"],
+    // "rust.cargotest.env": { "ENV2": "value" }, // will be merged with the ENV variable defined on the language level
 }

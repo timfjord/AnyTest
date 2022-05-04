@@ -4,7 +4,7 @@ import sublime
 
 from . import runners, settings, test_frameworks
 from .context import Context
-from .errors import handle_errors
+from .errors import Error, handle_errors
 from .history import History
 from .view_callbacks import ViewCallbacks
 
@@ -31,6 +31,7 @@ class Plugin:
 
     def __init__(self, view):
         self.view = view
+        self.runner = None
 
     def build_runner(self, scope):
         if scope == SCOPE_LAST:
@@ -43,13 +44,32 @@ class Plugin:
         return runner.build(test_framework(context), scope)
 
     @handle_errors
-    def run_test(self, scope):
+    def run_test(self, scope, edit=False):
         settings.reload_project_settings()
 
-        runner = self.build_runner(scope)
+        self.runner = self.build_runner(scope)
+
+        if edit:
+            self.view.window().show_input_panel(
+                'Command',
+                self.runner.cmd,
+                self.process_runner,
+                lambda _: None,
+                lambda: None,
+            )
+        else:
+            self.process_runner()
+
+    @handle_errors
+    def process_runner(self, command=''):
+        if self.runner is None:
+            raise Error('Runner is not set')
+
+        if bool(command):
+            self.runner = self.runner._replace(cmd=command)
 
         ViewCallbacks(self.view).run()
 
-        logger.debug("Running '%s' from '%s'", runner.cmd, runner.dir)
-        runner.run()
-        history.add(runner)
+        logger.debug("Running '%s' from '%s'", self.runner.cmd, self.runner.dir)
+        self.runner.run()
+        history.add(self.runner)

@@ -19,8 +19,8 @@ from .plugin import Plugin  # noqa: E402
 
 
 class AnyTestRunCommand(sublime_plugin.TextCommand):
-    def run(self, _, scope='file'):
-        Plugin(self.view).run_test(scope)
+    def run(self, _, scope='file', edit=False):
+        Plugin(self.view).run_test(scope, edit)
 
 
 class AnyTestShowLastOutputCommand(sublime_plugin.ApplicationCommand):

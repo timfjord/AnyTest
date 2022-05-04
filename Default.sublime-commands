@@ -23,9 +23,19 @@
         "args": { "scope": "line" }
     },
     {
+        "caption": "AnyTest: Edit nearest",
+        "command": "any_test_run",
+        "args": { "scope": "line", "edit": true }
+    },
+    {
         "caption": "AnyTest: Test file",
         "command": "any_test_run",
         "args": { "scope": "file" }
+    },
+    {
+        "caption": "AnyTest: Edit file",
+        "command": "any_test_run",
+        "args": { "scope": "file", "edit": true }
     },
     {
         "caption": "AnyTest: Test suite",
@@ -33,9 +43,19 @@
         "args": { "scope": "suite" }
     },
     {
+        "caption": "AnyTest: Edit suite",
+        "command": "any_test_run",
+        "args": { "scope": "suite", "edit": true }
+    },
+    {
         "caption": "AnyTest: Run last",
         "command": "any_test_run",
         "args": { "scope": "last" }
+    },
+    {
+        "caption": "AnyTest: Edit last",
+        "command": "any_test_run",
+        "args": { "scope": "last", "edit": true }
     },
     {
         "caption": "AnyTest: Show last output",

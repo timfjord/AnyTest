@@ -1,3 +1,4 @@
+# isort:skip_file
 import unittest
 
 import sublime

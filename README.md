@@ -1,6 +1,8 @@
+<!-- markdownlint-disable -->
 [![Stand With Ukraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/banner2-direct.svg)](https://stand-with-ukraine.pp.ua)
 
 # AnyTest [![Lint](https://github.com/timfjord/AnyTest/actions/workflows/lint.yml/badge.svg)](https://github.com/timfjord/AnyTest/actions/workflows/lint.yml) [![Test](https://github.com/timfjord/AnyTest/actions/workflows/test.yml/badge.svg)](https://github.com/timfjord/AnyTest/actions/workflows/test.yml)
+<!-- markdownlint-enable -->
 Run any test from Sublime Text
 
 A Sublime Text 3/4 package whose main idea is to automatically detect a test framework for the given file and run it.  

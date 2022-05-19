@@ -15,7 +15,7 @@ class Runner(BaseRunner):
             args['pattern'] = os.path.basename(self.file)
             args['package'] += ':{}'.format(args['pattern'])
 
-        self.run_command('unit_testing', args=args)
+        self.run_command('unit_testing', args)
 
     class Builder(BaseRunner.Builder):
         def build_cmd(self):

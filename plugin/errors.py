@@ -11,9 +11,9 @@ def handle_errors(func):
     def handler(*args, **kwargs):
         try:
             return func(*args, **kwargs)
-        except Error as e:
-            status.update(str(e))
-            logger.error(e)
+        except Error as exc:
+            status.update(str(exc))
+            logger.error(exc)
 
     return handler
 

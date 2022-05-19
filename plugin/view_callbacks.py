@@ -38,7 +38,7 @@ class ViewCallbacks(WindowMixin):
             return
 
         diff = -len(self.view.lines(overlaid_region))
-        self.view.run_command('scroll_lines', args={'amount': float(diff)})
+        self.view.run_command('scroll_lines', {'amount': float(diff)})
 
     def run(self):
         self.save()

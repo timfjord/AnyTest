@@ -49,7 +49,7 @@ class Runner(
     def show_output(self, focus=True):
         panel_name = self.get_panel_name()
 
-        self.window.run_command('show_panel', args={'panel': panel_name})
+        self.window.run_command('show_panel', {'panel': panel_name})
 
         if not focus:
             return

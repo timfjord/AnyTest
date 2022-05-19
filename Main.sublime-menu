@@ -12,20 +12,74 @@
                         "args": { "scope": "line" }
                     },
                     {
+                        "caption": "Edit nearest command",
+                        "command": "any_test_run",
+                        "args": { "scope": "line", "edit": true }
+                    },
+                    {
+                        "caption": "Test nearest with",
+                        "command": "any_test_run",
+                        "args": { "scope": "line", "select": true }
+                    },
+                    {
+                        "caption": "Select and edit nearest command",
+                        "command": "any_test_run",
+                        "args": { "scope": "line", "edit": true, "select": true }
+                    },
+                    { "caption": "-" },
+                    {
                         "caption": "Test file",
                         "command": "any_test_run",
                         "args": { "scope": "file" }
                     },
+                    {
+                        "caption": "Edit file command",
+                        "command": "any_test_run",
+                        "args": { "scope": "file", "edit": true }
+                    },
+                    {
+                        "caption": "Test file with",
+                        "command": "any_test_run",
+                        "args": { "scope": "file", "select": true }
+                    },
+                    {
+                        "caption": "Select and edit file command",
+                        "command": "any_test_run",
+                        "args": { "scope": "file", "edit": true, "select": true }
+                    },
+                    { "caption": "-" },
                     {
                         "caption": "Test suite",
                         "command": "any_test_run",
                         "args": { "scope": "suite" }
                     },
                     {
+                        "caption": "Edit suite command",
+                        "command": "any_test_run",
+                        "args": { "scope": "suite", "edit": true }
+                    },
+                    {
+                        "caption": "Test suite with",
+                        "command": "any_test_run",
+                        "args": { "scope": "suite", "select": true }
+                    },
+                    {
+                        "caption": "Select and edit suite command",
+                        "command": "any_test_run",
+                        "args": { "scope": "suite", "edit": true, "select": true }
+                    },
+                    { "caption": "-" },
+                    {
                         "caption": "Run last",
                         "command": "any_test_run",
                         "args": { "scope": "last" }
                     },
+                    {
+                        "caption": "Edit last command",
+                        "command": "any_test_run",
+                        "args": { "scope": "last", "edit": true }
+                    },
+                    { "caption": "-" },
                     {
                         "caption": "Show last output",
                         "command": "any_test_show_last_output",

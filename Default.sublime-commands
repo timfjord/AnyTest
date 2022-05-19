@@ -23,9 +23,19 @@
         "args": { "scope": "line" }
     },
     {
-        "caption": "AnyTest: Edit nearest",
+        "caption": "AnyTest: Edit nearest command",
         "command": "any_test_run",
         "args": { "scope": "line", "edit": true }
+    },
+    {
+        "caption": "AnyTest: Test nearest with",
+        "command": "any_test_run",
+        "args": { "scope": "line", "select": true }
+    },
+    {
+        "caption": "AnyTest: Select and edit nearest command",
+        "command": "any_test_run",
+        "args": { "scope": "line", "edit": true, "select": true }
     },
     {
         "caption": "AnyTest: Test file",
@@ -33,9 +43,19 @@
         "args": { "scope": "file" }
     },
     {
-        "caption": "AnyTest: Edit file",
+        "caption": "AnyTest: Edit file command",
         "command": "any_test_run",
         "args": { "scope": "file", "edit": true }
+    },
+    {
+        "caption": "AnyTest: Test file with",
+        "command": "any_test_run",
+        "args": { "scope": "file", "select": true }
+    },
+    {
+        "caption": "AnyTest: Select and edit file command",
+        "command": "any_test_run",
+        "args": { "scope": "file", "edit": true, "select": true }
     },
     {
         "caption": "AnyTest: Test suite",
@@ -43,9 +63,19 @@
         "args": { "scope": "suite" }
     },
     {
-        "caption": "AnyTest: Edit suite",
+        "caption": "AnyTest: Edit suite command",
         "command": "any_test_run",
         "args": { "scope": "suite", "edit": true }
+    },
+    {
+        "caption": "AnyTest: Test suite with",
+        "command": "any_test_run",
+        "args": { "scope": "suite", "select": true }
+    },
+    {
+        "caption": "AnyTest: Select and edit suite command",
+        "command": "any_test_run",
+        "args": { "scope": "suite", "edit": true, "select": true }
     },
     {
         "caption": "AnyTest: Run last",
@@ -53,7 +83,7 @@
         "args": { "scope": "last" }
     },
     {
-        "caption": "AnyTest: Edit last",
+        "caption": "AnyTest: Edit last command",
         "command": "any_test_run",
         "args": { "scope": "last", "edit": true }
     },

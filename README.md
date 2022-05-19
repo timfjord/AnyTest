@@ -1,6 +1,8 @@
+<!-- markdownlint-disable -->
 [![Stand With Ukraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/banner2-direct.svg)](https://stand-with-ukraine.pp.ua)
 
 # AnyTest [![Lint](https://github.com/timfjord/AnyTest/actions/workflows/lint.yml/badge.svg)](https://github.com/timfjord/AnyTest/actions/workflows/lint.yml) [![Test](https://github.com/timfjord/AnyTest/actions/workflows/test.yml/badge.svg)](https://github.com/timfjord/AnyTest/actions/workflows/test.yml)
+<!-- markdownlint-enable -->
 Run any test from Sublime Text
 
 A Sublime Text 3/4 package whose main idea is to automatically detect a test framework for the given file and run it.  
@@ -137,7 +139,6 @@ Using `unittesting` only makes sense with PyUnit test framework, so it is usuall
 ## Roadmap
 
 - Add more test frameworks (the end goal is to at least support all test frameworks that `vim-test` supports)
-- Allow to explicitly select a test framework for the given file/project
 - Run tests from the Side Bar (including testing folders)
 - Potentially integrate the package with [Sublime Debugger](https://github.com/daveleroy/sublime_debugger)
 

@@ -7,6 +7,7 @@ from ..test_frameworks import TestFramework
 class Runner(BaseRunner):
     name = 'unittesting'
     panel_name = 'output.UnitTesting'
+    editable = False
 
     def run(self):
         args = {'package': os.path.basename(self.dir)}
@@ -15,7 +16,7 @@ class Runner(BaseRunner):
             args['pattern'] = os.path.basename(self.file)
             args['package'] += ':{}'.format(args['pattern'])
 
-        self.run_command('unit_testing', args=args)
+        self.run_command('unit_testing', args)
 
     class Builder(BaseRunner.Builder):
         def build_cmd(self):

@@ -156,6 +156,11 @@
                                     "default": false,
                                     "description": "Scroll the view when running tests and the panel is overlaying the cursor"
                                 },
+                                "select_test_framework_when_not_found": {
+                                    "type": "boolean",
+                                    "default": false,
+                                    "description": "When a test framework is not found show a quick panel with all available test frameworks"
+                                },
                                 "runner": {
                                     "$ref": "sublime://settings/AnyTest#/definitions/Runner"
                                 },

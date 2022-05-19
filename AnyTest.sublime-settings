@@ -28,6 +28,8 @@
     "save_all_files_on_run": false,
     // scroll the view when the panel is overlaying the cursor
     "scroll_to_view_on_run": false,
+    // when a test framework is not found show a quick panel with all available test frameworks
+    "select_test_framework_when_not_found": false,
     //
     // ###########
     // # Runners #

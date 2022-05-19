@@ -28,6 +28,7 @@ class Runner(
 
     name = None
     panel_name = None
+    editable = True
 
     @classmethod
     def build(cls, test_framework, scope):

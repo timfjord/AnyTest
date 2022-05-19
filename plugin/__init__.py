@@ -63,7 +63,7 @@ class Plugin:
         try:
             runner = self.build_runner(scope, quite_panel_item=quite_panel_item)
 
-            if edit:
+            if edit and runner.editable:
                 self.view.window().show_input_panel(
                     'Command',
                     runner.cmd,
@@ -71,6 +71,8 @@ class Plugin:
                     lambda _: None,
                     lambda: None,
                 )
+            elif edit:
+                raise Error("Runner '{}' is not editable".format(runner.name))
             else:
                 self.process_runner(runner)
         except FrameworkNotFound as exc:

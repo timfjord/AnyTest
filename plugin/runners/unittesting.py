@@ -7,6 +7,7 @@ from ..test_frameworks import TestFramework
 class Runner(BaseRunner):
     name = 'unittesting'
     panel_name = 'output.UnitTesting'
+    editable = False
 
     def run(self):
         args = {'package': os.path.basename(self.dir)}

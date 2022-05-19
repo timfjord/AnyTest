@@ -1,4 +1,4 @@
-from AnyTest.plugin.test_frameworks import TestFramework
+from AnyTest.plugin.test_frameworks import TestFramework, items, load, quick_panel_items
 from AnyTest.tests import SublimeWindowTestCase
 
 
@@ -64,3 +64,48 @@ class BaseTestFrameworkTestCase(SublimeWindowTestCase):
         self.assertEqual(
             TF.settings('_ENV', root=True, merge=True), {'E': 1, 'F': 1, 'G': 1}
         )
+
+
+class FunctionsTestCase(SublimeWindowTestCase):
+    def test_load(self):
+        test_framework = load('ruby', 'rspec')
+
+        self.assertTrue(issubclass(test_framework, TestFramework))
+        self.assertEqual(test_framework.language, 'ruby')
+        self.assertEqual(test_framework.framework, 'rspec')
+
+    def test_load_not_found(self):
+        with self.assertRaises(ImportError):
+            load('_lng', '_frm')
+
+    def test_items(self):
+        self.setSettings(
+            {'test_frameworks': {'ruby': 'rspec', 'python': ['pyunit'], '_lng': '_frm'}}
+        )
+        test_frameworks = list(items())
+
+        self.assertEqual(len(test_frameworks), 2)
+        self.assertTrue(
+            any(
+                item
+                for item in test_frameworks
+                if item.language == 'ruby' and item.framework == 'rspec'
+            )
+        )
+        self.assertTrue(
+            any(
+                item
+                for item in test_frameworks
+                if item.language == 'python' and item.framework == 'pyunit'
+            )
+        )
+
+    def test_quick_panel_items(self):
+        self.setSettings({'test_frameworks': {'ruby': 'rspec', 'python': ['pyunit']}})
+        items = quick_panel_items()
+
+        self.assertEqual(len(items), 2)
+        self.assertEqual(items[0].language, 'python')
+        self.assertEqual(items[0].framework, 'pyunit')
+        self.assertEqual(items[1].language, 'ruby')
+        self.assertEqual(items[1].framework, 'rspec')

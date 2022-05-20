@@ -142,8 +142,9 @@ Using `unittesting` only makes sense with PyUnit test framework, so it is usuall
 
 ## Roadmap
 
-- Add more test frameworks (the end goal is to at least support all test frameworks that `vim-test` supports)
+- Add more test frameworks (the end goal is to at least support all the test frameworks that `vim-test` supports)
 - Run tests from the Side Bar (including testing folders)
+- Show history
 - Potentially integrate the package with [Sublime Debugger](https://github.com/daveleroy/sublime_debugger)
 
 ## Contribution

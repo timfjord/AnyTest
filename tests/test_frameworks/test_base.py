@@ -1,4 +1,4 @@
-from AnyTest.plugin.test_frameworks import TestFramework, items, load, quick_panel_items
+from AnyTest.plugin.test_frameworks import TestFramework, items, load
 from AnyTest.tests import SublimeWindowTestCase
 
 

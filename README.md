@@ -38,7 +38,7 @@ The main command that the packages exposes is `any_test_run`. It support 4 scope
 The package tries to detect a test framework based on the current file.
 When the framework is detected the package generates a command and runs it using the selected runner.  
 When the `edit` flag is passed to `true` then the command can be edited before running.  
-And finally, if the `select` flag is passed to `true` then the auto-detection feature is bypassed 
+And finally, if the `select` flag is passed to `true` then the auto-detection feature is bypassed
 and the quick panel with all available test frameworks is shown allowing to select a test framework manually.
 
 The package comes with polyfills for test frameworks that don't have  built-in support for running tests for the current line.  

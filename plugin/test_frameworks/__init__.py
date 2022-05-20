@@ -5,7 +5,6 @@ from abc import ABCMeta, abstractmethod
 
 from .. import errors, settings
 from . import utils
-from .quick_panel_item import QuickPanelItem
 
 logger = logging.getLogger(__name__)
 
@@ -29,17 +28,6 @@ def items():
                     "Cannot load '%s' framework for '%s' language", framework, language
                 )
                 continue
-
-
-def quick_panel_items():
-    test_frameworks = settings.get('test_frameworks', type=dict, default={})
-    items = []
-
-    for language, frameworks in test_frameworks.items():
-        for framework in utils.to_unpackable(frameworks):
-            items.append(QuickPanelItem(language, framework))
-
-    return sorted(items, key=QuickPanelItem.signature)
 
 
 def find(file):

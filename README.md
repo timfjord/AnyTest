@@ -28,14 +28,18 @@ Feel free to [open an issue](https://github.com/timfjord/AnyTest/issues/new) wit
 
 ## Usage
 
-There are 4 main commands that the package exposes:
+The main command that the packages exposes is `any_test_run`. It support 4 scopes:
 
-- `AnyTest: Test suite`: runs the whole test suite (based on the current file)
-- `AnyTest: Test file`: runs all tests in the current file
-- `AnyTest: Test nearest`: runs the test nearest to the current line(cursor)
-- `AnyTest: Run last`: runs the last test
+- `suite`: runs the whole test suite (based on the current file)
+- `file`: runs all tests in the current file
+- `line`: runs the test nearest to the current line(cursor)
+- `last`: runs the last test
 
-Any of the commands above supports the `edit` flag that allows editing the command before running it.
+The package tries to detect a test framework based on the current file.
+When the framework is detected the package generates a command and runs it using the selected runner.  
+When the `edit` flag is passed to `true` then the command can be edited before running.  
+And finally, if the `select` flag is passed to `true` then the auto-detection feature is bypassed
+and the quick panel with all available test frameworks is shown allowing to select a test framework manually.
 
 The package comes with polyfills for test frameworks that don't have  built-in support for running tests for the current line.  
 All the polyfills have been borrowed from the `vim-test` plugin and adapted for Sublime Text.
@@ -138,8 +142,9 @@ Using `unittesting` only makes sense with PyUnit test framework, so it is usuall
 
 ## Roadmap
 
-- Add more test frameworks (the end goal is to at least support all test frameworks that `vim-test` supports)
+- Add more test frameworks (the end goal is to at least support all the test frameworks that `vim-test` supports)
 - Run tests from the Side Bar (including testing folders)
+- Show history
 - Potentially integrate the package with [Sublime Debugger](https://github.com/daveleroy/sublime_debugger)
 
 ## Contribution

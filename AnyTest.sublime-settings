@@ -30,6 +30,9 @@
     "scroll_to_view_on_run": false,
     // when a test framework is not found show a quick panel with all available test frameworks
     "select_test_framework_when_not_found": false,
+    // show the quick panel even if there is only one test framework available
+    // otherwise use the first test framework from the list
+    "always_show_test_framework_selection": true,
     //
     // ###########
     // # Runners #

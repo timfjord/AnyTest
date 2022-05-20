@@ -1,4 +1,5 @@
 import logging
+import operator
 
 import sublime
 
@@ -6,6 +7,7 @@ from . import runners, settings, status, test_frameworks
 from .context import Context
 from .errors import Error, FrameworkNotFound, handle_errors
 from .history import History
+from .quick_panel_item import QuickPanelItem
 from .view_callbacks import ViewCallbacks
 
 SCOPE_LAST = 'last'
@@ -32,36 +34,28 @@ class Plugin:
     def __init__(self, view):
         self.view = view
 
-    def build_runner(self, scope, quite_panel_item=None):
-        if scope == SCOPE_LAST:
-            return history.last()
-
-        context = Context(self.view)
-        test_framework = (
-            test_frameworks.find(context.file)
-            if quite_panel_item is None
-            else test_frameworks.load(*quite_panel_item.signature())
-        )
-
-        runner = runners.find(test_framework)
-
-        return runner.build(test_framework(context), scope)
-
     @handle_errors
     def select_test_framework(self, scope, edit=False):
-        items = test_frameworks.quick_panel_items()
+        settings.reload_project_settings()
 
-        self.view.window().show_quick_panel(
-            items,
-            lambda index: index != -1 and self.run_test(scope, edit, items[index]),
+        items = sorted(
+            test_frameworks.items(), key=operator.attrgetter('language', 'framework')
         )
 
+        if len(items) == 1 and not settings.get('always_show_test_framework_selection'):
+            self.run_test(scope, edit, items[0])
+        else:
+            self.view.window().show_quick_panel(
+                [QuickPanelItem(item.framework, '', item.language) for item in items],
+                lambda index: index != -1 and self.run_test(scope, edit, items[index]),
+            )
+
     @handle_errors
-    def run_test(self, scope, edit=False, quite_panel_item=None):
+    def run_test(self, scope, edit=False, test_framework=None):
         settings.reload_project_settings()
 
         try:
-            runner = self.build_runner(scope, quite_panel_item=quite_panel_item)
+            runner = self.build_runner(scope, test_framework=test_framework)
 
             if edit and runner.editable:
                 self.view.window().show_input_panel(
@@ -86,6 +80,18 @@ class Plugin:
                 )
             else:
                 raise exc
+
+    def build_runner(self, scope, test_framework=None):
+        if scope == SCOPE_LAST:
+            return history.last()
+
+        context = Context(self.view)
+        if test_framework is None:
+            test_framework = test_frameworks.find(context.file)
+
+        runner = runners.find(test_framework)
+
+        return runner.build(test_framework(context), scope)
 
     @handle_errors
     def process_runner(self, runner, cmd=''):

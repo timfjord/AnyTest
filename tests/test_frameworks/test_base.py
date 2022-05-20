@@ -99,13 +99,3 @@ class FunctionsTestCase(SublimeWindowTestCase):
                 if item.language == 'python' and item.framework == 'pyunit'
             )
         )
-
-    def test_quick_panel_items(self):
-        self.setSettings({'test_frameworks': {'ruby': 'rspec', 'python': ['pyunit']}})
-        items = quick_panel_items()
-
-        self.assertEqual(len(items), 2)
-        self.assertEqual(items[0].language, 'python')
-        self.assertEqual(items[0].framework, 'pyunit')
-        self.assertEqual(items[1].language, 'ruby')
-        self.assertEqual(items[1].framework, 'rspec')

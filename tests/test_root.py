@@ -7,7 +7,8 @@ import unittest
 import sublime
 
 from AnyTest.plugin import errors
-from AnyTest.plugin.root import File, RelativePath, Root
+from AnyTest.plugin.root import File, RelativePath, Root, Glob
+from AnyTest.tests import FIXTURES_PATH
 
 IS_WINDOWS = sublime.platform() == 'windows'
 
@@ -72,6 +73,13 @@ class RootTestCase(unittest.TestCase):
         self.assertIsInstance(file, File)
         self.assertEqual(file.path, path('code', 'project', 'folder', 'file.py'))
 
+    def test_glob(self):
+        root = Root(path('code'))
+        glob = root.glob('cucumber', '**', '*.rb')
+
+        self.assertIsInstance(glob, Glob)
+        self.assertEqual(glob.pattern, path('code', 'cucumber', '**', '*.rb'))
+
 
 def build_temp_files(tmpfile):
     existing_file = os.path.basename(tmpfile.name)
@@ -121,3 +129,14 @@ class FileTestCase(unittest.TestCase):
 
             self.assertTrue(file.contains('content'))
             self.assertFalse(file.contains('uNkn0wn'))
+
+
+class GlobTestCase(unittest.TestCase):
+    def test_iter(self):
+        root = Root(FIXTURES_PATH)
+        glob = Glob(root, 'cucumber', '**', '*.rb')
+        iter = glob.__iter__()
+
+        self.assertIsInstance(iter, map)
+        self.assertEqual(list(iter), [root.join('cucumber', 'features', 'code.rb')])
+        self.assertTrue(any(glob))

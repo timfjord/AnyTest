@@ -41,6 +41,7 @@
                         "RubyFrameworks": {
                             "type": "string",
                             "enum": [
+                                "cucumber",
                                 "minitest",
                                 "rspec"
                             ]
@@ -362,6 +363,39 @@
                                     "type": "object",
                                     "default": {},
                                     "description": "Ruby specific ENV variables (will be merged with the ENV variables defined on the test framework level)"
+                                },
+                                "ruby.cucumber.runner": {
+                                    "$ref": "sublime://settings/AnyTest#/definitions/Runner",
+                                    "description": "A runner to run Cucumber tests with"
+                                },
+                                "ruby.cucumber.executable": {
+                                    "type": "array",
+                                    "description": "Cucumber test framework executable (e.g. [\"bin/my_cucumber\"])"
+                                },
+                                "ruby.cucumber.use_bundle": {
+                                    "type": "boolean",
+                                    "default": true,
+                                    "description": "If the Gemfile exists prefix the Cucumber executable with bundle exec"
+                                },
+                                "ruby.cucumber.use_binstubs": {
+                                    "type": "boolean",
+                                    "default": true,
+                                    "description": "If the Cucumber binstub exists use it as an executable"
+                                },
+                                "ruby.cucumber.use_spring_binstub": {
+                                    "type": "boolean",
+                                    "default": false,
+                                    "description": "If the Spring binstub exists prefix the Cucumber executable with it"
+                                },
+                                "ruby.cucumber.args": {
+                                    "type": "array",
+                                    "default": [],
+                                    "description": "Cucumber cli args (e.g. [\"--do-smth\"])"
+                                },
+                                "ruby.cucumber.env": {
+                                    "type": "object",
+                                    "default": {},
+                                    "description": "Cucumber specific ENV variables (will be merged with the ENV variables defined on the language level)"
                                 },
                                 "ruby.minitest.runner": {
                                     "$ref": "sublime://settings/AnyTest#/definitions/Runner",

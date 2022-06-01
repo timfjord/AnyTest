@@ -1,6 +1,6 @@
 import os.path
 
-from . import errors
+from . import errors, glob2
 
 
 class Root:
@@ -34,6 +34,9 @@ class Root:
     def file(self, *paths):
         return File(self, *paths)
 
+    def glob(self, *paths):
+        return Glob(self, *paths)
+
 
 class RelativePath:
     def __init__(self, root, *paths):
@@ -48,7 +51,7 @@ class RelativePath:
         return os.path.exists(self.path)
 
     def contains(self, _):
-        raise NotImplementedError
+        raise NotImplementedError()
 
 
 class File(RelativePath):
@@ -58,3 +61,15 @@ class File(RelativePath):
     def contains(self, content):
         with open(self.path) as file:
             return content in file.read()
+
+
+class Glob:
+    def __init__(self, root, *paths):
+        if not bool(paths):
+            raise ValueError('Path is required')
+
+        self.root = root
+        self.pattern = self.root.join(*paths)
+
+    def __iter__(self):
+        return glob2.iglob(self.pattern)

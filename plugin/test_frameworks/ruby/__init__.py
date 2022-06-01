@@ -4,6 +4,8 @@ from .. import TestFramework as BaseTestFramework
 
 
 class TestFramework(BaseTestFramework):
+    BINSTUBS_WITH_PREFIX = 'prefix'
+
     language = 'ruby'
     test_patterns = (
         (r'^\s*def\s+(test_\w+)', 'test'),
@@ -16,23 +18,25 @@ class TestFramework(BaseTestFramework):
         r'^\s*describe\s*[\( ]\s*([^\s\)]+)',
     )
 
-    @lru_cache(maxsize=None)
-    def use_zeus(self):
-        return self.file('.zeus.sock').exists()
-
-    def zeus(self, executable):
-        return ['zeus'] + executable
-
     def bin(self):
-        raise NotImplementedError
+        raise NotImplementedError()
 
-    @lru_cache(maxsize=None)
-    def use_binstubs(self):
-        return self.bin().exists() and self.settings('use_binstubs')
+    def _build_executable(self, command, zeus=False, spring=False, binstubs=False):
+        executable = command if isinstance(command, list) else [command]
 
-    @lru_cache(maxsize=None)
-    def use_bundler(self):
-        return self.file('Gemfile').exists() and self.settings('use_bundle')
+        if zeus and self.file('.zeus.sock').exists():
+            executable = ['zeus'] + executable
+        elif (
+            spring
+            and self.settings('use_spring_binstub')
+            and self.spring_bin().exists()
+        ):
+            executable = [self.spring_bin().relpath] + executable
+        elif binstubs and self.settings('use_binstubs') and self.bin().exists():
+            executable = [self.bin().relpath] + (
+                executable if binstubs == self.BINSTUBS_WITH_PREFIX else []
+            )
+        elif self.settings('use_bundle') and self.file('Gemfile').exists():
+            executable = ['bundle', 'exec'] + executable
 
-    def bundle(self, executable):
-        return ['bundle', 'exec'] + executable
+        return executable

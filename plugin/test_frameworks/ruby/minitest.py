@@ -41,26 +41,11 @@ class TestFramework(ruby.TestFramework):
 
     def build_executable(self):
         if self.use_rake():
-            return self.build_rake_executable()
+            return self._build_executable(
+                ['rake', 'test'], zeus=True, binstubs=self.BINSTUBS_WITH_PREFIX
+            )
 
-        executable = ['ruby', '-I{}'.format(self.test_folder())]
-
-        if self.use_bundler():
-            executable = self.bundle(executable)
-
-        return executable
-
-    def build_rake_executable(self):
-        executable = ['rake', 'test']
-
-        if self.use_zeus():
-            executable = self.zeus(executable)
-        elif self.use_binstubs():
-            executable = [self.bin().relpath] + executable
-        elif self.use_bundler():
-            executable = self.bundle(executable)
-
-        return executable
+        return self._build_executable(['ruby', '-I{}'.format(self.test_folder())])
 
     def build_file_position_args(self):
         if self.use_rake():

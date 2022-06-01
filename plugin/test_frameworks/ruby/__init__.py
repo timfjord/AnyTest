@@ -21,6 +21,10 @@ class TestFramework(BaseTestFramework):
     def bin(self):
         raise NotImplementedError()
 
+    @lru_cache(maxsize=None)
+    def spring_bin(self):
+        return self.file('bin', 'spring')
+
     def _build_executable(self, command, zeus=False, spring=False, binstubs=False):
         executable = command if isinstance(command, list) else [command]
 

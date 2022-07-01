@@ -1,24 +1,25 @@
 from functools import lru_cache
 
+from ... import settings
 from .. import ruby
 
 
 class TestFramework(ruby.TestFramework):
-    framework = 'cucumber'
-    pattern = r'\.feature$'
+    framework = 'm'
+    pattern = r'_test\.rb$'
 
     @classmethod
     def is_suitable_for(cls, file):
-        return super().is_suitable_for(file) and any(
-            file.root.glob('features', '**', '*.rb')
+        return super().is_suitable_for(file) and settings.get(
+            ('ruby', 'minitest', 'use_m'), type=bool
         )
 
     @lru_cache(maxsize=None)
     def bin(self):
-        return self.file('bin', 'cucumber')
+        return self.file('bin', 'm')
 
     def build_executable(self):
-        return self._build_executable('cucumber', zeus=True, binstubs=True)
+        return self._build_executable('m', zeus=True, binstubs=True)
 
     def build_file_position_args(self):
         return [self.context.file.relpath]

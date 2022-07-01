@@ -10,13 +10,13 @@ Basically it is a Sublime Text interpretation of the awesome [vim-test](https://
 
 Currently the following test frameworks are supported (more test frameworks are coming soon):
 
-|       Language | Test framework            | Identifiers                     |
-| -------------: | :------------------------ | :-------------------------------|
-|     **Elixir** | ESpec, ExUnit             | `espec`, `exunit`               |
-| **JavaScript** | Jest                      | `jest`                          |
-|     **Python** | PyTest, PyUnit            | `pytest`, `pyunit`              |
-|       **Ruby** | Cucumber, Minitest, RSpec | `cucumber`, `minitest`, `rspec` |
-|       **Rust** | Cargo                     | `cargotest`                     |
+|       Language | Test framework               | Identifiers                          |
+| -------------: | :--------------------------- | :----------------------------------- |
+|     **Elixir** | ESpec, ExUnit                | `espec`, `exunit`                    |
+| **JavaScript** | Jest                         | `jest`                               |
+|     **Python** | PyTest, PyUnit               | `pytest`, `pyunit`                   |
+|       **Ruby** | Cucumber, M, Minitest, RSpec | `cucumber`, `m` ,`minitest`, `rspec` |
+|       **Rust** | Cargo                        | `cargotest`                          |
 
 Feel free to [open an issue](https://github.com/timfjord/AnyTest/issues/new) with a test framework request as those test frameworks will be added first.
 

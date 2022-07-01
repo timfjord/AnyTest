@@ -13,6 +13,7 @@
         ],
         "ruby": [
             "cucumber",
+            "m",
             "minitest",
             "rspec"
         ],
@@ -117,11 +118,20 @@
     // "ruby.cucumber.args": ["--do-smth"],
     // "ruby.cucumber.env": { "ENV2": "value" }, // will be merged with the ENV variable defined on the language level
     //
+    // "ruby.m.use_bundle": true,
+    // "ruby.m.use_binstubs": true,
+    // "ruby.m.use_spring_binstub": false,
+    // "ruby.m.runner": "command", // a runner for the M test framework
+    // "ruby.m.executable": ["bin/my_m"],
+    // "ruby.m.args": ["--do-smth"],
+    // "ruby.m.env": { "ENV2": "value" }, // will be merged with the ENV variable defined on the language level
+    //
     "ruby.minitest.test_folder": "test",
     "ruby.minitest.file_pattern": "*_test.rb",
     // "ruby.minitest.use_bundle": true,
     // "ruby.minitest.use_binstubs": true,
     // "ruby.minitest.use_spring_binstub": false,
+    // "ruby.minitest.use_m": true, // use the M test framework instead of minitest
     // "ruby.minitest.runner": "command", // a runner for the minitest test framework
     // "ruby.minitest.executable": ["bin/tests"],
     // "ruby.minitest.args": ["--do-smth"],

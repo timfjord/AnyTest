@@ -42,6 +42,7 @@
                             "type": "string",
                             "enum": [
                                 "cucumber",
+                                "m",
                                 "minitest",
                                 "rspec"
                             ]
@@ -397,6 +398,39 @@
                                     "default": {},
                                     "description": "Cucumber specific ENV variables (will be merged with the ENV variables defined on the language level)"
                                 },
+                                "ruby.m.runner": {
+                                    "$ref": "sublime://settings/AnyTest#/definitions/Runner",
+                                    "description": "A runner to run Cucumber tests with"
+                                },
+                                "ruby.m.executable": {
+                                    "type": "array",
+                                    "description": "M test framework executable (e.g. [\"bin/my_m\"])"
+                                },
+                                "ruby.m.use_bundle": {
+                                    "type": "boolean",
+                                    "default": true,
+                                    "description": "If the Gemfile exists prefix the M executable with bundle exec"
+                                },
+                                "ruby.m.use_binstubs": {
+                                    "type": "boolean",
+                                    "default": true,
+                                    "description": "If the M binstub exists use it as an executable"
+                                },
+                                "ruby.m.use_spring_binstub": {
+                                    "type": "boolean",
+                                    "default": false,
+                                    "description": "If the Spring binstub exists prefix the M executable with it"
+                                },
+                                "ruby.m.args": {
+                                    "type": "array",
+                                    "default": [],
+                                    "description": "M cli args (e.g. [\"--do-smth\"])"
+                                },
+                                "ruby.m.env": {
+                                    "type": "object",
+                                    "default": {},
+                                    "description": "M specific ENV variables (will be merged with the ENV variables defined on the language level)"
+                                },
                                 "ruby.minitest.runner": {
                                     "$ref": "sublime://settings/AnyTest#/definitions/Runner",
                                     "description": "A runner to run minitest tests with"
@@ -419,6 +453,11 @@
                                     "type": "boolean",
                                     "default": false,
                                     "description": "If the Spring binstub exists prefix the minitest executable with it"
+                                },
+                                "ruby.minitest.use_m": {
+                                    "type": "boolean",
+                                    "default": false,
+                                    "description": "If the file pattern matches use the M test framework"
                                 },
                                 "ruby.minitest.test_folder": {
                                     "type": "string",

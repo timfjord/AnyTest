@@ -12,6 +12,10 @@ class TestFramework(ruby.TestFramework):
     pattern = r'(((^|/|\\)test_.+)|_test)(?<!spec).rb$'
 
     @classmethod
+    def is_suitable_for(cls, file):
+        return super().is_suitable_for(file) and not cls.settings('use_m', type=bool)
+
+    @classmethod
     def test_folder(cls):
         return cls.settings('test_folder', type=str, fallback=False)
 

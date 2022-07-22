@@ -1,7 +1,7 @@
 from AnyTest.tests import SublimeProjectTestCase
 
 
-class CucumberTestCase(SublimeProjectTestCase):
+class MTestCase(SublimeProjectTestCase):
     folder = ('minitest', 'rake')
 
     def setUp(self):

@@ -44,7 +44,8 @@
                                 "cucumber",
                                 "m",
                                 "minitest",
-                                "rspec"
+                                "rspec",
+                                "test_bench"
                             ]
                         },
                         "RustFrameworks": {
@@ -511,6 +512,29 @@
                                     "type": "object",
                                     "default": {},
                                     "description": "RSpec specific ENV variables (will be merged with the ENV variables defined on the language level)"
+                                },
+                                "ruby.test_bench.runner": {
+                                    "$ref": "sublime://settings/AnyTest#/definitions/Runner",
+                                    "description": "A runner to run Cucumber tests with"
+                                },
+                                "ruby.test_bench.executable": {
+                                    "type": "array",
+                                    "description": "M test framework executable (e.g. [\"bin/my_m\"])"
+                                },
+                                "ruby.test_bench.use_bundle": {
+                                    "type": "boolean",
+                                    "default": true,
+                                    "description": "If the Gemfile exists prefix the M executable with bundle exec"
+                                },
+                                "ruby.test_bench.args": {
+                                    "type": "array",
+                                    "default": [],
+                                    "description": "M cli args (e.g. [\"--do-smth\"])"
+                                },
+                                "ruby.test_bench.env": {
+                                    "type": "object",
+                                    "default": {},
+                                    "description": "M specific ENV variables (will be merged with the ENV variables defined on the language level)"
                                 },
                                 "rust.runner": {
                                     "$ref": "sublime://settings/AnyTest#/definitions/Runner",

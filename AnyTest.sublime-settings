@@ -15,7 +15,8 @@
             "cucumber",
             "m",
             "minitest",
-            "rspec"
+            "rspec",
+            "test_bench"
         ],
         "rust": [
             "cargotest"
@@ -144,6 +145,12 @@
     // "ruby.rspec.executable": ["bin/my_rspec"],
     // "ruby.rspec.args": ["--do-smth"],
     // "ruby.rspec.env": { "ENV2": "value" }, // will be merged with the ENV variable defined on the language level
+    //
+    // "ruby.test_bench.use_bundle": true,
+    // "ruby.test_bench.runner": "command", // a runner for the test bench test framework
+    // "ruby.test_bench.executable": ["bin/my_test_bench"],
+    // "ruby.test_bench.args": ["--do-smth"],
+    // "ruby.test_bench.env": { "ENV2": "value" }, // will be merged with the ENV variable defined on the language level
     //
     // --- Rust ---
     // "rust.runner": "command", // a runner for all Rust test frameworks

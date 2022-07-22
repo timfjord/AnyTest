@@ -9,7 +9,7 @@ class TestFramework(ruby.TestFramework):
     METHOD_SEPARATOR = '#'
 
     framework = 'minitest'
-    pattern = r'(((^|/|\\)test_.+)|_test)(?<!spec).rb$'
+    pattern = r'(((^|/|\\)test_[^/\\]+)|_test)(?<!spec).rb$'
 
     @classmethod
     def is_suitable_for(cls, file):

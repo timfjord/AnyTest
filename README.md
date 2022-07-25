@@ -9,13 +9,13 @@ A Sublime Text 3/4 package whose main idea is to automatically detect a test fra
 
 Currently, the following test frameworks are supported (more test frameworks are coming soon):
 
-|       Language | Test framework                           | Identifiers                                        |
-| -------------: | :--------------------------------------- | :------------------------------------------------- |
-|     **Elixir** | ESpec, ExUnit                            | `espec`, `exunit`                                  |
-| **JavaScript** | Jest                                     | `jest`                                             |
-|     **Python** | PyTest, PyUnit                           | `pytest`, `pyunit`                                 |
-|       **Ruby** | Cucumber, M, Minitest, RSpec, Test Bench | `cucumber`, `m` ,`minitest`, `rspec`, `test_bench` |
-|       **Rust** | Cargo                                    | `cargotest`                                        |
+|       Language | Test framework                                  | Identifiers                                                 |
+|---------------:|:------------------------------------------------|:------------------------------------------------------------|
+|     **Elixir** | ESpec, ExUnit                                   | `espec`, `exunit`                                           |
+| **JavaScript** | Jest                                            | `jest`                                                      |
+|     **Python** | PyTest, PyUnit                                  | `pytest`, `pyunit`                                          |
+|       **Ruby** | Cucumber, M, Minitest, Rails, RSpec, Test Bench | `cucumber`, `m` ,`minitest`, `rails`, `rspec`, `test_bench` |
+|       **Rust** | Cargo                                           | `cargotest`                                                 |
 
 Feel free to [open an issue](https://github.com/timfjord/AnyTest/issues/new) with a test framework request as those test frameworks will be added first.
 
@@ -56,19 +56,19 @@ To configure the package at the project level all settings must be added under t
 
 ```json
 {
-    "folders": [
-        {
-            "path": ".",
-        }
-    ],
-    "settings": {
-        "AnyTest": {
-            "test_frameworks": {
-                "python": "pyunit"
-            },
-            "python.pyunit.runner": "unittesting"
-        }
+  "folders": [
+    {
+      "path": ".",
     }
+  ],
+  "settings": {
+    "AnyTest": {
+      "test_frameworks": {
+        "python": "pyunit"
+      },
+      "python.pyunit.runner": "unittesting"
+    }
+  }
 }
 ```
 

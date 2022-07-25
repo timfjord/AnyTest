@@ -1,26 +1,6 @@
-import re
 from functools import lru_cache
 
 from .. import ruby
-
-_GEM_EMPTY_VERSION = (0, 0, 0)
-_GEM_PATTERN = r'\s*{name}\s+\((\d+)\.(\d+)\.(\d+).*\)'
-
-
-def get_gem_version(root, name):
-    lockfile = root.file('Gemfile.lock')
-
-    if not lockfile.exists():
-        return _GEM_EMPTY_VERSION
-
-    with open(lockfile.path) as file:
-        for line in file:
-            regex = _GEM_PATTERN.format(name=re.escape(name))
-            match = re.findall(regex, line)
-            if match:
-                return tuple(map(int, match[0]))
-
-    return _GEM_EMPTY_VERSION
 
 
 class TestFramework(ruby.TestFramework):
@@ -29,15 +9,9 @@ class TestFramework(ruby.TestFramework):
 
     @classmethod
     def is_suitable_for(cls, file):
-        if not super().is_suitable_for(file):
-            return False
-
-        if not file.root.file('config', 'application.rb').exists() and not any(
-            file.root.glob('test', '*', 'config', 'application.rb')
-        ):
-            return False
-
-        return get_gem_version(file.root, 'railties')[0] >= 5
+        return super().is_suitable_for(file) and ruby.is_railties_5_or_greater(
+            file.root
+        )
 
     @lru_cache(maxsize=None)
     def bin(self):

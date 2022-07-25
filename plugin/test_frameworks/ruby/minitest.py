@@ -13,7 +13,11 @@ class TestFramework(ruby.TestFramework):
 
     @classmethod
     def is_suitable_for(cls, file):
-        return super().is_suitable_for(file) and not cls.settings('use_m', type=bool)
+        return (
+            super().is_suitable_for(file)
+            and not cls.settings('use_m', type=bool)
+            and not ruby.is_railties_5_or_greater(file.root)
+        )
 
     @classmethod
     def test_folder(cls):

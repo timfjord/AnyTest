@@ -44,6 +44,7 @@
                                 "cucumber",
                                 "m",
                                 "minitest",
+                                "rails",
                                 "rspec",
                                 "test_bench"
                             ]
@@ -479,6 +480,39 @@
                                     "type": "object",
                                     "default": {},
                                     "description": "minitest specific ENV variables (will be merged with the ENV variables defined on the language level)"
+                                },
+                                "ruby.rails.runner": {
+                                    "$ref": "sublime://settings/AnyTest#/definitions/Runner",
+                                    "description": "A runner to run Rails tests with"
+                                },
+                                "ruby.rails.executable": {
+                                    "type": "array",
+                                    "description": "Rails test framework executable (e.g. [\"bin/my_rails_test\"])"
+                                },
+                                "ruby.rails.use_bundle": {
+                                    "type": "boolean",
+                                    "default": true,
+                                    "description": "If the Gemfile exists prefix the Rails executable with bundle exec"
+                                },
+                                "ruby.rails.use_binstubs": {
+                                    "type": "boolean",
+                                    "default": true,
+                                    "description": "If the Rails binstub exists use it as an executable"
+                                },
+                                "ruby.rails.use_spring_binstub": {
+                                    "type": "boolean",
+                                    "default": false,
+                                    "description": "If the Spring binstub exists prefix the Rails test framework executable with it"
+                                },
+                                "ruby.rails.args": {
+                                    "type": "array",
+                                    "default": [],
+                                    "description": "Rails test framework cli args (e.g. [\"--do-smth\"])"
+                                },
+                                "ruby.rails.env": {
+                                    "type": "object",
+                                    "default": {},
+                                    "description": "Rails test framework specific ENV variables (will be merged with the ENV variables defined on the language level)"
                                 },
                                 "ruby.rspec.runner": {
                                     "$ref": "sublime://settings/AnyTest#/definitions/Runner",

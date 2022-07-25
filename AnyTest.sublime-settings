@@ -139,6 +139,14 @@
     // "ruby.minitest.args": ["--do-smth"],
     // "ruby.minitest.env": { "ENV2": "value" }, // will be merged with the ENV variable defined on the language level
     //
+    // "ruby.rails.use_bundle": true,
+    // "ruby.rails.use_binstubs": true,
+    // "ruby.rails.use_spring_binstub": false,
+    // "ruby.rails.runner": "command", // a runner for the Rails test framework
+    // "ruby.rails.executable": ["bin/my_rails_test"],
+    // "ruby.rails.args": ["--do-smth"],
+    // "ruby.rails.env": { "ENV2": "value" }, // will be merged with the ENV variable defined on the language level
+    //
     // "ruby.rspec.use_bundle": true,
     // "ruby.rspec.use_binstubs": true,
     // "ruby.rspec.use_spring_binstub": false,

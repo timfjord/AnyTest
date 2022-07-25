@@ -5,7 +5,7 @@ from .. import ruby
 
 class TestFramework(ruby.TestFramework):
     framework = 'cucumber'
-    pattern = r'\.feature$'
+    pattern = r'features[/\\].*\.feature'
 
     @classmethod
     def is_suitable_for(cls, file):

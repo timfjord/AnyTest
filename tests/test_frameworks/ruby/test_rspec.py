@@ -31,6 +31,5 @@ class RspecTestCase(SublimeProjectTestCase):
         self.assertLastCommand('rspec')
 
     def test_turnip(self):
-        yield from self._testFile('math.feature')
-
-        self.assertLastCommand('rspec math.feature')
+        yield from self._testFile(('spec', 'math.feature'))
+        self.assertLastCommand('rspec ', ('spec', 'math.feature'))

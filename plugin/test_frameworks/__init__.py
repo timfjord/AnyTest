@@ -77,7 +77,7 @@ class TestFramework(metaclass=ABCMeta):
 
     @classmethod
     def is_suitable_for(cls, file):
-        return re.search(cls.pattern, file.path)
+        return re.search(cls.pattern, file.relpath)
 
     @classmethod
     def settings(

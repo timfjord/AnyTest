@@ -41,8 +41,12 @@
                         "RubyFrameworks": {
                             "type": "string",
                             "enum": [
+                                "cucumber",
+                                "m",
                                 "minitest",
-                                "rspec"
+                                "rails",
+                                "rspec",
+                                "test_bench"
                             ]
                         },
                         "RustFrameworks": {
@@ -363,6 +367,72 @@
                                     "default": {},
                                     "description": "Ruby specific ENV variables (will be merged with the ENV variables defined on the test framework level)"
                                 },
+                                "ruby.cucumber.runner": {
+                                    "$ref": "sublime://settings/AnyTest#/definitions/Runner",
+                                    "description": "A runner to run Cucumber tests with"
+                                },
+                                "ruby.cucumber.executable": {
+                                    "type": "array",
+                                    "description": "Cucumber test framework executable (e.g. [\"bin/my_cucumber\"])"
+                                },
+                                "ruby.cucumber.use_bundle": {
+                                    "type": "boolean",
+                                    "default": true,
+                                    "description": "If the Gemfile exists prefix the Cucumber executable with bundle exec"
+                                },
+                                "ruby.cucumber.use_binstubs": {
+                                    "type": "boolean",
+                                    "default": true,
+                                    "description": "If the Cucumber binstub exists use it as an executable"
+                                },
+                                "ruby.cucumber.use_spring_binstub": {
+                                    "type": "boolean",
+                                    "default": false,
+                                    "description": "If the Spring binstub exists prefix the Cucumber executable with it"
+                                },
+                                "ruby.cucumber.args": {
+                                    "type": "array",
+                                    "default": [],
+                                    "description": "Cucumber cli args (e.g. [\"--do-smth\"])"
+                                },
+                                "ruby.cucumber.env": {
+                                    "type": "object",
+                                    "default": {},
+                                    "description": "Cucumber specific ENV variables (will be merged with the ENV variables defined on the language level)"
+                                },
+                                "ruby.m.runner": {
+                                    "$ref": "sublime://settings/AnyTest#/definitions/Runner",
+                                    "description": "A runner to run Cucumber tests with"
+                                },
+                                "ruby.m.executable": {
+                                    "type": "array",
+                                    "description": "M test framework executable (e.g. [\"bin/my_m\"])"
+                                },
+                                "ruby.m.use_bundle": {
+                                    "type": "boolean",
+                                    "default": true,
+                                    "description": "If the Gemfile exists prefix the M executable with bundle exec"
+                                },
+                                "ruby.m.use_binstubs": {
+                                    "type": "boolean",
+                                    "default": true,
+                                    "description": "If the M binstub exists use it as an executable"
+                                },
+                                "ruby.m.use_spring_binstub": {
+                                    "type": "boolean",
+                                    "default": false,
+                                    "description": "If the Spring binstub exists prefix the M executable with it"
+                                },
+                                "ruby.m.args": {
+                                    "type": "array",
+                                    "default": [],
+                                    "description": "M cli args (e.g. [\"--do-smth\"])"
+                                },
+                                "ruby.m.env": {
+                                    "type": "object",
+                                    "default": {},
+                                    "description": "M specific ENV variables (will be merged with the ENV variables defined on the language level)"
+                                },
                                 "ruby.minitest.runner": {
                                     "$ref": "sublime://settings/AnyTest#/definitions/Runner",
                                     "description": "A runner to run minitest tests with"
@@ -386,6 +456,11 @@
                                     "default": false,
                                     "description": "If the Spring binstub exists prefix the minitest executable with it"
                                 },
+                                "ruby.minitest.use_m": {
+                                    "type": "boolean",
+                                    "default": false,
+                                    "description": "If the file pattern matches use the M test framework"
+                                },
                                 "ruby.minitest.test_folder": {
                                     "type": "string",
                                     "default": "test",
@@ -405,6 +480,39 @@
                                     "type": "object",
                                     "default": {},
                                     "description": "minitest specific ENV variables (will be merged with the ENV variables defined on the language level)"
+                                },
+                                "ruby.rails.runner": {
+                                    "$ref": "sublime://settings/AnyTest#/definitions/Runner",
+                                    "description": "A runner to run Rails tests with"
+                                },
+                                "ruby.rails.executable": {
+                                    "type": "array",
+                                    "description": "Rails test framework executable (e.g. [\"bin/my_rails_test\"])"
+                                },
+                                "ruby.rails.use_bundle": {
+                                    "type": "boolean",
+                                    "default": true,
+                                    "description": "If the Gemfile exists prefix the Rails executable with bundle exec"
+                                },
+                                "ruby.rails.use_binstubs": {
+                                    "type": "boolean",
+                                    "default": true,
+                                    "description": "If the Rails binstub exists use it as an executable"
+                                },
+                                "ruby.rails.use_spring_binstub": {
+                                    "type": "boolean",
+                                    "default": false,
+                                    "description": "If the Spring binstub exists prefix the Rails test framework executable with it"
+                                },
+                                "ruby.rails.args": {
+                                    "type": "array",
+                                    "default": [],
+                                    "description": "Rails test framework cli args (e.g. [\"--do-smth\"])"
+                                },
+                                "ruby.rails.env": {
+                                    "type": "object",
+                                    "default": {},
+                                    "description": "Rails test framework specific ENV variables (will be merged with the ENV variables defined on the language level)"
                                 },
                                 "ruby.rspec.runner": {
                                     "$ref": "sublime://settings/AnyTest#/definitions/Runner",
@@ -438,6 +546,29 @@
                                     "type": "object",
                                     "default": {},
                                     "description": "RSpec specific ENV variables (will be merged with the ENV variables defined on the language level)"
+                                },
+                                "ruby.test_bench.runner": {
+                                    "$ref": "sublime://settings/AnyTest#/definitions/Runner",
+                                    "description": "A runner to run Cucumber tests with"
+                                },
+                                "ruby.test_bench.executable": {
+                                    "type": "array",
+                                    "description": "M test framework executable (e.g. [\"bin/my_m\"])"
+                                },
+                                "ruby.test_bench.use_bundle": {
+                                    "type": "boolean",
+                                    "default": true,
+                                    "description": "If the Gemfile exists prefix the M executable with bundle exec"
+                                },
+                                "ruby.test_bench.args": {
+                                    "type": "array",
+                                    "default": [],
+                                    "description": "M cli args (e.g. [\"--do-smth\"])"
+                                },
+                                "ruby.test_bench.env": {
+                                    "type": "object",
+                                    "default": {},
+                                    "description": "M specific ENV variables (will be merged with the ENV variables defined on the language level)"
                                 },
                                 "rust.runner": {
                                     "$ref": "sublime://settings/AnyTest#/definitions/Runner",

@@ -5,18 +5,17 @@
 <!-- markdownlint-enable -->
 Run any test from Sublime Text
 
-A Sublime Text 3/4 package whose main idea is to automatically detect a test framework for the given file and run it.  
-Basically it is a Sublime Text interpretation of the awesome [vim-test](https://github.com/vim-test/vim-test) plugin.
+A Sublime Text 3/4 package whose main idea is to automatically detect a test framework for the given file and run it. It is a Sublime Text interpretation of the awesome [vim-test](https://github.com/vim-test/vim-test) plugin.
 
-Currently the following test frameworks are supported (more test frameworks are coming soon):
+Currently, the following test frameworks are supported (more test frameworks are coming soon):
 
-|       Language | Test framework  | Identifiers         |
-| -------------: | :-------------- | :------------------ |
-|     **Elixir** | ESpec, ExUnit   | `espec`, `exunit`   |
-| **JavaScript** | Jest            | `jest`              |
-|     **Python** | PyTest, PyUnit  | `pytest`, `pyunit`  |
-|       **Ruby** | Minitest, RSpec | `minitest`, `rspec` |
-|       **Rust** | Cargo           | `cargotest`         |
+|       Language | Test framework                           | Identifiers                                        |
+| -------------: | :--------------------------------------- | :------------------------------------------------- |
+|     **Elixir** | ESpec, ExUnit                            | `espec`, `exunit`                                  |
+| **JavaScript** | Jest                                     | `jest`                                             |
+|     **Python** | PyTest, PyUnit                           | `pytest`, `pyunit`                                 |
+|       **Ruby** | Cucumber, M, Minitest, RSpec, Test Bench | `cucumber`, `m` ,`minitest`, `rspec`, `test_bench` |
+|       **Rust** | Cargo                                    | `cargotest`                                        |
 
 Feel free to [open an issue](https://github.com/timfjord/AnyTest/issues/new) with a test framework request as those test frameworks will be added first.
 
@@ -28,7 +27,7 @@ Feel free to [open an issue](https://github.com/timfjord/AnyTest/issues/new) wit
 
 ## Usage
 
-The main command that the packages exposes is `any_test_run`. It support 4 scopes:
+The main command that the package exposes is `any_test_run`. It supports 4 scopes:
 
 - `suite`: runs the whole test suite (based on the current file)
 - `file`: runs all tests in the current file
@@ -41,7 +40,7 @@ When the `edit` flag is passed to `true` then the command can be edited before r
 And finally, if the `select` flag is passed to `true` then the auto-detection feature is bypassed
 and the quick panel with all available test frameworks is shown allowing to select a test framework manually.
 
-The package comes with polyfills for test frameworks that don't have  built-in support for running tests for the current line.  
+The package comes with polyfills for test frameworks that don't have built-in support for running tests for the current line.  
 All the polyfills have been borrowed from the `vim-test` plugin and adapted for Sublime Text.
 
 All the package commands can be found in [Default.sublime-commands](https://github.com/timfjord/AnyTest/blob/main/Default.sublime-commands)
@@ -77,7 +76,7 @@ The package provides schemas for its settings so it is recommended to install [L
 
 To see all available settings please check [AnyTest.sublime-settings](https://github.com/timfjord/AnyTest/blob/main/AnyTest.sublime-settings)
 
-By default the package iterates thought all available test frameworks to detect the one to use.
+By default, the package iterates through all available test frameworks to detect the one to use.
 This can be changed with the `test_frameworks` setting:
 
 ```json
@@ -107,7 +106,7 @@ This won't change the detection process, but if there are multiple candidates th
 ### Project folders
 
 The package supports multiple project folders. It can be very useful when there is a nested folder
-that contains a separate project. The package is able to detect this situation and calculates the root path correctly
+that contains a separate project. The package can detect this situation and calculates the root path correctly
 
 ## Runners
 
@@ -120,9 +119,9 @@ The package comes with 3 runners:
 The default runner is `command`. It uses the built-in Sublime `exec` command(the command can be configured) to run the test command.  
 The `command` runner is a bit limited so it is recommended to install [Terminus](https://github.com/randy3k/Terminus) package and use the `terminus` runner instead.
 
-The `console` runner is mostly user for testing/debugging as its main purpose is to output the test command and metadata to the console.
+The `console` runner is mostly used for testing/debugging as its main purpose is to output the test command and metadata to the console.
 
-Runners can be activated globally, per language or per framework:
+Runners can be activated globally, per language or framework:
 
 ```json
 "runner": "terminus",
@@ -133,7 +132,7 @@ Runners can be activated globally, per language or per framework:
 Please consult with [AnyTest.sublime-settings](https://github.com/timfjord/AnyTest/blob/main/AnyTest.sublime-settings) to check all available settings.
 
 There is also the `unittesting` runner and it should be used to test sublime packages with [UnitTesting](https://github.com/SublimeText/UnitTesting).  
-Unfortunately, due to `UnitTesting` limitations there is no way to run tests for the current line.  
+Unfortunately, due to `UnitTesting` limitations, there is no way to run tests for the current line.  
 Using `unittesting` only makes sense with PyUnit test framework, so it is usually activated as:
 
 ```json
@@ -156,4 +155,4 @@ The package uses `black`, `flake8` and `isort` for linting.
 
 ## Credits
 
-`AnyTest` is heavily inspired by the [vim-test](https://github.com/vim-test/vim-test) plugin so all credits go the authors and maintainers of this awesome Vim plugin.
+`AnyTest` is heavily inspired by the [vim-test](https://github.com/vim-test/vim-test) plugin so all credits go to the authors and maintainers of this awesome Vim plugin.

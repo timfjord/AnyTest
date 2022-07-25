@@ -1,6 +1,35 @@
+import re
 from functools import lru_cache
 
 from .. import TestFramework as BaseTestFramework
+
+_GEM_EMPTY_VERSION = (0, 0, 0)
+_GEM_PATTERN = r'\s*{name}\s+\((\d+)\.(\d+)\.(\d+).*\)'
+
+
+def get_gem_version(root, name):
+    lockfile = root.file('Gemfile.lock')
+
+    if not lockfile.exists():
+        return _GEM_EMPTY_VERSION
+
+    with open(lockfile.path) as file:
+        for line in file:
+            regex = _GEM_PATTERN.format(name=re.escape(name))
+            match = re.findall(regex, line)
+            if match:
+                return tuple(map(int, match[0]))
+
+    return _GEM_EMPTY_VERSION
+
+
+def is_railties_5_or_greater(root):
+    if not root.file('config', 'application.rb').exists() and not any(
+        root.glob('test', '*', 'config', 'application.rb')
+    ):
+        return False
+
+    return get_gem_version(root, 'railties')[0] >= 5
 
 
 class TestFramework(BaseTestFramework):
@@ -16,23 +45,29 @@ class TestFramework(BaseTestFramework):
         r'^\s*describe\s*[\( ]\s*([^\s\)]+)',
     )
 
-    @lru_cache(maxsize=None)
-    def use_zeus(self):
-        return self.file('.zeus.sock').exists()
-
-    def zeus(self, executable):
-        return ['zeus'] + executable
-
     def bin(self):
-        raise NotImplementedError
+        raise NotImplementedError()
 
     @lru_cache(maxsize=None)
-    def use_binstubs(self):
-        return self.bin().exists() and self.settings('use_binstubs')
+    def spring_bin(self):
+        return self.file('bin', 'spring')
 
-    @lru_cache(maxsize=None)
-    def use_bundler(self):
-        return self.file('Gemfile').exists() and self.settings('use_bundle')
+    def _build_executable(self, command, zeus=False, spring=False, binstubs=False):
+        executable = command if isinstance(command, list) else [command]
 
-    def bundle(self, executable):
-        return ['bundle', 'exec'] + executable
+        if zeus and self.file('.zeus.sock').exists():
+            executable = ['zeus'] + zeus if isinstance(zeus, list) else executable
+        elif (
+            spring
+            and self.settings('use_spring_binstub')
+            and self.spring_bin().exists()
+        ):
+            executable = [self.spring_bin().relpath] + executable
+        elif binstubs and self.settings('use_binstubs') and self.bin().exists():
+            executable = [self.bin().relpath] + (
+                binstubs if isinstance(binstubs, list) else []
+            )
+        elif self.settings('use_bundle') and self.file('Gemfile').exists():
+            executable = ['bundle', 'exec'] + executable
+
+        return executable

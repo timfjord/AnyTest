@@ -9,7 +9,15 @@ class TestFramework(ruby.TestFramework):
     METHOD_SEPARATOR = '#'
 
     framework = 'minitest'
-    pattern = r'(((^|/|\\)test_.+)|_test)(?<!spec).rb$'
+    pattern = r'(((^|/|\\)test_[^/\\]+)|_test)(?<!spec).rb$'
+
+    @classmethod
+    def is_suitable_for(cls, file):
+        return (
+            super().is_suitable_for(file)
+            and not cls.settings('use_m', type=bool)
+            and not ruby.is_railties_5_or_greater(file.root)
+        )
 
     @classmethod
     def test_folder(cls):
@@ -41,26 +49,11 @@ class TestFramework(ruby.TestFramework):
 
     def build_executable(self):
         if self.use_rake():
-            return self.build_rake_executable()
+            return self._build_executable(
+                ['rake', 'test'], zeus=True, binstubs=['test']
+            )
 
-        executable = ['ruby', '-I{}'.format(self.test_folder())]
-
-        if self.use_bundler():
-            executable = self.bundle(executable)
-
-        return executable
-
-    def build_rake_executable(self):
-        executable = ['rake', 'test']
-
-        if self.use_zeus():
-            executable = self.zeus(executable)
-        elif self.use_binstubs():
-            executable = [self.bin().relpath] + executable
-        elif self.use_bundler():
-            executable = self.bundle(executable)
-
-        return executable
+        return self._build_executable(['ruby', '-I{}'.format(self.test_folder())])
 
     def build_file_position_args(self):
         if self.use_rake():

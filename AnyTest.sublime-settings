@@ -12,8 +12,12 @@
             "pyunit"
         ],
         "ruby": [
+            "cucumber",
+            "m",
             "minitest",
-            "rspec"
+            "rails",
+            "rspec",
+            "test_bench"
         ],
         "rust": [
             "cargotest"
@@ -108,23 +112,54 @@
     // "ruby.runner": "command", // a runner for all Ruby test frameworks
     // "ruby.env": { "ENV1": "value" }, // will be merged with the ENV variable defined on the test framework level
     //
+    // "ruby.cucumber.use_bundle": true,
+    // "ruby.cucumber.use_binstubs": true,
+    // "ruby.cucumber.use_spring_binstub": false,
+    // "ruby.cucumber.runner": "command", // a runner for the Cucumber test framework
+    // "ruby.cucumber.executable": ["bin/my_cucumber"],
+    // "ruby.cucumber.args": ["--do-smth"],
+    // "ruby.cucumber.env": { "ENV2": "value" }, // will be merged with the ENV variable defined on the language level
+    //
+    // "ruby.m.use_bundle": true,
+    // "ruby.m.use_binstubs": true,
+    // "ruby.m.use_spring_binstub": false,
+    // "ruby.m.runner": "command", // a runner for the M test framework
+    // "ruby.m.executable": ["bin/my_m"],
+    // "ruby.m.args": ["--do-smth"],
+    // "ruby.m.env": { "ENV2": "value" }, // will be merged with the ENV variable defined on the language level
+    //
     "ruby.minitest.test_folder": "test",
     "ruby.minitest.file_pattern": "*_test.rb",
     // "ruby.minitest.use_bundle": true,
     // "ruby.minitest.use_binstubs": true,
     // "ruby.minitest.use_spring_binstub": false,
+    // "ruby.minitest.use_m": true, // use the M test framework instead of minitest
     // "ruby.minitest.runner": "command", // a runner for the minitest test framework
     // "ruby.minitest.executable": ["bin/tests"],
     // "ruby.minitest.args": ["--do-smth"],
     // "ruby.minitest.env": { "ENV2": "value" }, // will be merged with the ENV variable defined on the language level
     //
+    // "ruby.rails.use_bundle": true,
+    // "ruby.rails.use_binstubs": true,
+    // "ruby.rails.use_spring_binstub": false,
+    // "ruby.rails.runner": "command", // a runner for the Rails test framework
+    // "ruby.rails.executable": ["bin/my_rails_test"],
+    // "ruby.rails.args": ["--do-smth"],
+    // "ruby.rails.env": { "ENV2": "value" }, // will be merged with the ENV variable defined on the language level
+    //
     // "ruby.rspec.use_bundle": true,
     // "ruby.rspec.use_binstubs": true,
     // "ruby.rspec.use_spring_binstub": false,
     // "ruby.rspec.runner": "command", // a runner for the RSpec test framework
-    // "ruby.rspec.executable": ["bin/my_rpsec"],
+    // "ruby.rspec.executable": ["bin/my_rspec"],
     // "ruby.rspec.args": ["--do-smth"],
     // "ruby.rspec.env": { "ENV2": "value" }, // will be merged with the ENV variable defined on the language level
+    //
+    // "ruby.test_bench.use_bundle": true,
+    // "ruby.test_bench.runner": "command", // a runner for the test bench test framework
+    // "ruby.test_bench.executable": ["bin/my_test_bench"],
+    // "ruby.test_bench.args": ["--do-smth"],
+    // "ruby.test_bench.env": { "ENV2": "value" }, // will be merged with the ENV variable defined on the language level
     //
     // --- Rust ---
     // "rust.runner": "command", // a runner for all Rust test frameworks

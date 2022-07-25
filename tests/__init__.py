@@ -137,5 +137,9 @@ class SublimeProjectTestCase(SublimeViewTestCase):
     def _testSuite(self, file):
         yield from self._testFile(file, scope=TestFramework.SCOPE_SUITE)
 
-    def assertLastCommand(self, command):
+    def assertLastCommand(self, *command_parts):
+        command = ''.join(
+            map(lambda part: os.path.join(*to_unpackable(part)), command_parts)
+        )
+
         self.assertEqual(last_command(self.view), command)

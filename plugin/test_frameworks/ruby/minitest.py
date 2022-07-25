@@ -46,7 +46,7 @@ class TestFramework(ruby.TestFramework):
     def build_executable(self):
         if self.use_rake():
             return self._build_executable(
-                ['rake', 'test'], zeus=True, binstubs=self.BINSTUBS_WITH_PREFIX
+                ['rake', 'test'], zeus=True, binstubs=['test']
             )
 
         return self._build_executable(['ruby', '-I{}'.format(self.test_folder())])

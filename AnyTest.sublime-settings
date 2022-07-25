@@ -15,6 +15,7 @@
             "cucumber",
             "m",
             "minitest",
+            "rails",
             "rspec",
             "test_bench"
         ],

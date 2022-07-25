@@ -34,6 +34,9 @@ class ViewCallbacks(WindowMixin):
             self.view.visible_region().end() + 1, self._prev_visible_region.end()
         )
 
+        if len(self.view.sel()) < 1:
+            return
+
         if not overlaid_region.contains(self.view.sel()[-1].end()):
             return
 

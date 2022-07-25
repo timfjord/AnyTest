@@ -4,8 +4,6 @@ from .. import TestFramework as BaseTestFramework
 
 
 class TestFramework(BaseTestFramework):
-    BINSTUBS_WITH_PREFIX = 'prefix'
-
     language = 'ruby'
     test_patterns = (
         (r'^\s*def\s+(test_\w+)', 'test'),
@@ -29,7 +27,7 @@ class TestFramework(BaseTestFramework):
         executable = command if isinstance(command, list) else [command]
 
         if zeus and self.file('.zeus.sock').exists():
-            executable = ['zeus'] + executable
+            executable = ['zeus'] + zeus if isinstance(zeus, list) else executable
         elif (
             spring
             and self.settings('use_spring_binstub')
@@ -38,7 +36,7 @@ class TestFramework(BaseTestFramework):
             executable = [self.spring_bin().relpath] + executable
         elif binstubs and self.settings('use_binstubs') and self.bin().exists():
             executable = [self.bin().relpath] + (
-                executable if binstubs == self.BINSTUBS_WITH_PREFIX else []
+                binstubs if isinstance(binstubs, list) else []
             )
         elif self.settings('use_bundle') and self.file('Gemfile').exists():
             executable = ['bundle', 'exec'] + executable

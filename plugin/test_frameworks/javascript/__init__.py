@@ -25,3 +25,11 @@ class TestFramework(BaseTestFramework):
     namespace_patterns = (
         r'^\s*(?:describe|suite|context)\s*[( ]\s*(?:"|\'|`)(.*)(?:"|\'|`)',
     )
+
+    def _build_executable(self, executable):
+        bin = self.file('node_modules', '.bin', executable)
+
+        if bin.exists():
+            return [bin.relpath]
+        else:
+            return [executable]

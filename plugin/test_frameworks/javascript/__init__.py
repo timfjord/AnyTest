@@ -1,22 +1,27 @@
 import json
 
+from ...cache import cache
 from .. import TestFramework as BaseTestFramework
 
 PACKAGE_JSON = 'package.json'
 
 
-def has_package(package, root):
+@cache
+def get_package_json_content(root):
     package_json = root.file(PACKAGE_JSON)
-
-    if not package_json.exists():
-        return False
 
     with open(package_json.path) as file:
         content = json.load(file)
 
-        return package in content.get('dependencies', {}) or package in content.get(
-            'devDependencies', {}
-        )
+        return content or {}
+
+
+def has_package(package, root):
+    content = get_package_json_content(root)
+
+    return package in content.get('dependencies', {}) or package in content.get(
+        'devDependencies', {}
+    )
 
 
 class TestFramework(BaseTestFramework):

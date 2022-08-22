@@ -5,7 +5,8 @@
             "exunit"
         ],
         "javascript": [
-            "jest"
+            "jest",
+            "vitest"
         ],
         "python": [
             "pytest",
@@ -87,6 +88,11 @@
     "javascript.jest.args": [
         "--no-coverage"
     ],
+    //
+    // "javascript.vitest.runner": "command", // a runner for the Vitest test framework
+    // "javascript.vitest.executable": ["npm", "run", "test"],
+    // "javascript.vitest.env": { "ENV2": "value" }, // will be merged with the ENV variable defined on the language level
+    // "javascript.vitest.args": ["--do-smth"],
     //
     // --- Python ---
     // to force a Python test framework use:

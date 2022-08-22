@@ -11,6 +11,7 @@ from AnyTest.plugin.test_frameworks import TestFramework
 from AnyTest.plugin.test_frameworks.utils import to_unpackable
 
 FIXTURES_PATH = os.path.join(os.path.dirname(__file__), 'fixtures')
+ST3 = sublime.version() < '4000'
 
 
 class SublimeWindowTestCase(DeferrableTestCase):

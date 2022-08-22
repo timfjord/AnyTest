@@ -3,9 +3,8 @@ import unittest
 
 import sublime
 
+from AnyTest.tests import ST3
 from AnyTest.plugin.quick_panel_item import QuickPanelItem
-
-ST3 = sublime.version() < '4000'
 
 
 class QuickPanelItemTestCase(unittest.TestCase):

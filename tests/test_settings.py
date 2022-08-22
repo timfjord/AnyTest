@@ -1,5 +1,7 @@
+import unittest
+
 from AnyTest.plugin import cache, settings
-from AnyTest.tests import SublimeWindowTestCase
+from AnyTest.tests import ST3, SublimeWindowTestCase
 
 
 class SettingsTestCase(SublimeWindowTestCase):
@@ -43,6 +45,10 @@ class ProjectSettingsTestCase(SublimeWindowTestCase):
     def test_get(self):
         self.assertEqual(settings.get('key'), 'value2')
 
+    @unittest.skipIf(
+        ST3,
+        'It looks like setting project data during a test is not supported in Sublime Text 3',
+    )
     def test_project_settings_cache(self):
         self.window.set_project_data(
             {'settings': {settings.PROJECT_SETTINGS_KEY: {'key': 'value3'}}}

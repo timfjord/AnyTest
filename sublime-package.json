@@ -28,7 +28,8 @@
                         "JavascriptFrameworks": {
                             "type": "string",
                             "enum": [
-                                "jest"
+                                "jest",
+                                "vitest"
                             ]
                         },
                         "PythonFrameworks": {
@@ -288,6 +289,24 @@
                                     "type": "object",
                                     "default": {},
                                     "description": "Jest specific ENV variables (will be merged with the ENV variables defined on the language level)"
+                                },
+                                "javascript.vitest.runner": {
+                                    "$ref": "sublime://settings/AnyTest#/definitions/Runner",
+                                    "description": "A runner to run Vitest tests with"
+                                },
+                                "javascript.vitest.executable": {
+                                    "type": "array",
+                                    "description": "Vitest test framework executable (e.g. [\"npm\", \"run\", \"test\"])"
+                                },
+                                "javascript.vitest.args": {
+                                    "type": "array",
+                                    "default": [],
+                                    "description": "Vitest cli args (e.g. [\"--do-smth\"])"
+                                },
+                                "javascript.vitest.env": {
+                                    "type": "object",
+                                    "default": {},
+                                    "description": "Vitest specific ENV variables (will be merged with the ENV variables defined on the language level)"
                                 },
                                 "python.test_framework": {
                                     "$ref": "sublime://settings/AnyTest#/definitions/PythonFrameworks"

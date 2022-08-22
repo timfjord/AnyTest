@@ -12,14 +12,8 @@ class TestFramework(IsConfigurableMixin, javascript.TestFramework):
     def is_configurable_fallback(cls, file):
         return javascript.has_package('jest', file.root)
 
-    def bin(self):
-        return self.file('node_modules', '.bin', 'jest')
-
     def build_executable(self):
-        if self.bin().exists():
-            return [self.bin().relpath]
-        else:
-            return ['jest']
+        return self._build_executable('jest')
 
     def build_file_position_args(self):
         return [self.EOO, self.context.file.relpath]

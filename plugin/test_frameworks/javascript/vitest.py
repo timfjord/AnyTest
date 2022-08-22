@@ -22,7 +22,7 @@ class TestFramework(IsConfigurableMixin, javascript.TestFramework):
 
         name = ''.join(
             (
-                '^' if bool(nearest.namespaces) else '',
+                '^.*' if bool(nearest.namespaces) else '',
                 utils.escape_regex(' '.join(nearest.namespaces + nearest.tests)),
                 '$' if bool(nearest.tests) else '',
             )

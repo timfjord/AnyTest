@@ -3,7 +3,7 @@ import operator
 
 import sublime
 
-from . import runners, settings, status, test_frameworks
+from . import cache, runners, settings, status, test_frameworks
 from .context import Context
 from .errors import Error, FrameworkNotFound, handle_errors
 from .history import History
@@ -36,7 +36,7 @@ class Plugin:
 
     @handle_errors
     def select_test_framework(self, scope, edit=False):
-        settings.reload_project_settings()
+        cache.clear()
 
         items = sorted(
             test_frameworks.items(), key=operator.attrgetter('language', 'framework')
@@ -52,7 +52,7 @@ class Plugin:
 
     @handle_errors
     def run_test(self, scope, edit=False, test_framework=None):
-        settings.reload_project_settings()
+        cache.clear()
 
         try:
             runner = self.build_runner(scope, test_framework=test_framework)

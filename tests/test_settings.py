@@ -1,4 +1,4 @@
-from AnyTest.plugin import settings
+from AnyTest.plugin import cache, settings
 from AnyTest.tests import SublimeWindowTestCase
 
 
@@ -35,10 +35,22 @@ class ProjectSettingsTestCase(SublimeWindowTestCase):
             {'settings': {settings.PROJECT_SETTINGS_KEY: {'key': 'value2'}}}
         )
 
-    def test_get(self):
+    def setUp(self):
+        super().setUp()
+
         self.setSettings({'key': 'value1'})
 
+    def test_get(self):
         self.assertEqual(settings.get('key'), 'value2')
+
+    def test_project_settings_cache(self):
+        self.window.set_project_data(
+            {'settings': {settings.PROJECT_SETTINGS_KEY: {'key': 'value3'}}}
+        )
+        self.assertEqual(settings.get('key'), 'value2')
+
+        cache.clear()
+        self.assertEqual(settings.get('key'), 'value3')
 
 
 class InvalidProjectDataTestCase(SublimeWindowTestCase):

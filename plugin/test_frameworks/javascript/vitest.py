@@ -20,13 +20,7 @@ class TestFramework(IsConfigurableMixin, javascript.TestFramework):
         args = self.build_file_position_args()
         nearest = self.find_nearest()
 
-        name = ''.join(
-            (
-                '^.*' if bool(nearest.namespaces) else '',
-                utils.escape_regex(' '.join(nearest.namespaces + nearest.tests)),
-                '$' if bool(nearest.tests) else '',
-            )
-        )
+        name = utils.escape_regex(' '.join(nearest.namespaces + nearest.tests))
 
         if bool(name):
             args = ['-t', utils.escape_shell(name)] + args

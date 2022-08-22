@@ -12,13 +12,13 @@ class VitestTestCase(SublimeProjectTestCase):
     def test_line1(self):
         yield from self._testFile(('test', 'basic.test.ts'), 6)
         self.assertLastCommand(
-            'vitest run -t \'Math\\.sqrt\\(\\)\\$\' ', ('test', 'basic.test.ts')
+            'vitest run -t \'Math\\.sqrt\\(\\)\' ', ('test', 'basic.test.ts')
         )
 
     def test_line2(self):
         yield from self._testFile(('test', 'suite.test.js'), 5)
         self.assertLastCommand(
-            'vitest run -t \'^.*suite name foo\\$\' ', ('test', 'suite.test.js')
+            'vitest run -t \'suite name foo\' ', ('test', 'suite.test.js')
         )
 
     def test_line_no_nearest(self):

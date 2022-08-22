@@ -5,12 +5,13 @@ import os
 import sublime
 from unittesting import DeferrableTestCase
 
-from AnyTest.plugin import settings
+from AnyTest.plugin import settings, cache
 from AnyTest.plugin.runners.console import last_command
 from AnyTest.plugin.test_frameworks import TestFramework
 from AnyTest.plugin.test_frameworks.utils import to_unpackable
 
 FIXTURES_PATH = os.path.join(os.path.dirname(__file__), 'fixtures')
+ST3 = sublime.version() < '4000'
 
 
 class SublimeWindowTestCase(DeferrableTestCase):
@@ -26,7 +27,7 @@ class SublimeWindowTestCase(DeferrableTestCase):
             'close_windows_when_empty', False
         )
 
-        settings.reload_project_settings()
+        cache.clear()
 
     @classmethod
     def tearDownClass(cls):

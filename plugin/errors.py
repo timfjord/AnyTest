@@ -8,14 +8,14 @@ logger = logging.getLogger(__name__)
 
 def handle_errors(func):
     @wraps(func)
-    def handler(*args, **kwargs):
+    def wrapper_handle_errors(*args, **kwargs):
         try:
             return func(*args, **kwargs)
         except Error as exc:
             status.update(str(exc))
             logger.error(exc)
 
-    return handler
+    return wrapper_handle_errors
 
 
 class Error(Exception):

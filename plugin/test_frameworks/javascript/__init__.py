@@ -31,6 +31,9 @@ class TestFramework(BaseTestFramework):
         r'^\s*(?:describe|suite|context)\s*[( ]\s*(?:"|\'|`)(.*)(?:"|\'|`)',
     )
 
+    def has_package(self, package):
+        return has_package(package, self.context.root)
+
     def _build_executable(self, executable):
         bin = self.file('node_modules', '.bin', executable)
 

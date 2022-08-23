@@ -6,6 +6,7 @@
         ],
         "javascript": [
             "jest",
+            "mocha",
             "vitest"
         ],
         "python": [
@@ -88,6 +89,11 @@
     "javascript.jest.args": [
         "--no-coverage"
     ],
+    //
+    // "javascript.mocha.runner": "command", // a runner for the Mocha test framework
+    // "javascript.mocha.executable": ["npm", "run", "test"],
+    // "javascript.mocha.env": { "ENV2": "value" }, // will be merged with the ENV variable defined on the language level
+    // "javascript.mocha.args": ["--do-smth"],
     //
     // "javascript.vitest.runner": "command", // a runner for the Vitest test framework
     // "javascript.vitest.executable": ["npm", "run", "test"],

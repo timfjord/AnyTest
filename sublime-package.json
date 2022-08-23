@@ -29,6 +29,7 @@
                             "type": "string",
                             "enum": [
                                 "jest",
+                                "mocha",
                                 "vitest"
                             ]
                         },
@@ -289,6 +290,24 @@
                                     "type": "object",
                                     "default": {},
                                     "description": "Jest specific ENV variables (will be merged with the ENV variables defined on the language level)"
+                                },
+                                "javascript.mocha.runner": {
+                                    "$ref": "sublime://settings/AnyTest#/definitions/Runner",
+                                    "description": "A runner to run Mocha tests with"
+                                },
+                                "javascript.mocha.executable": {
+                                    "type": "array",
+                                    "description": "Mocha test framework executable (e.g. [\"npm\", \"run\", \"test\"])"
+                                },
+                                "javascript.mocha.args": {
+                                    "type": "array",
+                                    "default": [],
+                                    "description": "Mocha cli args (e.g. [\"--do-smth\"])"
+                                },
+                                "javascript.mocha.env": {
+                                    "type": "object",
+                                    "default": {},
+                                    "description": "Mocha specific ENV variables (will be merged with the ENV variables defined on the language level)"
                                 },
                                 "javascript.vitest.runner": {
                                     "$ref": "sublime://settings/AnyTest#/definitions/Runner",

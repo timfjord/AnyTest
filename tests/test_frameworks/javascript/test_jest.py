@@ -4,11 +4,6 @@ from AnyTest.tests import SublimeProjectTestCase
 class JestTestCase(SublimeProjectTestCase):
     folder = 'jest'
 
-    def setUp(self):
-        super().setUp()
-
-        self.setSettings({'javascript.test_framework': 'jest'})
-
     def test_line(self):
         yield from self._testFile(('__tests__', 'normal-test.js'), 2)
         self.assertLastCommand(

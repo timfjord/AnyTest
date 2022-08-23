@@ -4,11 +4,6 @@ from AnyTest.tests import SublimeProjectTestCase
 class VitestTestCase(SublimeProjectTestCase):
     folder = 'vitest'
 
-    def setUp(self):
-        super().setUp()
-
-        self.setSettings({'javascript.test_framework': 'vitest'})
-
     def test_line1(self):
         yield from self._testFile(('test', 'basic.test.ts'), 6)
         self.assertLastCommand(

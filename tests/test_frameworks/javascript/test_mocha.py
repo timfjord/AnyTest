@@ -4,11 +4,6 @@ from AnyTest.tests import SublimeProjectTestCase
 class MochaJavaScriptTestCase(SublimeProjectTestCase):
     folder = ('mocha', 'javascript')
 
-    def setUp(self):
-        super().setUp()
-
-        self.setSettings({'javascript.test_framework': 'mocha'})
-
     def test_line(self):
         yield from self._testFile(('test', 'normal.js'), 2)
         self.assertLastCommand('mocha ', ('test', 'normal.js'), ' --grep \'^Math\'')

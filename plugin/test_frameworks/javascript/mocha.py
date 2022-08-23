@@ -35,7 +35,13 @@ class TestFramework(IsConfigurableMixin, javascript.TestFramework):
             )
 
         parts = self.context.file.relpath.split('.')
-        return ['"{}/**/*.{}.{}"'.format(test_dir, parts[-2], parts[-1])]
+        return [
+            os.path.join(
+                '"{}'.format(test_dir),
+                '**',
+                '*.{}.{}"'.format(parts[-2], parts[-1]),
+            )
+        ]
 
     def build_file_position_args(self):
         return [self.context.file.relpath]

@@ -1,0 +1,6 @@
+=> 0.4.0
+
+# Features
+
+- Better caching
+- Add various javascript test frameworks (Vitest, Mocha)

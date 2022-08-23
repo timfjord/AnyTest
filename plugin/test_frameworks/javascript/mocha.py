@@ -7,7 +7,7 @@ from ..mixins import IsConfigurableMixin
 
 class TestFramework(IsConfigurableMixin, javascript.TestFramework):
     framework = 'mocha'
-    pattern = r'(tests?/.*|(test))\.(js|jsx|coffee|ts|tsx)$'
+    pattern = r'(tests?[/\\].*|(test))\.(js|jsx|coffee|ts|tsx)$'
 
     @classmethod
     def is_configurable_fallback(cls, file):

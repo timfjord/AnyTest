@@ -1,7 +1,8 @@
 import os
 import re
 
-from .. import rust, utils
+from ... import utils
+from .. import rust
 
 
 class TestFramework(rust.TestFramework):

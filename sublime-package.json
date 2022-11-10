@@ -59,6 +59,24 @@
                         },
                         "PackageConfig": {
                             "properties": {
+                                "subprojects": {
+                                    "type": "array",
+                                    "default": [],
+                                    "description": "A list of subprojects",
+                                    "items": {
+                                        "anyOf": [
+                                            {
+                                                "type": "string"
+                                            },
+                                            {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                },
                                 "test_frameworks": {
                                     "type": "object",
                                     "description": "Test frameworks to choose from",

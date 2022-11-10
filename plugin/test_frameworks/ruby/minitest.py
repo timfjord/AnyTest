@@ -1,7 +1,8 @@
 import re
 from functools import lru_cache
 
-from .. import ruby, utils
+from ... import utils
+from .. import ruby
 
 
 class TestFramework(ruby.TestFramework):

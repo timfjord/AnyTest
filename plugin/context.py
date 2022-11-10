@@ -3,6 +3,7 @@ from collections import namedtuple
 from functools import lru_cache
 from operator import ge, le
 
+from . import settings
 from .mixins import WindowMixin
 from .root import Root
 
@@ -28,7 +29,11 @@ class Context(WindowMixin):
 
     def __init__(self, view):
         self.view = view
-        self.root, self.file = Root.find(self.window.folders(), self.view.file_name())
+        self.root, self.file = Root.find(
+            self.window.folders(),
+            self.view.file_name(),
+            settings.get('subprojects', type=list, default=[]),
+        )
 
     @property
     def window(self):

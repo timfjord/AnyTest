@@ -1,4 +1,5 @@
-from .. import python, utils
+from ... import utils
+from .. import python
 from ..mixins import IsConfigurableMixin
 
 

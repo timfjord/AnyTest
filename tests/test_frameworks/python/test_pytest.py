@@ -85,25 +85,19 @@ class PipenvPytestTestCase(SublimeProjectTestCase):
 
     def test_line(self):
         # I couldn't make it working with a class decorator or start/stop
-        with patch(
-            'AnyTest.plugin.test_frameworks.utils.is_executable', return_value=False
-        ):
+        with patch('AnyTest.plugin.utils.is_executable', return_value=False):
             yield from self._testFile('test_class.py', 1)
             self.assertLastCommand(
                 'pipenv run python -m pytest test_class.py::TestNumbers'
             )
 
     def test_file(self):
-        with patch(
-            'AnyTest.plugin.test_frameworks.utils.is_executable', return_value=False
-        ):
+        with patch('AnyTest.plugin.utils.is_executable', return_value=False):
             yield from self._testFile('test_class.py')
             self.assertLastCommand('pipenv run python -m pytest test_class.py')
 
     def test_suite(self):
-        with patch(
-            'AnyTest.plugin.test_frameworks.utils.is_executable', return_value=False
-        ):
+        with patch('AnyTest.plugin.utils.is_executable', return_value=False):
             yield from self._testSuite('test_class.py')
             self.assertLastCommand('pipenv run python -m pytest')
 
@@ -113,24 +107,18 @@ class PoetryPytestTestCase(SublimeProjectTestCase):
     settings = {'python.test_framework': 'pytest'}
 
     def test_line(self):
-        with patch(
-            'AnyTest.plugin.test_frameworks.utils.is_executable', return_value=False
-        ):
+        with patch('AnyTest.plugin.utils.is_executable', return_value=False):
             yield from self._testFile('test_class.py', 1)
             self.assertLastCommand(
                 'poetry run python -m pytest test_class.py::TestNumbers'
             )
 
     def test_file(self):
-        with patch(
-            'AnyTest.plugin.test_frameworks.utils.is_executable', return_value=False
-        ):
+        with patch('AnyTest.plugin.utils.is_executable', return_value=False):
             yield from self._testFile('test_class.py')
             self.assertLastCommand('poetry run python -m pytest test_class.py')
 
     def test_suite(self):
-        with patch(
-            'AnyTest.plugin.test_frameworks.utils.is_executable', return_value=False
-        ):
+        with patch('AnyTest.plugin.utils.is_executable', return_value=False):
             yield from self._testSuite('test_class.py')
             self.assertLastCommand('poetry run python -m pytest')

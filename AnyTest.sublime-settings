@@ -1,4 +1,6 @@
 {
+    // A list of subprojects
+    "subprojects": [],
     "test_frameworks": {
         "elixir": [
             "espec",

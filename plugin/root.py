@@ -1,6 +1,7 @@
 import os.path
 
 from . import errors, glob2
+from .utils import to_unpackable
 
 
 class Root:
@@ -8,9 +9,15 @@ class Root:
         self.path = path
 
     @classmethod
-    def find(cls, folders, file):
-        if not bool(file):
+    def find(cls, folders, file, subprojects=[]):
+        if not bool(file) or not bool(folders):
             raise errors.InvalidContext
+
+        root = cls(folders[0])
+        for subproject in subprojects:
+            folders.append(
+                root.join(*to_unpackable(subproject)),
+            )
 
         for folder in sorted(folders, key=len, reverse=True):
             # Since Sublime returns expanded path so it should be fine to use `startswith`,

@@ -7,7 +7,7 @@ import unittest
 import sublime
 
 from AnyTest.plugin import errors
-from AnyTest.plugin.root import File, RelativePath, Root, Glob
+from AnyTest.plugin.root import File, Glob, RelativePath, Root
 from AnyTest.tests import FIXTURES_PATH
 
 IS_WINDOWS = sublime.platform() == 'windows'
@@ -61,7 +61,9 @@ class RootTestCase(unittest.TestCase):
         file_path = path('code', 'project', 'folder', 'subfolder2', 'file.py')
         root, file = Root.find([root_path], file_path, [subproject1, subproject2])
 
-        self.assertEqual(root.path, os.path.join(root_path, subproject2[0], subproject2[1]))
+        self.assertEqual(
+            root.path, os.path.join(root_path, subproject2[0], subproject2[1])
+        )
         self.assertEqual(file.path, file_path)
 
     def test_find_projects_and_subprojects_longest_folder_first(self):
@@ -69,8 +71,12 @@ class RootTestCase(unittest.TestCase):
         root_path2 = path('code', 'project', 'folder', 'subfolder1', 'subfolder1_1')
         subproject1 = os.path.join('folder', 'subfolder1')
         subproject2 = ('folder', 'subfolder2')
-        file_path = path('code', 'project', 'folder', 'subfolder1', 'subfolder1_1', 'file.py')
-        root, file = Root.find([root_path1, root_path2], file_path, [subproject1, subproject2])
+        file_path = path(
+            'code', 'project', 'folder', 'subfolder1', 'subfolder1_1', 'file.py'
+        )
+        root, file = Root.find(
+            [root_path1, root_path2], file_path, [subproject1, subproject2]
+        )
 
         self.assertEqual(root.path, root_path2)
         self.assertEqual(file.path, file_path)

@@ -95,7 +95,7 @@ or
 
 this way all other test frameworks will be ignored.
 
-Also, some languages support specifying test framework, for example
+Also, some languages support specifying test frameworks, for example
 
 ```json
 "python.test_framework": "pytest"
@@ -103,10 +103,32 @@ Also, some languages support specifying test framework, for example
 
 This won't change the detection process, but if there are multiple candidates the specified one will be used.
 
-### Project folders
+### Project folders and subprojects
 
 The package supports multiple project folders. It can be very useful when there is a nested folder
-that contains a separate project. The package can detect this situation and calculates the root path correctly
+that contains a separate project. The package can detect this situation and calculate the root path correctly.
+
+Another way to handle nested projects is to use the `subprojects` settings (usually in the project config)
+
+```json
+{
+  "folders": [
+    {
+      "path": ".",
+    }
+  ],
+  "settings": {
+    "AnyTest": {
+      "subprojects": [
+        "subfolder1/subfolder1_1",
+        ["subfolder2", "subfolder2_1"]
+      ]
+    }
+  }
+}
+```
+
+A subproject can be either a string or an array of strings(the path separator will be added automatically).
 
 ## Runners
 
@@ -116,7 +138,7 @@ The package comes with 3 runners:
 - `terminus`
 - `console`
 
-The default runner is `command`. It uses the built-in Sublime `exec` command(the command can be configured) to run the test command.  
+The default runner is the `command`. It uses the built-in Sublime `exec` command(the command can be configured) to run the test command.  
 The `command` runner is a bit limited so it is recommended to install [Terminus](https://github.com/randy3k/Terminus) package and use the `terminus` runner instead.
 
 The `console` runner is mostly used for testing/debugging as its main purpose is to output the test command and metadata to the console.

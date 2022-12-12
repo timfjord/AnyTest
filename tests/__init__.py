@@ -8,7 +8,7 @@ from unittesting import DeferrableTestCase
 from AnyTest.plugin import settings, cache
 from AnyTest.plugin.runners.console import last_command
 from AnyTest.plugin.test_frameworks import TestFramework
-from AnyTest.plugin.test_frameworks.utils import to_unpackable
+from AnyTest.plugin.utils import to_unpackable
 
 FIXTURES_PATH = os.path.join(os.path.dirname(__file__), 'fixtures')
 ST3 = sublime.version() < '4000'

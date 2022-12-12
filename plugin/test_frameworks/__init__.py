@@ -3,8 +3,7 @@ import logging
 import re
 from abc import ABCMeta, abstractmethod
 
-from .. import errors, settings
-from . import utils
+from .. import errors, settings, utils
 
 logger = logging.getLogger(__name__)
 

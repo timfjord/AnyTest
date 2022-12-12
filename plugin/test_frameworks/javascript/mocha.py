@@ -1,7 +1,8 @@
 import os
 import re
 
-from .. import javascript, utils
+from ... import utils
+from .. import javascript
 from ..mixins import IsConfigurableMixin
 
 

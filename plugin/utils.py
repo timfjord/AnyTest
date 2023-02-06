@@ -1,3 +1,4 @@
+import re
 import shlex
 from distutils import spawn
 
@@ -50,3 +51,17 @@ def is_executable(name):
 
 def to_unpackable(val):
     return val if isinstance(val, list) or isinstance(val, tuple) else (val,)
+
+
+def match_patterns(string, patterns):
+    for pattern in patterns:
+        if isinstance(pattern, tuple):
+            pattern, name = pattern
+        else:
+            name = None
+
+        match = re.search(pattern, string)
+        if match is not None:
+            return match.group(1), name
+
+    return None, None

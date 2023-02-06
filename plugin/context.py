@@ -6,22 +6,9 @@ from operator import ge, le
 from . import settings
 from .mixins import WindowMixin
 from .root import Root
+from .utils import match_patterns
 
 Nearest = namedtuple('Nearest', 'tests, namespaces, line, names')
-
-
-def _match_patterns(string, patterns):
-    for pattern in patterns:
-        if isinstance(pattern, tuple):
-            pattern, name = pattern
-        else:
-            name = None
-
-        match = re.search(pattern, string)
-        if match is not None:
-            return match.group(1), name
-
-    return None, None
 
 
 class Context(WindowMixin):
@@ -99,8 +86,8 @@ class Context(WindowMixin):
         last_namespace_line_nr = last_indent = -1
 
         for line, line_nr in self.lines(from_line=from_line, to_line=to_line):
-            test_match, test_name = _match_patterns(line, test_patterns)
-            namespace_match, _ = _match_patterns(line, namespace_patterns)
+            test_match, test_name = match_patterns(line, test_patterns)
+            namespace_match, _ = match_patterns(line, namespace_patterns)
             indent_match = re.match(r'^\s*', line)
             indent = 0 if indent_match is None else indent_match.end()
 

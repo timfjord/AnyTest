@@ -57,6 +57,12 @@
                                 "cargotest"
                             ]
                         },
+                        "SwiftFrameworks": {
+                            "type": "string",
+                            "enum": [
+                                "swiftpm"
+                            ]
+                        },
                         "PackageConfig": {
                             "properties": {
                                 "subprojects": {
@@ -142,6 +148,19 @@
                                                     "type": "array",
                                                     "items": {
                                                         "$ref": "sublime://settings/AnyTest#/definitions/RustFrameworks"
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        "swift": {
+                                            "anyOf": [
+                                                {
+                                                    "$ref": "sublime://settings/AnyTest#/definitions/SwiftFrameworks"
+                                                },
+                                                {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "sublime://settings/AnyTest#/definitions/SwiftFrameworks"
                                                     }
                                                 }
                                             ]
@@ -656,6 +675,33 @@
                                     "type": "object",
                                     "default": {},
                                     "description": "Cargo tests specific ENV variables (will be merged with the ENV variables defined on the language level)"
+                                },
+                                "swift.env": {
+                                    "type": "object",
+                                    "default": {},
+                                    "description": "Swift specific ENV variables (will be merged with the ENV variables defined on the test framework level)"
+                                },
+                                "swift.swiftpm.runner": {
+                                    "$ref": "sublime://settings/AnyTest#/definitions/Runner",
+                                    "description": "A runner to run SwiftPM tests with"
+                                },
+                                "swift.swiftpm.executable": {
+                                    "type": "array",
+                                    "default": [
+                                        "swift",
+                                        "test"
+                                    ],
+                                    "description": "SwiftPM test framework executable (e.g. [\"bin/tests\"])"
+                                },
+                                "swift.swiftpm.args": {
+                                    "type": "array",
+                                    "default": [],
+                                    "description": "SwiftPM test cli args (e.g. [\"--do-smth\"])"
+                                },
+                                "swift.swiftpm.env": {
+                                    "type": "object",
+                                    "default": {},
+                                    "description": "SwiftPM tests specific ENV variables (will be merged with the ENV variables defined on the language level)"
                                 }
                             }
                         }

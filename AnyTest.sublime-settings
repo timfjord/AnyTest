@@ -25,6 +25,9 @@
         ],
         "rust": [
             "cargotest"
+        ],
+        "swift": [
+            "swiftpm"
         ]
     },
     // Available log levels: DEBUG, INFO, WARNING, ERROR, CRITICAL
@@ -186,4 +189,16 @@
     ],
     // "rust.cargotest.args": ["--do-smth"],
     // "rust.cargotest.env": { "ENV2": "value" }, // will be merged with the ENV variable defined on the language level
+    //
+    // --- Swift ---
+    // "swift.runner": "command", // a runner for all Swift test frameworks
+    // "swift.env": { "ENV1": "value" }, // will be merged with the ENV variable defined on the test framework level
+    //
+    // "swift.swiftpm.runner": "command", // a runner for the SwiftPM test framework
+    "swift.swiftpm.executable": [
+        "swift",
+        "test"
+    ],
+    // "swift.swiftpm.args": ["--do-smth"],
+    // "swift.swiftpm.env": { "ENV2": "value" }, // will be merged with the ENV variable defined on the language level
 }

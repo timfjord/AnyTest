@@ -28,6 +28,9 @@
         ],
         "swift": [
             "swiftpm"
+        ],
+        "java": [
+            "maventest"
         ]
     },
     // Available log levels: DEBUG, INFO, WARNING, ERROR, CRITICAL

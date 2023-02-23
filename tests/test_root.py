@@ -100,6 +100,13 @@ class RootTestCase(unittest.TestCase):
         self.assertIsInstance(file, File)
         self.assertEqual(file.path, path('code', 'project', 'folder', 'file.py'))
 
+    def test_parent(self):
+        root = Root(path('code', 'project'))
+        parent = root.parent()
+
+        self.assertIsInstance(parent, Root)
+        self.assertEqual(parent.path, path('code'))
+
     def test_glob(self):
         root = Root(path('code'))
         glob = root.glob('cucumber', '**', '*.rb')
@@ -134,6 +141,26 @@ class RelativePathTestCase(unittest.TestCase):
             self.assertTrue(RelativePath(root, existing_file).exists())
             self.assertFalse(RelativePath(root, 'uNkn0wn.py').exists())
             self.assertTrue(RelativePath(subfolder, existing_dir).exists())
+
+    def test_parent(self):
+        root = Root(path('code', 'project'))
+        relative_path = RelativePath(root, 'folder', 'file.py')
+        parent = relative_path.parent()
+
+        self.assertIsInstance(parent, Root)
+        self.assertEqual(parent.path, path('code', 'project'))
+
+    def test_dirname(self):
+        root = Root(path('code', 'project'))
+        relative_path = RelativePath(root, 'folder', 'file.py')
+
+        self.assertEqual(relative_path.dirname(), 'folder')
+
+    def test_name(self):
+        root = Root(path('code', 'project'))
+        relative_path = RelativePath(root, 'folder', 'file.py')
+
+        self.assertEqual(relative_path.name(), 'file')
 
 
 class FileTestCase(unittest.TestCase):

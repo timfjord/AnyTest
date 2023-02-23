@@ -63,6 +63,12 @@
                                 "swiftpm"
                             ]
                         },
+                        "JavaFrameworks": {
+                            "type": "string",
+                            "enum": [
+                                "maventest"
+                            ]
+                        },
                         "PackageConfig": {
                             "properties": {
                                 "subprojects": {
@@ -161,6 +167,19 @@
                                                     "type": "array",
                                                     "items": {
                                                         "$ref": "sublime://settings/AnyTest#/definitions/SwiftFrameworks"
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        "java": {
+                                            "anyOf": [
+                                                {
+                                                    "$ref": "sublime://settings/AnyTest#/definitions/JavaFrameworks"
+                                                },
+                                                {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "sublime://settings/AnyTest#/definitions/JavaFrameworks"
                                                     }
                                                 }
                                             ]

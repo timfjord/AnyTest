@@ -41,6 +41,9 @@ class Root:
     def file(self, *paths):
         return File(self, *paths)
 
+    def parent(self):
+        return Root(os.path.dirname(self.path))
+
     def glob(self, *paths):
         return Glob(self, *paths)
 
@@ -59,6 +62,17 @@ class RelativePath:
 
     def contains(self, _):
         raise NotImplementedError()
+
+    def parent(self):
+        return Root(os.path.dirname(os.path.dirname(self.path)))
+
+    def dirname(self):
+        return os.path.basename(os.path.dirname(self.path))
+
+    def name(self):
+        return os.path.splitext(
+            os.path.basename(self.relpath),
+        )[0]
 
 
 class File(RelativePath):

@@ -6,37 +6,37 @@ class MaventestJunit3TestCase(SublimeProjectTestCase):
 
     def test_line(self):
         yield from self._testFile(
-            ('src', 'test', 'java', 'org', 'vimtest', 'math', 'MathTest.java'), 37
+            ('src', 'test', 'java', 'org', 'anytest', 'math', 'MathTest.java'), 37
         )
 
         self.assertLastCommand(
-            'mvn test -Dtest=org.vimtest.math.MathTest#testFailedAdd'
+            'mvn test -Dtest=org.anytest.math.MathTest#testFailedAdd'
         )
 
     def test_file(self):
         yield from self._testFile(
-            ('src', 'test', 'java', 'org', 'vimtest', 'math', 'TestMath.java')
+            ('src', 'test', 'java', 'org', 'anytest', 'math', 'TestMath.java')
         )
-        self.assertLastCommand('mvn test -Dtest=org.vimtest.math.TestMath\\*')
+        self.assertLastCommand('mvn test -Dtest=org.anytest.math.TestMath\\*')
 
         yield from self._testFile(
-            ('src', 'test', 'java', 'org', 'vimtest', 'math', 'MathTest.java')
+            ('src', 'test', 'java', 'org', 'anytest', 'math', 'MathTest.java')
         )
-        self.assertLastCommand('mvn test -Dtest=org.vimtest.math.MathTest\\*')
+        self.assertLastCommand('mvn test -Dtest=org.anytest.math.MathTest\\*')
 
         yield from self._testFile(
-            ('src', 'test', 'java', 'org', 'vimtest', 'math', 'MathTests.java')
+            ('src', 'test', 'java', 'org', 'anytest', 'math', 'MathTests.java')
         )
-        self.assertLastCommand('mvn test -Dtest=org.vimtest.math.MathTests\\*')
+        self.assertLastCommand('mvn test -Dtest=org.anytest.math.MathTests\\*')
 
         yield from self._testFile(
-            ('src', 'test', 'java', 'org', 'vimtest', 'math', 'MathTestCase.java')
+            ('src', 'test', 'java', 'org', 'anytest', 'math', 'MathTestCase.java')
         )
-        self.assertLastCommand('mvn test -Dtest=org.vimtest.math.MathTestCase\\*')
+        self.assertLastCommand('mvn test -Dtest=org.anytest.math.MathTestCase\\*')
 
     def test_suite(self):
         yield from self._testSuite(
-            ('src', 'test', 'java', 'org', 'vimtest', 'math', 'MathTest.java')
+            ('src', 'test', 'java', 'org', 'anytest', 'math', 'MathTest.java')
         )
         self.assertLastCommand('mvn test')
 
@@ -52,7 +52,7 @@ class MaventestJunit3MultimoduleTestCase(SublimeProjectTestCase):
                 'test',
                 'java',
                 'org',
-                'vimtest',
+                'anytest',
                 'math',
                 'MathTest.java',
             ),
@@ -60,7 +60,7 @@ class MaventestJunit3MultimoduleTestCase(SublimeProjectTestCase):
         )
 
         self.assertLastCommand(
-            'mvn test -pl sample_module -Dtest=org.vimtest.math.MathTest#testFailedAdd'
+            'mvn test -pl sample_module -Dtest=org.anytest.math.MathTest#testFailedAdd'
         )
 
     def test_file(self):
@@ -71,13 +71,13 @@ class MaventestJunit3MultimoduleTestCase(SublimeProjectTestCase):
                 'test',
                 'java',
                 'org',
-                'vimtest',
+                'anytest',
                 'math',
                 'TestMath.java',
             )
         )
         self.assertLastCommand(
-            'mvn test -pl sample_module -Dtest=org.vimtest.math.TestMath\\*'
+            'mvn test -pl sample_module -Dtest=org.anytest.math.TestMath\\*'
         )
 
         yield from self._testFile(
@@ -87,13 +87,13 @@ class MaventestJunit3MultimoduleTestCase(SublimeProjectTestCase):
                 'test',
                 'java',
                 'org',
-                'vimtest',
+                'anytest',
                 'math',
                 'MathTest.java',
             )
         )
         self.assertLastCommand(
-            'mvn test -pl sample_module -Dtest=org.vimtest.math.MathTest\\*'
+            'mvn test -pl sample_module -Dtest=org.anytest.math.MathTest\\*'
         )
 
         yield from self._testFile(
@@ -103,13 +103,13 @@ class MaventestJunit3MultimoduleTestCase(SublimeProjectTestCase):
                 'test',
                 'java',
                 'org',
-                'vimtest',
+                'anytest',
                 'math',
                 'MathTests.java',
             )
         )
         self.assertLastCommand(
-            'mvn test -pl sample_module -Dtest=org.vimtest.math.MathTests\\*'
+            'mvn test -pl sample_module -Dtest=org.anytest.math.MathTests\\*'
         )
 
         yield from self._testFile(
@@ -119,13 +119,13 @@ class MaventestJunit3MultimoduleTestCase(SublimeProjectTestCase):
                 'test',
                 'java',
                 'org',
-                'vimtest',
+                'anytest',
                 'math',
                 'MathTestCase.java',
             )
         )
         self.assertLastCommand(
-            'mvn test -pl sample_module -Dtest=org.vimtest.math.MathTestCase\\*'
+            'mvn test -pl sample_module -Dtest=org.anytest.math.MathTestCase\\*'
         )
 
     def test_suite(self):
@@ -136,7 +136,7 @@ class MaventestJunit3MultimoduleTestCase(SublimeProjectTestCase):
                 'test',
                 'java',
                 'org',
-                'vimtest',
+                'anytest',
                 'math',
                 'MathTest.java',
             )
@@ -149,33 +149,33 @@ class MaventestJunit5TestCase(SublimeProjectTestCase):
 
     def test_line(self):
         yield from self._testFile(
-            ('src', 'test', 'java', 'org', 'vimtest', 'TestApp.java'), 12
+            ('src', 'test', 'java', 'org', 'anytest', 'TestApp.java'), 12
         )
         self.assertLastCommand(
-            'mvn test -Dtest=org.vimtest.TestApp#test_testdecorator_void'
+            'mvn test -Dtest=org.anytest.TestApp#test_testdecorator_void'
         )
 
         self._testLine(17)
         self.assertLastCommand(
-            'mvn test -Dtest=org.vimtest.TestApp#test_testdecorator_public_void'
+            'mvn test -Dtest=org.anytest.TestApp#test_testdecorator_public_void'
         )
 
         self._testLine(22)
-        self.assertLastCommand('mvn test -Dtest=org.vimtest.TestApp#test_void')
+        self.assertLastCommand('mvn test -Dtest=org.anytest.TestApp#test_void')
 
         self._testLine(30)
-        self.assertLastCommand('mvn test -Dtest=org.vimtest.TestApp#test_public_void')
+        self.assertLastCommand('mvn test -Dtest=org.anytest.TestApp#test_public_void')
 
         self._testLine(39)
         self.assertLastCommand(
-            'mvn test -Dtest=org.vimtest.TestApp\\$Test_NestedTestClass#test_nested_test'
+            'mvn test -Dtest=org.anytest.TestApp\\$Test_NestedTestClass#test_nested_test'
         )
 
     def test_file(self):
         yield from self._testFile(
-            ('src', 'test', 'java', 'org', 'vimtest', 'TestApp.java')
+            ('src', 'test', 'java', 'org', 'anytest', 'TestApp.java')
         )
-        self.assertLastCommand('mvn test -Dtest=org.vimtest.TestApp\\*')
+        self.assertLastCommand('mvn test -Dtest=org.anytest.TestApp\\*')
 
 
 class MaventestJunit5MvnwTestCase(SublimeProjectTestCase):
@@ -183,35 +183,35 @@ class MaventestJunit5MvnwTestCase(SublimeProjectTestCase):
 
     def test_line(self):
         yield from self._testFile(
-            ('src', 'test', 'java', 'org', 'vimtest', 'TestApp.java'), 12
+            ('src', 'test', 'java', 'org', 'anytest', 'TestApp.java'), 12
         )
         self.assertLastCommand(
-            './mvnw test -Dtest=org.vimtest.TestApp#test_testdecorator_void'
+            './mvnw test -Dtest=org.anytest.TestApp#test_testdecorator_void'
         )
 
         self._testLine(17)
         self.assertLastCommand(
-            './mvnw test -Dtest=org.vimtest.TestApp#test_testdecorator_public_void'
+            './mvnw test -Dtest=org.anytest.TestApp#test_testdecorator_public_void'
         )
 
         self._testLine(22)
-        self.assertLastCommand('./mvnw test -Dtest=org.vimtest.TestApp#test_void')
+        self.assertLastCommand('./mvnw test -Dtest=org.anytest.TestApp#test_void')
 
         self._testLine(30)
         self.assertLastCommand(
-            './mvnw test -Dtest=org.vimtest.TestApp#test_public_void'
+            './mvnw test -Dtest=org.anytest.TestApp#test_public_void'
         )
 
         self._testLine(39)
         self.assertLastCommand(
-            './mvnw test -Dtest=org.vimtest.TestApp\\$Test_NestedTestClass#test_nested_test'
+            './mvnw test -Dtest=org.anytest.TestApp\\$Test_NestedTestClass#test_nested_test'
         )
 
     def test_file(self):
         yield from self._testFile(
-            ('src', 'test', 'java', 'org', 'vimtest', 'TestApp.java')
+            ('src', 'test', 'java', 'org', 'anytest', 'TestApp.java')
         )
-        self.assertLastCommand('./mvnw test -Dtest=org.vimtest.TestApp\\*')
+        self.assertLastCommand('./mvnw test -Dtest=org.anytest.TestApp\\*')
 
 
 class MaventestJunit5MultimoduleTestCase(SublimeProjectTestCase):
@@ -219,38 +219,38 @@ class MaventestJunit5MultimoduleTestCase(SublimeProjectTestCase):
 
     def test_line(self):
         yield from self._testFile(
-            ('sample_module', 'src', 'test', 'java', 'org', 'vimtest', 'TestApp.java'),
+            ('sample_module', 'src', 'test', 'java', 'org', 'anytest', 'TestApp.java'),
             12,
         )
         self.assertLastCommand(
-            'mvn test -pl sample_module -Dtest=org.vimtest.TestApp#test_testdecorator_void'
+            'mvn test -pl sample_module -Dtest=org.anytest.TestApp#test_testdecorator_void'
         )
 
         self._testLine(17)
         self.assertLastCommand(
-            'mvn test -pl sample_module -Dtest=org.vimtest.TestApp#test_testdecorator_public_void'
+            'mvn test -pl sample_module -Dtest=org.anytest.TestApp#test_testdecorator_public_void'
         )
 
         self._testLine(22)
         self.assertLastCommand(
-            'mvn test -pl sample_module -Dtest=org.vimtest.TestApp#test_void'
+            'mvn test -pl sample_module -Dtest=org.anytest.TestApp#test_void'
         )
 
         self._testLine(30)
         self.assertLastCommand(
-            'mvn test -pl sample_module -Dtest=org.vimtest.TestApp#test_public_void'
+            'mvn test -pl sample_module -Dtest=org.anytest.TestApp#test_public_void'
         )
 
         self._testLine(39)
         self.assertLastCommand(
             'mvn test -pl sample_module '
-            '-Dtest=org.vimtest.TestApp\\$Test_NestedTestClass#test_nested_test'
+            '-Dtest=org.anytest.TestApp\\$Test_NestedTestClass#test_nested_test'
         )
 
     def test_file(self):
         yield from self._testFile(
-            ('sample_module', 'src', 'test', 'java', 'org', 'vimtest', 'TestApp.java')
+            ('sample_module', 'src', 'test', 'java', 'org', 'anytest', 'TestApp.java')
         )
         self.assertLastCommand(
-            'mvn test -pl sample_module -Dtest=org.vimtest.TestApp\\*'
+            'mvn test -pl sample_module -Dtest=org.anytest.TestApp\\*'
         )

@@ -11,9 +11,7 @@ POM_XML = 'pom.xml'
 
 
 @cache
-def get_pom_file(file):
-    folder = file.parent()
-
+def get_pom_file(folder):
     for _ in range(MAX_DEPTH):
         pom_file = folder.file(POM_XML)
 
@@ -24,8 +22,8 @@ def get_pom_file(file):
 
 
 class TestFramework(IsConfigurableMixin, java.TestFramework):
-    framework = 'maventest'
-    pattern = r'([Tt]est.*|.*[Tt]est(s|Case)?)\.java$'
+    framework = 'maventest'  # type: str
+    pattern = r'([Tt]est.*|.*[Tt]est(s|Case)?)\.java$'  # type: str
 
     @classmethod
     def is_configurable_fallback(cls, file):
@@ -52,9 +50,14 @@ class TestFramework(IsConfigurableMixin, java.TestFramework):
         return [command, 'test']
 
     def build_suite_position_args(self):
-        pom_file = get_pom_file(self.context.file)
+        pom_file = get_pom_file(self.context.file.dir())
 
-        if pom_file and pom_file.parent().file(POM_XML).exists():
+        if not (pom_file):
+            return []
+
+        parent_pom_file = get_pom_file(pom_file.parent())
+
+        if parent_pom_file:
             return ['-pl', pom_file.dirname()]
 
         return []

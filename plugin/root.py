@@ -32,6 +32,9 @@ class Root:
                 "File '{}' is outside of the project".format(file)
             )
 
+    def name(self):
+        return os.path.basename(self.path)
+
     def join(self, *paths):
         return os.path.join(self.path, *paths)
 
@@ -63,11 +66,14 @@ class RelativePath:
     def contains(self, _):
         raise NotImplementedError()
 
-    def parent(self):
-        return Root(os.path.dirname(os.path.dirname(self.path)))
+    def dir(self):
+        return Root(os.path.dirname(self.path))
 
     def dirname(self):
-        return os.path.basename(os.path.dirname(self.path))
+        return self.dir().name()
+
+    def parent(self):
+        return self.dir().parent()
 
     def name(self):
         return os.path.splitext(

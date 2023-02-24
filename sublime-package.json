@@ -315,6 +315,29 @@
                                     "default": {},
                                     "description": "ExUnit specific ENV variables (will be merged with the ENV variables defined on the language level)"
                                 },
+                                "java.env": {
+                                    "type": "object",
+                                    "default": {},
+                                    "description": "Swift specific ENV variables (will be merged with the ENV variables defined on the test framework level)"
+                                },
+                                "java.maventest.runner": {
+                                    "$ref": "sublime://settings/AnyTest#/definitions/Runner",
+                                    "description": "A runner to run SwiftPM tests with"
+                                },
+                                "java.maventest.executable": {
+                                    "type": "array",
+                                    "description": "Maven test framework executable (e.g. [\"bin/my_mvnw\", \"test\"])"
+                                },
+                                "java.maventest.args": {
+                                    "type": "array",
+                                    "default": [],
+                                    "description": "Maven test cli args (e.g. [\"--do-smth\"])"
+                                },
+                                "java.maventest.env": {
+                                    "type": "object",
+                                    "default": {},
+                                    "description": "Maven tests specific ENV variables (will be merged with the ENV variables defined on the language level)"
+                                },
                                 "javascript.test_framework": {
                                     "$ref": "sublime://settings/AnyTest#/definitions/JavascriptFrameworks"
                                 },

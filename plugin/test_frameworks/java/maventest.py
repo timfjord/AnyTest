@@ -47,20 +47,17 @@ class TestFramework(IsConfigurableMixin, java.TestFramework):
 
     def build_executable(self):
         mvnw = self.file('mvnw')
+        command = './{}'.format(mvnw.relpath) if mvnw.exists() else 'mvn'
 
-        if mvnw.exists():
-            return ['./{}'.format(mvnw.relpath)]
-
-        return ['mvn']
+        return [command, 'test']
 
     def build_suite_position_args(self):
-        args = ['test']
         pom_file = get_pom_file(self.context.file)
 
         if pom_file and pom_file.parent().file(POM_XML).exists():
-            args += ['-pl', pom_file.dirname()]
+            return ['-pl', pom_file.dirname()]
 
-        return args
+        return []
 
     def build_file_position_args(self):
         args = self.build_suite_position_args()

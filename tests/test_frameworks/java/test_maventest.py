@@ -243,7 +243,8 @@ class MaventestJunit5MultimoduleTestCase(SublimeProjectTestCase):
 
         self._testLine(39)
         self.assertLastCommand(
-            'mvn test -pl sample_module -Dtest=org.vimtest.TestApp\\$Test_NestedTestClass#test_nested_test'
+            'mvn test -pl sample_module '
+            '-Dtest=org.vimtest.TestApp\\$Test_NestedTestClass#test_nested_test'
         )
 
     def test_file(self):

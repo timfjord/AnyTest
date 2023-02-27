@@ -97,8 +97,6 @@ class Maven(Base):
 
         if bool(name):
             return ['-Dtest=' + self.get_package() + '.' + name]
-        else:
-            return None
 
 
 class Gradle(Base):

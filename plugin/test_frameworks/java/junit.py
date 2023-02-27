@@ -34,9 +34,10 @@ class TestFramework(java.TestFramework):
         return []
 
     def build_file_position_args(self):
-        args = self.build_suite_position_args()
-
-        return args + self.build_tool.build_file_position_args()
+        return (
+            self.build_suite_position_args()
+            + self.build_tool.build_file_position_args()
+        )
 
     def build_line_position_args(self):
         nearest = self.find_nearest()

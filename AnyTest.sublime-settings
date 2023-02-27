@@ -28,6 +28,9 @@
         ],
         "swift": [
             "swiftpm"
+        ],
+        "java": [
+            "junit"
         ]
     },
     // Available log levels: DEBUG, INFO, WARNING, ERROR, CRITICAL
@@ -80,6 +83,15 @@
     // "elixir.exunit.executable": ["mix", "do", "smth"],
     // "elixir.exunit.args": ["--do-smth"],
     // "elixir.exunit.env": { "ENV2": "value" }, // will be merged with the ENV variable defined on the language level
+    //
+    // --- Java ---
+    // "java.runner": "command", // a runner for all Java test frameworks
+    // "java.env": { "ENV1": "value" }, // will be merged with the ENV variable defined on the test framework level
+    //
+    // "java.junit.runner": "command", // a runner for the JUnit test framework
+    // "java.junit.executable": ["bin/my_wrapper", "test"],
+    // "java.junit.args": ["--do-smth"],
+    // "java.junit.env": { "ENV2": "value" }, // will be merged with the ENV variable defined on the language level
     //
     // --- JavaScript ---
     // to force a JavaScript test framework use:

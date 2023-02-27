@@ -15,8 +15,8 @@
             }
         ]
     },
-    // { "keys": ["primary+j", "primary+n"], "command": "any_test_run", "args": { "scope": "line" } },
-    // { "keys": ["primary+j", "primary+shift+n"], "command": "any_test_run", "args": { "scope": "line", "edit": true } },
+    // { "keys": ["primary+j", "primary+l"], "command": "any_test_run", "args": { "scope": "line" } },
+    // { "keys": ["primary+j", "primary+shift+l"], "command": "any_test_run", "args": { "scope": "line", "edit": true } },
     // { "keys": ["primary+j", "primary+alt+n"], "command": "any_test_run", "args": { "scope": "line", "select": true } },
     // { "keys": ["primary+j", "primary+f"], "command": "any_test_run", "args": { "scope": "file" } },
     // { "keys": ["primary+j", "primary+shift+f"], "command": "any_test_run", "args": { "scope": "file", "edit": true } },
@@ -24,8 +24,8 @@
     // { "keys": ["primary+j", "primary+s"], "command": "any_test_run", "args": { "scope": "suite" } },
     // { "keys": ["primary+j", "primary+shift+s"], "command": "any_test_run", "args": { "scope": "suite", "edit": true } },
     // { "keys": ["primary+j", "primary+alt+s"], "command": "any_test_run", "args": { "scope": "suite", "select": true } },
-    // { "keys": ["primary+j", "primary+l"], "command": "any_test_run", "args": { "scope": "last" } },
-    // { "keys": ["primary+j", "primary+shift+l"], "command": "any_test_run", "args": { "scope": "last", "edit": true } },
+    // { "keys": ["shift", "shift"], "command": "any_test_run", "args": { "scope": "last" } },
+    // { "keys": ["primary+j", "primary+shift+k"], "command": "any_test_run", "args": { "scope": "last", "edit": true } },
     // { "keys": ["primary+j", "primary+k"], "command": "any_test_show_last_output", "args": { "focus": true } },
     // { "keys": ["primary+j", "primary+e"], "command": "any_test_edit_last" },
 ]

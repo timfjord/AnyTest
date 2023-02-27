@@ -24,7 +24,8 @@ class ViewCallbacks(WindowMixin):
 
     def scroll_to_view(self):
         if (
-            not settings.get('scroll_to_view_on_run')
+            not settings
+            or not settings.get('scroll_to_view_on_run')
             or not self.is_editable
             or self._prev_visible_region is None
         ):

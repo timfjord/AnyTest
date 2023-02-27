@@ -12,6 +12,7 @@ Currently, the following test frameworks are supported (more test frameworks are
 |       Language | Test framework                                  | Identifiers                                                 |
 |---------------:|:------------------------------------------------|:------------------------------------------------------------|
 |     **Elixir** | ESpec, ExUnit                                   | `espec`, `exunit`                                           |
+|       **Java** | JUnit (with Maven or Gradle)                    | `junit`                                                     |
 | **JavaScript** | Jest, Mocha, Vitest                             | `jest`, `mocha`, `vitest`                                   |
 |     **Python** | PyTest, PyUnit                                  | `pytest`, `pyunit`                                          |
 |       **Ruby** | Cucumber, M, Minitest, Rails, RSpec, Test Bench | `cucumber`, `m` ,`minitest`, `rails`, `rspec`, `test_bench` |

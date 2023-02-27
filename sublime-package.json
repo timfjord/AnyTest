@@ -63,6 +63,12 @@
                                 "swiftpm"
                             ]
                         },
+                        "JavaFrameworks": {
+                            "type": "string",
+                            "enum": [
+                                "junit"
+                            ]
+                        },
                         "PackageConfig": {
                             "properties": {
                                 "subprojects": {
@@ -161,6 +167,19 @@
                                                     "type": "array",
                                                     "items": {
                                                         "$ref": "sublime://settings/AnyTest#/definitions/SwiftFrameworks"
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        "java": {
+                                            "anyOf": [
+                                                {
+                                                    "$ref": "sublime://settings/AnyTest#/definitions/JavaFrameworks"
+                                                },
+                                                {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "sublime://settings/AnyTest#/definitions/JavaFrameworks"
                                                     }
                                                 }
                                             ]
@@ -295,6 +314,29 @@
                                     "type": "object",
                                     "default": {},
                                     "description": "ExUnit specific ENV variables (will be merged with the ENV variables defined on the language level)"
+                                },
+                                "java.env": {
+                                    "type": "object",
+                                    "default": {},
+                                    "description": "Swift specific ENV variables (will be merged with the ENV variables defined on the test framework level)"
+                                },
+                                "java.junit.runner": {
+                                    "$ref": "sublime://settings/AnyTest#/definitions/Runner",
+                                    "description": "A runner to run Junit tests with"
+                                },
+                                "java.junit.executable": {
+                                    "type": "array",
+                                    "description": "JUnit test framework executable (e.g. [\"bin/my_wrapper\", \"test\"])"
+                                },
+                                "java.junit.args": {
+                                    "type": "array",
+                                    "default": [],
+                                    "description": "JUnit test cli args (e.g. [\"--do-smth\"])"
+                                },
+                                "java.junit.env": {
+                                    "type": "object",
+                                    "default": {},
+                                    "description": "JUnit tests specific ENV variables (will be merged with the ENV variables defined on the language level)"
                                 },
                                 "javascript.test_framework": {
                                     "$ref": "sublime://settings/AnyTest#/definitions/JavascriptFrameworks"

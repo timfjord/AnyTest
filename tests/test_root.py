@@ -81,6 +81,12 @@ class RootTestCase(unittest.TestCase):
         self.assertEqual(root.path, root_path2)
         self.assertEqual(file.path, file_path)
 
+    def test_name(self):
+        root_path = path('code', 'project')
+        root = Root(root_path)
+
+        self.assertEqual(root.name(), 'project')
+
     def test_join_joins_files_to_the_root(self):
         root_path = path('code', 'project')
         root = Root(root_path)
@@ -99,6 +105,13 @@ class RootTestCase(unittest.TestCase):
 
         self.assertIsInstance(file, File)
         self.assertEqual(file.path, path('code', 'project', 'folder', 'file.py'))
+
+    def test_parent(self):
+        root = Root(path('code', 'project'))
+        parent = root.parent()
+
+        self.assertIsInstance(parent, Root)
+        self.assertEqual(parent.path, path('code'))
 
     def test_glob(self):
         root = Root(path('code'))
@@ -134,6 +147,34 @@ class RelativePathTestCase(unittest.TestCase):
             self.assertTrue(RelativePath(root, existing_file).exists())
             self.assertFalse(RelativePath(root, 'uNkn0wn.py').exists())
             self.assertTrue(RelativePath(subfolder, existing_dir).exists())
+
+    def test_dir(self):
+        root = Root(path('code', 'project'))
+        relative_path = RelativePath(root, 'folder', 'file.py')
+        dir = relative_path.dir()
+
+        self.assertIsInstance(dir, Root)
+        self.assertEqual(dir.path, path('code', 'project', 'folder'))
+
+    def test_dirname(self):
+        root = Root(path('code', 'project'))
+        relative_path = RelativePath(root, 'folder', 'file.py')
+
+        self.assertEqual(relative_path.dirname(), 'folder')
+
+    def test_parent(self):
+        root = Root(path('code', 'project'))
+        relative_path = RelativePath(root, 'folder', 'file.py')
+        parent = relative_path.parent()
+
+        self.assertIsInstance(parent, Root)
+        self.assertEqual(parent.path, path('code', 'project'))
+
+    def test_name(self):
+        root = Root(path('code', 'project'))
+        relative_path = RelativePath(root, 'folder', 'file.py')
+
+        self.assertEqual(relative_path.name(), 'file')
 
 
 class FileTestCase(unittest.TestCase):

@@ -1,7 +1,7 @@
 from AnyTest.tests import SublimeProjectTestCase
 
 
-class MavenJunit3TestCase(SublimeProjectTestCase):
+class MavenJUnit3TestCase(SublimeProjectTestCase):
     folder = ('junit', 'maven', 'junit3')
 
     def test_line(self):
@@ -41,8 +41,8 @@ class MavenJunit3TestCase(SublimeProjectTestCase):
         self.assertLastCommand('mvn test')
 
 
-class MavenJunit3MultimoduleTestCase(SublimeProjectTestCase):
-    folder = ('junit', 'maven', 'junit3_multimodule')
+class MavenJUnit3MultiModuleTestCase(SublimeProjectTestCase):
+    folder = ('junit', 'maven', 'junit3_multi_module')
 
     def test_line(self):
         yield from self._testFile(
@@ -144,7 +144,7 @@ class MavenJunit3MultimoduleTestCase(SublimeProjectTestCase):
         self.assertLastCommand('mvn test -pl sample_module')
 
 
-class MavenJunit5TestCase(SublimeProjectTestCase):
+class MavenJUnit5TestCase(SublimeProjectTestCase):
     folder = ('junit', 'maven', 'junit5')
 
     def test_line(self):
@@ -178,7 +178,7 @@ class MavenJunit5TestCase(SublimeProjectTestCase):
         self.assertLastCommand('mvn test -Dtest=org.anytest.TestApp\\*')
 
 
-class MavenJunit5MvnwTestCase(SublimeProjectTestCase):
+class MavenJUnit5MvnwTestCase(SublimeProjectTestCase):
     folder = ('junit', 'maven', 'junit5_mvnw')
 
     def test_line(self):
@@ -214,8 +214,8 @@ class MavenJunit5MvnwTestCase(SublimeProjectTestCase):
         self.assertLastCommand('./mvnw test -Dtest=org.anytest.TestApp\\*')
 
 
-class MavenJunit5MultimoduleTestCase(SublimeProjectTestCase):
-    folder = ('junit', 'maven', 'junit5_multimodule')
+class MavenJUnit5MultiModuleTestCase(SublimeProjectTestCase):
+    folder = ('junit', 'maven', 'junit5_multi_module')
 
     def test_line(self):
         yield from self._testFile(
@@ -253,4 +253,136 @@ class MavenJunit5MultimoduleTestCase(SublimeProjectTestCase):
         )
         self.assertLastCommand(
             'mvn test -pl sample_module -Dtest=org.anytest.TestApp\\*'
+        )
+
+
+class GradlePlainTestCase(SublimeProjectTestCase):
+    folder = ('junit', 'gradle', 'plain')
+
+    def test_line(self):
+        yield from self._testFile('MathTest.java', 37)
+        self.assertLastCommand('gradle test --tests MathTest.testFailedAdd')
+
+    def test_file(self):
+        yield from self._testFile('TestMath.java')
+        self.assertLastCommand('gradle test --tests TestMath')
+
+        yield from self._testFile('MathTest.java')
+        self.assertLastCommand('gradle test --tests MathTest')
+
+        yield from self._testFile('MathTests.java')
+        self.assertLastCommand('gradle test --tests MathTests')
+
+        yield from self._testFile('MathTestCase.java')
+        self.assertLastCommand('gradle test --tests MathTestCase')
+
+    def test_suite(self):
+        yield from self._testSuite('MathTest.java')
+        self.assertLastCommand('gradle test')
+
+
+class GradleSingleModuleTestCase(SublimeProjectTestCase):
+    folder = ('junit', 'gradle', 'single_module')
+
+    def test_line(self):
+        yield from self._testFile(('src', 'test', 'java', 'MathTest.java'), 37)
+        self.assertLastCommand('gradle test --tests MathTest.testFailedAdd')
+
+    def test_file(self):
+        yield from self._testFile(('src', 'test', 'java', 'TestMath.java'))
+        self.assertLastCommand('gradle test --tests TestMath')
+
+        yield from self._testFile(('src', 'test', 'java', 'MathTest.java'))
+        self.assertLastCommand('gradle test --tests MathTest')
+
+        yield from self._testFile(('src', 'test', 'java', 'MathTests.java'))
+        self.assertLastCommand('gradle test --tests MathTests')
+
+        yield from self._testFile(('src', 'test', 'java', 'MathTestCase.java'))
+        self.assertLastCommand('gradle test --tests MathTestCase')
+
+    def test_suite(self):
+        yield from self._testSuite(('src', 'test', 'java', 'MathTest.java'))
+        self.assertLastCommand('gradle test')
+
+
+class GradleMultiModuleTestCase(SublimeProjectTestCase):
+    folder = ('junit', 'gradle', 'multi_module')
+
+    def test_line(self):
+        yield from self._testFile(
+            ('sample_module', 'src', 'test', 'java', 'MathTest.java'), 37
+        )
+        self.assertLastCommand(
+            'gradle test -p sample_module --tests MathTest.testFailedAdd'
+        )
+
+    def test_file(self):
+        yield from self._testFile(
+            ('sample_module', 'src', 'test', 'java', 'TestMath.java')
+        )
+        self.assertLastCommand('gradle test -p sample_module --tests TestMath')
+
+        yield from self._testFile(
+            ('sample_module', 'src', 'test', 'java', 'MathTest.java')
+        )
+        self.assertLastCommand('gradle test -p sample_module --tests MathTest')
+
+        yield from self._testFile(
+            ('sample_module', 'src', 'test', 'java', 'MathTests.java')
+        )
+        self.assertLastCommand('gradle test -p sample_module --tests MathTests')
+
+        yield from self._testFile(
+            ('sample_module', 'src', 'test', 'java', 'MathTestCase.java')
+        )
+        self.assertLastCommand('gradle test -p sample_module --tests MathTestCase')
+
+    def test_suite(self):
+        yield from self._testSuite(
+            ('sample_module', 'src', 'test', 'java', 'MathTest.java')
+        )
+        self.assertLastCommand('gradle test -p sample_module')
+
+
+class GradleMultiModuleDeepTestCase(SublimeProjectTestCase):
+    folder = ('junit', 'gradle', 'multi_module_deep')
+
+    def test_file(self):
+        yield from self._testFile(
+            ('hello', 'world', 'src', 'test', 'java', 'MessageServiceTest.java')
+        )
+        self.assertLastCommand('gradle test -p hello/world --tests MessageServiceTest')
+
+
+class GradlePlainJUnit5TestCase(SublimeProjectTestCase):
+    folder = ('junit', 'gradle', 'plain_junit5')
+
+    def test_line_nested(self):
+        yield from self._testFile('MathJunit5Test.java', 57)
+        self.assertLastCommand(
+            'gradle test --tests MathJunit5Test\\$NestedClass.testNested'
+        )
+
+        self._testLine(64)
+        self.assertLastCommand(
+            'gradle test --tests MathJunit5Test\\$NestedClass.testNested2'
+        )
+
+    def test_line_leveled_nested(self):
+        yield from self._testFile('MathJunit5Test.java', 74)
+        self.assertLastCommand(
+            'gradle test --tests MathJunit5Test\\$NestedClass\\$NestedNestedClass.testNestedNested'
+        )
+
+    def test_line_nested_parameterized_test_and_source_methods(self):
+        yield from self._testFile('MathJunit5Test.java', 91)
+        self.assertLastCommand(
+            'gradle test --tests MathJunit5Test\\$NestedParameterizedTestClass.testWithParams'
+        )
+
+    def test_line_nested_parameterized_test_combined(self):
+        yield from self._testFile('MathJunit5Test.java', 91)
+        self.assertLastCommand(
+            'gradle test --tests MathJunit5Test\\$NestedParameterizedTestClass.testWithParams'
         )

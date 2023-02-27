@@ -352,7 +352,9 @@ class GradleMultiModuleDeepTestCase(SublimeProjectTestCase):
         yield from self._testFile(
             ('hello', 'world', 'src', 'test', 'java', 'MessageServiceTest.java')
         )
-        self.assertLastCommand('gradle test -p hello/world --tests MessageServiceTest')
+        self.assertLastCommand(
+            'gradle test -p ', ('hello', 'world'), ' --tests MessageServiceTest'
+        )
 
 
 class GradlePlainJUnit5TestCase(SublimeProjectTestCase):

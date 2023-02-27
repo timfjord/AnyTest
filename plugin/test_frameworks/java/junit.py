@@ -24,9 +24,12 @@ class TestFramework(java.TestFramework):
 
     def build_suite_position_args(self):
         config_file = self.build_tool.config_file
+        parent_config_file = self.build_tool.find_config_file(config_file.parent())
 
-        if self.build_tool.find_config_file(config_file.parent(), max_depth=1):
-            return self.build_tool.build_module_args(config_file.dirname())
+        if parent_config_file:
+            return self.build_tool.build_module_args(
+                parent_config_file.dir().relpath(config_file.dir().path),
+            )
 
         return []
 

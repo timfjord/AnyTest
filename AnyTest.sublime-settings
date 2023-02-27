@@ -30,7 +30,7 @@
             "swiftpm"
         ],
         "java": [
-            "maventest"
+            "junit"
         ]
     },
     // Available log levels: DEBUG, INFO, WARNING, ERROR, CRITICAL
@@ -88,10 +88,10 @@
     // "java.runner": "command", // a runner for all Java test frameworks
     // "java.env": { "ENV1": "value" }, // will be merged with the ENV variable defined on the test framework level
     //
-    // "java.maventest.runner": "command", // a runner for the Maven test framework
-    // "java.maventest.executable": ["bin/my_mvnw", "test"],
-    // "java.maventest.args": ["--do-smth"],
-    // "java.maventest.env": { "ENV2": "value" }, // will be merged with the ENV variable defined on the language level
+    // "java.junit.runner": "command", // a runner for the JUnit test framework
+    // "java.junit.executable": ["bin/my_wrapper", "test"],
+    // "java.junit.args": ["--do-smth"],
+    // "java.junit.env": { "ENV2": "value" }, // will be merged with the ENV variable defined on the language level
     //
     // --- JavaScript ---
     // to force a JavaScript test framework use:

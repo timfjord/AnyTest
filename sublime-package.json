@@ -66,7 +66,7 @@
                         "JavaFrameworks": {
                             "type": "string",
                             "enum": [
-                                "maventest"
+                                "junit"
                             ]
                         },
                         "PackageConfig": {
@@ -320,23 +320,23 @@
                                     "default": {},
                                     "description": "Swift specific ENV variables (will be merged with the ENV variables defined on the test framework level)"
                                 },
-                                "java.maventest.runner": {
+                                "java.junit.runner": {
                                     "$ref": "sublime://settings/AnyTest#/definitions/Runner",
-                                    "description": "A runner to run SwiftPM tests with"
+                                    "description": "A runner to run Junit tests with"
                                 },
-                                "java.maventest.executable": {
+                                "java.junit.executable": {
                                     "type": "array",
-                                    "description": "Maven test framework executable (e.g. [\"bin/my_mvnw\", \"test\"])"
+                                    "description": "JUnit test framework executable (e.g. [\"bin/my_wrapper\", \"test\"])"
                                 },
-                                "java.maventest.args": {
+                                "java.junit.args": {
                                     "type": "array",
                                     "default": [],
-                                    "description": "Maven test cli args (e.g. [\"--do-smth\"])"
+                                    "description": "JUnit test cli args (e.g. [\"--do-smth\"])"
                                 },
-                                "java.maventest.env": {
+                                "java.junit.env": {
                                     "type": "object",
                                     "default": {},
-                                    "description": "Maven tests specific ENV variables (will be merged with the ENV variables defined on the language level)"
+                                    "description": "JUnit tests specific ENV variables (will be merged with the ENV variables defined on the language level)"
                                 },
                                 "javascript.test_framework": {
                                     "$ref": "sublime://settings/AnyTest#/definitions/JavascriptFrameworks"

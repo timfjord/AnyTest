@@ -1,8 +1,8 @@
 from AnyTest.tests import SublimeProjectTestCase
 
 
-class MaventestJunit3TestCase(SublimeProjectTestCase):
-    folder = ('maventest', 'junit3')
+class MavenJunit3TestCase(SublimeProjectTestCase):
+    folder = ('junit', 'maven', 'junit3')
 
     def test_line(self):
         yield from self._testFile(
@@ -41,8 +41,8 @@ class MaventestJunit3TestCase(SublimeProjectTestCase):
         self.assertLastCommand('mvn test')
 
 
-class MaventestJunit3MultimoduleTestCase(SublimeProjectTestCase):
-    folder = ('maventest', 'junit3_multimodule')
+class MavenJunit3MultimoduleTestCase(SublimeProjectTestCase):
+    folder = ('junit', 'maven', 'junit3_multimodule')
 
     def test_line(self):
         yield from self._testFile(
@@ -144,8 +144,8 @@ class MaventestJunit3MultimoduleTestCase(SublimeProjectTestCase):
         self.assertLastCommand('mvn test -pl sample_module')
 
 
-class MaventestJunit5TestCase(SublimeProjectTestCase):
-    folder = ('maventest', 'junit5')
+class MavenJunit5TestCase(SublimeProjectTestCase):
+    folder = ('junit', 'maven', 'junit5')
 
     def test_line(self):
         yield from self._testFile(
@@ -178,8 +178,8 @@ class MaventestJunit5TestCase(SublimeProjectTestCase):
         self.assertLastCommand('mvn test -Dtest=org.anytest.TestApp\\*')
 
 
-class MaventestJunit5MvnwTestCase(SublimeProjectTestCase):
-    folder = ('maventest', 'junit5_mvnw')
+class MavenJunit5MvnwTestCase(SublimeProjectTestCase):
+    folder = ('junit', 'maven', 'junit5_mvnw')
 
     def test_line(self):
         yield from self._testFile(
@@ -214,8 +214,8 @@ class MaventestJunit5MvnwTestCase(SublimeProjectTestCase):
         self.assertLastCommand('./mvnw test -Dtest=org.anytest.TestApp\\*')
 
 
-class MaventestJunit5MultimoduleTestCase(SublimeProjectTestCase):
-    folder = ('maventest', 'junit5_multimodule')
+class MavenJunit5MultimoduleTestCase(SublimeProjectTestCase):
+    folder = ('junit', 'maven', 'junit5_multimodule')
 
     def test_line(self):
         yield from self._testFile(

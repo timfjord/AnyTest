@@ -143,9 +143,9 @@ class TestFramework(metaclass=ABCMeta):
         pass
 
     def build_command(self, scope):
-        try:
+        if scope in (self.SCOPE_SUITE, self.SCOPE_FILE, self.SCOPE_LINE):
             position_args = getattr(self, 'build_{}_position_args'.format(scope))
 
             return self.executable() + self.args() + position_args()
-        except AttributeError:
+        else:
             raise errors.Error('Invalid scope')

@@ -256,8 +256,8 @@ class MavenJUnit5MultiModuleTestCase(SublimeProjectTestCase):
         )
 
 
-class GradlePlainTestCase(SublimeProjectTestCase):
-    folder = ('junit', 'gradle', 'plain')
+class GradleJUnit3PlainTestCase(SublimeProjectTestCase):
+    folder = ('junit', 'gradle', 'junit3_plain')
 
     def test_line(self):
         yield from self._testFile('MathTest.java', 37)
@@ -281,8 +281,8 @@ class GradlePlainTestCase(SublimeProjectTestCase):
         self.assertLastCommand('gradle test')
 
 
-class GradleSingleModuleTestCase(SublimeProjectTestCase):
-    folder = ('junit', 'gradle', 'single_module')
+class GradleJUnit3SingleModuleTestCase(SublimeProjectTestCase):
+    folder = ('junit', 'gradle', 'junit3_single_module')
 
     def test_line(self):
         yield from self._testFile(('src', 'test', 'java', 'MathTest.java'), 37)
@@ -306,8 +306,8 @@ class GradleSingleModuleTestCase(SublimeProjectTestCase):
         self.assertLastCommand('gradle test')
 
 
-class GradleMultiModuleTestCase(SublimeProjectTestCase):
-    folder = ('junit', 'gradle', 'multi_module')
+class GradleJUnit3MultiModuleTestCase(SublimeProjectTestCase):
+    folder = ('junit', 'gradle', 'junit3_multi_module')
 
     def test_line(self):
         yield from self._testFile(
@@ -345,8 +345,8 @@ class GradleMultiModuleTestCase(SublimeProjectTestCase):
         self.assertLastCommand('gradle test -p sample_module')
 
 
-class GradleMultiModuleDeepTestCase(SublimeProjectTestCase):
-    folder = ('junit', 'gradle', 'multi_module_deep')
+class GradleJUnit3MultiModuleDeepTestCase(SublimeProjectTestCase):
+    folder = ('junit', 'gradle', 'junit3_multi_module_deep')
 
     def test_file(self):
         yield from self._testFile(
@@ -357,8 +357,8 @@ class GradleMultiModuleDeepTestCase(SublimeProjectTestCase):
         )
 
 
-class GradlePlainJUnit5TestCase(SublimeProjectTestCase):
-    folder = ('junit', 'gradle', 'plain_junit5')
+class GradleJUnit5PlainTestCase(SublimeProjectTestCase):
+    folder = ('junit', 'gradle', 'junit5_plain')
 
     def test_line_nested(self):
         yield from self._testFile('MathJunit5Test.java', 57)

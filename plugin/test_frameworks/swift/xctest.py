@@ -6,7 +6,7 @@ class TestFramework(swift.TestFramework):
     NAMESPACE_SEPARATOR = '.'
     NEAREST_SEPARATOR = '/'
 
-    framework = 'swiftpm'
+    framework = 'xctest'
     pattern = r'^Tests[/\\].*\.swift$'
 
     def build_file_position_args(self):

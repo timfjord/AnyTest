@@ -1,9 +1,9 @@
 import XCTest
-@testable import VimTest
+@testable import AnyTest
 
-class VimTestRootTests: XCTestCase {
+public class AnyTestPublicTests: XCTestCase {
   func testExample() {
-    XCTAssertEqual(VimTest().text, "Hello, World!")
+    XCTAssertEqual(AnyTest().text, "Hello, World!")
   }
 
   func testOther() {

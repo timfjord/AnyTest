@@ -1,3 +1,3 @@
-struct VimTest {
+struct AnyTest {
   let text = "Hello, World!"
 }

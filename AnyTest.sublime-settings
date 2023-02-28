@@ -27,7 +27,7 @@
             "cargotest"
         ],
         "swift": [
-            "swiftpm"
+            "xctest"
         ],
         "java": [
             "junit"
@@ -206,11 +206,11 @@
     // "swift.runner": "command", // a runner for all Swift test frameworks
     // "swift.env": { "ENV1": "value" }, // will be merged with the ENV variable defined on the test framework level
     //
-    // "swift.swiftpm.runner": "command", // a runner for the SwiftPM test framework
-    "swift.swiftpm.executable": [
+    // "swift.xctest.runner": "command", // a runner for the XCTest test framework
+    "swift.xctest.executable": [
         "swift",
         "test"
     ],
-    // "swift.swiftpm.args": ["--do-smth"],
-    // "swift.swiftpm.env": { "ENV2": "value" }, // will be merged with the ENV variable defined on the language level
+    // "swift.xctest.args": ["--do-smth"],
+    // "swift.xctest.env": { "ENV2": "value" }, // will be merged with the ENV variable defined on the language level
 }

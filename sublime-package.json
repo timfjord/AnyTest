@@ -60,7 +60,7 @@
                         "SwiftFrameworks": {
                             "type": "string",
                             "enum": [
-                                "swiftpm"
+                                "xctest"
                             ]
                         },
                         "JavaFrameworks": {
@@ -723,27 +723,27 @@
                                     "default": {},
                                     "description": "Swift specific ENV variables (will be merged with the ENV variables defined on the test framework level)"
                                 },
-                                "swift.swiftpm.runner": {
+                                "swift.xctest.runner": {
                                     "$ref": "sublime://settings/AnyTest#/definitions/Runner",
-                                    "description": "A runner to run SwiftPM tests with"
+                                    "description": "A runner to run XCTest tests with"
                                 },
-                                "swift.swiftpm.executable": {
+                                "swift.xctest.executable": {
                                     "type": "array",
                                     "default": [
                                         "swift",
                                         "test"
                                     ],
-                                    "description": "SwiftPM test framework executable (e.g. [\"bin/tests\"])"
+                                    "description": "XCTest test framework executable (e.g. [\"bin/tests\"])"
                                 },
-                                "swift.swiftpm.args": {
+                                "swift.xctest.args": {
                                     "type": "array",
                                     "default": [],
-                                    "description": "SwiftPM test cli args (e.g. [\"--do-smth\"])"
+                                    "description": "XCTest test cli args (e.g. [\"--do-smth\"])"
                                 },
-                                "swift.swiftpm.env": {
+                                "swift.xctest.env": {
                                     "type": "object",
                                     "default": {},
-                                    "description": "SwiftPM tests specific ENV variables (will be merged with the ENV variables defined on the language level)"
+                                    "description": "XCTest tests specific ENV variables (will be merged with the ENV variables defined on the language level)"
                                 }
                             }
                         }

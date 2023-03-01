@@ -27,15 +27,12 @@ class Runner(BaseRunner):
 
     class Builder(BaseRunner.Builder):
         def build_options(self):
-            options = {
-                'command_name': Runner.settings('name', type=str),
-                'encoding': 'utf-8',
-                'env': self.test_framework.settings(
-                    'env', default={}, fallback=False, type=dict, merge=True
-                ),
-            }
+            options = self.map_test_framework_options(file_regex='output_file_regex')
 
-            if self.test_framework.output_file_regex is not None:
-                options['file_regex'] = self.test_framework.output_file_regex
+            options['command_name'] = Runner.settings('name', type=str)
+            options['encoding'] = 'utf-8'
+            options['env'] = self.test_framework.settings(
+                'env', default={}, fallback=False, type=dict, merge=True
+            )
 
             return options

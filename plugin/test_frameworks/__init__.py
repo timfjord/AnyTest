@@ -54,7 +54,6 @@ class TestFramework(metaclass=ABCMeta):
 
     test_patterns = None
     namespace_patterns = []
-    output_file_regex = None
 
     def __init__(self, context):
         self.context = context
@@ -149,3 +148,6 @@ class TestFramework(metaclass=ABCMeta):
             return self.executable() + self.args() + position_args()
         else:
             raise errors.Error('Invalid scope')
+
+    def get_options(self):
+        return {}

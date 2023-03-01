@@ -12,6 +12,7 @@ Currently, the following test frameworks are supported (more test frameworks are
 |       Language | Test framework                                  | Identifiers                                                 |
 |---------------:|:------------------------------------------------|:------------------------------------------------------------|
 |     **Elixir** | ESpec, ExUnit                                   | `espec`, `exunit`                                           |
+|         **Go** | Gotest                                          | `gotest`                                                    |
 |       **Java** | JUnit (with Maven or Gradle)                    | `junit`                                                     |
 | **JavaScript** | Jest, Mocha, Vitest                             | `jest`, `mocha`, `vitest`                                   |
 |     **Python** | PyTest, PyUnit                                  | `pytest`, `pyunit`                                          |

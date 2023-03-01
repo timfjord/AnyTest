@@ -19,6 +19,7 @@ def find(file):
 
 class Base(metaclass=ABCMeta):
     MAX_DEPTH = 20
+    NAMESPACE_SEPARATOR = '$'
 
     @property
     @abstractmethod
@@ -69,6 +70,8 @@ class Maven(Base):
         (r'\/[^\/]+$', ''),
         (r'/', '.'),
     )
+    NEAREST_SEPARATOR = '$'
+    SECTION_SEPARATOR = '#'
 
     executable = 'mvn'  # type: str
     config_filenames = ('pom.xml',)  # type: tuple
@@ -89,9 +92,9 @@ class Maven(Base):
     def build_line_position_args(self, nearest):
         name = ''.join(
             (
-                utils.escape_regex('$'.join(nearest.namespaces)),
-                '#' if bool(nearest.namespaces) else '',
-                utils.escape_regex('$'.join(nearest.tests)),
+                utils.escape_regex(self.NAMESPACE_SEPARATOR.join(nearest.namespaces)),
+                self.SECTION_SEPARATOR if bool(nearest.namespaces) else '',
+                utils.escape_regex(self.NEAREST_SEPARATOR.join(nearest.tests)),
             )
         )
 
@@ -100,6 +103,8 @@ class Maven(Base):
 
 
 class Gradle(Base):
+    NEAREST_SEPARATOR = '.'
+
     executable = 'gradle'  # type: str
     config_filenames = (
         'build.gradle',
@@ -117,9 +122,9 @@ class Gradle(Base):
     def build_line_position_args(self, nearest):
         name = ''.join(
             (
-                utils.escape_regex('$'.join(nearest.namespaces)),
-                '.' if bool(nearest.namespaces) else '',
-                utils.escape_regex('.'.join(nearest.tests)),
+                utils.escape_regex(self.NAMESPACE_SEPARATOR.join(nearest.namespaces)),
+                self.NEAREST_SEPARATOR if bool(nearest.namespaces) else '',
+                utils.escape_regex(self.NEAREST_SEPARATOR.join(nearest.tests)),
             )
         )
 

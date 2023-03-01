@@ -25,6 +25,12 @@
                                 "exunit"
                             ]
                         },
+                        "GoFrameworks": {
+                            "type": "string",
+                            "enum": [
+                                "gotest"
+                            ]
+                        },
                         "JavascriptFrameworks": {
                             "type": "string",
                             "enum": [
@@ -102,6 +108,19 @@
                                                     "type": "array",
                                                     "items": {
                                                         "$ref": "sublime://settings/AnyTest#/definitions/ElixirFrameworks"
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        "go": {
+                                            "anyOf": [
+                                                {
+                                                    "$ref": "sublime://settings/AnyTest#/definitions/GoFrameworks"
+                                                },
+                                                {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "sublime://settings/AnyTest#/definitions/GoFrameworks"
                                                     }
                                                 }
                                             ]
@@ -314,6 +333,37 @@
                                     "type": "object",
                                     "default": {},
                                     "description": "ExUnit specific ENV variables (will be merged with the ENV variables defined on the language level)"
+                                },
+                                "go.runner": {
+                                    "$ref": "sublime://settings/AnyTest#/definitions/Runner",
+                                    "description": "A runner to run Go tests with"
+                                },
+                                "go.env": {
+                                    "type": "object",
+                                    "default": {},
+                                    "description": "Go specific ENV variables (will be merged with the ENV variables defined on the test framework level)"
+                                },
+                                "go.gotest.runner": {
+                                    "$ref": "sublime://settings/AnyTest#/definitions/Runner",
+                                    "description": "A runner to run Gotest tests with"
+                                },
+                                "go.gotest.executable": {
+                                    "type": "array",
+                                    "default": [
+                                        "go",
+                                        "test"
+                                    ],
+                                    "description": "Gotest test framework executable (e.g. [\"go\", \"my_test\"])"
+                                },
+                                "go.gotest.args": {
+                                    "type": "array",
+                                    "default": [],
+                                    "description": "Gotest cli args (e.g. [\"--do-smth\"])"
+                                },
+                                "go.gotest.env": {
+                                    "type": "object",
+                                    "default": {},
+                                    "description": "Gotest specific ENV variables (will be merged with the ENV variables defined on the language level)"
                                 },
                                 "java.env": {
                                     "type": "object",

@@ -6,9 +6,51 @@ from operator import ge, le
 from . import settings
 from .mixins import WindowMixin
 from .root import Root
+from .utils import escape_regex as _escape_regex
 from .utils import match_patterns
 
-Nearest = namedtuple('Nearest', 'tests, namespaces, line, names')
+
+class Nearest(namedtuple('Nearest', 'tests, namespaces, line, names')):
+    __slots__ = ()
+
+    def join(
+        self,
+        sep,
+        namespace_sep=None,
+        test_sep=None,
+        start='',
+        namespace_start='',
+        test_end='',
+        end='',
+        escape_regex=False,
+    ):
+        if namespace_sep is None:
+            namespace_sep = sep
+
+        if test_sep is None:
+            test_sep = sep
+
+        has_tests_or_namespaces = bool(self.tests) or bool(self.namespaces)
+        joined = sep.join(
+            filter(
+                bool,
+                (namespace_sep.join(self.namespaces), test_sep.join(self.tests)),
+            ),
+        )
+
+        if escape_regex:
+            escape_function = escape_regex if callable(escape_regex) else _escape_regex
+            joined = escape_function(joined)
+
+        return ''.join(
+            (
+                start if has_tests_or_namespaces else '',
+                namespace_start if bool(self.namespaces) else '',
+                joined,
+                test_end if bool(self.tests) else '',
+                end if has_tests_or_namespaces else '',
+            )
+        )
 
 
 class Context(WindowMixin):

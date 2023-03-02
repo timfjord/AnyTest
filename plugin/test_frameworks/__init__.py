@@ -142,7 +142,8 @@ class TestFramework(metaclass=ABCMeta):
         pass
 
     def build_command(self, scope):
-        if scope in (self.SCOPE_SUITE, self.SCOPE_FILE, self.SCOPE_LINE):
+        method_name = 'build_{}_position_args'.format(scope)
+        if hasattr(self, method_name):
             position_args = getattr(self, 'build_{}_position_args'.format(scope))
 
             return self.executable() + self.args() + position_args()

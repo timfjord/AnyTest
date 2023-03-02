@@ -6,27 +6,27 @@ class GoTestTestCase(SublimeProjectTestCase):
 
     def test_line(self):
         yield from self._testFile('normal_test.go', 5)
-        self.assertLastCommand('go test -run TestNumbers\\$ ./.')
+        self.assertLastCommand('go test -run TestNumbers$ ./.')
 
         self._testLine(8)
-        self.assertLastCommand('go test -run TestNumbers/adding_two_numbers\\$ ./.')
+        self.assertLastCommand('go test -run TestNumbers/adding_two_numbers$ ./.')
 
         self._testLine(12)
         self.assertLastCommand(
-            r'go test -run TestNumbers/\\\[\\\]\\\.\\\*\\\+\\\?\\\\\|\\\\\$\\\^\\\\\(\\\\\)\$ ./.'
+            r'go test -run TestNumbers/\\\[\\\]\\\.\\\*\\\+\\\?\\\|\\\$\\\^\\\(\\\)$ ./.'
         )
 
         self._testLine(17)
-        self.assertLastCommand('go test -run TestNumbers/this_is/nested\\$ ./.')
+        self.assertLastCommand('go test -run TestNumbers/this_is/nested$ ./.')
 
         self._testLine(23)
-        self.assertLastCommand('go test -run Testテスト\\$ ./.')
+        self.assertLastCommand('go test -run Testテスト$ ./.')
 
         self._testLine(27)
-        self.assertLastCommand('go test -run ExampleSomething\\$ ./.')
+        self.assertLastCommand('go test -run ExampleSomething$ ./.')
 
         self._testLine(36)
-        self.assertLastCommand('go test -run TestSomethingInASuite\\$ ./.')
+        self.assertLastCommand('go test -run TestSomethingInASuite$ ./.')
 
     def test_file(self):
         yield from self._testFile('normal_test.go')

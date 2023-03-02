@@ -1,3 +1,5 @@
+import shlex
+
 from ... import utils
 from .. import javascript
 from ..mixins import IsConfigurableMixin
@@ -24,6 +26,6 @@ class TestFramework(IsConfigurableMixin, javascript.TestFramework):
         name = utils.escape_regex(' '.join(nearest.namespaces + nearest.tests))
 
         if bool(name):
-            args = ['-t', utils.escape_shell(name)] + args
+            args = ['-t', shlex.quote(name)] + args
 
         return args

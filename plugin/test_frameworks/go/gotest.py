@@ -1,32 +1,9 @@
 import os.path
 import re
 
+from ...utils import escape_regex
 from .. import go
 from ..mixins import IsConfigurableMixin
-
-REGEXP_ESCAPE_TRANSLATION_TABLE = str.maketrans(
-    {
-        '?': r'\\\?',
-        '+': r'\\\+',
-        '*': r'\\\*',
-        '\\': r'\\\\',
-        '^': r'\\\^',
-        '$': r'\\\\\$',
-        '.': r'\\\.',
-        '|': r'\\\\\|',
-        '{': r'\\\{',
-        '}': r'\\\}',
-        '[': r'\\\[',
-        ']': r'\\\]',
-        '(': r'\\\\\(',
-        ')': r'\\\\\)',
-    }
-)
-
-
-# TODO: This escape function doesn't work correctly with |()$^ symbols when the runner is `command`
-def escape_regex(string):
-    return string.translate(REGEXP_ESCAPE_TRANSLATION_TABLE)
 
 
 class TestFramework(IsConfigurableMixin, go.TestFramework):
@@ -47,10 +24,12 @@ class TestFramework(IsConfigurableMixin, go.TestFramework):
     def build_line_position_args(self):
         args = self.build_file_position_args()
         name = re.sub(
-            r'\s+',
+            r'\s',
             '_',
             self.find_nearest().join(
-                self.NEAREST_SEPARATOR, end=r'\$', escape_regex=escape_regex
+                self.NEAREST_SEPARATOR,
+                end='$',
+                escape_regex=lambda x: escape_regex(escape_regex(x)),
             ),
         )
 

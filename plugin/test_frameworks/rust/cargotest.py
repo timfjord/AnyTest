@@ -1,5 +1,6 @@
 import os
 import re
+import shlex
 
 from ... import utils
 from .. import rust
@@ -36,7 +37,7 @@ class TestFramework(rust.TestFramework):
             return args
 
         namespace = self.NEAREST_SEPARATOR.join(modules[1:] + [''])
-        return args + [utils.escape_shell(namespace)]
+        return args + [shlex.quote(namespace)]
 
     def build_line_position_args(self):
         file_args = self.build_file_position_args()

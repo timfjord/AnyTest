@@ -77,11 +77,7 @@ class Maven(Base):
     config_filenames = ('pom.xml',)  # type: tuple
 
     def get_package(self):
-        return reduce(
-            lambda value, args: re.sub(args[0], args[1], value),
-            self.PACKAGE_REPLACEMENTS,
-            self.file.relpath,
-        )
+        return utils.replace(self.file.relpath, *self.PACKAGE_REPLACEMENTS)
 
     def build_module_args(self, module):
         return ['-pl', module]

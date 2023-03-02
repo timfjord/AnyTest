@@ -1,5 +1,6 @@
 import os
 import re
+import shlex
 
 from ... import utils
 from .. import javascript
@@ -60,6 +61,6 @@ class TestFramework(IsConfigurableMixin, javascript.TestFramework):
         )
 
         if bool(name):
-            args += ['--grep', utils.escape_shell(name)]
+            args += ['--grep', shlex.quote(name)]
 
         return args

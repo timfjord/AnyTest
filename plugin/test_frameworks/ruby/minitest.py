@@ -110,9 +110,9 @@ class TestFramework(ruby.TestFramework):
         return (
             [
                 'find',
-                utils.escape_shell(self.test_folder(), quote=False),
+                self.test_folder(),
                 '-name',
-                utils.escape_shell(self.test_file_pattern(), quote=False),
+                self.test_file_pattern(),
                 '-exec',
             ]
             + command

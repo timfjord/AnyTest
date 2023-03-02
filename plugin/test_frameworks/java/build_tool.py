@@ -1,6 +1,4 @@
-import re
 from abc import ABCMeta, abstractmethod
-from functools import reduce
 
 from ... import utils
 from ...cache import cache

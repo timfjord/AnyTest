@@ -1,5 +1,4 @@
 import re
-import shlex
 from distutils import spawn
 from functools import reduce
 

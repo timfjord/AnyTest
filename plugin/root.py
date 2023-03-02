@@ -66,6 +66,9 @@ class RelativePath:
     def contains(self, _):
         raise NotImplementedError()
 
+    def lines(self):
+        raise NotImplementedError()
+
     def dir(self):
         return Root(os.path.dirname(self.path))
 
@@ -80,6 +83,12 @@ class RelativePath:
             os.path.basename(self.relpath),
         )[0]
 
+    def is_in_root(self):
+        return self.dir().path == self.root.path
+
+    def dir_relpath(self):
+        raise NotImplementedError()
+
 
 class File(RelativePath):
     def exists(self):
@@ -88,6 +97,14 @@ class File(RelativePath):
     def contains(self, content):
         with open(self.path) as file:
             return content in file.read()
+
+    def lines(self):
+        with open(self.path) as file:
+            for line in file:
+                yield line.strip()
+
+    def dir_relpath(self):
+        return os.path.split(self.relpath)[0]
 
 
 class Glob:

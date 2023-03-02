@@ -16,10 +16,22 @@ class TestFramework(IsConfigurableMixin, go.TestFramework):
         return ['./...']
 
     def build_file_position_args(self):
-        if self.context.file.dir().path == self.context.root.path:
-            return []
+        tags = []
+        for line in self.context.file.lines():
+            if re.match(r'\s*package\s', line):
+                break
 
-        return ['./{}/...'.format(os.path.split(self.context.file.relpath)[0])]
+            match = re.match(r'\s*//\s*\+build\s+(.+)', line)
+            if match:
+                tags.append(re.sub(r'\s+', ',', match.group(1)))
+
+        if tags:
+            tags = ['-tags={}'.format(','.join(tags))]
+
+        if self.context.file.is_in_root():
+            return tags
+
+        return tags + ['./{}/...'.format(self.context.file.dir_relpath())]
 
     def build_line_position_args(self):
         args = self.build_file_position_args()
@@ -34,6 +46,11 @@ class TestFramework(IsConfigurableMixin, go.TestFramework):
         )
 
         if bool(name):
-            return ['-run', name] + (args if bool(args) else ['./.'])
+            args = ['-run', name] + args
+
+            if not args[-1].startswith('./'):
+                args = args + ['./.']
+
+            return args
         else:
             return args

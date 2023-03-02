@@ -176,6 +176,14 @@ class RelativePathTestCase(unittest.TestCase):
 
         self.assertEqual(relative_path.name(), 'file')
 
+    def test_is_in_root(self):
+        root = Root(path('code', 'project'))
+        relative_path1 = RelativePath(root, 'file.py')
+        relative_path2 = RelativePath(root, 'folder', 'file.py')
+
+        self.assertTrue(relative_path1.is_in_root())
+        self.assertFalse(relative_path2.is_in_root())
+
 
 class FileTestCase(unittest.TestCase):
     def test_exists_checks_if_file_exists(self):
@@ -197,6 +205,24 @@ class FileTestCase(unittest.TestCase):
 
             self.assertTrue(file.contains('content'))
             self.assertFalse(file.contains('uNkn0wn'))
+
+    @unittest.skipIf(IS_WINDOWS, '[Errno 13] Permission denied')
+    def test_lines(self):
+        with tempfile.NamedTemporaryFile('w') as tmpfile:
+            tmpfile.write('line1\nline2\nline3')
+            tmpfile.seek(0)
+            file_name = os.path.basename(tmpfile.name)
+            root = Root(os.path.dirname(tmpfile.name))
+            file = File(root, file_name)
+            lines = [line for line in file.lines()]
+
+            self.assertEqual(lines, ['line1', 'line2', 'line3'])
+
+    def test_dir_relpath(self):
+        root = Root(path('code', 'project'))
+        relative_path = File(root, 'folder1', 'folder2', 'file.py')
+
+        self.assertEqual(relative_path.dir_relpath(), os.path.join('folder1', 'folder2'))
 
 
 class GlobTestCase(unittest.TestCase):

@@ -28,6 +28,12 @@ class GoTestTestCase(SublimeProjectTestCase):
         self._testLine(36)
         self.assertLastCommand('go test -run TestSomethingInASuite$ ./.')
 
+    def test_line_build_tags(self):
+        yield from self._testFile('build_tags_test.go', 14)
+        self.assertLastCommand(
+            'go test -run TestNumbers$ -tags=foo,hello,world,!bar,red,black ./.'
+        )
+
     def test_file(self):
         yield from self._testFile('normal_test.go')
         self.assertLastCommand('go test')
@@ -36,6 +42,14 @@ class GoTestTestCase(SublimeProjectTestCase):
         yield from self._testFile('mypackage/normal_test.go')
         self.assertLastCommand('go test ./mypackage/...')
 
+    def test_file_build_tags(self):
+        yield from self._testFile('build_tags_test.go')
+        self.assertLastCommand('go test -tags=foo,hello,world,!bar,red,black')
+
     def test_suite(self):
         yield from self._testSuite('normal_test.go')
+        self.assertLastCommand('go test ./...')
+
+    def test_suite_build_tags(self):
+        yield from self._testSuite('build_tags_test.go')
         self.assertLastCommand('go test ./...')

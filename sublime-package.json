@@ -334,6 +334,9 @@
                                     "default": {},
                                     "description": "ExUnit specific ENV variables (will be merged with the ENV variables defined on the language level)"
                                 },
+                                "go.test_framework": {
+                                    "$ref": "sublime://settings/AnyTest#/definitions/GoFrameworks"
+                                },
                                 "go.runner": {
                                     "$ref": "sublime://settings/AnyTest#/definitions/Runner",
                                     "description": "A runner to run Go tests with"

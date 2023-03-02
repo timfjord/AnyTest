@@ -88,6 +88,9 @@
     // "elixir.exunit.env": { "ENV2": "value" }, // will be merged with the ENV variable defined on the language level
     //
     // --- Go ---
+    // to force a Go test framework use:
+    // "go.test_framework": "gotest",
+    //
     // "go.runner": "command", // a runner for all Go test frameworks
     // "go.env": { "ENV1": "value" }, // will be merged with the ENV variable defined on the test framework level
     //

@@ -127,11 +127,7 @@ class MochaJavaScriptTestCase(SublimeProjectTestCase):
 
 class MochaTypeScriptTestCase(SublimeProjectTestCase):
     folder = ('mocha', 'typescript')
-
-    def setUp(self):
-        super().setUp()
-
-        self.setSettings({'javascript.test_framework': 'mocha'})
+    settings = {'javascript.test_framework': 'mocha'}
 
     def test_line(self):
         yield from self._testFile(('test', 'normal.ts'), 2)

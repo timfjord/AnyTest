@@ -1,4 +1,3 @@
-import os.path
 import re
 
 from ...utils import escape_regex

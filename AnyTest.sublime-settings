@@ -98,7 +98,7 @@
     "go.gotest.executable": [
         "go",
         "test"
-    ],
+    ], // for richgo use ["richgo", "test"]
     // "go.gotest.args": ["--do-smth"],
     // "go.gotest.env": { "ENV2": "value" }, // will be merged with the ENV variable defined on the language level
     //

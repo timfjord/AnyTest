@@ -52,7 +52,10 @@ class TerminusBuilderTestCase(unittest.TestCase):
     def test_build_cmd(self):
         self.assertBuiltCmd(
             r'go test -run TestNumbers/\\\[\\\]\\\.\\\*\\\+\\\?\\\|\\\$\\\^\\\(\\\)$ ./.',
-            r'go test -run TestNumbers/\\\[\\\]\\\.\\\*\\\+\\\?\\\\\|\\\\\$\\\\\^\\\\\(\\\\\)\$ ./.',
+            (
+                r'go test -run TestNumbers'
+                r'/\\\[\\\]\\\.\\\*\\\+\\\?\\\\\|\\\\\$\\\\\^\\\\\(\\\\\)\$ ./.'
+            ),
         )
         self.assertBuiltCmd(
             r'do smth\$',

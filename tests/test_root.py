@@ -222,7 +222,9 @@ class FileTestCase(unittest.TestCase):
         root = Root(path('code', 'project'))
         relative_path = File(root, 'folder1', 'folder2', 'file.py')
 
-        self.assertEqual(relative_path.dir_relpath(), os.path.join('folder1', 'folder2'))
+        self.assertEqual(
+            relative_path.dir_relpath(), os.path.join('folder1', 'folder2')
+        )
 
 
 class GlobTestCase(unittest.TestCase):

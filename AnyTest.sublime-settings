@@ -7,7 +7,8 @@
             "exunit"
         ],
         "go": [
-            "gotest"
+            "ginkgo",
+            "gotest",
         ],
         "javascript": [
             "jest",
@@ -101,6 +102,13 @@
     ], // for richgo use ["richgo", "test"]
     // "go.gotest.args": ["--do-smth"],
     // "go.gotest.env": { "ENV2": "value" }, // will be merged with the ENV variable defined on the language level
+    //
+    // "go.ginkgo.runner": "command", // a runner for the Ginko test framework
+    "go.ginkgo.executable": [
+        "ginkgo"
+    ],
+    // "go.ginkgo.args": ["--do-smth"],
+    // "go.ginkgo.env": { "ENV2": "value" }, // will be merged with the ENV variable defined on the language level
     //
     // --- Java ---
     // "java.runner": "command", // a runner for all Java test frameworks

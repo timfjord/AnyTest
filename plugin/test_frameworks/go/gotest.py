@@ -9,7 +9,15 @@ class TestFramework(IsConfigurableMixin, go.TestFramework):
     NEAREST_SEPARATOR = '/'
 
     framework = 'gotest'  # type: str
-    pattern = r'[^_].*_test\.go$'  # type: str
+    test_patterns = (
+        r'^\s*func ((Test|Example).*)\(',
+        r'^\s*func \(.*\) ((Test).*)\(',
+        r'^\s*t\.Run\("(.*)"',
+    )
+    namespace_patterns = (
+        r'^\s*func ((Test).*)\(',
+        r'^\s*t\.Run\("(.*)"',
+    )
 
     def build_suite_position_args(self):
         return ['./...']

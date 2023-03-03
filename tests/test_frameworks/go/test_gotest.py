@@ -1,8 +1,9 @@
 from AnyTest.tests import SublimeProjectTestCase
 
 
-class GoTestTestCase(SublimeProjectTestCase):
+class GotestTestCase(SublimeProjectTestCase):
     folder = 'gotest'
+    settings = {'go.test_framework': 'gotest'}
 
     def test_line(self):
         yield from self._testFile('normal_test.go', 5)

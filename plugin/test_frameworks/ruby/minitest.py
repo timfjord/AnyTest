@@ -40,7 +40,7 @@ class TestFramework(ruby.TestFramework):
     def use_rake(self):
         return (
             self.rakefile().exists()
-            and self.rakefile().contains('Rake::TestTask')
+            and self.rakefile().contains_line('Rake::TestTask')
             or self.file('bin', 'rails').exists()
         )
 

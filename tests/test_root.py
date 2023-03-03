@@ -195,18 +195,6 @@ class FileTestCase(unittest.TestCase):
             self.assertFalse(File(subfolder, existing_dir).exists())
 
     @unittest.skipIf(IS_WINDOWS, '[Errno 13] Permission denied')
-    def test_contains(self):
-        with tempfile.NamedTemporaryFile('w') as tmpfile:
-            tmpfile.write('some content goes here')
-            tmpfile.seek(0)
-            file_name = os.path.basename(tmpfile.name)
-            root = Root(os.path.dirname(tmpfile.name))
-            file = File(root, file_name)
-
-            self.assertTrue(file.contains('content'))
-            self.assertFalse(file.contains('uNkn0wn'))
-
-    @unittest.skipIf(IS_WINDOWS, '[Errno 13] Permission denied')
     def test_lines(self):
         with tempfile.NamedTemporaryFile('w') as tmpfile:
             tmpfile.write('line1\nline2\nline3')
@@ -217,6 +205,18 @@ class FileTestCase(unittest.TestCase):
             lines = [line for line in file.lines()]
 
             self.assertEqual(lines, ['line1', 'line2', 'line3'])
+
+    @unittest.skipIf(IS_WINDOWS, '[Errno 13] Permission denied')
+    def test_contains_line(self):
+        with tempfile.NamedTemporaryFile('w') as tmpfile:
+            tmpfile.write('some content goes here')
+            tmpfile.seek(0)
+            file_name = os.path.basename(tmpfile.name)
+            root = Root(os.path.dirname(tmpfile.name))
+            file = File(root, file_name)
+
+            self.assertTrue(file.contains_line('content'))
+            self.assertFalse(file.contains_line('uNkn0wn'))
 
     def test_dir_relpath(self):
         root = Root(path('code', 'project'))

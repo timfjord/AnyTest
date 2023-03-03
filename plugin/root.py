@@ -63,10 +63,10 @@ class RelativePath:
     def exists(self):
         return os.path.exists(self.path)
 
-    def contains(self, _):
+    def lines(self):
         raise NotImplementedError()
 
-    def lines(self):
+    def contains_line(self, _):
         raise NotImplementedError()
 
     def dir(self):
@@ -94,14 +94,17 @@ class File(RelativePath):
     def exists(self):
         return os.path.isfile(self.path)
 
-    def contains(self, content):
-        with open(self.path) as file:
-            return content in file.read()
-
     def lines(self):
         with open(self.path) as file:
             for line in file:
                 yield line.strip()
+
+    def contains_line(self, content):
+        for line in self.lines():
+            if content in line:
+                return True
+
+        return False
 
     def dir_relpath(self):
         return os.path.split(self.relpath)[0]

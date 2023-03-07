@@ -1,6 +1,5 @@
 import shlex
 
-from ... import utils
 from .. import javascript
 from ..mixins import IsConfigurableMixin
 
@@ -21,9 +20,7 @@ class TestFramework(IsConfigurableMixin, javascript.TestFramework):
 
     def build_line_position_args(self):
         args = self.build_file_position_args()
-        nearest = self.find_nearest()
-
-        name = utils.escape_regex(' '.join(nearest.namespaces + nearest.tests))
+        name = self.find_nearest().join(' ', escape_regex=True)
 
         if bool(name):
             args = ['-t', shlex.quote(name)] + args

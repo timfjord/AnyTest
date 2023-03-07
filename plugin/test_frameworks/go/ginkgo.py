@@ -1,5 +1,6 @@
 import shlex
 
+from ...cache import cache
 from .. import go
 from ..mixins import IsConfigurableMixin
 
@@ -17,14 +18,16 @@ class TestFramework(IsConfigurableMixin, go.TestFramework):
     namespace_patterns = ()
 
     @classmethod
-    def is_configurable_fallback(cls, file):
+    @cache
+    def imports_ginkgo(cls, file):
         return file.contains_line('github.com/onsi/ginkgo')
 
-    def build_suite_position_args(self):
-        if self.context.file.is_in_root():
-            return ['./.']
+    @classmethod
+    def is_configurable_fallback(cls, file):
+        return cls.imports_ginkgo(file)
 
-        return ['./{}'.format(self.context.file.dir_relpath())]
+    def build_suite_position_args(self):
+        return ['./{}'.format(self.get_package())]
 
     def build_file_position_args(self):
         return [

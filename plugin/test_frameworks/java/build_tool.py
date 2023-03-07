@@ -84,12 +84,11 @@ class Maven(Base):
         return ['-Dtest=' + self.get_package() + '.' + self.file.name() + r'\*']
 
     def build_line_position_args(self, nearest):
-        name = ''.join(
-            (
-                utils.escape_regex(self.NAMESPACE_SEPARATOR.join(nearest.namespaces)),
-                self.SECTION_SEPARATOR if bool(nearest.namespaces) else '',
-                utils.escape_regex(self.NEAREST_SEPARATOR.join(nearest.tests)),
-            )
+        name = nearest.join(
+            self.SECTION_SEPARATOR,
+            namespace_sep=self.NAMESPACE_SEPARATOR,
+            test_sep=self.NEAREST_SEPARATOR,
+            escape_regex=True,
         )
 
         if bool(name):

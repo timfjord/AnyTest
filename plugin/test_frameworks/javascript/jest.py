@@ -22,7 +22,9 @@ class TestFramework(IsConfigurableMixin, javascript.TestFramework):
 
     def build_line_position_args(self):
         args = self.build_file_position_args()
-        name = self.find_nearest().join(' ', namespace_start='^', test_end='$')
+        name = self.find_nearest().join(
+            ' ', namespace_start='^', test_end='$', escape_regex=True
+        )
 
         if bool(name):
             args = ['-t', shlex.quote(name)] + args

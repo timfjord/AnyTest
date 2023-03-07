@@ -40,7 +40,7 @@ class TestFramework(ruby.TestFramework):
     def use_rake(self):
         return (
             self.rakefile().exists()
-            and self.rakefile().contains('Rake::TestTask')
+            and self.rakefile().contains_line('Rake::TestTask')
             or self.file('bin', 'rails').exists()
         )
 
@@ -110,9 +110,9 @@ class TestFramework(ruby.TestFramework):
         return (
             [
                 'find',
-                utils.escape_shell(self.test_folder(), quote=False),
+                self.test_folder(),
                 '-name',
-                utils.escape_shell(self.test_file_pattern(), quote=False),
+                self.test_file_pattern(),
                 '-exec',
             ]
             + command

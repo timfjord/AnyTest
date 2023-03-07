@@ -17,7 +17,7 @@ class MochaJavaScriptTestCase(SublimeProjectTestCase):
         self.assertLastCommand(
             'mocha ',
             ('test', 'normal.js'),
-            ' --grep \'^Math Addition adds two numbers\\$\'',
+            ' --grep \'^Math Addition adds two numbers$\'',
         )
 
     def test_line_context(self):
@@ -33,7 +33,7 @@ class MochaJavaScriptTestCase(SublimeProjectTestCase):
         self.assertLastCommand(
             'mocha ',
             ('test', 'context.js'),
-            ' --grep \'^Math Addition adds two numbers\\$\'',
+            ' --grep \'^Math Addition adds two numbers$\'',
         )
 
     def test_list_coffee(self):
@@ -49,7 +49,7 @@ class MochaJavaScriptTestCase(SublimeProjectTestCase):
         self.assertLastCommand(
             'mocha ',
             ('test', 'normal.coffee'),
-            ' --grep \'^Math Addition adds two numbers\\$\'',
+            ' --grep \'^Math Addition adds two numbers$\'',
         )
 
     def test_line_react(self):
@@ -65,7 +65,7 @@ class MochaJavaScriptTestCase(SublimeProjectTestCase):
         self.assertLastCommand(
             'mocha ',
             ('test', 'normal.jsx'),
-            ' --grep \'^Math Addition adds two numbers\\$\'',
+            ' --grep \'^Math Addition adds two numbers$\'',
         )
 
     def test_line_typescript(self):
@@ -81,7 +81,7 @@ class MochaJavaScriptTestCase(SublimeProjectTestCase):
         self.assertLastCommand(
             'mocha ',
             ('test', 'normal.ts'),
-            ' --grep \'^Math Addition adds two numbers\\$\'',
+            ' --grep \'^Math Addition adds two numbers$\'',
         )
 
     def test_line_typescript_jsx(self):
@@ -97,7 +97,7 @@ class MochaJavaScriptTestCase(SublimeProjectTestCase):
         self.assertLastCommand(
             'mocha ',
             ('test', 'normal.tsx'),
-            ' --grep \'^Math Addition adds two numbers\\$\'',
+            ' --grep \'^Math Addition adds two numbers$\'',
         )
 
     def test_line_no_nearest(self):
@@ -127,11 +127,7 @@ class MochaJavaScriptTestCase(SublimeProjectTestCase):
 
 class MochaTypeScriptTestCase(SublimeProjectTestCase):
     folder = ('mocha', 'typescript')
-
-    def setUp(self):
-        super().setUp()
-
-        self.setSettings({'javascript.test_framework': 'mocha'})
+    settings = {'javascript.test_framework': 'mocha'}
 
     def test_line(self):
         yield from self._testFile(('test', 'normal.ts'), 2)
@@ -158,7 +154,7 @@ class MochaTypeScriptTestCase(SublimeProjectTestCase):
             ('ts-node', 'register'),
             ' ',
             ('test', 'normal.ts'),
-            ' --grep \'^Math Addition adds two numbers\\$\'',
+            ' --grep \'^Math Addition adds two numbers$\'',
         )
 
     def test_line_jsx(self):
@@ -186,7 +182,7 @@ class MochaTypeScriptTestCase(SublimeProjectTestCase):
             ('ts-node', 'register'),
             ' ',
             ('test', 'normal.tsx'),
-            ' --grep \'^Math Addition adds two numbers\\$\'',
+            ' --grep \'^Math Addition adds two numbers$\'',
         )
 
     def test_line_no_nearest(self):

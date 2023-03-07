@@ -25,6 +25,14 @@
                                 "exunit"
                             ]
                         },
+                        "GoFrameworks": {
+                            "type": "string",
+                            "enum": [
+                                "delve",
+                                "ginkgo",
+                                "gotest"
+                            ]
+                        },
                         "JavascriptFrameworks": {
                             "type": "string",
                             "enum": [
@@ -102,6 +110,19 @@
                                                     "type": "array",
                                                     "items": {
                                                         "$ref": "sublime://settings/AnyTest#/definitions/ElixirFrameworks"
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        "go": {
+                                            "anyOf": [
+                                                {
+                                                    "$ref": "sublime://settings/AnyTest#/definitions/GoFrameworks"
+                                                },
+                                                {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "sublime://settings/AnyTest#/definitions/GoFrameworks"
                                                     }
                                                 }
                                             ]
@@ -315,10 +336,87 @@
                                     "default": {},
                                     "description": "ExUnit specific ENV variables (will be merged with the ENV variables defined on the language level)"
                                 },
+                                "go.test_framework": {
+                                    "$ref": "sublime://settings/AnyTest#/definitions/GoFrameworks"
+                                },
+                                "go.runner": {
+                                    "$ref": "sublime://settings/AnyTest#/definitions/Runner",
+                                    "description": "A runner to run Go tests with"
+                                },
+                                "go.env": {
+                                    "type": "object",
+                                    "default": {},
+                                    "description": "Go specific ENV variables (will be merged with the ENV variables defined on the test framework level)"
+                                },
+                                "go.delve.runner": {
+                                    "$ref": "sublime://settings/AnyTest#/definitions/Runner",
+                                    "description": "A runner to run Delve tests with"
+                                },
+                                "go.delve.executable": {
+                                    "type": "array",
+                                    "default": [
+                                        "dlv",
+                                        "test"
+                                    ],
+                                    "description": "Delve test framework executable (e.g. [\"dlv\", \"my_test\"])"
+                                },
+                                "go.delve.args": {
+                                    "type": "array",
+                                    "default": [],
+                                    "description": "Delve cli args (e.g. [\"--do-smth\"])"
+                                },
+                                "go.delve.env": {
+                                    "type": "object",
+                                    "default": {},
+                                    "description": "Delve specific ENV variables (will be merged with the ENV variables defined on the language level)"
+                                },
+                                "go.ginko.runner": {
+                                    "$ref": "sublime://settings/AnyTest#/definitions/Runner",
+                                    "description": "A runner to run Ginkgo tests with"
+                                },
+                                "go.ginko.executable": {
+                                    "type": "array",
+                                    "default": [
+                                        "ginkgo"
+                                    ],
+                                    "description": "Ginkgo test framework executable (e.g. [\"my_ginkgo\"])"
+                                },
+                                "go.ginko.args": {
+                                    "type": "array",
+                                    "default": [],
+                                    "description": "Ginkgo cli args (e.g. [\"--do-smth\"])"
+                                },
+                                "go.ginko.env": {
+                                    "type": "object",
+                                    "default": {},
+                                    "description": "Ginkgo specific ENV variables (will be merged with the ENV variables defined on the language level)"
+                                },
+                                "go.gotest.runner": {
+                                    "$ref": "sublime://settings/AnyTest#/definitions/Runner",
+                                    "description": "A runner to run Gotest tests with"
+                                },
+                                "go.gotest.executable": {
+                                    "type": "array",
+                                    "default": [
+                                        "go",
+                                        "test"
+                                    ],
+                                    "description": "Gotest test framework executable (e.g. [\"go\", \"my_test\"])"
+                                },
+                                "go.gotest.args": {
+                                    "type": "array",
+                                    "default": [],
+                                    "description": "Gotest cli args (e.g. [\"--do-smth\"])"
+                                },
+                                "go.gotest.env": {
+                                    "type": "object",
+                                    "default": {},
+                                    "description": "Gotest specific ENV variables (will be merged with the ENV variables defined on the language level)"
+                                },
                                 "java.env": {
                                     "type": "object",
                                     "default": {},
-                                    "description": "Swift specific ENV variables (will be merged with the ENV variables defined on the test framework level)"
+                                    "description": "Java specific ENV variables (will be merged with the ENV variables defined on the test framework level)"
                                 },
                                 "java.junit.runner": {
                                     "$ref": "sublime://settings/AnyTest#/definitions/Runner",

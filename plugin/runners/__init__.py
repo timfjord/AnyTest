@@ -73,6 +73,15 @@ class Runner(
             self.test_framework = test_framework
             self.scope = scope
 
+        def map_test_framework_options(self, **kwargs):
+            test_framework_options = self.test_framework.get_options()
+
+            return {
+                key: test_framework_options[tf_key]
+                for key, tf_key in kwargs.items()
+                if tf_key in test_framework_options
+            }
+
         def build_cmd(self):
             return ' '.join(self.test_framework.build_command(self.scope))
 

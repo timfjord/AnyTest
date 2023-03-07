@@ -18,7 +18,7 @@ class JestTestCase(SublimeProjectTestCase):
 
         self._testLine(4)
         self.assertLastCommand(
-            'jest --no-coverage -t \'^Math Addition adds two numbers\\$\' -- ',
+            'jest --no-coverage -t \'^Math Addition adds two numbers$\' -- ',
             ('__tests__', 'normal-test.js'),
         )
 
@@ -36,7 +36,7 @@ class JestTestCase(SublimeProjectTestCase):
 
         self._testLine(3)
         self.assertLastCommand(
-            'jest --no-coverage -t \'^Math Addition adds two numbers\\$\' -- ',
+            'jest --no-coverage -t \'^Math Addition adds two numbers$\' -- ',
             ('__tests__', 'context-test.js'),
         )
 
@@ -54,7 +54,7 @@ class JestTestCase(SublimeProjectTestCase):
 
         self._testLine(3)
         self.assertLastCommand(
-            'jest --no-coverage -t \'^Math Addition adds two numbers\\$\' -- ',
+            'jest --no-coverage -t \'^Math Addition adds two numbers$\' -- ',
             ('__tests__', 'normal-test.coffee'),
         )
 
@@ -72,7 +72,7 @@ class JestTestCase(SublimeProjectTestCase):
 
         self._testLine(3)
         self.assertLastCommand(
-            'jest --no-coverage -t \'^Math Addition adds two numbers\\$\' -- ',
+            'jest --no-coverage -t \'^Math Addition adds two numbers$\' -- ',
             ('__tests__', 'normal-test.jsx'),
         )
 

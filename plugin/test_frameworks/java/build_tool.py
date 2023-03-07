@@ -1,6 +1,4 @@
-import re
 from abc import ABCMeta, abstractmethod
-from functools import reduce
 
 from ... import utils
 from ...cache import cache
@@ -19,6 +17,7 @@ def find(file):
 
 class Base(metaclass=ABCMeta):
     MAX_DEPTH = 20
+    NAMESPACE_SEPARATOR = '$'
 
     @property
     @abstractmethod
@@ -69,16 +68,14 @@ class Maven(Base):
         (r'\/[^\/]+$', ''),
         (r'/', '.'),
     )
+    NEAREST_SEPARATOR = '$'
+    SECTION_SEPARATOR = '#'
 
     executable = 'mvn'  # type: str
     config_filenames = ('pom.xml',)  # type: tuple
 
     def get_package(self):
-        return reduce(
-            lambda value, args: re.sub(args[0], args[1], value),
-            self.PACKAGE_REPLACEMENTS,
-            self.file.relpath,
-        )
+        return utils.replace(self.file.relpath, *self.PACKAGE_REPLACEMENTS)
 
     def build_module_args(self, module):
         return ['-pl', module]
@@ -89,9 +86,9 @@ class Maven(Base):
     def build_line_position_args(self, nearest):
         name = ''.join(
             (
-                utils.escape_regex('$'.join(nearest.namespaces)),
-                '#' if bool(nearest.namespaces) else '',
-                utils.escape_regex('$'.join(nearest.tests)),
+                utils.escape_regex(self.NAMESPACE_SEPARATOR.join(nearest.namespaces)),
+                self.SECTION_SEPARATOR if bool(nearest.namespaces) else '',
+                utils.escape_regex(self.NEAREST_SEPARATOR.join(nearest.tests)),
             )
         )
 
@@ -100,6 +97,8 @@ class Maven(Base):
 
 
 class Gradle(Base):
+    NEAREST_SEPARATOR = '.'
+
     executable = 'gradle'  # type: str
     config_filenames = (
         'build.gradle',
@@ -117,9 +116,9 @@ class Gradle(Base):
     def build_line_position_args(self, nearest):
         name = ''.join(
             (
-                utils.escape_regex('$'.join(nearest.namespaces)),
-                '.' if bool(nearest.namespaces) else '',
-                utils.escape_regex('.'.join(nearest.tests)),
+                utils.escape_regex(self.NAMESPACE_SEPARATOR.join(nearest.namespaces)),
+                self.NEAREST_SEPARATOR if bool(nearest.namespaces) else '',
+                utils.escape_regex(self.NEAREST_SEPARATOR.join(nearest.tests)),
             )
         )
 

@@ -6,6 +6,11 @@
             "espec",
             "exunit"
         ],
+        "go": [
+            "delve",
+            "ginkgo",
+            "gotest",
+        ],
         "javascript": [
             "jest",
             "mocha",
@@ -83,6 +88,36 @@
     // "elixir.exunit.executable": ["mix", "do", "smth"],
     // "elixir.exunit.args": ["--do-smth"],
     // "elixir.exunit.env": { "ENV2": "value" }, // will be merged with the ENV variable defined on the language level
+    //
+    // --- Go ---
+    // to force a Go test framework use:
+    // "go.test_framework": "gotest",
+    //
+    // "go.runner": "command", // a runner for all Go test frameworks
+    // "go.env": { "ENV1": "value" }, // will be merged with the ENV variable defined on the test framework level
+    //
+    // "go.delve.runner": "command", // a runner for the Delve test framework
+    "go.delve.executable": [
+        "dlv",
+        "test"
+    ],
+    // "go.delve.args": ["--do-smth"],
+    // "go.delve.env": { "ENV2": "value" }, // will be merged with the ENV variable defined on the language level
+    //
+    // "go.ginkgo.runner": "command", // a runner for the Ginko test framework
+    "go.ginkgo.executable": [
+        "ginkgo"
+    ],
+    // "go.ginkgo.args": ["--do-smth"],
+    // "go.ginkgo.env": { "ENV2": "value" }, // will be merged with the ENV variable defined on the language level
+    //
+    // "go.gotest.runner": "command", // a runner for the Gotest test framework
+    "go.gotest.executable": [
+        "go",
+        "test"
+    ], // for richgo use ["richgo", "test"]
+    // "go.gotest.args": ["--do-smth"],
+    // "go.gotest.env": { "ENV2": "value" }, // will be merged with the ENV variable defined on the language level
     //
     // --- Java ---
     // "java.runner": "command", // a runner for all Java test frameworks

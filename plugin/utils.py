@@ -1,6 +1,6 @@
 import re
-import shlex
 from distutils import spawn
+from functools import reduce
 
 REGEXP_ESCAPE_TRANSLATION_TABLE = str.maketrans(
     {
@@ -20,22 +20,13 @@ REGEXP_ESCAPE_TRANSLATION_TABLE = str.maketrans(
         ')': r'\)',
     }
 )
-SHELL_ESCAPE_TRANSLATION_TABLE = str.maketrans(
-    {
-        '$': r'\$',  # to avoid issues with the $ symbol in terminus
-    }
-)
 
 
 def escape_regex(string):
+    """
+    Switch to re.escape once upgrade to Python 3.8 as it doesn't escape the / symbol
+    """
     return string.translate(REGEXP_ESCAPE_TRANSLATION_TABLE)
-
-
-def escape_shell(string, quote=True):
-    if quote:
-        string = shlex.quote(string)
-
-    return string.translate(SHELL_ESCAPE_TRANSLATION_TABLE)
 
 
 def escape(string, symbols):
@@ -65,3 +56,11 @@ def match_patterns(string, patterns):
             return match.group(1), name
 
     return None, None
+
+
+def replace(string, *replacements):
+    return reduce(
+        lambda value, args: re.sub(args[0], args[1], value),
+        replacements,
+        string,
+    )

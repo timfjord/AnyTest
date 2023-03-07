@@ -40,11 +40,11 @@ class TestFramework(rust.TestFramework):
         return args + [shlex.quote(namespace)]
 
     def build_line_position_args(self):
-        file_args = self.build_file_position_args()
+        args = self.build_file_position_args()
         nearest = self.find_nearest()
 
         if not bool(nearest.tests) or not re.search(r'#\[.*', nearest.tests[0]):
-            return file_args
+            return args
 
         forward_nearest = self.context.find_nearest(
             self.forward_test_patterns, from_line=nearest.line, to_line='current'
@@ -52,9 +52,9 @@ class TestFramework(rust.TestFramework):
         test_name = self.NEAREST_SEPARATOR.join(
             nearest.namespaces[0:1] + forward_nearest.tests[0:1]
         )
-        file_namespace = file_args.pop() if bool(file_args) else ''
+        file_namespace = args.pop() if bool(args) else ''
 
-        return file_args + [
+        return args + [
             file_namespace + utils.escape_regex(test_name),
             '--',
             '--exact',

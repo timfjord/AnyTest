@@ -3,4 +3,4 @@
 # Features
 
 - Allow selecting a test framework
-- Add various ruby test frameworks (Cucumber, M, Rails, Test Bench)
+- Add various Ruby test frameworks (Cucumber, M, Rails, Test Bench)

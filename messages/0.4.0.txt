@@ -3,4 +3,4 @@
 # Features
 
 - Better caching
-- Add various javascript test frameworks (Vitest, Mocha)
+- Add various JavaScript test frameworks (Vitest, Mocha)

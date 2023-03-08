@@ -2,4 +2,4 @@
 
 # Features
 
-- Add swift test frameworks
+- Add Swift test frameworks

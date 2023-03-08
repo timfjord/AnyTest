@@ -2,5 +2,5 @@
 
 # Features
 
-- Add rust support
+- Add Rust support
 - Allow editing the test command before running it

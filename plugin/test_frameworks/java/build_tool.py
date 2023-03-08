@@ -113,12 +113,10 @@ class Gradle(Base):
         return ['--tests', self.file.name()]
 
     def build_line_position_args(self, nearest):
-        name = ''.join(
-            (
-                utils.escape_regex(self.NAMESPACE_SEPARATOR.join(nearest.namespaces)),
-                self.NEAREST_SEPARATOR if bool(nearest.namespaces) else '',
-                utils.escape_regex(self.NEAREST_SEPARATOR.join(nearest.tests)),
-            )
+        name = nearest.join(
+            self.NEAREST_SEPARATOR,
+            namespace_sep=self.NAMESPACE_SEPARATOR,
+            escape_regex=True,
         )
 
         if bool(name):

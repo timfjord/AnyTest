@@ -168,7 +168,7 @@ class MavenJUnit5TestCase(SublimeProjectTestCase):
 
         self._testLine(39)
         self.assertLastCommand(
-            'mvn test -Dtest=org.anytest.TestApp\\$Test_NestedTestClass#test_nested_test'
+            'mvn test -Dtest=org.anytest.TestApp$Test_NestedTestClass#test_nested_test'
         )
 
     def test_file(self):
@@ -204,7 +204,7 @@ class MavenJUnit5MvnwTestCase(SublimeProjectTestCase):
 
         self._testLine(39)
         self.assertLastCommand(
-            './mvnw test -Dtest=org.anytest.TestApp\\$Test_NestedTestClass#test_nested_test'
+            './mvnw test -Dtest=org.anytest.TestApp$Test_NestedTestClass#test_nested_test'
         )
 
     def test_file(self):
@@ -244,7 +244,7 @@ class MavenJUnit5MultiModuleTestCase(SublimeProjectTestCase):
         self._testLine(39)
         self.assertLastCommand(
             'mvn test -pl sample_module '
-            '-Dtest=org.anytest.TestApp\\$Test_NestedTestClass#test_nested_test'
+            '-Dtest=org.anytest.TestApp$Test_NestedTestClass#test_nested_test'
         )
 
     def test_file(self):
@@ -363,28 +363,28 @@ class GradleJUnit5PlainTestCase(SublimeProjectTestCase):
     def test_line_nested(self):
         yield from self._testFile('MathJunit5Test.java', 57)
         self.assertLastCommand(
-            'gradle test --tests MathJunit5Test\\$NestedClass.testNested'
+            'gradle test --tests MathJunit5Test$NestedClass.testNested'
         )
 
         self._testLine(64)
         self.assertLastCommand(
-            'gradle test --tests MathJunit5Test\\$NestedClass.testNested2'
+            'gradle test --tests MathJunit5Test$NestedClass.testNested2'
         )
 
     def test_line_leveled_nested(self):
         yield from self._testFile('MathJunit5Test.java', 74)
         self.assertLastCommand(
-            'gradle test --tests MathJunit5Test\\$NestedClass\\$NestedNestedClass.testNestedNested'
+            'gradle test --tests MathJunit5Test$NestedClass$NestedNestedClass.testNestedNested'
         )
 
     def test_line_nested_parameterized_test_and_source_methods(self):
         yield from self._testFile('MathJunit5Test.java', 91)
         self.assertLastCommand(
-            'gradle test --tests MathJunit5Test\\$NestedParameterizedTestClass.testWithParams'
+            'gradle test --tests MathJunit5Test$NestedParameterizedTestClass.testWithParams'
         )
 
     def test_line_nested_parameterized_test_combined(self):
         yield from self._testFile('MathJunit5Test.java', 91)
         self.assertLastCommand(
-            'gradle test --tests MathJunit5Test\\$NestedParameterizedTestClass.testWithParams'
+            'gradle test --tests MathJunit5Test$NestedParameterizedTestClass.testWithParams'
         )

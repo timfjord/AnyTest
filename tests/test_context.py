@@ -13,6 +13,9 @@ class NearestTestCase(unittest.TestCase):
         self.nearest_empty = Nearest((), (), 0, None)
         self.nearest_no_namespaces = Nearest(('test1', 'test2'), (), 0, None)
         self.nearest_no_tests = Nearest((), ('namespace1', 'namespace2'), 0, None)
+        self.nearest_with_symbols = Nearest(
+            ('test.1', 'test[2'), ('namespace^1', 'namespace$2'), 0, None
+        )
 
     def test_join(self):
         self.assertEqual(self.nearest.join('/'), 'namespace1/namespace2/test1/test2')
@@ -23,7 +26,11 @@ class NearestTestCase(unittest.TestCase):
     def test_join_escape_regex_symbols(self):
         self.assertEqual(
             self.nearest.join('.', escape_regex=True),
-            'namespace1\\.namespace2\\.test1\\.test2',
+            'namespace1.namespace2.test1.test2',
+        )
+        self.assertEqual(
+            self.nearest_with_symbols.join('/', escape_regex=True),
+            'namespace\\^1/namespace\\$2/test\\.1/test\\[2',
         )
         self.assertEqual(
             self.nearest.join('.', escape_regex=lambda x: x.upper()),

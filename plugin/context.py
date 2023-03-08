@@ -22,7 +22,7 @@ class Nearest(namedtuple('Nearest', 'tests, namespaces, line, names')):
         namespace_start='',
         test_end='',
         end='',
-        escape_regex=False,
+        escape_regex=lambda x: x,
     ):
         if namespace_sep is None:
             namespace_sep = sep
@@ -30,17 +30,19 @@ class Nearest(namedtuple('Nearest', 'tests, namespaces, line, names')):
         if test_sep is None:
             test_sep = sep
 
+        if not callable(escape_regex):
+            escape_regex = _escape_regex if escape_regex else lambda x: x
+
         has_tests_or_namespaces = bool(self.tests) or bool(self.namespaces)
         joined = sep.join(
             filter(
                 bool,
-                (namespace_sep.join(self.namespaces), test_sep.join(self.tests)),
+                (
+                    namespace_sep.join(map(escape_regex, self.namespaces)),
+                    test_sep.join(map(escape_regex, self.tests)),
+                ),
             ),
         )
-
-        if escape_regex:
-            escape_function = escape_regex if callable(escape_regex) else _escape_regex
-            joined = escape_function(joined)
 
         return ''.join(
             (

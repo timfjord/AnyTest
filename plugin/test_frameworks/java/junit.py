@@ -40,8 +40,7 @@ class TestFramework(java.TestFramework):
         )
 
     def build_line_position_args(self):
-        nearest = self.find_nearest()
-        args = self.build_tool.build_line_position_args(nearest)
+        args = self.build_tool.build_line_position_args(self.find_nearest())
 
         if args:
             return self.build_suite_position_args() + args

@@ -24,9 +24,7 @@ class TestFramework(IsConfigurableMixin, python.TestFramework):
         return [file_path.replace(os.path.sep, self.NEAREST_SEPARATOR)]
 
     def build_line_position_args(self):
-        file_args = self.build_file_position_args()
+        args = self.build_file_position_args()
         nearest = self.find_nearest()
 
-        return [
-            self.NEAREST_SEPARATOR.join(file_args + nearest.namespaces + nearest.tests)
-        ]
+        return [self.NEAREST_SEPARATOR.join(args + nearest.namespaces + nearest.tests)]

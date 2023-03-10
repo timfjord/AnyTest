@@ -1,4 +1,5 @@
 import importlib
+import os.path
 import re
 from abc import ABCMeta, abstractmethod
 from collections import OrderedDict, namedtuple
@@ -40,6 +41,10 @@ class Runner(
             raise NotImplementedError('name is not defined for the runner')
 
         return settings.get(('runner', cls.name, key), type=type, default=default)
+
+    @property
+    def relpath(self):
+        return os.path.relpath(self.file, self.dir)
 
     def get_panel_name(self):
         if self.panel_name is None:

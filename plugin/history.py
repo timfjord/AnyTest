@@ -2,8 +2,6 @@ import sublime
 
 from . import errors, runners
 
-SETTINGS_KEY = 'AnyTest.history'
-
 
 class History:
     """
@@ -11,22 +9,49 @@ class History:
     which makes it available even after package reload
     """
 
-    def __init__(self):
-        self._history = {}
+    SETTINGS_KEY = 'AnyTest.history.items'
+    SIZE = 10
 
-    def settings(self):
-        return sublime.active_window().settings()
+    @classmethod
+    def current(cls):
+        return cls(sublime.active_window())
+
+    def __init__(self, window):
+        self._window = window
+
+    @property
+    def _settings(self):
+        return self._window.settings()
+
+    @property
+    def items(self):
+        return self._settings.get(self.SETTINGS_KEY, [])
+
+    @items.setter
+    def items(self, value):
+        self._settings.set(self.SETTINGS_KEY, value)
+
+    @property
+    def runners(self):
+        return (runners.load(item['runner'])(**item['kwargs']) for item in self.items)
 
     def add(self, runner):
-        self.settings().set(
-            SETTINGS_KEY, {'runner': runner.name, 'kwargs': runner.to_dict()}
-        )
+        data = {'runner': runner.name, 'kwargs': runner.to_dict()}
+        items = self.items
+
+        try:
+            items.remove(data)
+        except ValueError:
+            pass
+
+        new_items = [data] + items[: (self.SIZE - 1)]
+        self.items = new_items
 
     def last(self):
-        runnner_snapshot = self.settings().get(SETTINGS_KEY, None)
-
-        if runnner_snapshot is None:
+        try:
+            return next(self.runners)
+        except StopIteration:
             raise errors.EmptyHistory
 
-        runner = runners.load(runnner_snapshot['runner'])
-        return runner(**runnner_snapshot['kwargs'])
+    def clear(self):
+        self.items = []

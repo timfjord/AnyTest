@@ -5,14 +5,12 @@ import sublime
 
 from . import cache, runners, settings, status, test_frameworks
 from .context import Context
-from .errors import Error, FrameworkNotFound, handle_errors
+from .errors import EmptyHistory, Error, FrameworkNotFound, handle_errors
 from .history import History
 from .quick_panel_item import QuickPanelItem
 from .view_callbacks import ViewCallbacks
 
 SCOPE_LAST = 'last'
-
-history = History()
 
 logger = logging.getLogger(__name__)
 
@@ -21,15 +19,20 @@ class Plugin:
     @classmethod
     @handle_errors
     def show_last_output(cls, focus=True):
-        history.last().show_output(focus=focus)
+        History.current().last().show_output(focus=focus)
 
     @classmethod
     @handle_errors
     def edit_last(cls):
-        runner = history.last()
+        runner = History.current().last()
         sublime.active_window().open_file(
             '{}:{}'.format(runner.file, runner.line), sublime.ENCODED_POSITION
         )
+
+    @classmethod
+    @handle_errors
+    def clear_history(cls):
+        History.current().clear()
 
     def __init__(self, view):
         self.view = view
@@ -81,9 +84,28 @@ class Plugin:
             else:
                 raise exc
 
+    @handle_errors
+    def show_history(self):
+        runners = list(History.current().runners)
+
+        if not bool(runners):
+            raise EmptyHistory
+
+        self.view.window().show_quick_panel(
+            [
+                QuickPanelItem(
+                    '{}:{}'.format(runner.relpath, runner.line),
+                    runner.dir,
+                    runner.framework,
+                )
+                for runner in runners
+            ],
+            lambda index: index > -1 and self.process_runner(runners[index]),
+        )
+
     def build_runner(self, scope, test_framework=None):
         if scope == SCOPE_LAST:
-            return history.last()
+            return History.current().last()
 
         context = Context(self.view)
         if test_framework is None:
@@ -105,4 +127,4 @@ class Plugin:
 
         logger.debug("Running '%s' from '%s'", runner.cmd, runner.dir)
         runner.run()
-        history.add(runner)
+        History.current().add(runner)

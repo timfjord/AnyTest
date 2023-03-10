@@ -96,4 +96,12 @@
         "caption": "AnyTest: Edit last test",
         "command": "any_test_edit_last"
     },
+    {
+        "caption": "AnyTest: Show history",
+        "command": "any_test_show_history"
+    },
+    {
+        "caption": "AnyTest: Clear history",
+        "command": "any_test_clear_history"
+    }
 ]

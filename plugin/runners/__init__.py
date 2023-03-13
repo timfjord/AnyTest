@@ -22,7 +22,9 @@ def find(test_framework):
 
 class Runner(
     WindowMixin,
-    namedtuple('Runner', 'scope, cmd, dir, file, line, language, framework, options'),
+    namedtuple(
+        'Runner', 'scope, cmd, dir, file, line, language, framework, options, modified'
+    ),
     metaclass=ABCMeta,
 ):
     __slots__ = ()
@@ -103,4 +105,5 @@ class Runner(
                 self.test_framework.language,
                 self.test_framework.framework,
                 self.build_options(),
+                False,
             )

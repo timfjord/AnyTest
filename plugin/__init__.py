@@ -15,6 +15,24 @@ SCOPE_LAST = 'last'
 logger = logging.getLogger(__name__)
 
 
+def _build_runner_quick_panel_item(runner):
+    trigger = (
+        runner.cmd
+        if runner.scope == test_frameworks.TestFramework.SCOPE_SUITE
+        else runner.relpath
+    )
+    if runner.scope == test_frameworks.TestFramework.SCOPE_LINE:
+        trigger += ':{}'.format(runner.line)
+
+    scope = 'modified' if runner.modified else runner.scope
+
+    return QuickPanelItem(
+        trigger,
+        '[{}] in \'{}\' with {}'.format(scope, runner.dir, runner.name),
+        runner.framework,
+    )
+
+
 class Plugin:
     @classmethod
     @handle_errors
@@ -92,14 +110,7 @@ class Plugin:
             raise EmptyHistory
 
         self.view.window().show_quick_panel(
-            [
-                QuickPanelItem(
-                    '{}:{}'.format(runner.relpath, runner.line),
-                    runner.dir,
-                    runner.framework,
-                )
-                for runner in runners
-            ],
+            [_build_runner_quick_panel_item(runner) for runner in runners],
             lambda index: index > -1 and self.process_runner(runners[index]),
         )
 
@@ -120,8 +131,8 @@ class Plugin:
         if runner is None:
             raise Error('Runner is not set')
 
-        if bool(cmd):
-            runner = runner._replace(cmd=cmd)
+        if bool(cmd) and runner.cmd != cmd:
+            runner = runner._replace(cmd=cmd, modified=True)
 
         ViewCallbacks(self.view).run()
 

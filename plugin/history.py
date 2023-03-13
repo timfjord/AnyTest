@@ -10,7 +10,7 @@ class History:
     """
 
     SETTINGS_KEY = 'AnyTest.history.items'
-    SIZE = 10
+    MAX_ITEMS = 10
 
     @classmethod
     def current(cls):
@@ -31,27 +31,27 @@ class History:
     def items(self, value):
         self._settings.set(self.SETTINGS_KEY, value)
 
+    def add(self, runner):
+        data = {'runner': runner.name, 'kwargs': runner.to_dict()}
+        items = [
+            item
+            for item in self.items
+            if item['kwargs']['cmd'] != runner.cmd
+            or item['kwargs']['dir'] != runner.dir
+        ]
+
+        new_items = [data] + items[: (self.MAX_ITEMS - 1)]
+        self.items = new_items
+
+    def clear(self):
+        self.items = []
+
     @property
     def runners(self):
         return (runners.load(item['runner'])(**item['kwargs']) for item in self.items)
-
-    def add(self, runner):
-        data = {'runner': runner.name, 'kwargs': runner.to_dict()}
-        items = self.items
-
-        try:
-            items.remove(data)
-        except ValueError:
-            pass
-
-        new_items = [data] + items[: (self.SIZE - 1)]
-        self.items = new_items
 
     def last(self):
         try:
             return next(self.runners)
         except StopIteration:
             raise errors.EmptyHistory
-
-    def clear(self):
-        self.items = []

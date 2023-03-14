@@ -2,19 +2,12 @@ import types
 
 from AnyTest.plugin.errors import EmptyHistory
 from AnyTest.plugin.history import History
-from AnyTest.plugin.runners import Runner
+from AnyTest.plugin.runners.command import Runner as CommandRunner
 from AnyTest.tests import SublimeWindowTestCase
 
 
-class DummyRunner(Runner):
-    name = 'dummy'
-
-    def run(self):
-        pass
-
-
 def build_runner(cmd, dir='dir', modified=False):
-    return DummyRunner(
+    return CommandRunner(
         scope='scope',
         cmd=cmd,
         dir=dir,
@@ -47,15 +40,15 @@ class SettingsTestCase(SublimeWindowTestCase):
         self.history.add(runner1)
         self.assertEqual(
             self.history.items,
-            [{'runner': 'dummy', 'kwargs': runner1.to_dict()}],
+            [{'runner': 'command', 'kwargs': runner1.to_dict()}],
         )
 
         self.history.add(runner2)
         self.assertEqual(
             self.history.items,
             [
-                {'runner': 'dummy', 'kwargs': runner2.to_dict()},
-                {'runner': 'dummy', 'kwargs': runner1.to_dict()},
+                {'runner': 'command', 'kwargs': runner2.to_dict()},
+                {'runner': 'command', 'kwargs': runner1.to_dict()},
             ],
         )
 
@@ -63,8 +56,8 @@ class SettingsTestCase(SublimeWindowTestCase):
         self.assertEqual(
             self.history.items,
             [
-                {'runner': 'dummy', 'kwargs': runner1.to_dict()},
-                {'runner': 'dummy', 'kwargs': runner2.to_dict()},
+                {'runner': 'command', 'kwargs': runner1.to_dict()},
+                {'runner': 'command', 'kwargs': runner2.to_dict()},
             ],
         )
 
@@ -72,8 +65,8 @@ class SettingsTestCase(SublimeWindowTestCase):
         self.assertEqual(
             self.history.items,
             [
-                {'runner': 'dummy', 'kwargs': runner3.to_dict()},
-                {'runner': 'dummy', 'kwargs': runner2.to_dict()},
+                {'runner': 'command', 'kwargs': runner3.to_dict()},
+                {'runner': 'command', 'kwargs': runner2.to_dict()},
             ],
         )
 
@@ -89,8 +82,8 @@ class SettingsTestCase(SublimeWindowTestCase):
         self.assertEqual(
             self.history.items,
             [
-                {'runner': 'dummy', 'kwargs': runner2.to_dict()},
-                {'runner': 'dummy', 'kwargs': runner1.to_dict()},
+                {'runner': 'command', 'kwargs': runner2.to_dict()},
+                {'runner': 'command', 'kwargs': runner1.to_dict()},
             ],
         )
 
@@ -106,6 +99,14 @@ class SettingsTestCase(SublimeWindowTestCase):
 
         self.assertIsInstance(self.history.runners, types.GeneratorType)
 
+        runners = list(self.history.runners)
+        self.assertEqual(runners, [runner])
+
     def test_last(self):
         with self.assertRaises(EmptyHistory):
             self.history.last()
+
+        runner = build_runner('cmd')
+        self.history.add(runner)
+
+        self.assertEqual(self.history.last(), runner)

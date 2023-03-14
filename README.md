@@ -32,16 +32,50 @@ Feel free to [open an issue](https://github.com/timfjord/AnyTest/issues/new) wit
 
 The main command that the package exposes is `any_test_run`. It supports 4 scopes:
 
-- `suite`: runs the whole test suite (based on the current file)
-- `file`: runs all tests in the current file
-- `line`: runs the test nearest to the current line(cursor)
-- `last`: runs the last test
+#### • suite scope
+
+```json
+{ "command": "any_test_run", "args": { "scope": "suite" } }
+``` 
+or `AnyTest: Test suite` in the command palette.
+
+Runs the whole test suite (based on the current file)
+
+#### • file scope
+
+```json
+{ "command": "any_test_run", "args": { "scope": "file" } }
+``` 
+or `AnyTest: Test file` in the command palette.
+
+Runs all tests in the current file
+
+#### • line scope
+
+```json
+{ "command": "any_test_run", "args": { "scope": "line" } }
+``` 
+or `AnyTest: Test line` in the command palette.
+
+Runs the test nearest to the current line(cursor)
+
+#### • last scope
+
+```json
+{ "command": "any_test_run", "args": { "scope": "last" } }
+``` 
+or `AnyTest: Test last` in the command palette.
+
+Runs the last test
 
 The package tries to detect a test framework based on the current file.
 When the framework is detected the package generates a command and runs it using the selected runner.  
 When the `edit` flag is passed to `true` then the command can be edited before running.  
 And finally, if the `select` flag is passed to `true` then the auto-detection feature is bypassed
 and the quick panel with all available test frameworks is shown allowing to select a test framework manually.
+
+The package keeps the 10 last test commands in history that can be accessed with the `AnyTest: Show history` command.  
+The history can be cleared with the `AnyTest: Clear history` command.
 
 The package comes with polyfills for test frameworks that don't have built-in support for running tests for the current line.  
 All the polyfills have been borrowed from the `vim-test` plugin and adapted for Sublime Text.
@@ -168,7 +202,6 @@ Using `unittesting` only makes sense with PyUnit test framework, so it is usuall
 
 - Add more test frameworks (the end goal is to at least support all the test frameworks that `vim-test` supports)
 - Run tests from the Side Bar (including testing folders)
-- Show history
 - Potentially integrate the package with [Sublime Debugger](https://github.com/daveleroy/sublime_debugger)
 
 ## Contribution

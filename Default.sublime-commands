@@ -18,22 +18,22 @@
         }
     },
     {
-        "caption": "AnyTest: Test nearest",
+        "caption": "AnyTest: Test line",
         "command": "any_test_run",
         "args": { "scope": "line" }
     },
     {
-        "caption": "AnyTest: Edit nearest command",
+        "caption": "AnyTest: Edit line command",
         "command": "any_test_run",
         "args": { "scope": "line", "edit": true }
     },
     {
-        "caption": "AnyTest: Test nearest with",
+        "caption": "AnyTest: Test line with",
         "command": "any_test_run",
         "args": { "scope": "line", "select": true }
     },
     {
-        "caption": "AnyTest: Select and edit nearest command",
+        "caption": "AnyTest: Select and edit line command",
         "command": "any_test_run",
         "args": { "scope": "line", "edit": true, "select": true }
     },

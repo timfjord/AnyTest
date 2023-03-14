@@ -7,22 +7,22 @@
                 "caption": "AnyTest",
                 "children": [
                     {
-                        "caption": "Test nearest",
+                        "caption": "Test line",
                         "command": "any_test_run",
                         "args": { "scope": "line" }
                     },
                     {
-                        "caption": "Edit nearest command",
+                        "caption": "Edit line command",
                         "command": "any_test_run",
                         "args": { "scope": "line", "edit": true }
                     },
                     {
-                        "caption": "Test nearest with",
+                        "caption": "Test line with",
                         "command": "any_test_run",
                         "args": { "scope": "line", "select": true }
                     },
                     {
-                        "caption": "Select and edit nearest command",
+                        "caption": "Select and edit line command",
                         "command": "any_test_run",
                         "args": { "scope": "line", "edit": true, "select": true }
                     },
@@ -78,6 +78,15 @@
                         "caption": "Edit last command",
                         "command": "any_test_run",
                         "args": { "scope": "last", "edit": true }
+                    },
+                    { "caption": "-" },
+                    {
+                        "caption": "Show history",
+                        "command": "any_test_show_history"
+                    },
+                    {
+                        "caption": "Clear history",
+                        "command": "any_test_clear_history"
                     },
                     { "caption": "-" },
                     {

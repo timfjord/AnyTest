@@ -74,16 +74,16 @@ class SettingsTestCase(SublimeWindowTestCase):
         self.assertEqual(self.history.items, [])
 
     def test_add_same_cmd_different_dir(self):
-        runner1 = build_runner("cmd", dir="dir1")
-        runner2 = build_runner("cmd", dir="dir2")
+        runner_dir_1 = build_runner("cmd", dir="dir1")
+        runner_dir_2 = build_runner("cmd", dir="dir2")
 
-        self.history.add(runner1)
-        self.history.add(runner2)
+        self.history.add(runner_dir_1)
+        self.history.add(runner_dir_2)
         self.assertEqual(
             self.history.items,
             [
-                {"runner": "command", "kwargs": runner2.to_dict()},
-                {"runner": "command", "kwargs": runner1.to_dict()},
+                {"runner": "command", "kwargs": runner_dir_2.to_dict()},
+                {"runner": "command", "kwargs": runner_dir_1.to_dict()},
             ],
         )
 

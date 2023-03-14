@@ -4,20 +4,20 @@ from functools import reduce
 
 REGEXP_ESCAPE_TRANSLATION_TABLE = str.maketrans(
     {
-        '?': r'\?',
-        '+': r'\+',
-        '*': r'\*',
-        '\\': r'\\',
-        '^': r'\^',
-        '$': r'\$',
-        '.': r'\.',
-        '|': r'\|',
-        '{': r'\{',
-        '}': r'\}',
-        '[': r'\[',
-        ']': r'\]',
-        '(': r'\(',
-        ')': r'\)',
+        "?": r"\?",
+        "+": r"\+",
+        "*": r"\*",
+        "\\": r"\\",
+        "^": r"\^",
+        "$": r"\$",
+        ".": r"\.",
+        "|": r"\|",
+        "{": r"\{",
+        "}": r"\}",
+        "[": r"\[",
+        "]": r"\]",
+        "(": r"\(",
+        ")": r"\)",
     }
 )
 
@@ -31,7 +31,7 @@ def escape_regex(string):
 
 def escape(string, symbols):
     for char in symbols:
-        string = string.replace(char, '\\{}'.format(char))
+        string = string.replace(char, "\\{}".format(char))
 
     return string
 

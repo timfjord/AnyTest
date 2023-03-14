@@ -10,7 +10,7 @@ from .utils import escape_regex as _escape_regex
 from .utils import match_patterns
 
 
-class Nearest(namedtuple('Nearest', 'tests, namespaces, line, names')):
+class Nearest(namedtuple("Nearest", "tests, namespaces, line, names")):
     __slots__ = ()
 
     def join(
@@ -18,10 +18,10 @@ class Nearest(namedtuple('Nearest', 'tests, namespaces, line, names')):
         sep,
         namespace_sep=None,
         test_sep=None,
-        start='',
-        namespace_start='',
-        test_end='',
-        end='',
+        start="",
+        namespace_start="",
+        test_end="",
+        end="",
         escape_regex=lambda x: x,
     ):
         if namespace_sep is None:
@@ -44,26 +44,26 @@ class Nearest(namedtuple('Nearest', 'tests, namespaces, line, names')):
             ),
         )
 
-        return ''.join(
+        return "".join(
             (
-                start if has_tests_or_namespaces else '',
-                namespace_start if bool(self.namespaces) else '',
+                start if has_tests_or_namespaces else "",
+                namespace_start if bool(self.namespaces) else "",
                 joined,
-                test_end if bool(self.tests) else '',
-                end if has_tests_or_namespaces else '',
+                test_end if bool(self.tests) else "",
+                end if has_tests_or_namespaces else "",
             )
         )
 
 
 class Context(WindowMixin):
-    CURRENT_LINE = 'current'
+    CURRENT_LINE = "current"
 
     def __init__(self, view):
         self.view = view
         self.root, self.file = Root.find(
             self.window.folders(),
             self.view.file_name(),
-            settings.get('subprojects', type=list, default=[]),
+            settings.get("subprojects", type=list, default=[]),
         )
 
     @property
@@ -132,7 +132,7 @@ class Context(WindowMixin):
         for line, line_nr in self.lines(from_line=from_line, to_line=to_line):
             test_match, test_name = match_patterns(line, test_patterns)
             namespace_match, _ = match_patterns(line, namespace_patterns)
-            indent_match = re.match(r'^\s*', line)
+            indent_match = re.match(r"^\s*", line)
             indent = 0 if indent_match is None else indent_match.end()
 
             if test_match and (

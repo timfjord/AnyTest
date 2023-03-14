@@ -13,4 +13,4 @@ except ImportError:
             )
 
 
-__all__ = ['QuickPanelItem']
+__all__ = ["QuickPanelItem"]

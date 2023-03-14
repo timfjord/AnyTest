@@ -6,55 +6,55 @@ from .. import ruby
 
 
 class TestFramework(ruby.TestFramework):
-    NAMESPEACE_SEPARATOR = '::'
-    METHOD_SEPARATOR = '#'
+    NAMESPEACE_SEPARATOR = "::"
+    METHOD_SEPARATOR = "#"
 
-    framework = 'minitest'
-    pattern = r'(((^|/|\\)test_[^/\\]+)|_test)(?<!spec).rb$'
+    framework = "minitest"
+    pattern = r"(((^|/|\\)test_[^/\\]+)|_test)(?<!spec).rb$"
 
     @classmethod
     def is_suitable_for(cls, file):
         return (
             super().is_suitable_for(file)
-            and not cls.settings('use_m', type=bool)
+            and not cls.settings("use_m", type=bool)
             and not ruby.is_railties_5_or_greater(file.root)
         )
 
     @classmethod
     def test_folder(cls):
-        return cls.settings('test_folder', type=str, fallback=False)
+        return cls.settings("test_folder", type=str, fallback=False)
 
     @classmethod
     def test_file_pattern(cls):
         return cls.settings(
-            'file_pattern',
+            "file_pattern",
             type=str,
             fallback=False,
         )
 
     @lru_cache(maxsize=None)
     def rakefile(self):
-        return self.file('Rakefile')
+        return self.file("Rakefile")
 
     @lru_cache(maxsize=None)
     def use_rake(self):
         return (
             self.rakefile().exists()
-            and self.rakefile().contains_line('Rake::TestTask')
-            or self.file('bin', 'rails').exists()
+            and self.rakefile().contains_line("Rake::TestTask")
+            or self.file("bin", "rails").exists()
         )
 
     @lru_cache(maxsize=None)
     def bin(self):
-        return self.file('bin', 'rake')
+        return self.file("bin", "rake")
 
     def build_executable(self):
         if self.use_rake():
             return self._build_executable(
-                ['rake', 'test'], zeus=True, binstubs=['test']
+                ["rake", "test"], zeus=True, binstubs=["test"]
             )
 
-        return self._build_executable(['ruby', '-I{}'.format(self.test_folder())])
+        return self._build_executable(["ruby", "-I{}".format(self.test_folder())])
 
     def build_file_position_args(self):
         if self.use_rake():
@@ -73,7 +73,7 @@ class TestFramework(ruby.TestFramework):
             if self.use_rake():
                 nearest_args = ['TESTOPTS="--name={}"'.format(utils.escape(name, '"`'))]
             else:
-                nearest_args = ['--name', name]
+                nearest_args = ["--name", name]
 
         return file_args + nearest_args
 
@@ -87,13 +87,13 @@ class TestFramework(ruby.TestFramework):
         test = []
 
         if bool(nearest.tests):
-            test_name = utils.escape_regex('{}$'.format(nearest.tests[0]))
+            test_name = utils.escape_regex("{}$".format(nearest.tests[0]))
             syntax = nearest.names[0]
 
-            if syntax == 'rails':
-                test_name = 'test_{}'.format(re.sub(r'\s+', '_', test_name))
-            elif syntax == 'spec':
-                test_name = r'test_\d+_{}'.format(test_name)
+            if syntax == "rails":
+                test_name = "test_{}".format(re.sub(r"\s+", "_", test_name))
+            elif syntax == "spec":
+                test_name = r"test_\d+_{}".format(test_name)
 
             test = [test_name]
 
@@ -109,12 +109,12 @@ class TestFramework(ruby.TestFramework):
         # as a workaround for globstar in Bash, see https://github.com/randy3k/Terminus/issues/332
         return (
             [
-                'find',
+                "find",
                 self.test_folder(),
-                '-name',
+                "-name",
                 self.test_file_pattern(),
-                '-exec',
+                "-exec",
             ]
             + command
-            + ['{}', '+']
+            + ["{}", "+"]
         )

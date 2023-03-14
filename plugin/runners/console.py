@@ -2,12 +2,12 @@ import sublime
 
 from ..runners import Runner as BaseRunner
 
-SETTINGS_KEY = 'AnyTest.last_command'
+SETTINGS_KEY = "AnyTest.last_command"
 
 
 def last_command(view, value=None):
     if view is None:
-        return ''
+        return ""
 
     settings = view.settings()
 
@@ -23,12 +23,12 @@ class Runner(BaseRunner):
     Useful when there is no need to actually run the command(e.g. in tests, for debugging)
     """
 
-    name = 'console'
-    panel_name = 'console'
+    name = "console"
+    panel_name = "console"
 
     def run(self):
-        print('--- AnyTest command ---')
+        print("--- AnyTest command ---")
         print(self)
-        print('-----------------------')
+        print("-----------------------")
 
         last_command(sublime.active_window().active_view(), self.cmd)

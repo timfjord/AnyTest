@@ -5,18 +5,18 @@ from ..test_frameworks import TestFramework
 
 
 class Runner(BaseRunner):
-    name = 'unittesting'
-    panel_name = 'output.UnitTesting'
+    name = "unittesting"
+    panel_name = "output.UnitTesting"
     editable = False
 
     def run(self):
-        args = {'package': os.path.basename(self.dir)}
+        args = {"package": os.path.basename(self.dir)}
 
         if self.scope != TestFramework.SCOPE_SUITE:
-            args['pattern'] = os.path.basename(self.file)
-            args['package'] += ':{}'.format(args['pattern'])
+            args["pattern"] = os.path.basename(self.file)
+            args["package"] += ":{}".format(args["pattern"])
 
-        self.run_command('unit_testing', args)
+        self.run_command("unit_testing", args)
 
     class Builder(BaseRunner.Builder):
         def build_cmd(self):

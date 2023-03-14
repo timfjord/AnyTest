@@ -9,7 +9,7 @@ class History:
     which makes it available even after package reload
     """
 
-    SETTINGS_KEY = 'AnyTest.history.items'
+    SETTINGS_KEY = "AnyTest.history.items"
     MAX_ITEMS = 10
 
     @classmethod
@@ -32,12 +32,12 @@ class History:
         self._settings.set(self.SETTINGS_KEY, value)
 
     def add(self, runner):
-        data = {'runner': runner.name, 'kwargs': runner.to_dict()}
+        data = {"runner": runner.name, "kwargs": runner.to_dict()}
         items = [
             item
             for item in self.items
-            if item['kwargs']['cmd'] != runner.cmd
-            or item['kwargs']['dir'] != runner.dir
+            if item["kwargs"]["cmd"] != runner.cmd
+            or item["kwargs"]["dir"] != runner.dir
         ]
 
         new_items = [data] + items[: (self.MAX_ITEMS - 1)]
@@ -48,7 +48,7 @@ class History:
 
     @property
     def runners(self):
-        return (runners.load(item['runner'])(**item['kwargs']) for item in self.items)
+        return (runners.load(item["runner"])(**item["kwargs"]) for item in self.items)
 
     def last(self):
         try:

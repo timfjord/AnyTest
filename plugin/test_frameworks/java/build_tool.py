@@ -17,7 +17,7 @@ def find(file):
 
 class Base(metaclass=ABCMeta):
     MAX_DEPTH = 20
-    NAMESPACE_SEPARATOR = '$'
+    NAMESPACE_SEPARATOR = "$"
 
     @property
     @abstractmethod
@@ -63,25 +63,25 @@ class Base(metaclass=ABCMeta):
 
 class Maven(Base):
     PACKAGE_REPLACEMENTS = (
-        (r'\\', '/'),
-        (r'^.*src\/(main|test)\/(java\/)?', ''),
-        (r'\/[^\/]+$', ''),
-        (r'/', '.'),
+        (r"\\", "/"),
+        (r"^.*src\/(main|test)\/(java\/)?", ""),
+        (r"\/[^\/]+$", ""),
+        (r"/", "."),
     )
-    NEAREST_SEPARATOR = '$'
-    SECTION_SEPARATOR = '#'
+    NEAREST_SEPARATOR = "$"
+    SECTION_SEPARATOR = "#"
 
-    executable = 'mvn'  # type: str
-    config_filenames = ('pom.xml',)  # type: tuple
+    executable = "mvn"  # type: str
+    config_filenames = ("pom.xml",)  # type: tuple
 
     def get_package(self):
         return utils.replace(self.file.relpath, *self.PACKAGE_REPLACEMENTS)
 
     def build_module_args(self, module):
-        return ['-pl', module]
+        return ["-pl", module]
 
     def build_file_position_args(self):
-        return ['-Dtest=' + self.get_package() + '.' + self.file.name() + r'\*']
+        return ["-Dtest=" + self.get_package() + "." + self.file.name() + r"\*"]
 
     def build_line_position_args(self, nearest):
         name = nearest.join(
@@ -92,25 +92,25 @@ class Maven(Base):
         )
 
         if bool(name):
-            return ['-Dtest=' + self.get_package() + '.' + name]
+            return ["-Dtest=" + self.get_package() + "." + name]
 
 
 class Gradle(Base):
-    NEAREST_SEPARATOR = '.'
+    NEAREST_SEPARATOR = "."
 
-    executable = 'gradle'  # type: str
+    executable = "gradle"  # type: str
     config_filenames = (
-        'build.gradle',
-        'build.gradle.kts',
-        'settings.gradle',
-        'settings.gradle.kts',
+        "build.gradle",
+        "build.gradle.kts",
+        "settings.gradle",
+        "settings.gradle.kts",
     )  # type: tuple
 
     def build_module_args(self, module):
-        return ['-p', module]
+        return ["-p", module]
 
     def build_file_position_args(self):
-        return ['--tests', self.file.name()]
+        return ["--tests", self.file.name()]
 
     def build_line_position_args(self, nearest):
         name = nearest.join(
@@ -120,4 +120,4 @@ class Gradle(Base):
         )
 
         if bool(name):
-            return ['--tests', name]
+            return ["--tests", name]

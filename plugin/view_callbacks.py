@@ -17,15 +17,15 @@ class ViewCallbacks(WindowMixin):
         return self.view.window()
 
     def save(self):
-        if settings.get('save_all_files_on_run'):
-            self.run_command('save_all')
-        elif settings.get('save_current_file_on_run') and self.is_editable:
-            self.run_command('save')
+        if settings.get("save_all_files_on_run"):
+            self.run_command("save_all")
+        elif settings.get("save_current_file_on_run") and self.is_editable:
+            self.run_command("save")
 
     def scroll_to_view(self):
         if (
             not settings
-            or not settings.get('scroll_to_view_on_run')
+            or not settings.get("scroll_to_view_on_run")
             or not self.is_editable
             or self._prev_visible_region is None
         ):
@@ -42,7 +42,7 @@ class ViewCallbacks(WindowMixin):
             return
 
         diff = -len(self.view.lines(overlaid_region))
-        self.view.run_command('scroll_lines', {'amount': float(diff)})
+        self.view.run_command("scroll_lines", {"amount": float(diff)})
 
     def run(self):
         self.save()

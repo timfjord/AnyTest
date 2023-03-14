@@ -10,7 +10,7 @@ from .history import History
 from .quick_panel_item import QuickPanelItem
 from .view_callbacks import ViewCallbacks
 
-SCOPE_LAST = 'last'
+SCOPE_LAST = "last"
 
 logger = logging.getLogger(__name__)
 
@@ -22,13 +22,13 @@ def _build_runner_quick_panel_item(runner):
         else runner.relpath
     )
     if runner.scope == test_frameworks.TestFramework.SCOPE_LINE:
-        trigger += ':{}'.format(runner.line)
+        trigger += ":{}".format(runner.line)
 
-    scope = 'modified' if runner.modified else runner.scope
+    scope = "modified" if runner.modified else runner.scope
 
     return QuickPanelItem(
         trigger,
-        '[{}] in \'{}\' with {}'.format(scope, runner.dir, runner.name),
+        "[{}] in '{}' with {}".format(scope, runner.dir, runner.name),
         runner.framework,
     )
 
@@ -44,7 +44,7 @@ class Plugin:
     def edit_last(cls):
         runner = History.current().last()
         sublime.active_window().open_file(
-            '{}:{}'.format(runner.file, runner.line), sublime.ENCODED_POSITION
+            "{}:{}".format(runner.file, runner.line), sublime.ENCODED_POSITION
         )
 
     @classmethod
@@ -60,14 +60,14 @@ class Plugin:
         cache.clear()
 
         items = sorted(
-            test_frameworks.items(), key=operator.attrgetter('language', 'framework')
+            test_frameworks.items(), key=operator.attrgetter("language", "framework")
         )
 
-        if len(items) == 1 and not settings.get('always_show_test_framework_selection'):
+        if len(items) == 1 and not settings.get("always_show_test_framework_selection"):
             self.run_test(scope, edit, items[0])
         else:
             self.view.window().show_quick_panel(
-                [QuickPanelItem(item.framework, '', item.language) for item in items],
+                [QuickPanelItem(item.framework, "", item.language) for item in items],
                 lambda index: index != -1 and self.run_test(scope, edit, items[index]),
             )
 
@@ -80,7 +80,7 @@ class Plugin:
 
             if edit and runner.editable:
                 self.view.window().show_input_panel(
-                    'Command',
+                    "Command",
                     runner.cmd,
                     lambda cmd: self.process_runner(runner, cmd),
                     lambda _: None,
@@ -92,12 +92,12 @@ class Plugin:
                 self.process_runner(runner)
         except FrameworkNotFound as exc:
             if (
-                settings.get('select_test_framework_when_not_found')
+                settings.get("select_test_framework_when_not_found")
                 and scope != SCOPE_LAST
             ):
                 status.update("Couldn't find a test framework, please select one")
                 self.view.run_command(
-                    'any_test_run', {'scope': scope, 'edit': edit, 'select': True}
+                    "any_test_run", {"scope": scope, "edit": edit, "select": True}
                 )
             else:
                 raise exc
@@ -127,9 +127,9 @@ class Plugin:
         return runner.build(test_framework(context), scope)
 
     @handle_errors
-    def process_runner(self, runner, cmd=''):
+    def process_runner(self, runner, cmd=""):
         if runner is None:
-            raise Error('Runner is not set')
+            raise Error("Runner is not set")
 
         if bool(cmd) and runner.cmd != cmd:
             runner = runner._replace(cmd=cmd, modified=True)

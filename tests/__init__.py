@@ -10,8 +10,8 @@ from AnyTest.plugin.runners.console import last_command
 from AnyTest.plugin.test_frameworks import TestFramework
 from AnyTest.plugin.utils import to_unpackable
 
-FIXTURES_PATH = os.path.join(os.path.dirname(__file__), 'fixtures')
-ST3 = sublime.version() < '4000'
+FIXTURES_PATH = os.path.join(os.path.dirname(__file__), "fixtures")
+ST3 = sublime.version() < "4000"
 
 
 class SublimeWindowTestCase(DeferrableTestCase):
@@ -19,25 +19,25 @@ class SublimeWindowTestCase(DeferrableTestCase):
 
     @classmethod
     def setUpClass(cls):
-        sublime.run_command('new_window')
+        sublime.run_command("new_window")
         cls.window = sublime.active_window()
-        cls.window.set_project_data({'settings': {settings.PROJECT_SETTINGS_KEY: {}}})
+        cls.window.set_project_data({"settings": {settings.PROJECT_SETTINGS_KEY: {}}})
 
-        sublime.load_settings('Preferences.sublime-settings').set(
-            'close_windows_when_empty', False
+        sublime.load_settings("Preferences.sublime-settings").set(
+            "close_windows_when_empty", False
         )
 
         cache.clear()
 
     @classmethod
     def tearDownClass(cls):
-        cls.window.run_command('close_window')
+        cls.window.run_command("close_window")
 
     def setUp(self):
         self._settings = sublime.load_settings(settings.BASE_NAME)
         self._setting_keys = set()
 
-        self.setSettings({'runner': 'console'})
+        self.setSettings({"runner": "console"})
         self.setSettings(self.settings)
 
     def tearDown(self):
@@ -85,7 +85,7 @@ class SublimeViewTestCase(SublimeWindowTestCase):
             return
 
         self.focusView()
-        self.view.run_command('goto_line', {'line': line})
+        self.view.run_command("goto_line", {"line": line})
 
         return line
 
@@ -101,29 +101,29 @@ class SublimeProjectTestCase(SublimeViewTestCase):
         super().setUpClass()
 
         if cls.folder is None:
-            raise ValueError('folder is missing')
+            raise ValueError("folder is missing")
 
         cls._currentFolder = os.path.join(FIXTURES_PATH, *to_unpackable(cls.folder))
-        cls.window.set_project_data({'folders': [{'path': cls._currentFolder}]})
+        cls.window.set_project_data({"folders": [{"path": cls._currentFolder}]})
 
     def _testLine(self, line):
         if not self.view:
             return
 
         self.gotoLine(line)
-        self.view.run_command('any_test_run', {'scope': TestFramework.SCOPE_LINE})
+        self.view.run_command("any_test_run", {"scope": TestFramework.SCOPE_LINE})
 
     def _testFile(self, file, line=None, scope=None):
         test_scope = scope if scope is not None else TestFramework.SCOPE_FILE
 
         if self._currentFolder is None:
-            raise ValueError('folder is required')
+            raise ValueError("folder is required")
 
         file_path = os.path.join(self._currentFolder, *to_unpackable(file))
         open_flags = 0
 
         if line is not None:
-            file_path += ':{}'.format(line)
+            file_path += ":{}".format(line)
             open_flags |= sublime.ENCODED_POSITION
 
             if scope is None:
@@ -133,13 +133,13 @@ class SublimeProjectTestCase(SublimeViewTestCase):
 
         yield self.isViewLoaded
 
-        self.view.run_command('any_test_run', {'scope': test_scope})
+        self.view.run_command("any_test_run", {"scope": test_scope})
 
     def _testSuite(self, file):
         yield from self._testFile(file, scope=TestFramework.SCOPE_SUITE)
 
     def assertLastCommand(self, *command_parts):
-        command = ''.join(
+        command = "".join(
             map(lambda part: os.path.join(*to_unpackable(part)), command_parts)
         )
 

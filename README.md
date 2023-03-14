@@ -32,38 +32,42 @@ Feel free to [open an issue](https://github.com/timfjord/AnyTest/issues/new) wit
 
 The main command that the package exposes is `any_test_run`. It supports 4 scopes:
 
-#### • suite scope
+### • suite scope
 
 ```json
 { "command": "any_test_run", "args": { "scope": "suite" } }
-``` 
+```
+
 or `AnyTest: Test suite` in the command palette.
 
 Runs the whole test suite (based on the current file)
 
-#### • file scope
+### • file scope
 
 ```json
 { "command": "any_test_run", "args": { "scope": "file" } }
-``` 
+```
+
 or `AnyTest: Test file` in the command palette.
 
 Runs all tests in the current file
 
-#### • line scope
+### • line scope
 
 ```json
 { "command": "any_test_run", "args": { "scope": "line" } }
-``` 
+```
+
 or `AnyTest: Test line` in the command palette.
 
 Runs the test nearest to the current line(cursor)
 
-#### • last scope
+### • last scope
 
 ```json
 { "command": "any_test_run", "args": { "scope": "last" } }
-``` 
+```
+
 or `AnyTest: Test last` in the command palette.
 
 Runs the last test

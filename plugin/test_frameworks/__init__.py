@@ -10,13 +10,13 @@ logger = logging.getLogger(__name__)
 
 def load(language, framework):
     module = importlib.import_module(
-        '..test_frameworks.{}.{}'.format(language.lower(), framework.lower()), __name__
+        "..test_frameworks.{}.{}".format(language.lower(), framework.lower()), __name__
     )
-    return getattr(module, 'TestFramework')
+    return getattr(module, "TestFramework")
 
 
 def items():
-    test_frameworks = settings.get('test_frameworks', type=dict, default={})
+    test_frameworks = settings.get("test_frameworks", type=dict, default={})
 
     for language, frameworks in test_frameworks.items():
         for framework in utils.to_unpackable(frameworks):
@@ -48,9 +48,9 @@ def _safe_merge(dict1, dict2):
 
 
 class TestFramework(metaclass=ABCMeta):
-    SCOPE_SUITE = 'suite'
-    SCOPE_FILE = 'file'
-    SCOPE_LINE = 'line'
+    SCOPE_SUITE = "suite"
+    SCOPE_FILE = "file"
+    SCOPE_LINE = "line"
 
     test_patterns = None
     namespace_patterns = []
@@ -112,7 +112,7 @@ class TestFramework(metaclass=ABCMeta):
 
     def find_nearest(self):
         if self.test_patterns is None:
-            raise NotImplementedError('test_patterns is not defined for the framework')
+            raise NotImplementedError("test_patterns is not defined for the framework")
 
         return self.context.find_nearest(
             self.test_patterns, self.namespace_patterns, to_line=1
@@ -120,7 +120,7 @@ class TestFramework(metaclass=ABCMeta):
 
     def executable(self):
         return (
-            self.settings('executable', type=list, fallback=False)
+            self.settings("executable", type=list, fallback=False)
             or self.build_executable()
         )
 
@@ -128,7 +128,7 @@ class TestFramework(metaclass=ABCMeta):
         return []
 
     def args(self):
-        return self.settings('args', type=list, fallback=False, default=[])
+        return self.settings("args", type=list, fallback=False, default=[])
 
     def build_suite_position_args(self):
         return []
@@ -142,13 +142,13 @@ class TestFramework(metaclass=ABCMeta):
         pass
 
     def build_command(self, scope):
-        method_name = 'build_{}_position_args'.format(scope)
+        method_name = "build_{}_position_args".format(scope)
         if hasattr(self, method_name):
-            position_args = getattr(self, 'build_{}_position_args'.format(scope))
+            position_args = getattr(self, "build_{}_position_args".format(scope))
 
             return self.executable() + self.args() + position_args()
         else:
-            raise errors.Error('Invalid scope')
+            raise errors.Error("Invalid scope")
 
     def get_options(self):
         return {}

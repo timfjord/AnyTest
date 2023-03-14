@@ -1,6 +1,5 @@
 [tool.black]
 max-line-length = 99
-skip-string-normalization = true
 target-version = ['py33']
 extend-exclude = '''
 ^/tests/fixtures

@@ -3,7 +3,7 @@ import json
 from ...cache import cache
 from .. import TestFramework as BaseTestFramework
 
-PACKAGE_JSON = 'package.json'
+PACKAGE_JSON = "package.json"
 
 
 @cache
@@ -19,13 +19,13 @@ def get_package_json_content(root):
 def has_package(package, root):
     content = get_package_json_content(root)
 
-    return package in content.get('dependencies', {}) or package in content.get(
-        'devDependencies', {}
+    return package in content.get("dependencies", {}) or package in content.get(
+        "devDependencies", {}
     )
 
 
 class TestFramework(BaseTestFramework):
-    language = 'javascript'
+    language = "javascript"
     test_patterns = (r'^\s*(?:it|test)\s*[\( ]\s*(?:"|\'|`)(.*)(?:"|\'|`)',)
     namespace_patterns = (
         r'^\s*(?:describe|suite|context)\s*[( ]\s*(?:"|\'|`)(.*)(?:"|\'|`)',
@@ -35,7 +35,7 @@ class TestFramework(BaseTestFramework):
         return has_package(package, self.context.root)
 
     def _build_executable(self, executable):
-        bin = self.file('node_modules', '.bin', executable)
+        bin = self.file("node_modules", ".bin", executable)
 
         if bin.exists():
             return [bin.relpath]

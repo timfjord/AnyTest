@@ -13,7 +13,7 @@ package_logger.setLevel(DEFAULT_LOG_LEVEL)
 if not package_logger.hasHandlers():
     handler = logging.StreamHandler()
 
-    formatter = logging.Formatter(fmt="AnyTest({levelname}): {message}", style='{')
+    formatter = logging.Formatter(fmt="AnyTest({levelname}): {message}", style="{")
     handler.setFormatter(formatter)
 
     package_logger.addHandler(handler)
@@ -27,7 +27,7 @@ def plugin_loaded():
         cur_log_level = package_logger.getEffectiveLevel()
         cur_log_level_name = logging.getLevelName(cur_log_level)
         new_log_level_name = settings.get(
-            'log_level', type=str, default=DEFAULT_LOG_LEVEL_NAME
+            "log_level", type=str, default=DEFAULT_LOG_LEVEL_NAME
         ).upper()
         new_log_level = getattr(logging, new_log_level_name, DEFAULT_LOG_LEVEL)
 

@@ -3,7 +3,7 @@
 # See https://github.com/emmetio/sublime-text-plugin/issues/35
 import sys
 
-prefix = __package__ + '.'  # don't clear the base package
+prefix = __package__ + "."  # don't clear the base package
 for module_name in [
     module_name
     for module_name in sys.modules
@@ -19,7 +19,7 @@ from .plugin import SCOPE_LAST, Plugin  # noqa: E402
 
 
 class AnyTestRunCommand(sublime_plugin.TextCommand):
-    def run(self, _, scope='file', edit=False, select=False):
+    def run(self, _, scope="file", edit=False, select=False):
         plugin = Plugin(self.view)
 
         if select and scope != SCOPE_LAST:
@@ -36,3 +36,13 @@ class AnyTestShowLastOutputCommand(sublime_plugin.ApplicationCommand):
 class AnyTestEditLastCommand(sublime_plugin.ApplicationCommand):
     def run(self):
         Plugin.edit_last()
+
+
+class AnyTestShowHistoryCommand(sublime_plugin.TextCommand):
+    def run(self, _):
+        Plugin(self.view).show_history()
+
+
+class AnyTestClearHistoryCommand(sublime_plugin.ApplicationCommand):
+    def run(self):
+        Plugin.clear_history()

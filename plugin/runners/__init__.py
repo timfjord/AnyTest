@@ -1,4 +1,5 @@
 import importlib
+import os.path
 import re
 from abc import ABCMeta, abstractmethod
 from collections import OrderedDict, namedtuple
@@ -8,20 +9,22 @@ from ..mixins import WindowMixin
 
 
 def load(runner):
-    module = importlib.import_module('.{}'.format(runner), __name__)
-    return getattr(module, 'Runner')
+    module = importlib.import_module(".{}".format(runner), __name__)
+    return getattr(module, "Runner")
 
 
 def find(test_framework):
     runner_name = test_framework.settings(
-        'runner', type=str, default='command', root=True
+        "runner", type=str, default="command", root=True
     )
     return load(runner_name)
 
 
 class Runner(
     WindowMixin,
-    namedtuple('Runner', 'scope, cmd, dir, file, line, language, framework, options'),
+    namedtuple(
+        "Runner", "scope, cmd, dir, file, line, language, framework, options, modified"
+    ),
     metaclass=ABCMeta,
 ):
     __slots__ = ()
@@ -37,25 +40,29 @@ class Runner(
     @classmethod
     def settings(cls, key, default=None, type=None):
         if cls.name is None:
-            raise NotImplementedError('name is not defined for the runner')
+            raise NotImplementedError("name is not defined for the runner")
 
-        return settings.get(('runner', cls.name, key), type=type, default=default)
+        return settings.get(("runner", cls.name, key), type=type, default=default)
+
+    @property
+    def relpath(self):
+        return os.path.relpath(self.file, self.dir)
 
     def get_panel_name(self):
         if self.panel_name is None:
-            raise errors.Error('panel_name is not set')
+            raise errors.Error("panel_name is not set")
 
         return self.panel_name
 
     def show_output(self, focus=True):
         panel_name = self.get_panel_name()
 
-        self.window.run_command('show_panel', {'panel': panel_name})
+        self.window.run_command("show_panel", {"panel": panel_name})
 
         if not focus:
             return
 
-        panel = self.window.find_output_panel(re.sub(r'^output\.', '', panel_name))
+        panel = self.window.find_output_panel(re.sub(r"^output\.", "", panel_name))
 
         if panel:
             self.window.focus_view(panel)
@@ -83,7 +90,7 @@ class Runner(
             }
 
         def build_cmd(self):
-            return ' '.join(self.test_framework.build_command(self.scope))
+            return " ".join(self.test_framework.build_command(self.scope))
 
         def build_options(self):
             return {}
@@ -98,4 +105,5 @@ class Runner(
                 self.test_framework.language,
                 self.test_framework.framework,
                 self.build_options(),
+                False,
             )

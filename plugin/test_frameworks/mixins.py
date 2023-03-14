@@ -8,7 +8,7 @@ class IsConfigurableMixin:
         available_frameworks = tuple(
             to_unpackable(
                 settings.get(
-                    'test_frameworks',
+                    "test_frameworks",
                     type=dict,
                     default={},
                 ).get(cls.language, ())
@@ -26,7 +26,7 @@ class IsConfigurableMixin:
             return True
 
         configured_framework = cls.settings(
-            'test_framework', framework=False, fallback=False
+            "test_framework", framework=False, fallback=False
         )
 
         return (

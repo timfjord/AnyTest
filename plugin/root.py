@@ -54,7 +54,7 @@ class Root:
 class RelativePath:
     def __init__(self, root, *paths):
         if not bool(paths):
-            raise ValueError('Path is required')
+            raise ValueError("Path is required")
 
         self.root = root
         self.relpath = os.path.join(*paths)
@@ -113,7 +113,7 @@ class File(RelativePath):
 class Glob:
     def __init__(self, root, *paths):
         if not bool(paths):
-            raise ValueError('Path is required')
+            raise ValueError("Path is required")
 
         self.root = root
         self.pattern = self.root.join(*paths)

@@ -3,11 +3,11 @@ from .. import swift
 
 
 class TestFramework(swift.TestFramework):
-    NAMESPACE_SEPARATOR = '.'
-    NEAREST_SEPARATOR = '/'
+    NAMESPACE_SEPARATOR = "."
+    NEAREST_SEPARATOR = "/"
 
-    framework = 'xctest'
-    pattern = r'^Tests[/\\].*\.swift$'
+    framework = "xctest"
+    pattern = r"^Tests[/\\].*\.swift$"
 
     def build_file_position_args(self):
         filter, _ = match_patterns(self.context.file.relpath, self.module_patterns)
@@ -15,7 +15,7 @@ class TestFramework(swift.TestFramework):
         if filter:
             namespace = self.context.find_nearest(self.namespace_patterns, from_line=1)
             return [
-                '--filter',
+                "--filter",
                 self.NAMESPACE_SEPARATOR.join([filter] + namespace.tests[0:1]),
             ]
         else:

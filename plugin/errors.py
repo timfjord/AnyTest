@@ -19,7 +19,7 @@ def handle_errors(func):
 
 
 class Error(Exception):
-    DEFAULT_MESSAGE = ''
+    DEFAULT_MESSAGE = ""
 
     def __init__(self, *args, **kwargs):
         if not args and bool(self.DEFAULT_MESSAGE):
@@ -29,7 +29,7 @@ class Error(Exception):
 
 
 class EmptyHistory(Error):
-    DEFAULT_MESSAGE = 'No tests were run so far in this window'
+    DEFAULT_MESSAGE = "No tests were run so far in this window"
 
 
 class FrameworkNotFound(Error):
@@ -37,4 +37,4 @@ class FrameworkNotFound(Error):
 
 
 class InvalidContext(Error):
-    DEFAULT_MESSAGE = 'Test context is invalid'
+    DEFAULT_MESSAGE = "Test context is invalid"

@@ -4,8 +4,8 @@ import sublime
 
 from .cache import cache
 
-BASE_NAME = 'AnyTest.sublime-settings'
-PROJECT_SETTINGS_KEY = 'AnyTest'
+BASE_NAME = "AnyTest.sublime-settings"
+PROJECT_SETTINGS_KEY = "AnyTest"
 
 logger = logging.getLogger(__name__)
 
@@ -33,7 +33,7 @@ def settings():
 
 def get(key, type=None, default=None):
     if not isinstance(key, str):
-        key = '.'.join(key)
+        key = ".".join(key)
 
     value = (
         project_settings().get(key, default)

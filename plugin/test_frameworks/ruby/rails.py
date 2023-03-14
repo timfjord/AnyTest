@@ -4,8 +4,8 @@ from .. import ruby
 
 
 class TestFramework(ruby.TestFramework):
-    framework = 'rails'
-    pattern = r'_test\.rb$'
+    framework = "rails"
+    pattern = r"_test\.rb$"
 
     @classmethod
     def is_suitable_for(cls, file):
@@ -15,15 +15,15 @@ class TestFramework(ruby.TestFramework):
 
     @lru_cache(maxsize=None)
     def bin(self):
-        return self.file('bin', 'rails')
+        return self.file("bin", "rails")
 
     def build_executable(self):
         return self._build_executable(
-            ['rails', 'test'], zeus=['test'], spring=True, binstubs=['test']
+            ["rails", "test"], zeus=["test"], spring=True, binstubs=["test"]
         )
 
     def build_file_position_args(self):
         return [self.context.file.relpath]
 
     def build_line_position_args(self):
-        return ['{}:{}'.format(self.context.file.relpath, self.context.sel_line())]
+        return ["{}:{}".format(self.context.file.relpath, self.context.sel_line())]

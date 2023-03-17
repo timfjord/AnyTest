@@ -45,6 +45,7 @@
                             "type": "string",
                             "enum": [
                                 "behave",
+                                "mamba",
                                 "pytest",
                                 "pyunit"
                             ]
@@ -537,6 +538,24 @@
                                     "type": "object",
                                     "default": {},
                                     "description": "behave specific ENV variables (will be merged with the ENV variables defined on the language level)"
+                                },
+                                "python.mamba.runner": {
+                                    "$ref": "sublime://settings/AnyTest#/definitions/Runner",
+                                    "description": "A runner to run mamba tests with"
+                                },
+                                "python.mamba.executable": {
+                                    "type": "array",
+                                    "description": "mamba test framework executable (e.g. [\"my_mamba\"])"
+                                },
+                                "python.mamba.args": {
+                                    "type": "array",
+                                    "default": [],
+                                    "description": "mamba cli args (e.g. [\"--do-smth\"])"
+                                },
+                                "python.mamba.env": {
+                                    "type": "object",
+                                    "default": {},
+                                    "description": "mamba specific ENV variables (will be merged with the ENV variables defined on the language level)"
                                 },
                                 "python.pytest.runner": {
                                     "$ref": "sublime://settings/AnyTest#/definitions/Runner",

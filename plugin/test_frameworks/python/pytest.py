@@ -17,11 +17,11 @@ class TestFramework(IsConfigurableMixin, python.TestFramework):
         executable = ["python", "-m", "pytest"]
 
         if utils.is_executable("pytest"):
-            executable = ["pytest"]
+            executable = "pytest"
         elif utils.is_executable("py.test"):
-            executable = ["py.test"]
+            executable = "py.test"
 
-        return self.prefix_executable(executable)
+        return self._build_executable(executable)
 
     def build_file_position_args(self):
         return [self.context.file.relpath]

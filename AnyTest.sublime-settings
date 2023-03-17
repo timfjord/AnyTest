@@ -17,6 +17,7 @@
             "vitest"
         ],
         "python": [
+            "behave",
             "pytest",
             "pyunit"
         ],
@@ -158,6 +159,13 @@
     //
     // "python.runner": "command", // a runner for all Python test frameworks
     // "python.env": { "ENV1": "value" }, // will be merged with the ENV variable defined on the test framework level
+    //
+    // "python.behave.runner": "command", // a runner for the behave test framework
+    "python.behave.executable": [
+        "behave"
+    ],
+    // "python.behave.args": ["--do-smth"],
+    // "python.behave.env": { "ENV2": "value" }, // will be merged with the ENV variable defined on the language level
     //
     // "python.pytest.runner": "command", // a runner for the pytest test framework
     // "python.pytest.executable": ["my_pytest"],

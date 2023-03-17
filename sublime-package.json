@@ -44,6 +44,7 @@
                         "PythonFrameworks": {
                             "type": "string",
                             "enum": [
+                                "behave",
                                 "pytest",
                                 "pyunit"
                             ]
@@ -515,6 +516,27 @@
                                     "type": "object",
                                     "default": {},
                                     "description": "Python specific ENV variables (will be merged with the ENV variables defined on the test framework level)"
+                                },
+                                "python.behave.runner": {
+                                    "$ref": "sublime://settings/AnyTest#/definitions/Runner",
+                                    "description": "A runner to run behave tests with"
+                                },
+                                "python.behave.executable": {
+                                    "type": "array",
+                                    "default": [
+                                        "behave"
+                                    ],
+                                    "description": "behave test framework executable (e.g. [\"my_behave\"])"
+                                },
+                                "python.behave.args": {
+                                    "type": "array",
+                                    "default": [],
+                                    "description": "behave cli args (e.g. [\"--do-smth\"])"
+                                },
+                                "python.behave.env": {
+                                    "type": "object",
+                                    "default": {},
+                                    "description": "behave specific ENV variables (will be merged with the ENV variables defined on the language level)"
                                 },
                                 "python.pytest.runner": {
                                     "$ref": "sublime://settings/AnyTest#/definitions/Runner",

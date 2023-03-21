@@ -6,8 +6,8 @@ from ..mixins import IsConfigurableMixin
 class TestFramework(IsConfigurableMixin, python.TestFramework):
     NEAREST_SEPARATOR = "::"
 
-    framework = "pytest"
-    pattern = r"(test_[^/\\]+|[^/\\]+_test)\.py$"
+    framework = "pytest"  # type: str
+    pattern = r"(test_[^/\\]+|[^/\\]+_test)\.py$"  # type: str
 
     @classmethod
     def is_configurable_fallback(cls, _):

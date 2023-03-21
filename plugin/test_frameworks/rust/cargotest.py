@@ -10,8 +10,8 @@ class TestFramework(rust.TestFramework):
     NEAREST_SEPARATOR = "::"
     MANIFEST_FILE = "Cargo.toml"
 
-    framework = "cargotest"
-    pattern = r".rs$"
+    framework = "cargotest"  # type: str
+    pattern = r".rs$"  # type: str
 
     test_patterns = (r"(#\[(?:\w+::|rs)?test)",)
     namespace_patterns = (r"mod (tests?)",)

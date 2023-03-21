@@ -2,8 +2,8 @@ from .. import python
 
 
 class TestFramework(python.TestFramework):
-    framework = "behave"
-    pattern = r"\.feature$"
+    framework = "behave"  # type: str
+    pattern = r"\.feature$"  # type: str
 
     @classmethod
     def is_suitable_for(cls, file):

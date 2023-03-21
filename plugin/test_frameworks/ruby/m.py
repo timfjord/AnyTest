@@ -5,8 +5,8 @@ from .. import ruby
 
 
 class TestFramework(ruby.TestFramework):
-    framework = "m"
-    pattern = r"_test\.rb$"
+    framework = "m"  # type: str
+    pattern = r"_test\.rb$"  # type: str
 
     @classmethod
     def is_suitable_for(cls, file):

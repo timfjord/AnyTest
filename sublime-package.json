@@ -46,6 +46,7 @@
                             "enum": [
                                 "behave",
                                 "mamba",
+                                "nose",
                                 "pytest",
                                 "pyunit"
                             ]
@@ -556,6 +557,26 @@
                                     "type": "object",
                                     "default": {},
                                     "description": "mamba specific ENV variables (will be merged with the ENV variables defined on the language level)"
+                                },
+                                "python.nose.runner": {
+                                    "$ref": "sublime://settings/AnyTest#/definitions/Runner",
+                                    "description": "A runner to run nose tests with"
+                                },
+                                "python.nose.executable": {
+                                    "type": "array",
+                                    "description": "nose test framework executable (e.g. [\"my_nosetests\"])"
+                                },
+                                "python.nose.args": {
+                                    "type": "array",
+                                    "default": [
+                                        "--doctest-tests"
+                                    ],
+                                    "description": "nose cli args (e.g. [\"--do-smth\"])"
+                                },
+                                "python.nose.env": {
+                                    "type": "object",
+                                    "default": {},
+                                    "description": "nose specific ENV variables (will be merged with the ENV variables defined on the language level)"
                                 },
                                 "python.pytest.runner": {
                                     "$ref": "sublime://settings/AnyTest#/definitions/Runner",

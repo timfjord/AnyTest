@@ -79,7 +79,7 @@ class PytestXunitTestCase(SublimeProjectTestCase):
         self.assertLastCommand("pytest")
 
 
-class PipenvPytestTestCase(SublimeProjectTestCase):
+class PytestPipenvTestCase(SublimeProjectTestCase):
     folder = "pipenv"
     settings = {"python.test_framework": "pytest"}
 
@@ -102,7 +102,7 @@ class PipenvPytestTestCase(SublimeProjectTestCase):
             self.assertLastCommand("pipenv run python -m pytest")
 
 
-class PoetryPytestTestCase(SublimeProjectTestCase):
+class PytestPoetryTestCase(SublimeProjectTestCase):
     folder = "poetry"
     settings = {"python.test_framework": "pytest"}
 
@@ -122,3 +122,25 @@ class PoetryPytestTestCase(SublimeProjectTestCase):
         with patch("AnyTest.plugin.utils.is_executable", return_value=False):
             yield from self._testSuite("test_class.py")
             self.assertLastCommand("poetry run python -m pytest")
+
+
+class PytestPdmTestCase(SublimeProjectTestCase):
+    folder = "pdm"
+    settings = {"python.test_framework": "pytest"}
+
+    def test_line(self):
+        with patch("AnyTest.plugin.utils.is_executable", return_value=False):
+            yield from self._testFile("test_class.py", 1)
+            self.assertLastCommand(
+                "pdm run python -m pytest test_class.py::TestNumbers"
+            )
+
+    def test_file(self):
+        with patch("AnyTest.plugin.utils.is_executable", return_value=False):
+            yield from self._testFile("test_class.py")
+            self.assertLastCommand("pdm run python -m pytest test_class.py")
+
+    def test_suite(self):
+        with patch("AnyTest.plugin.utils.is_executable", return_value=False):
+            yield from self._testSuite("test_class.py")
+            self.assertLastCommand("pdm run python -m pytest")

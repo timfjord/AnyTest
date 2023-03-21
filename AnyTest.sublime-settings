@@ -19,6 +19,7 @@
         "python": [
             "behave",
             "mamba",
+            "nose",
             "pytest",
             "pyunit"
         ],
@@ -172,6 +173,13 @@
     // "python.mamba.executable": ["my_mamba"],
     // "python.mamba.args": ["--do-smth"],
     // "python.mamba.env": { "ENV2": "value" }, // will be merged with the ENV variable defined on the language level
+    //
+    // "python.nose.runner": "command", // a runner for the mamba test framework
+    // "python.nose.executable": ["my_nosetests"],
+    "python.nose.args": [
+        "--doctest-tests"
+    ],
+    // "python.nose.env": { "ENV2": "value" }, // will be merged with the ENV variable defined on the language level
     //
     // "python.pytest.runner": "command", // a runner for the pytest test framework
     // "python.pytest.executable": ["my_pytest"],

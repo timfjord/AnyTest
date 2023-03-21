@@ -4,8 +4,8 @@ from ..mixins import IsConfigurableMixin
 
 
 class TestFramework(IsConfigurableMixin, python.TestFramework):
-    framework = "mamba"
-    pattern = r"_spec\.py$"
+    framework = "mamba"  # type: str
+    pattern = r"_spec\.py$"  # type: str
 
     @classmethod
     def is_configurable_fallback(cls, _):

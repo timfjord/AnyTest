@@ -4,8 +4,8 @@ from .. import ruby
 
 
 class TestFramework(ruby.TestFramework):
-    framework = "test_bench"
-    pattern = r"(^|/|\\)test[/\\]automated[/\\].+\.rb$"
+    framework = "test_bench"  # type: str
+    pattern = r"(^|/|\\)test[/\\]automated[/\\].+\.rb$"  # type: str
 
     def build_executable(self):
         return self._build_executable("bench")

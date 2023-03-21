@@ -2,7 +2,7 @@ from .. import TestFramework as BaseTestFramework
 
 
 class TestFramework(BaseTestFramework):
-    language = "swift"
+    language = "swift"  # type: str
     test_patterns = (r"^\s*func (test.*)\(\)",)
     namespace_patterns = (
         r"^(?:(?:public )?(?:final )?|(?:final )?(?:public )?)class ([-_a-zA-Z0-9]+): XCTestCase",

@@ -8,8 +8,8 @@ from ..mixins import IsConfigurableMixin
 class TestFramework(IsConfigurableMixin, python.TestFramework):
     NEAREST_SEPARATOR = "."
 
-    framework = "pyunit"
-    pattern = r"test.*\.py$"
+    framework = "pyunit"  # type: str
+    pattern = r"test.*\.py$"  # type: str
 
     @classmethod
     def is_configurable_fallback(cls, _):

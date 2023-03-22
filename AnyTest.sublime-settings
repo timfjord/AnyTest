@@ -18,6 +18,7 @@
         ],
         "python": [
             "behave",
+            "django",
             "mamba",
             "nose",
             "nose2",
@@ -169,6 +170,12 @@
     ],
     // "python.behave.args": ["--do-smth"],
     // "python.behave.env": { "ENV2": "value" }, // will be merged with the ENV variable defined on the language level
+    //
+    // "python.django.use_nose": true, // use the Nose test framework for Django
+    // "python.django.runner": "command", // a runner for the Django test framework
+    // "python.django.executable": ["my_djangotest"],
+    // "python.django.args": ["--do-smth"],
+    // "python.django.env": { "ENV2": "value" }, // will be merged with the ENV variable defined on the language level
     //
     // "python.mamba.runner": "command", // a runner for the Mamba test framework
     // "python.mamba.executable": ["my_mamba"],

@@ -45,6 +45,7 @@
                             "type": "string",
                             "enum": [
                                 "behave",
+                                "django",
                                 "mamba",
                                 "nose",
                                 "nose2",
@@ -540,6 +541,29 @@
                                     "type": "object",
                                     "default": {},
                                     "description": "Behave specific ENV variables (will be merged with the ENV variables defined on the language level)"
+                                },
+                                "python.django.use_nose": {
+                                    "type": "boolean",
+                                    "default": false,
+                                    "description": "Use the Nose test framework for Django"
+                                },
+                                "python.django.runner": {
+                                    "$ref": "sublime://settings/AnyTest#/definitions/Runner",
+                                    "description": "A runner to run Django tests with"
+                                },
+                                "python.django.executable": {
+                                    "type": "array",
+                                    "description": "Django test framework executable (e.g. [\"my_djangotest\"])"
+                                },
+                                "python.django.args": {
+                                    "type": "array",
+                                    "default": [],
+                                    "description": "Django cli args (e.g. [\"--do-smth\"])"
+                                },
+                                "python.django.env": {
+                                    "type": "object",
+                                    "default": {},
+                                    "description": "Django specific ENV variables (will be merged with the ENV variables defined on the language level)"
                                 },
                                 "python.mamba.runner": {
                                     "$ref": "sublime://settings/AnyTest#/definitions/Runner",

@@ -20,6 +20,7 @@
             "behave",
             "mamba",
             "nose",
+            "nose2",
             "pytest",
             "pyunit"
         ],
@@ -162,31 +163,38 @@
     // "python.runner": "command", // a runner for all Python test frameworks
     // "python.env": { "ENV1": "value" }, // will be merged with the ENV variable defined on the test framework level
     //
-    // "python.behave.runner": "command", // a runner for the behave test framework
+    // "python.behave.runner": "command", // a runner for the Behave test framework
     "python.behave.executable": [
         "behave"
     ],
     // "python.behave.args": ["--do-smth"],
     // "python.behave.env": { "ENV2": "value" }, // will be merged with the ENV variable defined on the language level
     //
-    // "python.mamba.runner": "command", // a runner for the mamba test framework
+    // "python.mamba.runner": "command", // a runner for the Mamba test framework
     // "python.mamba.executable": ["my_mamba"],
     // "python.mamba.args": ["--do-smth"],
     // "python.mamba.env": { "ENV2": "value" }, // will be merged with the ENV variable defined on the language level
     //
-    // "python.nose.runner": "command", // a runner for the mamba test framework
+    // "python.nose.runner": "command", // a runner for the Nose test framework
     // "python.nose.executable": ["my_nosetests"],
     "python.nose.args": [
         "--doctest-tests"
     ],
     // "python.nose.env": { "ENV2": "value" }, // will be merged with the ENV variable defined on the language level
     //
-    // "python.pytest.runner": "command", // a runner for the pytest test framework
+    // "python.nose2.runner": "command", // a runner for the Nose2 test framework
+    "python.nose2.executable": [
+        "nose2"
+    ],
+    // "python.nose2.args": ["--do-smth"],
+    // "python.nose2.env": { "ENV2": "value" }, // will be merged with the ENV variable defined on the language level
+    //
+    // "python.pytest.runner": "command", // a runner for the PyTest test framework
     // "python.pytest.executable": ["my_pytest"],
     // "python.pytest.args": ["--do-smth"],
     // "python.pytest.env": { "ENV2": "value" }, // will be merged with the ENV variable defined on the language level
     //
-    // "python.pyunit.runner": "unittesting", // a runner for the pyunit test framework (use unittesting for testing sublime packages)
+    // "python.pyunit.runner": "unittesting", // a runner for the PyUnit test framework (use unittesting for testing sublime packages)
     // "python.pyunit.executable": ["my_pyunit"],
     // "python.pyunit.args": ["--do-smth"],
     // "python.pyunit.env": { "ENV2": "value" }, // will be merged with the ENV variable defined on the language level

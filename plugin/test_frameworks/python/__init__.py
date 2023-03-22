@@ -1,7 +1,11 @@
+import os.path
+
 from .. import TestFramework as BaseTestFramework
 
 
 class TestFramework(BaseTestFramework):
+    MODULE_SEPARATOR = "."
+
     language = "python"  # type: str
     test_patterns = (r"\s*(?:async )?def (test_\w+)",)
     namespace_patterns = (r"\s*class (\w+)",)
@@ -18,3 +22,8 @@ class TestFramework(BaseTestFramework):
             prefix = ["pdm", "run"]
 
         return prefix + executable
+
+    def get_module(self):
+        path, _ = os.path.splitext(self.context.file.relpath)
+
+        return path.replace(os.sep, self.MODULE_SEPARATOR)

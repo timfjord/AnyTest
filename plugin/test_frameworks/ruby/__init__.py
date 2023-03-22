@@ -33,7 +33,7 @@ def is_railties_5_or_greater(root):
 
 
 class TestFramework(BaseTestFramework):
-    language = "ruby"
+    language = "ruby"  # type: str
     test_patterns = (
         (r"^\s*def\s+(test_\w+)", "test"),
         (r'^\s*test\s*[\( ]\s*(?:\"|\')(.*)(?:"|\')', "rails"),

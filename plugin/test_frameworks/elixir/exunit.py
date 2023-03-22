@@ -4,8 +4,8 @@ from .. import elixir
 
 
 class TestFramework(elixir.TestFramework):
-    framework = "exunit"
-    pattern = r"_test\.exs$"
+    framework = "exunit"  # type: str
+    pattern = r"_test\.exs$"  # type: str
 
     @lru_cache(maxsize=None)
     def is_mix(self):

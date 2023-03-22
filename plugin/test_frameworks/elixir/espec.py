@@ -2,8 +2,8 @@ from .. import elixir
 
 
 class TestFramework(elixir.TestFramework):
-    framework = "espec"
-    pattern = r"_spec\.exs$"
+    framework = "espec"  # type: str
+    pattern = r"_spec\.exs$"  # type: str
 
     def build_file_position_args(self):
         return [self.context.file.relpath]

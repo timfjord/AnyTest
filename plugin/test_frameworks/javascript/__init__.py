@@ -25,7 +25,7 @@ def has_package(package, root):
 
 
 class TestFramework(BaseTestFramework):
-    language = "javascript"
+    language = "javascript"  # type: str
     test_patterns = (r'^\s*(?:it|test)\s*[\( ]\s*(?:"|\'|`)(.*)(?:"|\'|`)',)
     namespace_patterns = (
         r'^\s*(?:describe|suite|context)\s*[( ]\s*(?:"|\'|`)(.*)(?:"|\'|`)',

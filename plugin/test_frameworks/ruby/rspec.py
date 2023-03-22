@@ -4,8 +4,8 @@ from .. import ruby
 
 
 class TestFramework(ruby.TestFramework):
-    framework = "rspec"
-    pattern = r"(_spec\.rb|spec[/\\].*\.feature)$"
+    framework = "rspec"  # type: str
+    pattern = r"(_spec\.rb|spec[/\\].*\.feature)$"  # type: str
 
     @lru_cache(maxsize=None)
     def bin(self):

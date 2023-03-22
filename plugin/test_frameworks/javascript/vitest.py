@@ -5,8 +5,8 @@ from ..mixins import IsConfigurableMixin
 
 
 class TestFramework(IsConfigurableMixin, javascript.TestFramework):
-    framework = "vitest"
-    pattern = r"(test[/\\].*|(spec|test))\.(js|jsx|coffee|ts|tsx)$"
+    framework = "vitest"  # type: str
+    pattern = r"(test[/\\].*|(spec|test))\.(js|jsx|coffee|ts|tsx)$"  # type: str
 
     @classmethod
     def is_configurable_fallback(cls, file):

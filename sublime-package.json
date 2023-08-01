@@ -252,7 +252,7 @@
                                 "always_show_test_framework_selection": {
                                     "type": "boolean",
                                     "default": true,
-                                    "description": "show the quick panel even if there is only one test framework available otherwise use the first test framework from the list"
+                                    "description": "Show the quick panel even if there is only one test framework available otherwise use the first test framework from the list"
                                 },
                                 "runner": {
                                     "$ref": "sublime://settings/AnyTest#/definitions/Runner"

@@ -12,6 +12,6 @@ class UtilsTestCase(unittest.TestCase):
 
     def test_replace(self):
         self.assertEqual(
-            replace("foo-bar_baz/qux", ("-", "_"), ("/", "_")),
-            "foo_bar_baz_qux",
+            replace("foo-bar_baz/quux", ("-", "_"), ("/", "_")),
+            "foo_bar_baz_quux",
         )

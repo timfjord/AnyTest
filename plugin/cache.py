@@ -4,7 +4,7 @@ _cache = []
 
 
 def cache(func):
-    func = lru_cache()(func)
+    func = lru_cache(maxsize=None)(func)
     _cache.append(func)
 
     @wraps(func)

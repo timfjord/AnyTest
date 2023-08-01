@@ -14,6 +14,7 @@ def _ensure_dict(d):
     return d if isinstance(d, dict) else {}
 
 
+# window_cache('project_settings')
 @cache
 def project_settings():
     # fmt: off
@@ -21,7 +22,7 @@ def project_settings():
         _ensure_dict(
             _ensure_dict(
                 sublime.active_window().project_data()
-            ).get('settings', {}),
+            ).get("settings", {}),
         ).get(PROJECT_SETTINGS_KEY, {})
     )
     # fmt: on

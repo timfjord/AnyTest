@@ -643,7 +643,8 @@
                                     "description": "PyTest specific ENV variables (will be merged with the ENV variables defined on the language level)"
                                 },
                                 "python.pyunit.runner": {
-                                    "$ref": "sublime://settings/AnyTest#/definitions/Runner",
+                                    "type": "string",
+                                    "default": "command",
                                     "enum": [
                                         "console",
                                         "command",

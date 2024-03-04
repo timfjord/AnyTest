@@ -1,0 +1,8 @@
+=> 0.7.0
+
+# Features
+
+- Add history
+- Add various JavaScript test frameworks (Behave, Django, Mamba, Nose, Nose2)
+- Add Zig test framework
+- Enable Python 3.8 environment

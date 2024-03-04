@@ -82,6 +82,12 @@
                                 "junit"
                             ]
                         },
+                        "ZigFrameworks": {
+                            "type": "string",
+                            "enum": [
+                                "zigtest"
+                            ]
+                        },
                         "PackageConfig": {
                             "properties": {
                                 "subprojects": {
@@ -206,6 +212,19 @@
                                                     "type": "array",
                                                     "items": {
                                                         "$ref": "sublime://settings/AnyTest#/definitions/JavaFrameworks"
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        "zig": {
+                                            "anyOf": [
+                                                {
+                                                    "$ref": "sublime://settings/AnyTest#/definitions/ZigFrameworks"
+                                                },
+                                                {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "sublime://settings/AnyTest#/definitions/ZigFrameworks"
                                                     }
                                                 }
                                             ]
@@ -951,7 +970,37 @@
                                     "type": "object",
                                     "default": {},
                                     "description": "XCTest tests specific ENV variables (will be merged with the ENV variables defined on the language level)"
-                                }
+                                },
+                                "zig.runner": {
+                                    "$ref": "sublime://settings/AnyTest#/definitions/Runner",
+                                    "description": "A runner to run Zig tests with"
+                                },
+                                "zig.env": {
+                                    "type": "object",
+                                    "default": {},
+                                    "description": "Zig specific ENV variables (will be merged with the ENV variables defined on the test framework level)"
+                                },
+                                "zig.zigtest.runner": {
+                                    "$ref": "sublime://settings/AnyTest#/definitions/Runner",
+                                    "description": "A runner to run zig tests with"
+                                },
+                                "zig.zigtest.executable": {
+                                    "type": "array",
+                                    "default": [
+                                        "zig",
+                                    ],
+                                    "description": "Zig test framework executable (e.g. [\"bin/tests\"])"
+                                },
+                                "zig.zigtest.args": {
+                                    "type": "array",
+                                    "default": [],
+                                    "description": "Zig test cli args (e.g. [\"--do-smth\"])"
+                                },
+                                "zig.zigtest.env": {
+                                    "type": "object",
+                                    "default": {},
+                                    "description": "Zig tests specific ENV variables (will be merged with the ENV variables defined on the language level)"
+                                },
                             }
                         }
                     },

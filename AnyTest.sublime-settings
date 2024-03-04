@@ -41,6 +41,9 @@
         ],
         "java": [
             "junit"
+        ],
+        "zig": [
+            "zigtest"
         ]
     },
     // Available log levels: DEBUG, INFO, WARNING, ERROR, CRITICAL
@@ -285,4 +288,15 @@
     ],
     // "swift.xctest.args": ["--do-smth"],
     // "swift.xctest.env": { "ENV2": "value" }, // will be merged with the ENV variable defined on the language level
+    //
+    // --- Zig ---
+    // "zig.runner": "command", // a runner for all Zig test frameworks
+    // "zig.env": { "ENV1": "value" }, // will be merged with the ENV variable defined on the test framework level
+    //
+    // "zig.cargotest.runner": "command", // a runner for the Zig test framework
+    "zig.zigtest.executable": [
+        "zig",
+    ],
+    // "zig.zigtest.args": ["--do-smth"],
+    // "zig.zigtest.env": { "ENV2": "value" }, // will be merged with the ENV variable defined on the language level
 }

@@ -19,6 +19,7 @@ Currently, the following test frameworks are supported (more test frameworks are
 |       **Ruby** | Cucumber, M, Minitest, Rails, RSpec, Test Bench                    | `cucumber`, `m` ,`minitest`, `rails`, `rspec`, `test_bench`      |
 |       **Rust** | Cargo                                                              | `cargotest`                                                      |
 |     **Switft** | XCTest                                                             | `xctest`                                                         |
+|     **Zig**    | Zigtest                                                            | `zigtest`                                                        |
 
 Feel free to [open an issue](https://github.com/timfjord/AnyTest/issues/new) with a test framework request as those test frameworks will be added first.
 

@@ -987,7 +987,7 @@
                                 "zig.zigtest.executable": {
                                     "type": "array",
                                     "default": [
-                                        "zig",
+                                        "zig"
                                     ],
                                     "description": "Zig test framework executable (e.g. [\"bin/tests\"])"
                                 },
@@ -1000,7 +1000,7 @@
                                     "type": "object",
                                     "default": {},
                                     "description": "Zig tests specific ENV variables (will be merged with the ENV variables defined on the language level)"
-                                },
+                                }
                             }
                         }
                     },

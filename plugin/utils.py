@@ -1,5 +1,5 @@
 import re
-from distutils import spawn
+import shutil
 from functools import reduce
 
 REGEXP_ESCAPE_TRANSLATION_TABLE = str.maketrans(
@@ -37,7 +37,7 @@ def escape(string, symbols):
 
 
 def is_executable(name):
-    return bool(spawn.find_executable(name))
+    return bool(shutil.which(name))
 
 
 def to_unpackable(val):
